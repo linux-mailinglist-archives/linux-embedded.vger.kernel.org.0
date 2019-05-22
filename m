@@ -2,22 +2,23 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6D69C24066
-	for <lists+linux-embedded@lfdr.de>; Mon, 20 May 2019 20:32:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 17AD426638
+	for <lists+linux-embedded@lfdr.de>; Wed, 22 May 2019 16:47:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726209AbfETScc (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Mon, 20 May 2019 14:32:32 -0400
-Received: from westpalmbeachmassagegroup.com ([45.35.221.60]:54703 "EHLO
-        wolfgangdigital.com" rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726205AbfETScb (ORCPT
+        id S1729555AbfEVOrT (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Wed, 22 May 2019 10:47:19 -0400
+Received: from 107-174-234-49-host.colocrossing.com ([107.174.234.49]:49991
+        "EHLO venetian.com" rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1729491AbfEVOrS (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Mon, 20 May 2019 14:32:31 -0400
+        Wed, 22 May 2019 10:47:18 -0400
+X-Greylist: delayed 5332 seconds by postgrey-1.27 at vger.kernel.org; Wed, 22 May 2019 10:47:18 EDT
 To:     linux-embedded@vger.kernel.org
-Subject: Print your logo
-Message-ID: <33afd0668d0e87da9bcc927de327929b@esquire.com>
-Date:   Mon, 20 May 2019 17:02:20 +0200
-From:   "Heather" <heather@usblogo.space>
-Reply-To: flashdrive@aliyun.com
+Subject: Logo printing
+Message-ID: <3669f5bfa4cdeaa3f493ad0c7eda6f36@walgreens.com>
+Date:   Wed, 22 May 2019 13:40:06 +0200
+From:   "David" <david@usbcustom.site>
+Reply-To: jensanke@aliyun.com
 MIME-Version: 1.0
 Content-Type: text/plain; format=flowed; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -28,36 +29,79 @@ X-Mailing-List: linux-embedded@vger.kernel.org
 
 Hi,
 
-I didn’t know if you had received my email from last week?
+Not sure if you received my last email?
 
-We manufacture ALL custom LOGO and branded products – over 300,000 to
-choose from.
+Are you interested in purchasing your LOGO promotional and marketing
+products for your company?
+We produce USB Drives with your Logo Printed or artwork printed to be used
+for gifts or marketing.
+Here is more info from our website:
 
-The most asked about product that we make, is the custom printed USB flash
-drives!
-We can print your logo on them and load your digital images, videos and
-files!
+We can pre-load your media files, images, presentations and files onto the
+drives for you.
 
-Here is what we include:
--Any size memory you need: 64MB up to 128GB
--We will print your logo on both sides, just ask!
--Very Low Order Minimums
--Need them quickly?  Not a problem, we offer Rush Service
+Some reasons to get the USB drives from us:
+We make Custom Shaped USB drives in the shape of your logo, product or
+anything you like.
+Our USB drives are Eco-friendly
+We supply USB drives to Fortune 100 companies.
+We have over 150 styles and colors to choose from.
+People will keep the USB drive you give them and show it to others
+increasing your marketing value
 
-Email over a copy of your logo and we will create a design mock up for you
-at no cost!
+Please click
+to see all of our stock models and get a quote.
 
-Our higher memory sizes are a really good option right now!
+If you are nonprofit, have further discounts for schools and charities.
 
-Pricing is low right now, so let us know what you need and we will get you
-a quick quote.
+Thanks,
+David
+USB Drive Specialist
 
-We always offer great rates for schools and nonprofits as well.
 
-Let us know what you would like quoted?
 
-Regards,
 
-Heather Millons
-Custom USB Account Manager
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://walgreens.com/mail/link.php?M=8181225&N=2777&L=65&F=T
 
