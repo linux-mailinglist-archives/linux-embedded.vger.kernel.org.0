@@ -2,91 +2,73 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C0F4A38508
-	for <lists+linux-embedded@lfdr.de>; Fri,  7 Jun 2019 09:29:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7CBDB47AF6
+	for <lists+linux-embedded@lfdr.de>; Mon, 17 Jun 2019 09:28:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727391AbfFGH27 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 7 Jun 2019 03:28:59 -0400
-Received: from smtp1.iitb.ac.in ([103.21.127.13]:60566 "EHLO smtp1.iitb.ac.in"
+        id S1726834AbfFQH24 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Mon, 17 Jun 2019 03:28:56 -0400
+Received: from slot0.nejknio.cf ([89.32.41.233]:42729 "EHLO slot0.nejknio.cf"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727318AbfFGH27 (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 7 Jun 2019 03:28:59 -0400
-Received: from ldns2.iitb.ac.in (ldns2.iitb.ac.in [10.200.12.2])
-        by smtp1.iitb.ac.in (Postfix) with SMTP id 1671C103DF54
-        for <linux-embedded@vger.kernel.org>; Fri,  7 Jun 2019 12:01:54 +0530 (IST)
-Received: (qmail 29995 invoked by uid 510); 7 Jun 2019 12:01:34 +0530
-X-Qmail-Scanner-Diagnostics: from 10.200.1.25 by ldns2 (envelope-from <rws@aero.iitb.ac.in>, uid 501) with qmail-scanner-2.11
- spamassassin: 3.4.1. mhr: 1.0. {clamdscan: 0.100.0/25472} 
- Clear:RC:1(10.200.1.25):SA:0(1.5/7.0):. Processed in 3.224183 secs; 07 Jun 2019 12:01:34 +0530
-X-Spam-Checker-Version: SpamAssassin 3.4.1 (2015-04-28) on ldns2.iitb.ac.in
-X-Spam-Level: *
-X-Spam-Status: No, score=1.5 required=7.0 tests=BAYES_50,IITB_ORIG,
-        MISSING_HEADERS,PROPER_IITB_MSGID autolearn=disabled version=3.4.1
-X-Spam-Pyzor: Reported 1 times.
-X-Envelope-From: rws@aero.iitb.ac.in
-X-Qmail-Scanner-Mime-Attachments: |
-X-Qmail-Scanner-Zip-Files: |
-Received: from unknown (HELO ldns2.iitb.ac.in) (10.200.1.25)
-  by ldns2.iitb.ac.in with SMTP; 7 Jun 2019 12:01:31 +0530
-Received: from vayu.aero.iitb.ac.in (vayu.aero.iitb.ac.in [10.101.1.1])
-        by ldns2.iitb.ac.in (Postfix) with ESMTP id CB958341965;
-        Fri,  7 Jun 2019 12:01:17 +0530 (IST)
-Received: from localhost (localhost [127.0.0.1])
-        by vayu.aero.iitb.ac.in (Postfix) with ESMTP id 9509A8902E52F;
-        Fri,  7 Jun 2019 12:01:17 +0530 (IST)
-Received: from vayu.aero.iitb.ac.in ([127.0.0.1])
-        by localhost (vayu.aero.iitb.ac.in [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id 3VnK-_U7b-vs; Fri,  7 Jun 2019 12:01:17 +0530 (IST)
-Received: from localhost (localhost [127.0.0.1])
-        by vayu.aero.iitb.ac.in (Postfix) with ESMTP id 5DAB88902E54D;
-        Fri,  7 Jun 2019 12:01:14 +0530 (IST)
-X-Virus-Scanned: amavisd-new at aero.iitb.ac.in
-Received: from vayu.aero.iitb.ac.in ([127.0.0.1])
-        by localhost (vayu.aero.iitb.ac.in [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id TgJiwoMo_EHZ; Fri,  7 Jun 2019 12:01:14 +0530 (IST)
-Received: from vayu.aero.iitb.ac.in (vayu.aero.iitb.ac.in [10.101.1.1])
-        by vayu.aero.iitb.ac.in (Postfix) with ESMTP id 0EEE684310111;
-        Fri,  7 Jun 2019 12:01:10 +0530 (IST)
-Date:   Fri, 7 Jun 2019 12:01:09 +0530 (IST)
-From:   Martins Henry <rws@aero.iitb.ac.in>
-Message-ID: <412557711.60336.1559889069980.JavaMail.zimbra@aero.iitb.ac.in>
-Subject: Thanks and I wait for your answer
+        id S1726622AbfFQH2y (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
+        Mon, 17 Jun 2019 03:28:54 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=dkim; d=nejknio.cf;
+ h=Content-Type:MIME-Version:Content-Transfer-Encoding:Content-Description:Subject:To:From:Date:Reply-To:Message-ID; i=trade1@nejknio.cf;
+ bh=73Xs4LxjK+lP+h5mKCyFyWTpkoQ=;
+ b=S9i3uZIHCvNPh+2KCuDjUmEgXYjgkD9k3bocwEMM2hTh5yWaBM1BDsNO+YXh7kZlJhCcbc3kpCO8
+   we8/wWPEk/rthM27WMKwQx/80CHJ82BDf6ndqeDwB/InRAksEp/XN8Wo/SM2fSxOr98evbDlHgMH
+   BVFYqvDu6RbkMhtCRRQXQ7+6weL/tVdWHLhOAvO789Izzm6K86+x5HKx/Mwj6llKmzeJzInK89Lc
+   27f9xBClDvR11MvWxlsf3G/ZtM8jg7hBGPzNVp1f8LbPysLF0XjpNXtRiVuS4xw92ERAldV6vkTA
+   I/P+JSUgzsn2S0V1b+OVHIcaH5cUVKWofHjLcg==
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=dkim; d=nejknio.cf;
+ b=e2UTiYFb6zoXBkqAMt8J3YnGfakrR1lWKCvkb5YEl0gGFg3PlHvMK/AfNNysWp3GID2QaqnbVGFW
+   JAvo2oasLSUCnxDX6NmER2RCU6fBS/yLTKQrBDMJXYUe1sbAtXMQGk6/mm721GjOJb43WSZcHy7r
+   BB4r7PkbstdMWE4NhnP2d7ifrcILKvjn/ultZLSkGL7kutnC+r2pZoHyFHlSUNdFkRJbrRlt8yNl
+   O/+nStwN6vy2hU6VgOA4KqMx/+p4ooNHPObSUH9WEE1PfgJ7BjwktQJn6NiyZRhC48lWgPx7cGRW
+   OXreGjEFO78k1tueFH6OaYU4PrWelwsuEYjzzg==;
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.101.1.5]
-X-Mailer: Zimbra 8.8.12_GA_3803 (ZimbraWebClient - FF11 (Win)/8.8.12_GA_3794)
-Thread-Index: SsslhYkcLNFU69da/wYft5cO9/ZYnA==
-Thread-Topic: Thanks and I wait for your answer
-To:     unlisted-recipients:; (no To-header on input)
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: PRODUCT INQUIRY FOR EXPORT SHIPMENT
+To:     Recipients <trade1@nejknio.cf>
+From:   "Mark Maths" <trade1@nejknio.cf>
+Date:   Mon, 17 Jun 2019 10:08:51 +0300
+Reply-To: purchase_m.maths@aol.com
+Message-ID: <0.0.1.D19.1D524DB794AE0AC.0@slot0.nejknio.cf>
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Hello,
+Dear Sales team,
+ =
 
-I am Martin Henry, An American Citizen; I am the personal secretary to
-Mr. Donald Railton, the controller of a Lottery Company. Please I am
-having big problem now, I have a 6yrs old daughter who has leukemia, a
-disease of the blood, and she needs a bone marrow transplant or she
-will die.
+In furtherance to our market research, we have reviewed all your products t=
+ypes and we have finally interested in your product for our market here in =
 
-Please I am only asking for your help and you will benefit from it
-also. As an insider with Lottery Firm, working as the personal
-secretary to the controller, I want you to send me your name to play,
-I have some numbers that are going to win, stored in his secret data
-system in the office. The Lottery is an online entry with credit card
-anywhere with a name and address. All I want you to do is to send your
-name to play it and I will send confirmation to you.
 
-I will play with my card on your name and the Prize will be shared
-equally between us. Immediately the results are released they will
-contact you for payment as the oversea winner. The lotto can be played
-with 9.00 dollars, or 50 dollars but the prize will be Millions.
-Remember that I am playing on your name with my card; I just want to
-front you for this, because I need this money to save the life of my
-little daughter.
+United State for your production. We introduce ourselves as Emilxa Tram SRL=
+, A general group of company located in the United State. =
 
-Thanks and I wait for your answer
-Martin Henry.
+
+We are sourcing for new suppliers from your location =
+
+
+Kindly advice us if you accept new purchase orders, I will forward our PO f=
+or urgent order.
+
+Waiting for your response to send order. Reply to ( purchase_m.maths@aol.co=
+m)
+
+Best regards.
+Mark Maths
+Company Address:
+Emilxa Tram SRL Company Limited
+P.O. Box 978
+Road Town
+Tortola
+British Virgin Islands
+Contact information:
+Tel: +1 (284) 493 7235
+Email: purchase_m.maths@aol.com
+https://meridianbvi.com/contact-us/
