@@ -2,65 +2,63 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7BFE24F6EE
-	for <lists+linux-embedded@lfdr.de>; Sat, 22 Jun 2019 18:29:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D12DB60D76
+	for <lists+linux-embedded@lfdr.de>; Fri,  5 Jul 2019 23:59:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726415AbfFVQ26 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Sat, 22 Jun 2019 12:28:58 -0400
-Received: from sonic301-3.consmr.mail.bf2.yahoo.com ([74.6.129.42]:43715 "EHLO
-        sonic301-3.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726354AbfFVQ2u (ORCPT
+        id S1727959AbfGEV7q (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 5 Jul 2019 17:59:46 -0400
+Received: from out12.masterobox.work ([178.156.202.12]:48304 "EHLO
+        slot0.mathewsons.ga" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
+        with ESMTP id S1725882AbfGEV7q (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Sat, 22 Jun 2019 12:28:50 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1561220929; bh=3fXYToOZXvh5MOJ1JSawYDThjnynC/Ekt2gucIg6zZg=; h=Date:From:Reply-To:Subject:From:Subject; b=FwrBLUl7u665XwQeVPTq5hUQ4Ptv5qPcwgE0MfCyAxPjQW66W+sBKlTITy95Xiak8M/9mL3k87XvuhuNYmdzjOXFqAsXXJ7ZeR0tr0xQhaR4qpp9+I79zHB4JVXDeOtUnrv/ni1DEn3m49tSMIml9+1SbDvUcui/xLYzcB7mOtvlwJJC6bBkcbOwJW8drH7WnSKYQVlUvO9PRg8+IWYABo4m/HoTrmg3JSd7+tfq1bmdsTjreC9G6uwJClVG1p8XyGEOijmNqXv9Ivunj8UzUvxVldTIg/taTAKdSlSG3i+xbnz28LKLpxSK2+M63p52Vf+hNJ0OycyVj1TkO+H8OQ==
-X-YMail-OSG: BClZlNgVM1mJa1pSUAMlnjmDwJQUKDn0osVKNVIeZ6AC0JZQ8NzrV_.P2vPToBw
- lk4l1yMYy0P1wu9iKWHPF1vwWtED.NCcY6jE.jXdELnZdUngnDzcX.f1Ik7TcPjN._6dUftCNvSG
- 0ilPDIIh6JKut3rld3EDzfXqVTEprJFL10dLfXEmdNXy8_9HzWnLN9Uxxh6FWr8nj4DbExyF48M8
- b8CzHn8AtWzh0fDjJqMRXb5UR1L1fHF.mq4wk_41bl8VHLLREhO8D9AiMB_Iou.TvP.xektI4Uzf
- lBotEg54S8nbe5a5a2eamKaLSiD6XaCIzSQkrGwkgk9qzk7J4361PG1C2lAWhSULJjGYH.uKi9SH
- 8omXh8MvwuZmVU7umqXbA4eIFWV8ruRR3qRFWtA.2B0Eer.D49EbNovsAu.wRPm8yYyL6YMdaoys
- 3vYAkjype1yPgR0gHAH3zObnNPMrtMzQfsTzcaha59dNYsVWPRo5EvcFgAIKXVIUqnKnooWuODru
- O4SgrdrM8PGEZGs5dJS.h.dJB3gwQ.0I1wf1Q_CLgJhbPMrumaMiWl3ifhN9G_CCxrGhRPRltqdB
- RyAvAXGENXKEJswzM.sYWHkLQyblOWaGX5TLKzeDGaJCZVu7CtZvQ0aNcyWtqrf4SAtE7MK9SqUH
- 7phABBxeBrGdyDkvdUQOX_EPh25.Hb3SncDKllMEIHjvEdwbQcMGmqMEDVCI8Jh0nfgpjh259ODl
- q.bGW_sz63_QvjPWXygjUQ4RzfXiei1bHIkvbkPAHc04dS.Qr8LP1Jyxp2QD0wtNtJgo5RScK99X
- P5NPqcNAR8eez8YgXpk3cKLQCR9JSylhL6QyUVACODhQSLMO_l73eEDpWzNQUeEQLrEwA53TFUO9
- BXx4lR26gADp4OeWMANR3pTNDn8J7Oc5G1l.tF8AqVFtdsoB5vgCdw0tzoX9_22cJzNNteihaN9H
- ktOSXaCeUY26x9DWNkYi7HTOCc9F4vHnioRwelB9Lv.KGDeGPUJBBPmfcn0xXC8MB2YTlUFeVHzN
- FJsHhvFz9eJx.VwEAdhJs3DHW6xmbj9a_RSOf.BoLPiAvMAdoBe_1sVY8nFOqhuBwpkbj17TOzIW
- ts0JEWafkyantIFw8kEnIr0AHDEAK4aB1fgOVS8TQpbEaj2tB4pKHPa4OOjXszQAPBozr7PYVj2f
- 6AcwHFYhcmsrFfliX20p43dgFMRY8GMXgvUWeegBAeAuOTxCoUC9WvAdL
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic301.consmr.mail.bf2.yahoo.com with HTTP; Sat, 22 Jun 2019 16:28:49 +0000
-Date:   Sat, 22 Jun 2019 16:28:46 +0000 (UTC)
-From:   "Miss.Fatima Yusuf" <fatimayusuf5@outlook.fr>
-Reply-To: miss.fmayusuf11@gmail.com
-Message-ID: <270302503.296556.1561220926635@mail.yahoo.com>
-Subject: From:Miss: Fatima Yusuf.
+        Fri, 5 Jul 2019 17:59:46 -0400
+X-Greylist: delayed 627 seconds by postgrey-1.27 at vger.kernel.org; Fri, 05 Jul 2019 17:59:45 EDT
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=dkim; d=mathewsons.ga;
+ h=Content-Type:MIME-Version:Content-Transfer-Encoding:Content-Description:Subject:To:From:Date:Reply-To:Message-ID; i=purchase@mathewsons.ga;
+ bh=onxYcir3NvpNjk2I/gjm/O+ljxo=;
+ b=WrJB4oBOvLtf3vJ5q/jhIp/iCJ9LZA79ErWVoRlywxdS1dnnKml3C1/o8HtpTnqV6AWoj9Fs2NCg
+   A2V0nwgL2wmDppe9I7BzxzoAoHffjw3DZV6IEVEzziRnQPWroVyi47hkYZ3sJdmTK1o38PZmMFPS
+   Jl23BvZJvJ3CMxykNq+1GgaZTOlh7WUYWkeh3Y+jJQqLAW9ggZJe2R8hrWr1xpW5FdItBfDN/lDI
+   K/xKFL4eB6dY652xai9l2XwajOR+3MyKteKXit+RZ0SOVD32IMiMTZB0pOhAGiNe/cd7j518fsj4
+   GK2Rz1dAAViwG2hrFC2Bf+W/3YZWZQP6Wt9VzA==
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=dkim; d=mathewsons.ga;
+ b=gcEQmNp1yW+cITpryKFd+qHpvi3ypZ8wm+Hb8BP14n01qWXlOBf72XbxIZTJIN3lUEqcIFJVIi8z
+   +0LHgvpXomaNu3Z70brIJkTHm0Dr9nz1pGNHdaSftalsz0OfhqMWwGyp7pVMmPI9x7syBdVXZlCg
+   CA/mJ7cvSJ1vLKegLxtx6le93tvdntnAVC4UmLmd+UDGjzs01dDL6LfxXLGbYw1UdyECgMhYwlhR
+   vXM30OdWnwh6UEyRdugRq5ibcCD3x8IFKVLhaL04E2TeoyxJHQUC+8utQMJ2BXcIXd7h5ScHQ8Ah
+   OsaZw8ZZtkoPqhnxF/sE5gCdPHhoqQXm9kg6vQ==;
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-To:     unlisted-recipients:; (no To-header on input)
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Quotes needed For July Shipments
+To:     Recipients <purchase@mathewsons.ga>
+From:   "Sales -Jpexcc." <purchase@mathewsons.ga>
+Date:   Sat, 06 Jul 2019 00:39:14 +0300
+Reply-To: jpexcc@aol.com
+Message-ID: <0.0.4D.13D.1D53379E5670D72.0@slot0.mathewsons.ga>
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
+Hello dear,
+ =
 
+We are in the market for your products after meeting at your stand during l=
+ast expo.
+ =
 
-From:Miss: Fatima Yusuf.
+Please kindly send us your latest catalog and price list so as to start a n=
+ew project/order as promised during the exhibition. =
 
-For sure this mail would definitely come to you as a surprise, but do take your good time to go through it, My name is Ms. Fatima Yusuf,i am from Ivory Coast.
+ =
 
-I lost my parents a year and couple of months ago. My father was a serving director of the Agro-exporting board until his death. He was assassinated by his business partners.Before his death, he made a deposit of US$9.7 Million Dollars here in Cote d'ivoire which was for the purchase of cocoa processing machine and development of another factory before his untimely death.
+I would appreciate your response about the above details required so we can=
+ revert back to you asap.
+ =
 
-Being that this part of the world experiences political and crises time without number, there is no guarantee of lives and properties. I cannot invest this money here any long, despite the fact it had been my late father's industrial plans.
+Kind regards
+ =
 
-I want you to do me a favor to receive this funds into your country or any safer place as the beneficiary, I have plans to invest this money in continuation with the investment vision of my late father, but not in this place again rather in your country. I have the vision of going into real estate and industrial production or any profitable business venture.
-
-I will be ready to compensate you with 20% of the total Amount, now all my hope is banked on you and i really wants to invest this money in your country, where there is stability of Government, political and economic welfare.
-
-My greatest worry now is how to move out of this country because my uncle is threatening to kill me as he killed my father,Please do not let anybody hear about this, it is between me and you alone because of my security reason.
-
-I am waiting to hear from you.
-Yours Sincerely,
-Miss.Fatima Yusuf.
+Rhema Zoeh
