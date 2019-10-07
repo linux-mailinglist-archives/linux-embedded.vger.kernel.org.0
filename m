@@ -2,52 +2,67 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9130223B456
-	for <lists+linux-embedded@lfdr.de>; Tue,  4 Aug 2020 07:14:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DAC4923C263
+	for <lists+linux-embedded@lfdr.de>; Wed,  5 Aug 2020 01:52:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727088AbgHDFOK convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-embedded@lfdr.de>);
-        Tue, 4 Aug 2020 01:14:10 -0400
-Received: from lx0001.riocuarto.gov.ar ([181.15.158.195]:35274 "EHLO
-        lx0001.riocuarto.gov.ar" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726000AbgHDFOK (ORCPT
+        id S1727833AbgHDXw3 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Tue, 4 Aug 2020 19:52:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59272 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726011AbgHDXw2 (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Tue, 4 Aug 2020 01:14:10 -0400
-X-Greylist: delayed 545 seconds by postgrey-1.27 at vger.kernel.org; Tue, 04 Aug 2020 01:14:09 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by zimbra.riocuarto.gov.ar (Postfix) with ESMTP id 73E5860460DCF;
-        Tue,  4 Aug 2020 02:04:51 -0300 (-03)
-Received: from lx0001.riocuarto.gov.ar ([127.0.0.1])
-        by localhost (zimbra.riocuarto.gov.ar [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id vJU7JlE98TLi; Tue,  4 Aug 2020 02:04:51 -0300 (-03)
-Received: from localhost (localhost [127.0.0.1])
-        by zimbra.riocuarto.gov.ar (Postfix) with ESMTP id 7A41160461897;
-        Tue,  4 Aug 2020 02:04:49 -0300 (-03)
-X-Virus-Scanned: amavisd-new at riocuarto.gov.ar
-Received: from lx0001.riocuarto.gov.ar ([127.0.0.1])
-        by localhost (zimbra.riocuarto.gov.ar [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id 3QigFgwHkhCq; Tue,  4 Aug 2020 02:04:49 -0300 (-03)
-Received: from zimbra.riocuarto.gov.ar (localhost [127.0.0.1])
-        by zimbra.riocuarto.gov.ar (Postfix) with ESMTP id 2EAFF60460DB0;
-        Tue,  4 Aug 2020 02:04:47 -0300 (-03)
-Date:   Tue, 4 Aug 2020 02:04:47 -0300 (ART)
-From:   Jorge Meroni <jmeroni@riocuarto.gov.ar>
-Reply-To: DANIEL MADRE <danielsmadre6@gmail.com>
-Message-ID: <2053163934.1364767.1596517487139.JavaMail.zimbra@riocuarto.gov.ar>
-Subject: SPENDE
+        Tue, 4 Aug 2020 19:52:28 -0400
+X-Greylist: delayed 86248 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 04 Aug 2020 16:52:27 PDT
+Received: from dockerbox (unknown [IPv6:2001:4800:7817:101:be76:4eff:fe04:a215])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id BC72FC061756;
+        Tue,  4 Aug 2020 16:52:27 -0700 (PDT)
+Received: from 127.0.0.1 (localhost [127.0.0.1])
+        by dockerbox (Postfix) with SMTP id 6F4DA5EC5A;
+        Mon,  7 Oct 2019 19:30:12 -0500 (CDT)
+Received: from [32.188.209.113] by 127.0.0.1 with SMTP; Mon, 07 Oct 2019 18:22:17 -0600
+Message-ID: <80v-q$4-o4pqyq0@6eeih174.p55>
+From:   "Mr Barrister Hans Erich" <dave@dbsoundfactory.com>
+Reply-To: "Mr Barrister Hans Erich" <dave@dbsoundfactory.com>
+To:     linkos@binet.lv
+Subject: RE:PERSONAL LETTER FROM MRS RASHIA AMIRA
+Date:   Mon, 07 Oct 19 18:22:17 GMT
+X-Mailer: Microsoft Outlook Express 5.00.2615.200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8BIT
-X-Originating-IP: [105.9.103.250]
-X-Mailer: Zimbra 8.8.15_GA_3918 (zclient/8.8.15_GA_3918)
-Thread-Index: xNKE1746z7520GYub8Cm2tj1QcztMA==
-Thread-Topic: SPENDE
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: multipart/alternative;
+        boundary="_.A4476ECDD73A3"
+X-Priority: 3
+X-MSMail-Priority: Normal
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
 
+--_.A4476ECDD73A3
+Content-Type: text/plain;
+Content-Transfer-Encoding: quoted-printable
 
-Ich habe eine Spende von 5,5 Millionen Euro für Sie. Bitte antworten Sie.
+Greetings
+
+My name is Barrister Hans Erich.
+
+I have a client who is interested to invest in your country, she is a well=
+ known politician in her country and deserve a lucrative investment partne=
+rship with you outside her country without any delay   Please can you mana=
+ge such investment please Kindly reply for further details.
+
+Your full names --------
+
+
+Your urgent response will be appreciated
+
+Thank you and God bless you.
+
+Barrister Hans Erich
+
+Yours sincerely,
+Barrister Hans Erich
+CONTACT: hanserich9helmut@gmail.com
+
+--_.A4476ECDD73A3--
+
