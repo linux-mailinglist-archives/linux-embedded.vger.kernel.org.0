@@ -2,30 +2,42 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A6EEFF245A
-	for <lists+linux-embedded@lfdr.de>; Thu,  7 Nov 2019 02:38:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2CA1EF3223
+	for <lists+linux-embedded@lfdr.de>; Thu,  7 Nov 2019 16:09:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728680AbfKGBh7 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 6 Nov 2019 20:37:59 -0500
-Received: from srv300.firstheberg.net ([91.236.239.149]:47314 "EHLO
-        rescue.firstheberg.net" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1727924AbfKGBh7 (ORCPT
-        <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 6 Nov 2019 20:37:59 -0500
-X-Greylist: delayed 16699 seconds by postgrey-1.27 at vger.kernel.org; Wed, 06 Nov 2019 20:37:59 EST
-Received: from dstat.app (localhost [IPv6:::1])
-        by rescue.firstheberg.net (Postfix) with SMTP id C05A960DED9;
-        Wed,  6 Nov 2019 19:46:39 +0000 (UTC)
-From:   prodawez@teleworm.us
-To:     vronsk@ru.ru
-Reply-To: prodawez@teleworm.us
-Subject: Zdravstvujte! Vas interesujut bazy dannyh dlja prodazhi Vashih tovarov i uslug?
-Message-Id: <20191106194639.C05A960DED9@rescue.firstheberg.net>
-Date:   Wed,  6 Nov 2019 19:46:39 +0000 (UTC)
+        id S2389067AbfKGPJQ (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 7 Nov 2019 10:09:16 -0500
+Received: from [211.53.128.215] ([211.53.128.215]:49660 "EHLO MAIL.isd.co.kr"
+        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1730980AbfKGPJQ (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
+        Thu, 7 Nov 2019 10:09:16 -0500
+Received: from 192.168.1.3 (217.217.179.17) by MAIL.isd.co.kr (10.10.10.22)
+ with Microsoft SMTP Server id 14.3.123.3; Fri, 8 Nov 2019 00:08:07 +0900
+Date:   Thu, 7 Nov 2019 16:08:05 +0100
+From:   Peter Wong <choimj@isd.co.kr>
+Reply-To: Peter Wong <pw178483@protonmail.com>
+To:     <linux-embedded@vger.kernel.org>
+Message-ID: <27946327.22527.1573139287764.JavaMail.cash@211.53.128.215>
+Subject: Investment opportunity
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [217.217.179.17]
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Zdravstvujte! Vas interesujut bazy dannyh dlja prodazhi Vashih tovarov i uslug?
+Greetings,
+
+Find attached email very confidential. reply for more details
+
+Thanks.
+Peter Wong
+
+
+
+
+----------------------------------------------------
+This email was sent by the shareware version of Postman Professional.
 
