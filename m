@@ -2,89 +2,111 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 81DDC10E2DE
-	for <lists+linux-embedded@lfdr.de>; Sun,  1 Dec 2019 19:15:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C3A48112BC3
+	for <lists+linux-embedded@lfdr.de>; Wed,  4 Dec 2019 13:43:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727282AbfLASP3 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Sun, 1 Dec 2019 13:15:29 -0500
-Received: from mtax.cdmx.gob.mx ([187.141.35.197]:14798 "EHLO mtax.cdmx.gob.mx"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727258AbfLASP3 (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
-        Sun, 1 Dec 2019 13:15:29 -0500
-X-Greylist: delayed 6380 seconds by postgrey-1.27 at vger.kernel.org; Sun, 01 Dec 2019 13:15:28 EST
-X-NAI-Header: Modified by McAfee Email Gateway (4500)
+        id S1727900AbfLDMnK (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Wed, 4 Dec 2019 07:43:10 -0500
+Received: from mail-qt1-f195.google.com ([209.85.160.195]:43941 "EHLO
+        mail-qt1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726010AbfLDMm6 (ORCPT
+        <rfc822;linux-embedded@vger.kernel.org>);
+        Wed, 4 Dec 2019 07:42:58 -0500
+Received: by mail-qt1-f195.google.com with SMTP id q8so7536319qtr.10
+        for <linux-embedded@vger.kernel.org>; Wed, 04 Dec 2019 04:42:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cdmx.gob.mx; s=72359050-3965-11E6-920A-0192F7A2F08E;
-        t=1575217548; h=DKIM-Filter:X-Virus-Scanned:
-         Content-Type:MIME-Version:Content-Transfer-Encoding:
-         Content-Description:Subject:To:From:Date:Message-Id:
-         X-AnalysisOut:X-AnalysisOut:X-AnalysisOut:
-         X-AnalysisOut:X-AnalysisOut:X-SAAS-TrackingID:
-         X-NAI-Spam-Flag:X-NAI-Spam-Threshold:X-NAI-Spam-Score:
-         X-NAI-Spam-Rules:X-NAI-Spam-Version; bh=M
-        8rWdUYQ57RAYAgTWJQ4Rsch0kO0UXllaAVDzocOs4
-        8=; b=JLhcGJUNigqDJduTtHyqCmxpDQB3jcT0ItmylUH1RDrU
-        fHVEMALzWayZyLAyPfC9JMvTWKmG+MZJHL190oTbQ+awRsTd8q
-        2+q5ZLWlazM3ZX4eAhat8x9cHuEyjvIsxlMktz/e9oPNGp4CsT
-        Hejj/AyiJEmz2gBpVwrijTjIWXM=
-Received: from cdmx.gob.mx (correo.cdmx.gob.mx [10.250.108.150]) by mtax.cdmx.gob.mx with smtp
-        (TLS: TLSv1/SSLv3,256bits,ECDHE-RSA-AES256-GCM-SHA384)
-         id 1dee_5ef9_3d51fe4e_c895_4252_96ba_bd2bfe429b60;
-        Sun, 01 Dec 2019 10:25:47 -0600
-Received: from localhost (localhost [127.0.0.1])
-        by cdmx.gob.mx (Postfix) with ESMTP id 89A881E2BC1;
-        Sun,  1 Dec 2019 10:17:57 -0600 (CST)
-Received: from cdmx.gob.mx ([127.0.0.1])
-        by localhost (cdmx.gob.mx [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id aqd_Z0aFQeXI; Sun,  1 Dec 2019 10:17:57 -0600 (CST)
-Received: from localhost (localhost [127.0.0.1])
-        by cdmx.gob.mx (Postfix) with ESMTP id 9B4AB1E25C4;
-        Sun,  1 Dec 2019 10:12:49 -0600 (CST)
-DKIM-Filter: OpenDKIM Filter v2.9.2 cdmx.gob.mx 9B4AB1E25C4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cdmx.gob.mx;
-        s=72359050-3965-11E6-920A-0192F7A2F08E; t=1575216769;
-        bh=M8rWdUYQ57RAYAgTWJQ4Rsch0kO0UXllaAVDzocOs48=;
-        h=Content-Type:MIME-Version:Content-Transfer-Encoding:Subject:To:
-         From:Date:Message-Id;
-        b=VM/MDjZp/ToXSb6IylSA2j7sfLnl+dppkEHIGNewktK0r0EZO1qVelzIRIQFHkauf
-         8hUyRBkWsbgG9sIPLTAaoMujF9jeNGlgJ29t0muQMp4uc+dagG5HP/nVJykCMmFrm4
-         ElRVBXlYvG+yOIuHsqtjedF5FbFTjZXWADNATTJc=
-X-Virus-Scanned: amavisd-new at cdmx.gob.mx
-Received: from cdmx.gob.mx ([127.0.0.1])
-        by localhost (cdmx.gob.mx [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id O2thXQNhnY8B; Sun,  1 Dec 2019 10:12:49 -0600 (CST)
-Received: from [192.168.0.104] (unknown [188.125.168.160])
-        by cdmx.gob.mx (Postfix) with ESMTPSA id 313181E2869;
-        Sun,  1 Dec 2019 10:03:53 -0600 (CST)
-Content-Type: text/plain; charset="iso-8859-1"
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=SWzs3svZdfoJNhQZue5B0UPApGf3QNVhTsPQAsjB3v0=;
+        b=AkbuvF8WWOeGkFuNbpEiUPeHs0D9XYCrvYJnn3sJBPk0l/N+bAJ+lU7by52a8c0/XL
+         X5y/+uJVi5SRPzgKpD7LZp2RSO63H/dWhNB+Sgv8CnTmnW6HnNvEkrD3pvFKiHue+ji0
+         Cyct4Vs7hozR5hYKDh8cJJMkT72K9aPHj93bK1Ew++bIIM698i5hGwNXpwVN8RyOlTlg
+         ekVZP06isuUhwZwFxkLwU0Sye3HMnEDkq9yUmWZzxA1JTm8RzibEufZxYTJilauyHwzc
+         pKJFDkaXtzzvkeOyU7ajhljX9QykaA8Ur2FHYJunK1Sxosbxld4ODKAYs9j7AB06Aipc
+         jW5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=SWzs3svZdfoJNhQZue5B0UPApGf3QNVhTsPQAsjB3v0=;
+        b=cKgQEYTxolAv8xelefQcbLfOAs+8vcy6dR8SKCIrBjp+dZ9TwOKTnSkZQEXOaK7yGn
+         IagHm/nWdn0OvxbDejkGUcSJZXpn6osLpNDCqOTwA42+wNCRRioJsGoL2gyKhlghTiao
+         3n6VDIUcZVimVExYJavhQqjurSPHtYFf2RD1Xjp1dhi1Ng3BRjQoW8j1/2rE7Xed1GW9
+         +7MvKNvibGrWQII5UDZgFekoYmo1WgcazRVkjk33EsDl/9R+GPBZVQVHYtEOKAhClBmm
+         gO9QsM5OBWWsgATjT7oeWk06twa1YLGC7xMj7XaU9PPjOYveFgK68P5+IIeavR0PHJLU
+         1CRw==
+X-Gm-Message-State: APjAAAUoSLRrd02wbAh/yoT5ijIndOtgpQw4gTzvWolzZf0WDYBRreec
+        v3pHSD9wOqW3YrymPrTUj9q8NS2rjAvUSMfwF78=
+X-Google-Smtp-Source: APXvYqzw3gCG5cnmI6368TWfhjS/+LLSHd6b95oZCOsPTpsAjIN23auDStB1pQ1PTnMah1qk6gl8uYsnTPaZ7k01uH0=
+X-Received: by 2002:ac8:4a81:: with SMTP id l1mr2434940qtq.357.1575463377714;
+ Wed, 04 Dec 2019 04:42:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: Congratulations
-To:     Recipients <aac-styfe@cdmx.gob.mx>
-From:   "Bishop Johnr" <aac-styfe@cdmx.gob.mx>
-Date:   Sun, 01 Dec 2019 17:03:46 +0100
-Message-Id: <20191201160354.313181E2869@cdmx.gob.mx>
-X-AnalysisOut: [v=2.2 cv=euev9shX c=1 sm=1 tr=0 p=6K-Ig8iNAUou4E5wYCEA:9 p]
-X-AnalysisOut: [=zRI05YRXt28A:10 a=T6zFoIZ12MK39YzkfxrL7A==:117 a=9152RP8M]
-X-AnalysisOut: [6GQqDhC/mI/QXQ==:17 a=8nJEP1OIZ-IA:10 a=pxVhFHJ0LMsA:10 a=]
-X-AnalysisOut: [pGLkceISAAAA:8 a=wPNLvfGTeEIA:10 a=M8O0W8wq6qAA:10 a=Ygvjr]
-X-AnalysisOut: [iKHvHXA2FhpO6d-:22]
-X-SAAS-TrackingID: 989e3ed5.0.105194649.00-2261.176837795.s12p02m004.mxlogic.net
-X-NAI-Spam-Flag: NO
-X-NAI-Spam-Threshold: 3
-X-NAI-Spam-Score: -5000
-X-NAI-Spam-Rules: 1 Rules triggered
-        WHITELISTED=-5000
-X-NAI-Spam-Version: 2.3.0.9418 : core <6686> : inlines <7165> : streams
- <1840193> : uri <2949748>
+Received: by 2002:ac8:2f0c:0:0:0:0:0 with HTTP; Wed, 4 Dec 2019 04:42:57 -0800 (PST)
+Reply-To: moneygram.1820@outlook.fr
+From:   "Rev.Dr Emmanuel Okoye CEO Ecobank-benin" 
+        <westernunion.benin982@gmail.com>
+Date:   Wed, 4 Dec 2019 13:42:57 +0100
+Message-ID: <CAP=nHBJXiPmPL21x=_0BHWRk_3N3Yax+tTxcFi=t=AhN7g==1Q@mail.gmail.com>
+Subject: God has remembered your prayers I have already sent you Money Gram
+ payment of $5000.00 today, MG 1029-8096
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Money was donated to you by Mr and Mrs Allen and Violet Large, just contact=
- them with this email for more information =
+Attn, dear Beneficiary.
 
+God has remembered your prayers
+I have already sent you Money Gram payment of $5000.00 today, MG 1029-8096
+This is because we have finally concluded to effect your transfer
+funds of $4.8,000.000usd
+through MONEY GRAM International Fund transfer Service
+Each payment will be sending to you by $5000.00 daily until the
+($4.8,000.000usd) is completely transferred
+we have this morning sent  MONEY GRAM payment of $5,000.00 in your name today
+So contact the MONEY GRAM Agent to pick up this first payment of $5000 now
 
-EMail: allenandvioletlargeaward@gmail.com
+Contact person Mrs. Alan Ude
+Dir. MONEY GRAM Service,Benin
+Phone number: +229 98856728
+E-mail: moneygram.1820@outlook.fr
+
+Ask him to give you the complete mtcn, sender name, question and
+answer to enable you
+pick up the $5000.00 sent today,
+Also you are instructed to re-confirm your information's
+to Mrs.Alan Ude as listed below to avoid wrong transactions.
+
+(1Your Full name:............................................
+(2 Phone number.....................................................
+(3 Contact address:.....................................
+(4 Age:..................................................................
+(5 Country..............................................
+(6) Sex .................................................................
+(7) your occupation...........................................
+
+(8)Passport/By Attach or Drivers License Number:
+Contact Mrs. Alan Ude for your MONEY GRAM payment of $4.8,000.000usd
+Note please: I have paid service fees for you but the only money you
+are required
+to send to Mrs. Alan Ude is $90.00 only Transfer fee before you can
+pick up your transfer today.
+
+Send it to via Money Gram
+Receiver's Name-----Alan Ude
+Country----------Benin
+Address-----------Cotonou
+Quest--------Honest
+Ans-----------Trust
+
+I done all my best for you to receive your transfer now ok.
+We need your urgent reply
+Best Regards
+Rev.Dr Emmanuel Okoye
+CEO Ecobank-benin
+
+If we did not receive it urgent from you today,
+I will go ahead and release you funds to Mrs. Lyndia Ppaulson as your
+representative.
