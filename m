@@ -2,111 +2,48 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C3A48112BC3
-	for <lists+linux-embedded@lfdr.de>; Wed,  4 Dec 2019 13:43:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0A88511B539
+	for <lists+linux-embedded@lfdr.de>; Wed, 11 Dec 2019 16:52:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727900AbfLDMnK (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 4 Dec 2019 07:43:10 -0500
-Received: from mail-qt1-f195.google.com ([209.85.160.195]:43941 "EHLO
-        mail-qt1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726010AbfLDMm6 (ORCPT
+        id S1732432AbfLKPwe convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-embedded@lfdr.de>);
+        Wed, 11 Dec 2019 10:52:34 -0500
+Received: from mailout02.3bbmail.com ([110.164.252.195]:40152 "EHLO
+        mailout03.3bb.co.th" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1731277AbfLKPwd (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 4 Dec 2019 07:42:58 -0500
-Received: by mail-qt1-f195.google.com with SMTP id q8so7536319qtr.10
-        for <linux-embedded@vger.kernel.org>; Wed, 04 Dec 2019 04:42:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=SWzs3svZdfoJNhQZue5B0UPApGf3QNVhTsPQAsjB3v0=;
-        b=AkbuvF8WWOeGkFuNbpEiUPeHs0D9XYCrvYJnn3sJBPk0l/N+bAJ+lU7by52a8c0/XL
-         X5y/+uJVi5SRPzgKpD7LZp2RSO63H/dWhNB+Sgv8CnTmnW6HnNvEkrD3pvFKiHue+ji0
-         Cyct4Vs7hozR5hYKDh8cJJMkT72K9aPHj93bK1Ew++bIIM698i5hGwNXpwVN8RyOlTlg
-         ekVZP06isuUhwZwFxkLwU0Sye3HMnEDkq9yUmWZzxA1JTm8RzibEufZxYTJilauyHwzc
-         pKJFDkaXtzzvkeOyU7ajhljX9QykaA8Ur2FHYJunK1Sxosbxld4ODKAYs9j7AB06Aipc
-         jW5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=SWzs3svZdfoJNhQZue5B0UPApGf3QNVhTsPQAsjB3v0=;
-        b=cKgQEYTxolAv8xelefQcbLfOAs+8vcy6dR8SKCIrBjp+dZ9TwOKTnSkZQEXOaK7yGn
-         IagHm/nWdn0OvxbDejkGUcSJZXpn6osLpNDCqOTwA42+wNCRRioJsGoL2gyKhlghTiao
-         3n6VDIUcZVimVExYJavhQqjurSPHtYFf2RD1Xjp1dhi1Ng3BRjQoW8j1/2rE7Xed1GW9
-         +7MvKNvibGrWQII5UDZgFekoYmo1WgcazRVkjk33EsDl/9R+GPBZVQVHYtEOKAhClBmm
-         gO9QsM5OBWWsgATjT7oeWk06twa1YLGC7xMj7XaU9PPjOYveFgK68P5+IIeavR0PHJLU
-         1CRw==
-X-Gm-Message-State: APjAAAUoSLRrd02wbAh/yoT5ijIndOtgpQw4gTzvWolzZf0WDYBRreec
-        v3pHSD9wOqW3YrymPrTUj9q8NS2rjAvUSMfwF78=
-X-Google-Smtp-Source: APXvYqzw3gCG5cnmI6368TWfhjS/+LLSHd6b95oZCOsPTpsAjIN23auDStB1pQ1PTnMah1qk6gl8uYsnTPaZ7k01uH0=
-X-Received: by 2002:ac8:4a81:: with SMTP id l1mr2434940qtq.357.1575463377714;
- Wed, 04 Dec 2019 04:42:57 -0800 (PST)
+        Wed, 11 Dec 2019 10:52:33 -0500
+X-Greylist: delayed 1852 seconds by postgrey-1.27 at vger.kernel.org; Wed, 11 Dec 2019 10:52:31 EST
+Authentication-Results: 3bb.co.th;
+        spf=fail smtp.mailfrom=infoccfoundation@amazon.com
+Received: from appserv (mx-ll-110.164.149-9.static.3bb.co.th [110.164.149.9] (may be forged))
+        by mailout03.3bb.co.th (8.16.0.27/8.16.0.27) with ESMTP id xBBFFDC3021418;
+        Wed, 11 Dec 2019 22:15:13 +0700
+Message-ID: <41450-2201912311151522902@appserv>
+To:     "a" <skyteamsbiz@gmail.com>
+Reply-To: "CCULVERT FOUNDATION" <skyteamsbiz@gmail.com>
+From:   "CCULVERT FOUNDATION" <infoccfoundation@amazon.com>
+Subject: Mein letzter Wunsch.
+Date:   Wed, 11 Dec 2019 22:15:22 +0700
 MIME-Version: 1.0
-Received: by 2002:ac8:2f0c:0:0:0:0:0 with HTTP; Wed, 4 Dec 2019 04:42:57 -0800 (PST)
-Reply-To: moneygram.1820@outlook.fr
-From:   "Rev.Dr Emmanuel Okoye CEO Ecobank-benin" 
-        <westernunion.benin982@gmail.com>
-Date:   Wed, 4 Dec 2019 13:42:57 +0100
-Message-ID: <CAP=nHBJXiPmPL21x=_0BHWRk_3N3Yax+tTxcFi=t=AhN7g==1Q@mail.gmail.com>
-Subject: God has remembered your prayers I have already sent you Money Gram
- payment of $5000.00 today, MG 1029-8096
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-type: text/plain; charset=windows-874
+Content-Transfer-Encoding: 8BIT
+X-Proofpoint-SPF-Result: fail
+X-Proofpoint-SPF-Record: v=spf1 include:spf1.amazon.com include:spf2.amazon.com
+ include:amazonses.com -all
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-11-25_06:,,
+ signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=40 suspectscore=1 malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=480
+ adultscore=0 classifier=spam adjust=40 reason=mlx scancount=1
+ engine=8.0.1-1911140001 definitions=main-1911260048
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Attn, dear Beneficiary.
+Wenn Sie sich für die Finanzierung der STIFTUNG interessieren, schreiben Sie bitte heute über meinen Anwalt zurück
+Grüße,
+Mrs. Cindy Culvert.
+skyteamsbiz@gmail.com
 
-God has remembered your prayers
-I have already sent you Money Gram payment of $5000.00 today, MG 1029-8096
-This is because we have finally concluded to effect your transfer
-funds of $4.8,000.000usd
-through MONEY GRAM International Fund transfer Service
-Each payment will be sending to you by $5000.00 daily until the
-($4.8,000.000usd) is completely transferred
-we have this morning sent  MONEY GRAM payment of $5,000.00 in your name today
-So contact the MONEY GRAM Agent to pick up this first payment of $5000 now
-
-Contact person Mrs. Alan Ude
-Dir. MONEY GRAM Service,Benin
-Phone number: +229 98856728
-E-mail: moneygram.1820@outlook.fr
-
-Ask him to give you the complete mtcn, sender name, question and
-answer to enable you
-pick up the $5000.00 sent today,
-Also you are instructed to re-confirm your information's
-to Mrs.Alan Ude as listed below to avoid wrong transactions.
-
-(1Your Full name:............................................
-(2 Phone number.....................................................
-(3 Contact address:.....................................
-(4 Age:..................................................................
-(5 Country..............................................
-(6) Sex .................................................................
-(7) your occupation...........................................
-
-(8)Passport/By Attach or Drivers License Number:
-Contact Mrs. Alan Ude for your MONEY GRAM payment of $4.8,000.000usd
-Note please: I have paid service fees for you but the only money you
-are required
-to send to Mrs. Alan Ude is $90.00 only Transfer fee before you can
-pick up your transfer today.
-
-Send it to via Money Gram
-Receiver's Name-----Alan Ude
-Country----------Benin
-Address-----------Cotonou
-Quest--------Honest
-Ans-----------Trust
-
-I done all my best for you to receive your transfer now ok.
-We need your urgent reply
-Best Regards
-Rev.Dr Emmanuel Okoye
-CEO Ecobank-benin
-
-If we did not receive it urgent from you today,
-I will go ahead and release you funds to Mrs. Lyndia Ppaulson as your
-representative.
