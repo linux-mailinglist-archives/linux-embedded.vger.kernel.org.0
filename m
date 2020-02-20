@@ -2,63 +2,81 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 703561645BC
-	for <lists+linux-embedded@lfdr.de>; Wed, 19 Feb 2020 14:38:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 20634165AF5
+	for <lists+linux-embedded@lfdr.de>; Thu, 20 Feb 2020 11:01:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727881AbgBSNiA convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 19 Feb 2020 08:38:00 -0500
-Received: from scm.imp.edu.mx ([132.247.16.103]:21971 "EHLO scm.imp.edu.mx"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727762AbgBSNh7 (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 19 Feb 2020 08:37:59 -0500
-Received: from localhost (localhost [127.0.0.1])
-        by scm.imp.edu.mx (Postfix) with ESMTP id C909E18AD1C;
-        Wed, 19 Feb 2020 06:11:28 -0600 (CST)
-X-Virus-Scanned: by SpamTitan at imp.edu.mx
-Received: from scm.imp.edu.mx (localhost [127.0.0.1])
-        by scm.imp.edu.mx (Postfix) with ESMTP id 2FB1E18D9F9;
-        Wed, 19 Feb 2020 04:51:47 -0600 (CST)
-Authentication-Results: scm.imp.edu.mx; none
-Received: from imp.edu.mx (unknown [10.249.93.105])
-        by scm.imp.edu.mx (Postfix) with ESMTP id 304AF18D9D5;
-        Wed, 19 Feb 2020 04:51:43 -0600 (CST)
-Received: from localhost (localhost [127.0.0.1])
-        by imp.edu.mx (Postfix) with ESMTP id 142C6180635F4C;
-        Wed, 19 Feb 2020 04:51:44 -0600 (CST)
-Received: from imp.edu.mx ([127.0.0.1])
-        by localhost (imp.edu.mx [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id drikqDSaXNZ7; Wed, 19 Feb 2020 04:51:44 -0600 (CST)
-Received: from localhost (localhost [127.0.0.1])
-        by imp.edu.mx (Postfix) with ESMTP id E9078180635F42;
-        Wed, 19 Feb 2020 04:51:43 -0600 (CST)
-X-Virus-Scanned: amavisd-new at imp.edu.mx
-Received: from imp.edu.mx ([127.0.0.1])
-        by localhost (imp.edu.mx [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id nlvgsIzZRblX; Wed, 19 Feb 2020 04:51:43 -0600 (CST)
-Received: from [45.147.4.119] (unknown [45.147.4.119])
-        by imp.edu.mx (Postfix) with ESMTPSA id 27589180635F4C;
-        Wed, 19 Feb 2020 04:51:42 -0600 (CST)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726952AbgBTKBI (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 20 Feb 2020 05:01:08 -0500
+Received: from mail-pg1-f195.google.com ([209.85.215.195]:40292 "EHLO
+        mail-pg1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726829AbgBTKBI (ORCPT
+        <rfc822;linux-embedded@vger.kernel.org>);
+        Thu, 20 Feb 2020 05:01:08 -0500
+Received: by mail-pg1-f195.google.com with SMTP id z7so1681644pgk.7
+        for <linux-embedded@vger.kernel.org>; Thu, 20 Feb 2020 02:01:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=xsUbPWAhYtsZRE8nHbpZ90/dMr+6ACJOvf/o3gzcGwM=;
+        b=gDZMn2EUTLoShvE51pdWAhkXt/HRLGKuxvA3ZS9ZLFlXYMhtfIN7d8AG6kyxVoYvBU
+         gqWdoOscY8SEg8/lXYo9SbvjKifCTD3pKbU+oMnksUDxZc+1Ol2NWqbKqPMNpKZob4JJ
+         yCY5FOykWsy8pTm3MjmB2rLnyEZ9xBCEWN/kgKRR8dAAG2ehvV8juW28wGJ7PuMABicB
+         jm+up8NugWpxGYoLtaKJHUQNPG11JFLz8LHhx8IDoQcTAFMxX1oUycfLKT9vfg+QtP0j
+         CEVfGgibNO9rRBNVm5w9z/KAH0vP/4A+ps5pWgbvyrTViiW3wJfAjRwd4j8baJeTKGQt
+         ie8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=xsUbPWAhYtsZRE8nHbpZ90/dMr+6ACJOvf/o3gzcGwM=;
+        b=P/UsPF4/YrzGi+S9mFE0HSJX/fLDuKkaNOTb6KAyINIu+NiEPu6d2/XVWiP+mJXWAz
+         mXh9Fwd9ou4joGT2K75KRn361TIY3AOMfABgNGU7mT2lQPkEVu3yA/s8Knf70fDRU5u6
+         3ZSaLRhC9tNMEMkjT39QitwLG9+tbdEGx9f95A0lJ9QC+YFngB4qziUzNnmffj7clpvy
+         xXMaexdBGm4T4g2kycfCae7CJUGZ1fJCOMolUZ+ZD1UcZl6+l270/baDXoRrbmFiKKw4
+         Cdgb27XXxWC0aS85tVYIthwY/ygxAzsmWb/RLP7OeAdsV5dF9EeazhuA1ZHO0WSmhxTB
+         lZ5w==
+X-Gm-Message-State: APjAAAVlvNwAJJ7rc1/kdLCJpvH4VIh3cVd6pFhByUyjB/TleUeqp99R
+        d9ZuTmoWFWMNtoNkG7Nt9rP/AQA7RGi9qrDyqf8=
+X-Google-Smtp-Source: APXvYqyOl99vHOqN+DcmAsiqFBt64uIhAKgBlbIpdKXgDi+JIqNCxw8ss5XbCW+kEoYe407B8qHTVMAAbOr89JpAdJg=
+X-Received: by 2002:a63:2cc9:: with SMTP id s192mr31426644pgs.441.1582192867722;
+ Thu, 20 Feb 2020 02:01:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: 19-02-2020
-To:     Recipients <mucios@imp.edu.mx>
-From:   "urs portmann" <mucios@imp.edu.mx>
-Date:   Wed, 19 Feb 2020 21:51:40 +1100
-Reply-To: onube@qq.com
-Message-Id: <20200219105142.27589180635F4C@imp.edu.mx>
+Received: by 2002:a17:90a:90f:0:0:0:0 with HTTP; Thu, 20 Feb 2020 02:01:07
+ -0800 (PST)
+Reply-To: cagesusan199@gmail.com
+From:   "Mrs. Susan S. Cage" <drgoodluckebelejonathan061@gmail.com>
+Date:   Thu, 20 Feb 2020 02:01:07 -0800
+Message-ID: <CALjo5=9NG2iPaKJo+8UdwnVuoP_wjiyn37HGuo_n1zX7X1vkTg@mail.gmail.com>
+Subject: Attention:Beneficiary
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Guten Morgen,
-                                          19-02-2020
-Wir haben versucht, Sie zu erreichen und haben noch nichts von Ihnen gehört. Haben Sie unsere letzte E-Mail über Ihre S.p.e.n.d.e erhalten? Wenn nicht, melden Sie sich bitte bei uns, um weitere Informationen zu erhalten.
+-- 
+Dearest Friend,
 
-Wir warten darauf, von Ihnen zu hören, sobald Sie diese Nachricht erhalten, die Sie bei der weiteren Vorgehensweise unterstützt.
+Sorry for invading your privacy, my name is Susan S. Cage I am 81
+years, citizen of United States and presently in hospital undergoing
+chromatography for bronchogenic carcinomas (Lung cancer) which
+affected both Lungs. The doctors said I have few days to live because
+the cancer has now affected my brain.
 
-Mfg
-urs portmann
+My late husband left Fifteen Million, Five Hundred British Pounds
+Sterling in my account, I want to transfer the money to you and I want
+you to use it as a donate for charitable and help the needy,
+motherless, less privileged and widows within your location.
+
+I need your assurance that you will use the fund for charity, once I a
+favorable reply from you, will inform my Bank through my lawyer to
+transfer the fund to you as my Next of Kin and Sole Beneficiary. Once
+I receive your response, I will inform my bank in writing through my
+lawyer.
+
+
+
+Thank you and God bless you.
+
+Mrs. Susan S. Cage
