@@ -2,81 +2,85 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 20634165AF5
-	for <lists+linux-embedded@lfdr.de>; Thu, 20 Feb 2020 11:01:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 120B9166D5C
+	for <lists+linux-embedded@lfdr.de>; Fri, 21 Feb 2020 04:19:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726952AbgBTKBI (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Thu, 20 Feb 2020 05:01:08 -0500
-Received: from mail-pg1-f195.google.com ([209.85.215.195]:40292 "EHLO
-        mail-pg1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726829AbgBTKBI (ORCPT
+        id S1729229AbgBUDTz (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 20 Feb 2020 22:19:55 -0500
+Received: from mail-oi1-f172.google.com ([209.85.167.172]:33397 "EHLO
+        mail-oi1-f172.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727488AbgBUDTz (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Thu, 20 Feb 2020 05:01:08 -0500
-Received: by mail-pg1-f195.google.com with SMTP id z7so1681644pgk.7
-        for <linux-embedded@vger.kernel.org>; Thu, 20 Feb 2020 02:01:08 -0800 (PST)
+        Thu, 20 Feb 2020 22:19:55 -0500
+Received: by mail-oi1-f172.google.com with SMTP id q81so274339oig.0
+        for <linux-embedded@vger.kernel.org>; Thu, 20 Feb 2020 19:19:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=xsUbPWAhYtsZRE8nHbpZ90/dMr+6ACJOvf/o3gzcGwM=;
-        b=gDZMn2EUTLoShvE51pdWAhkXt/HRLGKuxvA3ZS9ZLFlXYMhtfIN7d8AG6kyxVoYvBU
-         gqWdoOscY8SEg8/lXYo9SbvjKifCTD3pKbU+oMnksUDxZc+1Ol2NWqbKqPMNpKZob4JJ
-         yCY5FOykWsy8pTm3MjmB2rLnyEZ9xBCEWN/kgKRR8dAAG2ehvV8juW28wGJ7PuMABicB
-         jm+up8NugWpxGYoLtaKJHUQNPG11JFLz8LHhx8IDoQcTAFMxX1oUycfLKT9vfg+QtP0j
-         CEVfGgibNO9rRBNVm5w9z/KAH0vP/4A+ps5pWgbvyrTViiW3wJfAjRwd4j8baJeTKGQt
-         ie8A==
+        d=landley-net.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=xuYEaRHB/0pkNj1SqixIDNUqyYlP4wToyfv9uRwbzvE=;
+        b=w5nn3gkR7jmZuOHKRaBBCPcKd3LmFDmhhyIVqgVqORdOSAGdeBni4XQblGG1Cvu88L
+         0VHRrSsMKmTIpJdKNY6a9Coht7yoz3KO/XxQ6CgJcCWzUFuOHQzSSaah/ztnsbEcjNm8
+         MNsnPwp1IAjNf7eyZAiszn4qnSLxOi349F/qYMVpDjmcaKqs1VYD/IUuaLHQ6G9sj2t5
+         T4yPGM+/KTDNzrXAuVFF0qZM/FJOZ3BGEq6X0WqtjFJfe+JhEEMZ0q+PF6PibumfPCLz
+         V5/G7ixew7W0ALDGQMoBPK4MeVb3/cFBnzyMD+zJG2ne7G5nRoLvjbzNucF29XdMgELe
+         VcVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=xsUbPWAhYtsZRE8nHbpZ90/dMr+6ACJOvf/o3gzcGwM=;
-        b=P/UsPF4/YrzGi+S9mFE0HSJX/fLDuKkaNOTb6KAyINIu+NiEPu6d2/XVWiP+mJXWAz
-         mXh9Fwd9ou4joGT2K75KRn361TIY3AOMfABgNGU7mT2lQPkEVu3yA/s8Knf70fDRU5u6
-         3ZSaLRhC9tNMEMkjT39QitwLG9+tbdEGx9f95A0lJ9QC+YFngB4qziUzNnmffj7clpvy
-         xXMaexdBGm4T4g2kycfCae7CJUGZ1fJCOMolUZ+ZD1UcZl6+l270/baDXoRrbmFiKKw4
-         Cdgb27XXxWC0aS85tVYIthwY/ygxAzsmWb/RLP7OeAdsV5dF9EeazhuA1ZHO0WSmhxTB
-         lZ5w==
-X-Gm-Message-State: APjAAAVlvNwAJJ7rc1/kdLCJpvH4VIh3cVd6pFhByUyjB/TleUeqp99R
-        d9ZuTmoWFWMNtoNkG7Nt9rP/AQA7RGi9qrDyqf8=
-X-Google-Smtp-Source: APXvYqyOl99vHOqN+DcmAsiqFBt64uIhAKgBlbIpdKXgDi+JIqNCxw8ss5XbCW+kEoYe407B8qHTVMAAbOr89JpAdJg=
-X-Received: by 2002:a63:2cc9:: with SMTP id s192mr31426644pgs.441.1582192867722;
- Thu, 20 Feb 2020 02:01:07 -0800 (PST)
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=xuYEaRHB/0pkNj1SqixIDNUqyYlP4wToyfv9uRwbzvE=;
+        b=HXYVGyPZcECZ6MRHTJcvq7OgOg4zZ5PplwyP7rQIOt6w3lOw1cYIIDGaUwT3NuxABp
+         H4wWRjA++1y28CoG+W0s040LbXSYL5E2uXaqbqn0W4u4sAw3hQ1zO0IOtiEX/Zo4IeTT
+         194OZivqFmsNqhccT1MRQXXztiPwrp0StmmOkKE03BCb3MZSGAb6irq6+he4tSzFD53T
+         tjcMTjgnxnWqNm2dykK7rkk6vKFIUY9ychoVz0658xg0ruy3wuom4zLX00fyFQanm2MS
+         k3idDNAxfuDd8VR9lelNkYMuUYSn5txAIG9oMBKNOv7vGc2ugzz6HKZIb5yc2zbITfPP
+         fYCw==
+X-Gm-Message-State: APjAAAV/25O2RXPlf9QeIoL7d90+8cPtdAIwjWqdIB6tDm3P66Hu2dcO
+        G3Gu672lgHnZT2jkncaPLrF/3w==
+X-Google-Smtp-Source: APXvYqy0WdNjVOHrLgs4viZxslvAA7BEL5tbYkcxf/8d/igJmg9qjQEru9Qyl2ClT5ztqLazEOVTAQ==
+X-Received: by 2002:a54:448b:: with SMTP id v11mr297510oiv.74.1582255194406;
+        Thu, 20 Feb 2020 19:19:54 -0800 (PST)
+Received: from ?IPv6:2605:6000:e947:6500:6680:99ff:fe6f:cb54? ([2605:6000:e947:6500:6680:99ff:fe6f:cb54])
+        by smtp.googlemail.com with ESMTPSA id t23sm474014oic.28.2020.02.20.19.19.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 20 Feb 2020 19:19:53 -0800 (PST)
+Subject: Re: ELCE 2015 videos unavailable
+To:     "Bird, Tim" <Tim.Bird@sony.com>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Kishon Vijay Abraham I <kishon@ti.com>
+Cc:     "linux-embedded@vger.kernel.org" <linux-embedded@vger.kernel.org>,
+        Nicolas Saenz Julienne <nsaenzjulienne@suse.de>
+References: <6bd91f36-e8fb-fc43-e0b3-725906d04326@gmail.com>
+ <a4592c17-9868-afc4-c2f1-99877b676b91@ti.com>
+ <8c24b246-74ad-9c77-5e28-2765e0827525@gmail.com>
+ <MWHPR13MB08959A93DB69D356B2B608B0FD1A0@MWHPR13MB0895.namprd13.prod.outlook.com>
+From:   Rob Landley <rob@landley.net>
+Message-ID: <6541c562-9160-a5ee-306a-7d1c3a2b67d1@landley.net>
+Date:   Thu, 20 Feb 2020 21:24:56 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Received: by 2002:a17:90a:90f:0:0:0:0 with HTTP; Thu, 20 Feb 2020 02:01:07
- -0800 (PST)
-Reply-To: cagesusan199@gmail.com
-From:   "Mrs. Susan S. Cage" <drgoodluckebelejonathan061@gmail.com>
-Date:   Thu, 20 Feb 2020 02:01:07 -0800
-Message-ID: <CALjo5=9NG2iPaKJo+8UdwnVuoP_wjiyn37HGuo_n1zX7X1vkTg@mail.gmail.com>
-Subject: Attention:Beneficiary
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <MWHPR13MB08959A93DB69D356B2B608B0FD1A0@MWHPR13MB0895.namprd13.prod.outlook.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
--- 
-Dearest Friend,
+On 2/13/20 7:03 AM, Bird, Tim wrote:
+>> I'm especially interested in yours about PCIe, but others have valuable
+>> information for sure :)
+> 
+> Unfortunately, unless someone scraped the video from YouTube, the video
+> is likely lost forever.  :-(
 
-Sorry for invading your privacy, my name is Susan S. Cage I am 81
-years, citizen of United States and presently in hospital undergoing
-chromatography for bronchogenic carcinomas (Lung cancer) which
-affected both Lungs. The doctors said I have few days to live because
-the cancer has now affected my brain.
+Back in September I put out a call and a nice person (dandan) sent me
+https://landley.net/talks/jcore-2015.mp4 from their own backup.
 
-My late husband left Fifteen Million, Five Hundred British Pounds
-Sterling in my account, I want to transfer the money to you and I want
-you to use it as a donate for charitable and help the needy,
-motherless, less privileged and widows within your location.
+Copies of at least some of them are out there..
 
-I need your assurance that you will use the fund for charity, once I a
-favorable reply from you, will inform my Bank through my lawyer to
-transfer the fund to you as my Next of Kin and Sole Beneficiary. Once
-I receive your response, I will inform my bank in writing through my
-lawyer.
-
-
-
-Thank you and God bless you.
-
-Mrs. Susan S. Cage
+Rob
