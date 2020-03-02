@@ -2,86 +2,80 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CE1051765DD
-	for <lists+linux-embedded@lfdr.de>; Mon,  2 Mar 2020 22:22:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 68E84176647
+	for <lists+linux-embedded@lfdr.de>; Mon,  2 Mar 2020 22:44:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726536AbgCBVWu (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Mon, 2 Mar 2020 16:22:50 -0500
-Received: from mail-qk1-f177.google.com ([209.85.222.177]:35693 "EHLO
-        mail-qk1-f177.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725911AbgCBVWu (ORCPT
+        id S1726877AbgCBVoH (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Mon, 2 Mar 2020 16:44:07 -0500
+Received: from mail-qt1-f182.google.com ([209.85.160.182]:38554 "EHLO
+        mail-qt1-f182.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726728AbgCBVoE (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Mon, 2 Mar 2020 16:22:50 -0500
-Received: by mail-qk1-f177.google.com with SMTP id 145so1296212qkl.2
-        for <linux-embedded@vger.kernel.org>; Mon, 02 Mar 2020 13:22:49 -0800 (PST)
+        Mon, 2 Mar 2020 16:44:04 -0500
+Received: by mail-qt1-f182.google.com with SMTP id e20so1253583qto.5
+        for <linux-embedded@vger.kernel.org>; Mon, 02 Mar 2020 13:44:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=date:from:to:subject:message-id:references:mime-version
          :content-disposition:in-reply-to:user-agent;
-        bh=rX3WVXltipjdz6lZVWptiw+gNEH94gMssMHchzL4/L0=;
-        b=QTI973JubAfKIuHCIFKBBtenQ9Rm9ggz3B89tbD9Zw+qgyjPkFh/IxZYs9qnzdhfWM
-         aleAvIYJtmDMPB74J8F2oBEQSJkEMvPVuKJPUqJX4mu+w/3oh029mY272dBToxZX/bDL
-         ynj3YUxV6aOkYo2u+1sYcW7vo4ab3xhhOfNUxBF+Pr5Bo4qlT3ctLJ0eOxvVG7MmYVW7
-         X98S0Z9HfDtydn46hiti7pe4Q218s08n2aziwP0AsU4c2KQFlV7sBTRNNLM/fVeHr0xD
-         kufDrFipjPoBEYol2VZEhLhJVrEwfcQi07EuhswcHUsa8XpvBNU05/7OThQ5TNjBfT8W
-         x0+A==
+        bh=MITAib3SqPVDeFFmQQ2SYZ4ObZ3Y4ah1CtBnulHlld4=;
+        b=OvGvVXziS1Jb5n095m1nofZTeYC0cJmEMxwk2FcKWDa8rqH1RbJmwKMVF6TluxBd84
+         KX3UhX9cediRhfFYhLGM6EDLFUIpXZHxgpeB8HxE0PD7ga5AOnFH8Rq1xW3ST6ZL9KYF
+         zB5C7BML3Cq+eiYfdcKpFBZB7pKj5cwaI2JqYFwfz0wyI2XTWBQe9QrSndt8RtOs+DXJ
+         gAl9IQge7nObG6+y60b4uDb/8rdwNRN3SkJr51d9kQanuz0YDJzr7mIwJBUHx1nP7XkL
+         ikmp9jTxSXS+f6IQs8AUicUewmF0alDT5crjGfE7A8z8ILMX/erh6mCxB9NMyI6mBo2X
+         efwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:date:from:to:subject:message-id:references
          :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=rX3WVXltipjdz6lZVWptiw+gNEH94gMssMHchzL4/L0=;
-        b=JofygOtDFdVebf4BqWxn4KHPAcuWOlMOtoJnG0663ZKwowSirRqYQ1bqObx0rO5xWq
-         +vWLcRMwmhdUuiaIbFJRj4s9guTSO3f7WqS9qu0VSMbJHfTUaX4D6qlZbj7uuS7KrDmr
-         jOsxdtDOABrdI96DVeXIyJDd6myJv2e8BLAxufu1KyJuLVM7hfcQRvEkk92jx6scLpXi
-         xVSlPaN0v6tCYc/9OipKl27szacADrCG7KCO0ZeTVq6Fy21ejJqSPlHPCTj/CMCNek7Y
-         Gu/AS0nBBhxUDvKJNfvAdkVdjhjeOFKcfqTtOpTdQQNi6r0SuLWosaE86NaqGahyRfaK
-         M0Xg==
-X-Gm-Message-State: ANhLgQ2rd3bVBfUnlLBpofJRE545zULGenzOAxZEo6/0tXwZytOFDMEJ
-        q25VUGd/Bpcru3QJFMHv46sBh4O2
-X-Google-Smtp-Source: ADFU+vsxjieXo2xoaXJiNAetKbU87qXMruI3ph3yi0wtamso7qE/Yr8LMKmiGQwGO1uaSbjtNfZt1w==
-X-Received: by 2002:a37:6211:: with SMTP id w17mr1067301qkb.324.1583184168864;
-        Mon, 02 Mar 2020 13:22:48 -0800 (PST)
+        bh=MITAib3SqPVDeFFmQQ2SYZ4ObZ3Y4ah1CtBnulHlld4=;
+        b=gRDw6E/9+vq9kYZqD0VpJiUY22QyLxfhwZswoFGnDHU8KEmTzS4Pch21YgDk3Jl/AX
+         QlMbXohO41j6f5cT1XcPMshoX+NX2gBKoQR9QyMD4bijNI1I0v7S4WNm0m4+CjExigjX
+         /f5qK/QMtmKaptFmcvSHpYLGyvoHxkzc2tSMhj0BIgqPZMhNG4Il5mXsVZbX5M46j/l3
+         C9bib45jm8aFrQnISLeXBOCk4TTdnRS6pJV70sBbYDGx2LfVsBVBKMIhiCKaTu1LfCNe
+         VwFjK09Jn5MUPVJ2YbsMv2by+EhEAUcziVXxZgl1Cmk11OTJSHYT+ZcxDLw+c0o08YGy
+         vnFw==
+X-Gm-Message-State: ANhLgQ1dtb5SF4pINFciO7ajREiXjbwNjgxOwOoPpVVkALc+ptkptfi2
+        FDeMitGI7HT0Pt3pNXL2KXADO4aR
+X-Google-Smtp-Source: ADFU+vvXtB5qluN38/OwYqjH+LYkLynMJwJ1h7MDRtbRwr09YqmDJEJjYzydkMqbhSn/b0yyCt7AdA==
+X-Received: by 2002:aed:3022:: with SMTP id 31mr1662752qte.282.1583185443448;
+        Mon, 02 Mar 2020 13:44:03 -0800 (PST)
 Received: from linux-uys3 ([206.248.190.95])
-        by smtp.gmail.com with ESMTPSA id g62sm10542923qkd.25.2020.03.02.13.22.47
+        by smtp.gmail.com with ESMTPSA id 62sm8152324qkk.84.2020.03.02.13.44.01
         for <linux-embedded@vger.kernel.org>
         (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 02 Mar 2020 13:22:48 -0800 (PST)
-Date:   Mon, 2 Mar 2020 16:22:43 -0500
+        Mon, 02 Mar 2020 13:44:02 -0800 (PST)
+Date:   Mon, 2 Mar 2020 16:43:58 -0500
 From:   Trevor Woerner <twoerner@gmail.com>
 To:     linux-embedded@vger.kernel.org
 Subject: Re: ELCE 2015 videos unavailable
-Message-ID: <20200302212243.GA36779@linux-uys3>
+Message-ID: <20200302214358.GC36779@linux-uys3>
 References: <6bd91f36-e8fb-fc43-e0b3-725906d04326@gmail.com>
  <a4592c17-9868-afc4-c2f1-99877b676b91@ti.com>
  <8c24b246-74ad-9c77-5e28-2765e0827525@gmail.com>
  <MWHPR13MB08959A93DB69D356B2B608B0FD1A0@MWHPR13MB0895.namprd13.prod.outlook.com>
- <6541c562-9160-a5ee-306a-7d1c3a2b67d1@landley.net>
- <MWHPR13MB08950D7002AD742974026E8DFD120@MWHPR13MB0895.namprd13.prod.outlook.com>
+ <e223aa34-57c4-c946-acce-c74ab66fe09a@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <MWHPR13MB08950D7002AD742974026E8DFD120@MWHPR13MB0895.namprd13.prod.outlook.com>
+In-Reply-To: <e223aa34-57c4-c946-acce-c74ab66fe09a@ti.com>
 User-Agent: Mutt/1.6.0 (2016-04-01)
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-I hear that youtube-dl is a great program. It will also help you download
-content from other sites such as slideshare and vimeo etc:
-https://ytdl-org.github.io/youtube-dl/supportedsites.html
+On Mon 2020-02-17 @ 05:21:14 PM, Kishon Vijay Abraham I wrote:
+> Do we have permission from Youtube to download the videos? A quick look
+> at their terms [1] indicate we are not allowed to download the content
 
-I've also heard that sites like youtube aren't fond of tools like youtube-dl,
-so they change the metadata associated with their content on a regular basis
-to thwart such tools. As a result, the youtube-dl installed with your distro
-packaging is likely out of date, you'd be better off to install it using one
-of the python packaging/installing tools directly (and keep it up-to-date
-that way). As a result, I hear there are sometimes small gaps between youtube
-changing their metadata, and youtube-dl catching up.
+Yes, this is, unfortunately, true.
 
-Also, youtube does detect downloads via youtube-dl, and will cut you off (or
-more specifically, will cut off your IP) if you use it (in their opinion) too
-much (search for: "youtube-dl unauthorized 403"). So you'd be wise to throttle
-your usage of such a tool.
+Which is why huge kudos are in order for those conferences (linux.conf.au,
+fosdem, ccc, (and others?)) which, in addition to posting the videos on
+youtube, also host them on their own servers for these and other such reasons.
 
-...or so i've heard...
+https://video.fosdem.org/
+https://mirror.linux.org.au/pub/linux.conf.au/
+https://media.ccc.de/
