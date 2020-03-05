@@ -2,67 +2,61 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A0BE2178188
-	for <lists+linux-embedded@lfdr.de>; Tue,  3 Mar 2020 20:02:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6418D179DC9
+	for <lists+linux-embedded@lfdr.de>; Thu,  5 Mar 2020 03:25:53 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1733247AbgCCSDL (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Tue, 3 Mar 2020 13:03:11 -0500
-Received: from mail-il1-f193.google.com ([209.85.166.193]:39849 "EHLO
-        mail-il1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387862AbgCCSDF (ORCPT
+        id S1725807AbgCECZt (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Wed, 4 Mar 2020 21:25:49 -0500
+Received: from mail.comune.nogara.vr.it ([46.21.176.248]:60723 "EHLO
+        mail.comune.nogara.vr.it" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725776AbgCECZt (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Tue, 3 Mar 2020 13:03:05 -0500
-Received: by mail-il1-f193.google.com with SMTP id w69so3575170ilk.6
-        for <linux-embedded@vger.kernel.org>; Tue, 03 Mar 2020 10:03:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=42VRx4KA+cD1ZZnhz/34yl/kjJSKnU+ahvHX6e7S6BM=;
-        b=f69tLej+jZaI8HcbUHu+97ZlZEGq6wKm4Ihu5NHkUaiNzPdvtsGzyJy9rwVS9SxpwG
-         d9gq08lmSFsv6fyybJxoNxvu6iwGkH4xREnE4psnyGG3K0YRvXasrabDtLa7R34o/Ec3
-         Ky1TI55VAMww75miy4/4tD5KI1tgL61Bnw8bXsV6wVu9VwQ/dKGclBUPf0vcDyOC3Vxk
-         5WxEPigdjUR+QjbXDkExaTX4s6l97FFq6ydNWptCnx6OnbYak3BE2HB9GuU234JNAlGa
-         MjrBJWcwdndqDnlTyBadDcHuk0gx+IDI6Z3iy9cduffGMW9qtWgbhz1sKg0bWs+dlg3S
-         pBcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=42VRx4KA+cD1ZZnhz/34yl/kjJSKnU+ahvHX6e7S6BM=;
-        b=apxi3Bvd8MR+Z4RxZUhV71pLJgjWx9NZfiBwkPg8De+wESHQsnGeON6dDo7v8XMpk0
-         /J+4NRvRLJttZZ11LjXO8jJZVT/d7KYmoYRjnWIsjURpHsB4FGUQ99P3c8GYG4qegWm9
-         wFM7ZltH9/zWPABt+RL2/cdq8ZvscvQR+iKIe5WvciVMQDmrn73g+svS3y+Jvryb7EEt
-         /M50ht8OHLt+9CyaZZ8ZqjP5y/10hFNTOaRFwZsQiOHWLb6CHTxQrAZyGicqCTlQpBWV
-         eWcnZAc/mc/KbV86VyxC5olUyBb/czX2tvjqXBkb7vv+knH3VW1Vx18VgCKaW+y1Qi4n
-         OWeQ==
-X-Gm-Message-State: ANhLgQ0qUfzZH4a11KGCZ5IleeFZ5pBTgjHI0qVjDYEzTY4jlLXe+i6k
-        TdJgbwHwyBZzT+e5Wlzkrn2TnG/uPS4rIWCBUdGNWYJm
-X-Google-Smtp-Source: ADFU+vtp/62UP97QWogjn76kBCCKEtbdX528FwbU18bMZwtdjIRFU2CrKQe7QeIQwCM6z6ij+4SH6wn7H8lQANFeTWI=
-X-Received: by 2002:a92:d2c5:: with SMTP id w5mr245041ilg.196.1583258584502;
- Tue, 03 Mar 2020 10:03:04 -0800 (PST)
+        Wed, 4 Mar 2020 21:25:49 -0500
+Received: from localhost (localhost [127.0.0.1])
+        by mail.comune.nogara.vr.it (Postfix) with ESMTP id 13D68C75C7;
+        Thu,  5 Mar 2020 03:23:49 +0100 (CET)
+Received: from mail.comune.nogara.vr.it ([127.0.0.1])
+        by localhost (mail.comune.nogara.vr.it [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id B24wp-7RDaES; Thu,  5 Mar 2020 03:23:47 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.comune.nogara.vr.it (Postfix) with ESMTP id A0851C75C9;
+        Thu,  5 Mar 2020 03:23:47 +0100 (CET)
+X-Virus-Scanned: amavisd-new at comune.nogara.vr.it
+Received: from mail.comune.nogara.vr.it ([127.0.0.1])
+        by localhost (mail.comune.nogara.vr.it [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id 3Vvm9q4jJgRH; Thu,  5 Mar 2020 03:23:46 +0100 (CET)
+Received: from mail.comune.nogara.vr.it (mail.comune.nogara.vr.it [192.168.35.12])
+        by mail.comune.nogara.vr.it (Postfix) with ESMTP id 109BBC7555;
+        Thu,  5 Mar 2020 03:23:46 +0100 (CET)
+Date:   Thu, 5 Mar 2020 03:23:45 +0100 (CET)
+From:   Maria Alessandra Filippi <maria.filippi@comune.nogara.vr.it>
+Reply-To: "mrsmariaelisabethschaeffler11@gmail.com" 
+          <mrsmariaelisabethschaeffler11@gmail.com>
+Message-ID: <1837290610.226641.1583375025889.JavaMail.zimbra@comune.nogara.vr.it>
+Subject: 
 MIME-Version: 1.0
-Received: by 2002:a02:9f04:0:0:0:0:0 with HTTP; Tue, 3 Mar 2020 10:03:04 -0800 (PST)
-Reply-To: dr.challynoah@gmail.com
-From:   DR CHALLY NOAH <mayorabrahamedge404@gmail.com>
-Date:   Tue, 3 Mar 2020 19:03:04 +0100
-Message-ID: <CALqVJWexB-dRkiuH6FEm9rzNsByDhnn7guE3xR67bQ_4+GLcRQ@mail.gmail.com>
-Subject: Hello Dear
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [105.112.107.184]
+X-Mailer: Zimbra 8.0.6_GA_5922 (zclient/8.0.6_GA_5922)
+Thread-Topic: 
+Thread-Index: TQiJgaeXed1wPAY74eN+uxFl1MOFyw==
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Hello Dear,
-What Have Kept You Waiting To Claim Your $600,000.00 USD Compensation Award?
-This said fund was issued out by the UNITED NATIONS To compensate
-you.Please If You Have Not Claim Your Fund (Award),Kindly contact me
-at   DR.CHALLYNOAH@GMAIL.COM   for further details on how to proceed your
-fund (award)release to you or better still reply back Immediately You
-Receive This Information For An Urgent Confirmation And Release Of Your
-Fund To You Without Delays, as your email was listed among those to be
-compensated this year.Congratulations..
-Best Regards,
-Dr Chally Noah.
-Minister Of Finance On Foreign Remittance:
+
+
+Hallo,
+
+Ich bin Frau Maria Elisabeth Schaeffler, eine deutsche Wirtschaftsmagnatin, Investorin und Philanthropin. Ich bin der Vorsitzende von Wipro Limited. Ich habe 25 Prozent meines pers&ouml;nlichen Verm&ouml;gens f&uuml;r wohlt&auml;tige Zwecke ausgegeben. Und ich habe auch versprochen, den Rest von 25% in diesem Jahr 2020 an Einzelpersonen zu verschenken. Ich habe beschlossen, 1.000.000,00 Euro an Sie zu spenden. Wenn Sie an meiner Spende interessiert sind, kontaktieren Sie mich f&uuml;r weitere Informationen.
+
+Sie k&ouml;nnen auch mehr &uuml;ber mich &uuml;ber den Link unten lesen
+
+https://en.wikipedia.org/wiki/Maria-Elisabeth_Schaeffler
+Herzlicher Gruss
+Gesch&auml;ftsf&uuml;hrer Wipro Limited
+Maria-Elisabeth_Schaeffler
+E-Mail: mrsmariaelisabethschaeffler11@gmail.com
