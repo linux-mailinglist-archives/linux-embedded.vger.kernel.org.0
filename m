@@ -2,71 +2,90 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1AA0A18CC38
-	for <lists+linux-embedded@lfdr.de>; Fri, 20 Mar 2020 12:07:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3D5B3195843
+	for <lists+linux-embedded@lfdr.de>; Fri, 27 Mar 2020 14:45:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727005AbgCTLHd (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 20 Mar 2020 07:07:33 -0400
-Received: from mail-ot1-f67.google.com ([209.85.210.67]:39657 "EHLO
-        mail-ot1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726894AbgCTLHd (ORCPT
+        id S1726540AbgC0Npx (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 27 Mar 2020 09:45:53 -0400
+Received: from mail-il1-f196.google.com ([209.85.166.196]:41389 "EHLO
+        mail-il1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726275AbgC0Npx (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 20 Mar 2020 07:07:33 -0400
-Received: by mail-ot1-f67.google.com with SMTP id r2so5551854otn.6
-        for <linux-embedded@vger.kernel.org>; Fri, 20 Mar 2020 04:07:32 -0700 (PDT)
+        Fri, 27 Mar 2020 09:45:53 -0400
+Received: by mail-il1-f196.google.com with SMTP id t6so5165975ilj.8
+        for <linux-embedded@vger.kernel.org>; Fri, 27 Mar 2020 06:45:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=kuhba0bbR9oJup1oQ7P5tNPZ9FqBHXE57QqcfHgaIHo=;
-        b=T6oUe4eAvyg5/0hHPlCR3IdvpGYFvlQtVlT4tFExR4kAaKsnVrB8R4seElHgbMg820
-         lMEaqFka0Rzn4TRIgj3Qest8WHQYcrBQp7Z5anZGATTBBGWdGiMk4Pht/caoXTR2GlXB
-         BPAtbdhorYLojRM2ej2Kptd2fShAcM8Ri/fNBngV8JRZ+z2dCqhISd35vuI+fT5EFdkG
-         d1WX7FvpCCUxd6ONIfxJC35oJveE9hN2xsVbiswgLN0d4VZoBhYO/GPUilnznSOiTAfo
-         sykhtxc7eDXTLjJyTGxKrb1C+4M/+j+Mq371IWXe5LyRFnopWnB21C4Oyte/foEz7R4N
-         DerQ==
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=uIvUjlehSVigkxhw02yxSAS/Jekd0JL8sbxoZE/mhG8=;
+        b=lGCtmKMEci9mXyHuZIqVNTlyOUvhvYI3AHKIP5rgwuKVCArSKgOwm4aKEEk9dn83NK
+         EZPudidzF1dBC6Ynrafeef5laej7ivbngGE/eIlqvKceCf4jyY3M+QDqpwcIoH0pLH4u
+         qbSJCHAvc35uOSDmXR67baHLq7OZxnG9SDmAsUSnmhLM0R8SO3fklxvpJxSfZtrUIqNL
+         33jEVF0AqHasD234giA5BPD2Pr/B4ztewCZoknS+ABbvFTzp3VJSBVAZIvSJbWdpmhX/
+         2IPqoLO1Q0pNVMywjTYqpNdKibbTZ9OD4F2pMdMUlhAER6O/BCYFKSopAUBIpJUXPQKw
+         Q1bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=kuhba0bbR9oJup1oQ7P5tNPZ9FqBHXE57QqcfHgaIHo=;
-        b=rX5jmHF5vF+PLtO36B2ekR4/d4ZtLi+9tNIiciChLscLyfKZFdrq4UUjlqcxMLoBvL
-         w18H4uzzfx6faPfE+5jJKd5B0sKBWvjAUKOx2czAkhLMp7ttPcgKbRsyTRI4DAtVywcR
-         sj+dPKd7MnFrfRYwpsJ14R3a2qEyI292fm9LhhIgZeufed9rXhMvZzc9iEVuk550wihv
-         sfV6Vg/sKg7mCf4NnTUguusdlCZA+ygEevMGUSYzW65pstJycM1SmISrbiIkgy4NxNBj
-         jzqufYTih8YvUFNzJ5WcjGTXQG8EPZPgqvEKPQQ7F7bbg4Rw00SHiE45LicOACTVc4EV
-         pA9Q==
-X-Gm-Message-State: ANhLgQ2rgqxS0leXQ4P3KKnm243hCu2lu/iDPuB3E7BgINO2h3e65rSc
-        HF4FlxAMPL9MCiBpPEA2gu8VnDK2tIARPfgNaCw=
-X-Google-Smtp-Source: ADFU+vtB6Nv5pAOy8iFcqKcXvg9p4SVOcgQTwpvhtFGT6CcS1TCmS36zDlEU5e+Rav+9AbAPziz6z8HFpRINif/UMko=
-X-Received: by 2002:a9d:618e:: with SMTP id g14mr6001070otk.314.1584702452366;
- Fri, 20 Mar 2020 04:07:32 -0700 (PDT)
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=uIvUjlehSVigkxhw02yxSAS/Jekd0JL8sbxoZE/mhG8=;
+        b=fY/qO+n09W9quoSYfsjpp0QaWcAQt5MtKbnHsIYyrIdJn8QTBP/VmEBongmStSw9+d
+         aEOLfUk0iHpGaDwKXg5tsjlUmNDOxaCHP4hjjA6YlgWRd5eGEgoc7kpBfRSkRQpIVAQV
+         gTTg+T/NeaUYVYDXfPqExQqiBcZbl2FTME8hhUpXVUe2vWWPtzmn7kgv0T7WqGOz2IzF
+         2V6VN9I8WqyDPW4X7KSAQ1Ujz7/1FAKb6SmsrHYtecLia4smvsqiuYp6x2Wib4Y62ZHe
+         UUaCCMIwLS0eTmQrPgeIY4wNx+xsvSd4diGZUXSZuphvdBesCikWR27Z0K1TJHoPnZ32
+         Rcgg==
+X-Gm-Message-State: ANhLgQ1ZJAmegsQPZN6IJvEvSSWbfkZby5jKEfB4Z4BtDq/wjoRpggeT
+        yuyOm7dGj3hNXjO8YWSZROuEUHA+3+7ALdeSyoBlbPlP
+X-Google-Smtp-Source: ADFU+vuN6BsDMkbRhdC4y/+cJDgBBKqcH6A+mNuzIz+PSr0KB408Qd51DMUQHTrJNedgRe19fAQMzaJN3S1aifOnrGM=
+X-Received: by 2002:a92:cb49:: with SMTP id f9mr13584397ilq.193.1585316750449;
+ Fri, 27 Mar 2020 06:45:50 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a4a:c897:0:0:0:0:0 with HTTP; Fri, 20 Mar 2020 04:07:31
+Received: by 2002:a5e:8817:0:0:0:0:0 with HTTP; Fri, 27 Mar 2020 06:45:50
  -0700 (PDT)
-From:   federa bureau of inteligence <federabureauofinteligence@gmail.com>
-Date:   Fri, 20 Mar 2020 11:07:31 +0000
-Message-ID: <CAE9o6LDLHaxncasBk72sD=euc-R8tx_p7XY6mcTHqWzvcRD6aw@mail.gmail.com>
-Subject: HAPPY SURVIVAL OF CORONAVIRUS
+Reply-To: officework_progress@yahoo.com
+From:   Andrew Ede <consumingfirechurch4@gmail.com>
+Date:   Fri, 27 Mar 2020 15:45:50 +0200
+Message-ID: <CAK6CGFdn9sXGygR07a0NLhZn6LYtfLrXoxkwzR6tTZx6GiCNsQ@mail.gmail.com>
+Subject: HOW ARE YOU?
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Dear Sir,
+Good day.
 
-HAPPY SURVIVAL OF CORONAVIRUS
+My reason of contacting you is that I and my colleagues working in our
+country=E2=80=99s National Petroleum Corporation want to buy any existing
+modern crude oil refinery in any part of the world.
 
-We are reaching for a very interesting business transaction which we
-feel will of great benefit.We the FBI unit in the western subregion of
-Africa have a fund which we confiscated and lodge it in a bank
+We are ready to buy any available land to build the Refinery or buy
+the existing one anywhere outside Africa. We will make you our foreign
+partner abroad with some percentage shareholding if you will be
+interested to work with us on this project.
 
-This fund is worth of $12.5 million dollars.We will need your
-assistance to recieve this fund into your account for investment in
-your country.
+We have the sum of ($600 Million Dollars) Six Hundred Million Dollars
+for this project.
 
-We will need your urgent response for details
+Meanwhile, this amount of ($600 Million Dollars) will be accessible
+through Foreign Contract Purchase Fund. We are going to clarify what
+we meant by Foreign Contract Purchase Fund as soon as we hear from you
+for better understanding and the way forward.
 
-Inspector Greg Adams,
-For and on behalf of Cote D'Ivoire FBI
-Tel 00225 6716 6756
+However, in case you are not capable to handle this project with us,
+please kindly connect us to any capable person or company that would
+handle the project with us in order to enable us proceed at once.
+
+We hope to hear you in no distance time through this e-mail address
+at: officework_progress@yahoo.com, for immediate communication and
+more facts on how to go on.
+
+With respect
+
+Best Regards
+
+Andrew Ede and Co,,
