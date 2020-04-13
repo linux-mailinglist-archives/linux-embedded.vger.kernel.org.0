@@ -1,82 +1,112 @@
 Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
-Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E46041A0652
-	for <lists+linux-embedded@lfdr.de>; Tue,  7 Apr 2020 07:13:25 +0200 (CEST)
+Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
+	by mail.lfdr.de (Postfix) with ESMTP id E24501A65E3
+	for <lists+linux-embedded@lfdr.de>; Mon, 13 Apr 2020 13:50:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726829AbgDGFM5 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Tue, 7 Apr 2020 01:12:57 -0400
-Received: from mail-ua1-f68.google.com ([209.85.222.68]:46125 "EHLO
-        mail-ua1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726837AbgDGFMm (ORCPT
+        id S1729173AbgDMLuH (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Mon, 13 Apr 2020 07:50:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43800 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729198AbgDMLuF (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Tue, 7 Apr 2020 01:12:42 -0400
-Received: by mail-ua1-f68.google.com with SMTP id y17so822254uap.13
-        for <linux-embedded@vger.kernel.org>; Mon, 06 Apr 2020 22:12:41 -0700 (PDT)
+        Mon, 13 Apr 2020 07:50:05 -0400
+X-Greylist: delayed 365 seconds by postgrey-1.27 at vger.kernel.org; Mon, 13 Apr 2020 07:49:56 EDT
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com [IPv6:2607:f8b0:4864:20::12d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BC4D3C008616
+        for <linux-embedded@vger.kernel.org>; Mon, 13 Apr 2020 04:41:09 -0700 (PDT)
+Received: by mail-il1-x12d.google.com with SMTP id z12so8183884ilb.10
+        for <linux-embedded@vger.kernel.org>; Mon, 13 Apr 2020 04:41:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=38NlpNEbzNFWb7RFQtfvRASB+B576yw7dNc7pozf3pc=;
-        b=m9m/DCsFRus/zRmIuphflM5sHyenmkMN/TOEnECOGthbLJHVg8u2+iqtFZpNbyb2/k
-         2tLF//qwyXGtNVJKRleGUy+KbEtVjN+06Aw6FbGL98d5M/QEqB9c9SHaIsBPFlQYoUCh
-         Lj+P9EPUGdvyQRip4KeH3oSvDVhqDTV0IJcbcI66BzYP/b9Y/1y4LF++1q0teLhPl3GM
-         v15gBTxOBB8qvH4CNaCnwdm2sugBL+St8qIlm7SqBWweWj6hdsos1F0mjeWO8qJt64R9
-         xl3tya8AfljNAFdSOkZ4tC7INitomO8JQPFHHcp+JAODUsaup01At9KIYDntXEoTQZb0
-         DmdQ==
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=qlKWExEze9qCqlwbpw1q4+d2Zjr4ETGVa64TcX+dTlk=;
+        b=HxOaFJZljqXQIeSLw7dw+YeTIVe76Yo57NkC3rYQjPPsruaWLZEetJYgTw7mDA7iYw
+         4KM/sQKuVdxfTyBgHy0QGrcgvhBAp/s2WR+7lhwMEms7c5U3ARzlxX4w9gHN6kyIVCTo
+         InVjjBwajQbgYMLlLr/dGAnfAOq75HLmi2bmQShdg5UrDH6ZNHdmpjirCjsFE3E+W3lI
+         4HPNdhIk9GHy3wOVy8qt79oLhQ3V0WJ+l2R8YfTk5No8OB207Mc1ssyzLdiNdU6iDIon
+         HSnId1sWR9JHq8BkscMOY+TVCS7WuDDdfTSRJRDObUGUY3pKdsd/NGq97n4qtv5szVJr
+         IEMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=38NlpNEbzNFWb7RFQtfvRASB+B576yw7dNc7pozf3pc=;
-        b=B7LUkth08t1/nvA0qtRZ335w/MawWFfzI7cYa8kQkXBf6R5cKUXHTmB75W5cZ59xWN
-         lsfZyIiCeHqJE9WVxs+AUslcbxcYUai1HvoB15891T611YKxxrKuhM+/bcpbJ01Tf8Bd
-         g5qY9HVzrCGcQROTDPNw8mt/0qngHbbLm14AjOXAkrtjz4oJebeIwfjBHXiMsS7w9IUo
-         adYF08htNzU1VHKsUKDrCOr0ReWrG6rxMxdGjsC88duqelLk7yC2ocGQRHf11cmctQGk
-         TNJnPaGdh2GLkeg4oaszcOqsCleRey5D9U5Ncpsic8jfJb99oydxnxvqoByCRUiPpfYQ
-         fzgw==
-X-Gm-Message-State: AGi0PuY5AdtNTQkpKPM55EMCpGxEJ/NuqjrgZ7h/9oM3rH9T0Iet8c0l
-        P4amxDsBZaWk1GCw5/Wmp/usBtr/0LiyWSr8Xn0=
-X-Google-Smtp-Source: APiQypIYXniGQUHEpASwiGNjKth4Cu9ElCz4yjrJ2uXbYBYunhfz0887D/TRydUbTstl7MwaeVftG8QxF1P80ST3qos=
-X-Received: by 2002:ab0:a9:: with SMTP id 38mr504317uaj.61.1586236361040; Mon,
- 06 Apr 2020 22:12:41 -0700 (PDT)
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=qlKWExEze9qCqlwbpw1q4+d2Zjr4ETGVa64TcX+dTlk=;
+        b=h4imUqVt+qf/prPgDfg7mRSmenAK7JfulVAmNx8SUesBuVD3qi9XJpI2xRAiFONMsa
+         OVQd28SB3qnxIy5Z8sGkExSBtZTn/9btFWqO3iyqTkRQqRwXX0uit7YExAOQzZt3octz
+         cQOAvSOFUjTkkdezFwUMX6/1fCIAAo8p/wrrBunxhx/QFj2ruFV0/Ex3hfH+tFWEg7wv
+         o45HSGuq12RMYe9o+7V7jePQcnu6UCKwKl5v5xIFyQe6USqw8yF6+tpGtqNjBzmB7E67
+         5djG+EYmg1hpGQAqTXZYOEMWctFMG0ztm5Kq2RswxpzxoIrV4TYocznmuFsWRuBE0hWy
+         65Tg==
+X-Gm-Message-State: AGi0PubXj5+PaFcxt/YGRyDs8Q7wLLsTwmgUN64al7DbiT+sdRN4ABcM
+        WCRkag43W3Lj9xrKdlhrVF4M724UeQ5frtQGVw==
+X-Google-Smtp-Source: APiQypJ8Xf5JZIaJmuakcegBHklRN/w3ObzOY1fG2hZhiF0393fUgrxf6qaSVcLD5pLEm/4TEQgoj9oGK8tQ5EeyGAU=
+X-Received: by 2002:a05:6e02:c8f:: with SMTP id b15mr14965961ile.35.1586778068198;
+ Mon, 13 Apr 2020 04:41:08 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:ab0:4929:0:0:0:0:0 with HTTP; Mon, 6 Apr 2020 22:12:40 -0700 (PDT)
-From:   SANDRA DEWI <dewisandra154@gmail.com>
-Date:   Tue, 7 Apr 2020 05:12:40 +0000
-Message-ID: <CABRVPWys0xe4CWBkaU0ZXQW+4d=tjDOjyo8cKohc5-VFkWPkcA@mail.gmail.com>
-Subject: whether this is your correct email address or not
+Received: by 2002:a02:5e49:0:0:0:0:0 with HTTP; Mon, 13 Apr 2020 04:41:07
+ -0700 (PDT)
+Reply-To: mgbenin903@gmail.com
+From:   Barrister Robert Richter UN-Attorney at Law Court-Benin 
+        <info.zennitbankplcnigerian@gmail.com>
+Date:   Mon, 13 Apr 2020 13:41:07 +0200
+Message-ID: <CABHzvrm3rWryg1yAooKeHwdxzrKD47PRAEfC+ay1A6i5z3Wdiw@mail.gmail.com>
+Subject: I have already sent you first payment US$5000.00 this morning through
+ MONEY Gram service.it is available to pick up in address now.
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Dear ,Pastor
+ATTN DEAR BENEFICIARY.
+
+GOOD NEWS.
+
+I have already sent you first payment US$5000.00 this morning through
+MONEY Gram service.it is available to pick up in address now.
+
+So we advise you to Contact This Money Gram office to pick up your
+transfer $US5000.00 today.
 
 
+Note that your compensation payment funds is total amount $US2.800,000
+Million Dollars.We have instructed the Money Gram Agent,Mr. James
+Gadner to keep sending the transfer to you daily, but the maximum
+amount you will be receiving everyday is US$5000.00. Contact Agent now
+to pick up your first payment $US5000.00 immediately.
 
-I have a client who is an oil business man and he made a fixed deposit
-of $26 million USD in my bank, where I am the director of the branch,
-My client died with his entire family in Jordanian
+Contact Person, Mr. James Gadner, Dir. Money Gram Benin.
+Email: mgbenin903@gmail.com
+Telephone Numbers: +229 62819378/ +229 98477762
 
-50% of the fund will be for the church  for the work of God,the
-balance 50% we share it in the ratio of 50/50. Meaning 50% to you and
-50% for me
+HERE IS YOUR PAYMENT DETAILS FOR THE FIRST =C2=A3US5000.00 SENT TODAY.
 
-intervention in the Syrian Civil War 2014 leaving behind no next of
-kin. I Propose to present you as next of kin to claim the funds, if
-interested reply me for full details and how we are to
+Track View Website link:
+https://secure.moneygram.com/track
+Sender=E2=80=99s First name: David
+Sender=E2=80=99s Last Name: Joiner
+Money Transfer Control Number (MTCN) (REFERENCE)# 26046856
 
+Contact the Mmoney Gram Urgent and reconfirm your address to the
+office before, they will allow you to pick up the transfer today.
 
+HERE IS WHAT REQUIRED OF YOU.
 
-proceed to close this deal.
+YOUR FULL NAME---------
+ADDRESS--------------
+COUNTRY-----------------------------
+TELEPHONE NUMBERS-----------------
 
+Note, I paid the transfer fee for you, but only you are required to
+send to the office is $75 only,Been Your Payment File activation fee,
+Send once you contact the office,before you can able to pick up your
+transfer today.
 
+Let me know once you pick up first payment today.
 
-
-Mrs. Sandra Dewi
-
-
-
-Email  mrsdewi@gmx.com
+Barrister Robert Richter UN-Attorney at Law Court-Benin
