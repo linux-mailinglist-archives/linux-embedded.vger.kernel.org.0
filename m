@@ -2,63 +2,47 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 815761BA2CB
-	for <lists+linux-embedded@lfdr.de>; Mon, 27 Apr 2020 13:42:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 03F531CBB8B
+	for <lists+linux-embedded@lfdr.de>; Sat,  9 May 2020 02:05:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727040AbgD0Ll6 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Mon, 27 Apr 2020 07:41:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36074 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727045AbgD0Llf (ORCPT
+        id S1727959AbgEIAFg convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 8 May 2020 20:05:36 -0400
+Received: from mail.itanhaem.sp.gov.br ([187.8.184.45]:35438 "EHLO
+        mail.itanhaem.sp.gov.br" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727878AbgEIAFg (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Mon, 27 Apr 2020 07:41:35 -0400
-Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com [IPv6:2607:f8b0:4864:20::d43])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E8E6DC061BD3
-        for <linux-embedded@vger.kernel.org>; Mon, 27 Apr 2020 04:41:34 -0700 (PDT)
-Received: by mail-io1-xd43.google.com with SMTP id i3so18388776ioo.13
-        for <linux-embedded@vger.kernel.org>; Mon, 27 Apr 2020 04:41:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=F+HbPvxQnRBlqBFKy/zn6110uxUPAWY6eSsMY6+ckPY=;
-        b=uI1U3pP4FazEZaTfkDGgaf1Qyb1hL6AlgZB9tozzlJtw0tc2p0xAeW9BNdbY4A2XuL
-         JYn8lE6gg3HqjBgRaTT8CTSOLDZ9E79yDyBM0EGnWldSdHyzrk+BT/7frJGn/PAhMIrE
-         VCZdq7yfljhgiOOYhIeLP2AIIFXvLFMREe3IREMgf/Wimn5okrCaqK4gkS0+n2Tqfq3c
-         EFYh4cYLyK3nIET0YOm2adzDe5W5QN3hsgSvwW72euh+PRPDs3oxC82+7cfg/ZGTOz8/
-         eTagf6SblJMWIJeJ59y/zg3//EVOq9RPByBfKkQCDUJB6vE62XJLcx9qUgZNIxoYrz8S
-         JAeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=F+HbPvxQnRBlqBFKy/zn6110uxUPAWY6eSsMY6+ckPY=;
-        b=UBjtFk2fyndeOLfXQcBmuk0A4PLyPKL1q2jfED1ADJq0lf5gVV56ULVcisWpWiaNB2
-         S0x8mEd/WVWz6NGO/7EaoOuRpn3TEWsgl/dxHHOtApB+SrSf3owaBcxsVF8LQR1qbdDj
-         ravmRaFTynY4harVcKO0wzJgdr3Uq+MD3xd0BjX/dIrn1IkNAwey8fJh6fSY6DJiaL3g
-         0x49zb8+O/jEW0loeUe84WkqIfstfqXqKebiyiw5yP8zm2xolH8BIZZkKW+5VM383MFq
-         C3MqSJfnWJsNzvnxV2BdkbYBOPRVIkL8zIqAThZP2DaJr7TINoHkPf/TrqDmb9EDEHU3
-         kS5Q==
-X-Gm-Message-State: AGi0PubRwVEt48BZDCFnlatkIbR9ymsose0rLNBVkFqjvT6jAbqf6cQU
-        BhbJwYpNzkZoFN1zssnnnZjxsjXlJxWW84Fjo54=
-X-Google-Smtp-Source: APiQypJWdjzUZMbeRoAX94bUJV0IgwyoF5kUG7iPo3CBzKxW8lStFNsM/6tz3An/TyzRuH2Qw14DtavsVumw6JVLls0=
-X-Received: by 2002:a6b:7d4a:: with SMTP id d10mr4072296ioq.70.1587987694042;
- Mon, 27 Apr 2020 04:41:34 -0700 (PDT)
+        Fri, 8 May 2020 20:05:36 -0400
+X-Greylist: delayed 467 seconds by postgrey-1.27 at vger.kernel.org; Fri, 08 May 2020 20:05:35 EDT
+Received: from localhost (localhost [127.0.0.1])
+        by mail.itanhaem.sp.gov.br (Postfix) with ESMTP id 193F03E508D;
+        Fri,  8 May 2020 20:56:00 -0300 (-03)
+Received: from mail.itanhaem.sp.gov.br ([127.0.0.1])
+        by localhost (mail.itanhaem.sp.gov.br [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id aT46vQvH_3YD; Fri,  8 May 2020 20:55:59 -0300 (-03)
+Received: from mail.itanhaem.sp.gov.br (localhost [127.0.0.1])
+        by mail.itanhaem.sp.gov.br (Postfix) with ESMTP id 0CB273E4DFC;
+        Fri,  8 May 2020 20:55:52 -0300 (-03)
+Date:   Fri, 8 May 2020 20:55:51 -0300 (ART)
+From:   Barbara D Wilkins <endrigo.lsantos@itanhaem.sp.gov.br>
+Reply-To: "mrsbarbarawilkinsfunds.usa@gmail.com" 
+          <mrsbarbarawilkinsfunds.usa@gmail.com>
+Message-ID: <489391251.981144.1588982151922.JavaMail.zimbra@itanhaem.sp.gov.br>
+Subject: 
 MIME-Version: 1.0
-Received: by 2002:a5d:8f89:0:0:0:0:0 with HTTP; Mon, 27 Apr 2020 04:41:33
- -0700 (PDT)
-Reply-To: convy0090@gmail.com
-From:   Ruben CONVY <andrewboccc@gmail.com>
-Date:   Mon, 27 Apr 2020 12:41:33 +0100
-Message-ID: <CAHVC0+Ag87TMCmfNNwWbxXOFxn5166q8GG5wEfPjwtixj9=EXQ@mail.gmail.com>
-Subject: Why continued silence 2
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8BIT
+X-Originating-IP: [63.141.48.14]
+X-Mailer: Zimbra 8.7.11_GA_3865 (zclient/8.7.11_GA_3865)
+X-Authenticated-User: endrigo.lsantos@itanhaem.sp.gov.br
+Thread-Index: J8T0ailfUa+w1hAV8qfLP1n6bHlZSg==
+Thread-Topic: 
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Did you receive my previous email regarding your family inheritance?
-Reply strictly through: convy0090@gmail.com
-Best Regards,
-Ruben CONVY
+
+
+Hallo,          Wir sind eine christliche Organisation, die gegründet wurde, um Menschen zu helfen, die Hilfe benötigen, beispielsweise finanzielle Hilfe. Wenn Sie also finanzielle Schwierigkeiten haben oder sich in einem finanziellen Chaos befinden und Geld benötigen, um Ihr eigenes Unternehmen zu gründen, oder wenn Sie einen Kredit benötigen Begleichen Sie Ihre Schulden oder zahlen Sie Ihre Rechnungen ab, gründen Sie ein gutes Geschäft oder es fällt Ihnen schwer, einen Kapitalkredit von lokalen Banken zu erhalten. Kontaktieren Sie uns noch heute per E-Mail:  Lassen Sie sich diese Gelegenheit also nicht entgehen weil Jesus gestern, heute und für immer derselbe ist. Bitte, diese sind für ernsthafte und gottesfürchtige Menschen.Dein Name:Darlehensbetrag:Leihdauer:Gültige Handynummer:Vielen Dank für Ihr Verständnis für Ihren Kontakt, während wir warten: mrsbarbarawilkinsfunds.usagmail.comGrüßeVerwaltung
