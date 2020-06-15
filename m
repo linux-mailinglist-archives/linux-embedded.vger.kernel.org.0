@@ -2,40 +2,50 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2647C1F9513
-	for <lists+linux-embedded@lfdr.de>; Mon, 15 Jun 2020 13:12:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B845A1FA468
+	for <lists+linux-embedded@lfdr.de>; Tue, 16 Jun 2020 01:37:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729645AbgFOLMm (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Mon, 15 Jun 2020 07:12:42 -0400
-Received: from dns.tdjhs.tyc.edu.tw ([163.30.27.129]:12727 "EHLO
-        host.tdjhs.tyc.edu.tw" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728285AbgFOLMj (ORCPT
+        id S1726819AbgFOXga convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-embedded@lfdr.de>);
+        Mon, 15 Jun 2020 19:36:30 -0400
+Received: from mail.bnv.gob.ve ([201.249.200.115]:41360 "EHLO
+        correo.bnv.gob.ve" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1726652AbgFOXg3 (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Mon, 15 Jun 2020 07:12:39 -0400
-Received: from www.tdjhs.tyc.edu.tw (localhost.tdjhs.tyc.edu.tw [127.0.0.1])
-        by host.tdjhs.tyc.edu.tw (8.14.5/8.14.5) with ESMTP id 05DKtra9024277;
-        Sun, 14 Jun 2020 04:55:54 +0800 (CST)
-        (envelope-from ldhlupz@gmail.com)
-From:   "L.D Holt" <ldhlupz@gmail.com>
-Reply-To: ldhlupz@gmail.com
-Subject: Re: Lucrative Proposal.
-Date:   Sun, 14 Jun 2020 04:55:53 +0800
-Message-Id: <20200613205526.M13247@gmail.com>
-X-Mailer: OpenWebMail 2.53 
-X-OriginatingIP: 212.103.50.217 (whitedove)
+        Mon, 15 Jun 2020 19:36:29 -0400
+Received: from localhost (localhost.bnv.gob.ve [127.0.0.1])
+        by correo.bnv.gob.ve (Postfix) with ESMTP id EB6D73633A84;
+        Mon, 15 Jun 2020 17:55:07 -0400 (-04)
+Received: from correo.bnv.gob.ve ([127.0.0.1])
+        by localhost (correo.bnv.gob.ve [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id Kt3ZVtIRxb9y; Mon, 15 Jun 2020 17:55:07 -0400 (-04)
+Received: from localhost (localhost.bnv.gob.ve [127.0.0.1])
+        by correo.bnv.gob.ve (Postfix) with ESMTP id A16503633A66;
+        Mon, 15 Jun 2020 17:55:07 -0400 (-04)
+X-Virus-Scanned: amavisd-new at bnv.gob.ve
+Received: from correo.bnv.gob.ve ([127.0.0.1])
+        by localhost (correo.bnv.gob.ve [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id jZB2nlNvzZFd; Mon, 15 Jun 2020 17:55:07 -0400 (-04)
+Received: from [10.122.16.20] (unknown [105.12.7.63])
+        by correo.bnv.gob.ve (Postfix) with ESMTPSA id 9AA7A3633A84;
+        Mon, 15 Jun 2020 17:54:57 -0400 (-04)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset=utf-8
-To:     undisclosed-recipients:;
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: donation of Euro 2,000,000.00.
+To:     Recipients <manuel@info.com>
+From:   "manuel franco" <manuel@info.com>
+Date:   Mon, 15 Jun 2020 23:54:49 +0200
+Reply-To: manuelfrancospende22@gmail.com
+Message-Id: <20200615215457.9AA7A3633A84@correo.bnv.gob.ve>
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Hello,
+You have a donation of Euro 2,000,000.00.
 
-Good day.I am a banker and I have a lucrative business proposal of mutual 
-benefit. Please contact me on my email: ldhlupz@gmail.com
+My name is Manuel Franco from the United States.
 
-Sincerely,
-L.D Holt.
+I won the America lottery worth $768 million and I am donating a portion of it to just 5 lucky people and a few Orphanage homes as a memorandum of goodwill to humanity.email: manuelfrancospende@gmail.com
