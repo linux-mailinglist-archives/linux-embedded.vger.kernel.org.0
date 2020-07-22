@@ -2,54 +2,52 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E971022752F
-	for <lists+linux-embedded@lfdr.de>; Tue, 21 Jul 2020 04:00:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2A58C228FEF
+	for <lists+linux-embedded@lfdr.de>; Wed, 22 Jul 2020 07:42:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728326AbgGUCA3 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Mon, 20 Jul 2020 22:00:29 -0400
-Received: from [211.196.21.11] ([211.196.21.11]:53116 "EHLO
-        iscure03.localdomain" rhost-flags-FAIL-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1728153AbgGUCA0 (ORCPT
-        <rfc822;linux-embedded@vger.kernel.org>);
-        Mon, 20 Jul 2020 22:00:26 -0400
-Received: from Shop01 (unknown [127.0.0.1])
-        by iscure03.localdomain (Postfix) with SMTP id 061772AE13B;
-        Mon, 20 Jul 2020 12:16:00 +0900 (KST)
-Received: from [229.141.241.102] by Shop01 id ud7dU1XDA1r0; Sun, 19 Jul 2020 12:13:41 -0400
-Message-ID: <p$j$$juj73lb2-kt@3ud.erf.a.16r>
-From:   "MOORE GATES LTD" <TEXT@TEXT.COM>
-Reply-To: "MOORE GATES LTD" <TEXT@TEXT.COM>
-To:     ling_1111@hotmail.com
-Subject: FROM MR. MOORE
-Date:   Sun, 19 Jul 20 12:13:41 GMT
-X-Mailer: eGroups Message Poster
+        id S1728004AbgGVFmD convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-embedded@lfdr.de>);
+        Wed, 22 Jul 2020 01:42:03 -0400
+Received: from smtp.utu.edu.uy ([190.0.150.6]:49256 "EHLO delta45.utu.edu.uy"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726696AbgGVFmD (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
+        Wed, 22 Jul 2020 01:42:03 -0400
+X-Greylist: delayed 481 seconds by postgrey-1.27 at vger.kernel.org; Wed, 22 Jul 2020 01:41:53 EDT
+Received: from localhost (localhost [127.0.0.1])
+        by delta45.utu.edu.uy (Postfix) with ESMTP id A0FDF1D0EF10;
+        Wed, 22 Jul 2020 02:32:12 -0300 (GMT+3)
+Received: from delta45.utu.edu.uy ([127.0.0.1])
+        by localhost (delta45.utu.edu.uy [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id j-d5-xIHkuKF; Wed, 22 Jul 2020 02:32:12 -0300 (GMT+3)
+Received: from localhost (localhost [127.0.0.1])
+        by delta45.utu.edu.uy (Postfix) with ESMTP id DC7E81D0EF09;
+        Wed, 22 Jul 2020 02:32:11 -0300 (GMT+3)
+X-Virus-Scanned: amavisd-new at delta45.utu.edu.uy
+Received: from delta45.utu.edu.uy ([127.0.0.1])
+        by localhost (delta45.utu.edu.uy [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id z5KYbxFuF39p; Wed, 22 Jul 2020 02:32:11 -0300 (GMT+3)
+Received: from delta45.utu.edu.uy (delta45 [172.17.1.45])
+        by delta45.utu.edu.uy (Postfix) with ESMTP id 7FB051D0EEFB;
+        Wed, 22 Jul 2020 02:32:10 -0300 (GMT+3)
+Date:   Wed, 22 Jul 2020 02:32:10 -0300 (GMT-03:00)
+From:   Darlehen Bedienung <aemartinez@utu.edu.uy>
+Reply-To: info_innoxcapitalservicesolution@aol.com
+Message-ID: <754360867.138094.1595395930510.JavaMail.zimbra@utu.edu.uy>
+Subject: 
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
-        boundary="D9F2D5A2__"
-X-Priority: 1
-X-MSMail-Priority: High
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8BIT
+X-Originating-IP: [172.17.1.45]
+X-Mailer: Zimbra 8.8.12_GA_3866 (zclient/8.8.12_GA_3866)
+X-Authenticated-User: aemartinez@utu.edu.uy
+Thread-Index: sHxyVNlBzwToKpIuoIGp0++CnI1oLA==
+Thread-Topic: 
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
 
---D9F2D5A2__
-Content-Type: text/plain;
-Content-Transfer-Encoding: quoted-printable
 
-Dear Beloved,
-Peace of the Lord be with you and family, I am Fitzpatrick Moore a
-United Kingdom Citizen, I have ($ 25M) Twenty five Million united
-states dollars with a finance House in United State. I will want you
-to help me collect this deposit and dispatch it to charity
-organizations. You will take out 30% of these funds for your
-assistance to help ME disburse this fund to charities. I will like you
-to acknowledge the receipt of this e-mail as soon as possible and
-treats with absolute confidentiality and sincerity. Please reply to my
-Email: (moorefitzpatrick@gmail.com)
-Yours Sincerely,
-Fitzpatrick Moore
-
---D9F2D5A2__--
-
+Schönen Tag,Wir sind zuverlässige, vertrauenswürdige Kreditgeber, Wir bieten Darlehen an Unternehmen und Privatpersonen zu niedrigen und günstigen Zinssatz von 2%. Sind Sie auf der Suche nach einem Business-Darlehen, persönliche Darlehen, Schuldenkonsolidierung, unbesicherte Darlehen, Venture Capital. Kontaktieren Sie uns mit Name, Land, Darlehensbetrag, Dauer und Telefonnummer.GrüßeHerr DA COSTA DARREN FAY
