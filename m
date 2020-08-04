@@ -2,32 +2,46 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 96C5B22C8FF
-	for <lists+linux-embedded@lfdr.de>; Fri, 24 Jul 2020 17:29:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9130223B456
+	for <lists+linux-embedded@lfdr.de>; Tue,  4 Aug 2020 07:14:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726810AbgGXP33 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 24 Jul 2020 11:29:29 -0400
-Received: from [125.140.134.231] ([125.140.134.231]:53505 "EHLO
-        WIN-DAONO245HJF" rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726643AbgGXP32 (ORCPT
+        id S1727088AbgHDFOK convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-embedded@lfdr.de>);
+        Tue, 4 Aug 2020 01:14:10 -0400
+Received: from lx0001.riocuarto.gov.ar ([181.15.158.195]:35274 "EHLO
+        lx0001.riocuarto.gov.ar" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726000AbgHDFOK (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 24 Jul 2020 11:29:28 -0400
-Received: from User ([66.154.113.229]) by WIN-DAONO245HJF with Microsoft SMTPSVC(8.5.9600.16384);
-         Sat, 25 Jul 2020 00:23:25 +0900
-Reply-To: <christopherwang36@gmail.com>
-From:   "CHRISTOPHER WANG" <christopherwang36@gmail.com>
-Subject: INVESTMENT
-Date:   Fri, 24 Jul 2020 08:23:43 -0700
+        Tue, 4 Aug 2020 01:14:10 -0400
+X-Greylist: delayed 545 seconds by postgrey-1.27 at vger.kernel.org; Tue, 04 Aug 2020 01:14:09 EDT
+Received: from localhost (localhost [127.0.0.1])
+        by zimbra.riocuarto.gov.ar (Postfix) with ESMTP id 73E5860460DCF;
+        Tue,  4 Aug 2020 02:04:51 -0300 (-03)
+Received: from lx0001.riocuarto.gov.ar ([127.0.0.1])
+        by localhost (zimbra.riocuarto.gov.ar [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id vJU7JlE98TLi; Tue,  4 Aug 2020 02:04:51 -0300 (-03)
+Received: from localhost (localhost [127.0.0.1])
+        by zimbra.riocuarto.gov.ar (Postfix) with ESMTP id 7A41160461897;
+        Tue,  4 Aug 2020 02:04:49 -0300 (-03)
+X-Virus-Scanned: amavisd-new at riocuarto.gov.ar
+Received: from lx0001.riocuarto.gov.ar ([127.0.0.1])
+        by localhost (zimbra.riocuarto.gov.ar [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id 3QigFgwHkhCq; Tue,  4 Aug 2020 02:04:49 -0300 (-03)
+Received: from zimbra.riocuarto.gov.ar (localhost [127.0.0.1])
+        by zimbra.riocuarto.gov.ar (Postfix) with ESMTP id 2EAFF60460DB0;
+        Tue,  4 Aug 2020 02:04:47 -0300 (-03)
+Date:   Tue, 4 Aug 2020 02:04:47 -0300 (ART)
+From:   Jorge Meroni <jmeroni@riocuarto.gov.ar>
+Reply-To: DANIEL MADRE <danielsmadre6@gmail.com>
+Message-ID: <2053163934.1364767.1596517487139.JavaMail.zimbra@riocuarto.gov.ar>
+Subject: SPENDE
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="Windows-1251"
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2600.0000
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
-Message-ID: <WIN-DAONO245HJFyTcs008ef901@WIN-DAONO245HJF>
-X-OriginalArrivalTime: 24 Jul 2020 15:23:26.0051 (UTC) FILETIME=[60483330:01D661CE]
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8BIT
+X-Originating-IP: [105.9.103.250]
+X-Mailer: Zimbra 8.8.15_GA_3918 (zclient/8.8.15_GA_3918)
+Thread-Index: xNKE1746z7520GYub8Cm2tj1QcztMA==
+Thread-Topic: SPENDE
 To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
@@ -36,15 +50,4 @@ X-Mailing-List: linux-embedded@vger.kernel.org
 
 
 
-Good day,
-
-You were recommended by a mutual associate. I write you regarding an investment of bearer bonds I made on behalf of a client. 
-
-       The investment was made in 2009 and has been under my management. The said investor is deceased. The window is now available to assign these bonds to any name or company of my choice. I have all the necessary information to achieve this within 10 banking days.
-      
-       The total value of the bond is 100million pounds sterling, in a million pound denominations.
-      
-        If you can handle this, do contact me at your earliest convenience via my email christopherwang36@gmail.com
-So we can discuss the final details Thank you.
- 
-Mr CHRISTOPHER WANG
+Ich habe eine Spende von 5,5 Millionen Euro für Sie. Bitte antworten Sie.
