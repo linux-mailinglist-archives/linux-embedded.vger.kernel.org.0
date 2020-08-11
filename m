@@ -2,58 +2,85 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B3AAA23F09E
-	for <lists+linux-embedded@lfdr.de>; Fri,  7 Aug 2020 18:10:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 53A0D2419FA
+	for <lists+linux-embedded@lfdr.de>; Tue, 11 Aug 2020 12:54:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726772AbgHGQKN convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 7 Aug 2020 12:10:13 -0400
-Received: from mail.furshetcrimea.ru ([193.27.243.220]:40572 "EHLO
-        furshetcrimea.ru" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726664AbgHGQKL (ORCPT
-        <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 7 Aug 2020 12:10:11 -0400
-Received: from [154.118.61.214] (account info@furshetcrimea.ru HELO [192.168.8.100])
-  by furshetcrimea.ru (CommuniGate Pro SMTP 6.1.10)
-  with ESMTPA id 11168847; Fri, 07 Aug 2020 19:21:48 +0300
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1728548AbgHKKxz (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Tue, 11 Aug 2020 06:53:55 -0400
+Received: from mx2.suse.de ([195.135.220.15]:41820 "EHLO mx2.suse.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728326AbgHKKxy (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
+        Tue, 11 Aug 2020 06:53:54 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id D8A7AAB3E;
+        Tue, 11 Aug 2020 10:54:13 +0000 (UTC)
+Date:   Tue, 11 Aug 2020 12:53:52 +0200
+From:   Petr Mladek <pmladek@suse.com>
+To:     Paul Menzel <pmenzel@molgen.mpg.de>
+Cc:     Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+        linux-kernel@vger.kernel.org,
+        John Ogness <john.ogness@linutronix.de>,
+        Linus Torvalds <torvalds@linuxfoundation.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-embedded@vger.kernel.org
+Subject: Re: [PATCH v2 2/2] init/Kconfig: Increase default log buffer size
+ from 128 KB to 512 KB
+Message-ID: <20200811105352.GG6215@alley>
+References: <20200811092924.6256-1-pmenzel@molgen.mpg.de>
+ <20200811092924.6256-2-pmenzel@molgen.mpg.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Bei Interesse antworten.
-To:     Recipients <info@furshetcrimea.ru>
-From:   info@furshetcrimea.ru
-Date:   Fri, 07 Aug 2020 17:09:11 +0100
-Reply-To: mattiassjoborg751@gmail.com
-X-Antivirus: Avast (VPS 200807-2, 08/07/2020), Outbound message
-X-Antivirus-Status: Clean
-Message-ID: <auto-000011168847@furshetcrimea.ru>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200811092924.6256-2-pmenzel@molgen.mpg.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Schöne Grüße,
+On Tue 2020-08-11 11:29:24, Paul Menzel wrote:
+> Commit f17a32e97e (let LOG_BUF_SHIFT default to 17) from 2008 was the
+> last time, the the default log buffer size bump was increased.
+> 
+> Machines have evolved, and on current hardware, enough memory is
+> present, and some devices have over 200 PCI devices, like a two socket
+> Skylake-E server, resulting a lot of lines.
+> 
+> Therefore, increase the default from 128 KB to 512 KB. Anyone, with
+> limited memory, can still lower it.
+> 
+> --- a/init/Kconfig
+> +++ b/init/Kconfig
+> @@ -681,9 +681,9 @@ config IKHEADERS
+>  	  kheaders.ko is built which can be loaded on-demand to get access to headers.
+>  
+>  config LOG_BUF_SHIFT
+> -	int "Kernel log buffer size (16 => 64KB, 17 => 128KB)"
+> +	int "Kernel log buffer size (17 => 128KB, 19 => 512KB)"
+>  	range 12 25
+> -	default 17
+> +	default 19
+>  	depends on PRINTK
+>  	help
+>  	  Select the minimal kernel log buffer size as a power of 2.
 
-Mein Name ist MATTIAS SJOBORG, ich bin Schweizer Staatsbürger und (Vorsitzender des Vergütungs- und Nominierungsausschusses) von Tethys Petroleum, einem multinationalen Ölkonzern mit Sitz in London-England, Großbritannien. Ich bitte Sie um Ihre Hilfe, um die Summe von vierzig Millionen Dollar abzurufen, die aus zwei Sendungsboxen besteht.
+Honestly, I do not have experience with changing the defaults. People
+hacking small devices might complain. Well, this can be solved
+by increasing the default only when BASE_FULL is set.
 
-Dieses Geld wurde von der Firma erworben und von einem Diplomaten begleitet und korrekt in einer Sicherheitsfirma in Amerika hinterlegt. Mein Grund dafür ist, dass ich von der Firma zu lange um meine Ansprüche betrogen wurde, nur weil ich kein bin Britisch. Die Kontaktdaten des Diplomaten erhalten Sie, wenn Sie Ihr Interesse bekunden, mir zu helfen.
+I am personally fine with increasing the default when BASE_FULL
+is set. The amount of messages is growing over time because of
+increasing complexity of both the hardware and software.
+Fortunately also the amount of available memory is growing.
 
-Jede der Schachteln enthält 20 Mio. USD. Für Ihre Hilfe bin ich bereit, 40% an Sie freizugeben. Aus Sicherheitsgründen wurde die Sendung als VERTRAULICHE DIPLOMATISCHE DOKUMENTE registriert, und ich kann erklären, warum dies so erklärt wurde. Denken Sie daran, dass der Diplomat den Inhalt der Sendung nicht kennt. Er ist seit einem Monat dort, während ich nach einem zuverlässigen Partner suchen möchte. Ich werde das Land verlassen, sobald die Sendung für Sie an Sie geliefert wird Private Investitionen und ich haben geschworen, niemals nach London zurückzukehren. Bitte, ich brauche Ihre dringende Antwort, bevor meine Pläne, das Unternehmen zu verlassen, entdeckt werden.
+Well, this should get discussed in wider audience. Adding some
+people into CC.
 
-www.tethyspetroleum.com/tethys/static/EN_US/au_seniormanagement.html
+JFYI, it started with report of lost messages, see
+https://lore.kernel.org/lkml/264bfbae-122d-9c41-59ea-6413f91bd866@molgen.mpg.de/
 
-Im Moment ist die sicherste Form der Korrespondenz meine eigene E-Mail-Adresse. Bitte antworten Sie im Interesse der Vertraulichkeit nur über meine direkte E-Mail-Adresse. Antworten Sie zusammen mit Ihrer direkten Telefon- und Faxnummer, unter der ich Sie alternativ erreichen kann.
-
-Bitte, wenn Sie nicht bereit und interessiert sind, mir zu helfen, löschen Sie bitte diese E-Mail aus Ihrer E-Mail und tun Sie so, als hätten Sie sie nie erhalten.
-
-Freundliche Grüße,
-Mr.Mattias Sjoborg
-(Vorsitzender des Vergütungs- und Nominierungsausschusses)
-Tethys Petroleum.
-London, England
-
--- 
-This email has been checked for viruses by Avast antivirus software.
-https://www.avast.com/antivirus
-
+Best Regards,
+Petr
