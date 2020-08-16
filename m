@@ -2,85 +2,97 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 53A0D2419FA
-	for <lists+linux-embedded@lfdr.de>; Tue, 11 Aug 2020 12:54:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D62E024582A
+	for <lists+linux-embedded@lfdr.de>; Sun, 16 Aug 2020 16:32:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728548AbgHKKxz (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Tue, 11 Aug 2020 06:53:55 -0400
-Received: from mx2.suse.de ([195.135.220.15]:41820 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728326AbgHKKxy (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
-        Tue, 11 Aug 2020 06:53:54 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id D8A7AAB3E;
-        Tue, 11 Aug 2020 10:54:13 +0000 (UTC)
-Date:   Tue, 11 Aug 2020 12:53:52 +0200
-From:   Petr Mladek <pmladek@suse.com>
-To:     Paul Menzel <pmenzel@molgen.mpg.de>
-Cc:     Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        linux-kernel@vger.kernel.org,
-        John Ogness <john.ogness@linutronix.de>,
-        Linus Torvalds <torvalds@linuxfoundation.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-embedded@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] init/Kconfig: Increase default log buffer size
- from 128 KB to 512 KB
-Message-ID: <20200811105352.GG6215@alley>
-References: <20200811092924.6256-1-pmenzel@molgen.mpg.de>
- <20200811092924.6256-2-pmenzel@molgen.mpg.de>
+        id S1728794AbgHPOcT (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Sun, 16 Aug 2020 10:32:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57060 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729394AbgHPO2l (ORCPT
+        <rfc822;linux-embedded@vger.kernel.org>);
+        Sun, 16 Aug 2020 10:28:41 -0400
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com [IPv6:2a00:1450:4864:20::32c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9427EC061347
+        for <linux-embedded@vger.kernel.org>; Sun, 16 Aug 2020 07:28:34 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id t14so11863519wmi.3
+        for <linux-embedded@vger.kernel.org>; Sun, 16 Aug 2020 07:28:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=Duxa+mmNF3T3C2WDKsmzowR2OzvdY892XFjTPp0RWRI=;
+        b=NAKDDu3zYGlp6/1rTFA3zLXzfLNUWElMFpld1DGXTqZ3f2C1G5vMMGgQBtzYdv61gR
+         j0gW2VjYzcAEQEK9JcrA+yGSHFEXNhE9RNkaz3uxkanP37gacJrIVytgT7/c7zGkA2Dy
+         XJB3L8ToVDoWAD9Rvm7U849RIrxncLk9xI9S/Uu5ZGT/cXsim2IUQmYeZsKFSBsv6kJT
+         3kDR9KLYjND6JPpx0YTAndrQaTelzP3558OkivI4ykhj79/nak1F6z80uX1/EQIXmTKV
+         I+kUa6Zt2XAbNuMItIuLndMdaWWyo32PYvWKoOywYCMLUV2UDlYdbpJ66arhF+MiPCa0
+         yMKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=Duxa+mmNF3T3C2WDKsmzowR2OzvdY892XFjTPp0RWRI=;
+        b=NUS4qCygS7osyQm7UdWMVBQCr28KAAh5g59FEC647Zi5kGTleelnIBkQ+YSHzTPs8n
+         NHzeQXpHQ1oSdCwilZzs/9+wkpUKQ1LuGZn27Zd/smaZ2COfwh04lkflDEok8Sss0qJr
+         +o7BEh5mwUc1NS8m6TgmaRQQrN1slh2shP8MD3pA5jx4wvqOwxMxlK6kHHcS1VRCY+cF
+         DVKQWtk4Vj0Qtjbft89G88a0SHQsDcT3edrJlqOiaGE8OeB4NDBAQAS1lgLTAxOwGICK
+         oycoV25tAKfSuUDPxT4b0WAxFBV8kJY1CjFa5ArdyCbYD4QFPe+DERy8s0RmuhAuCpkx
+         50Kw==
+X-Gm-Message-State: AOAM533o/YRJ/K/rxDpEGf1BUC5kS34CbtIKbNESlD3CBVaGqxLhjxAP
+        /J6Hd+JcrWZQbRFOmGuJmWTr2KY+zmdTAnVjFOY=
+X-Google-Smtp-Source: ABdhPJydZZ8FQlFGmrB/EDLy0Z8gH5X03F6EFXypW4K1vf8iv94WhLhI3iwPKgeJEaRZZocHWED4lUmYPOBkTFPeX+4=
+X-Received: by 2002:a1c:a1c7:: with SMTP id k190mr10461870wme.1.1597588111746;
+ Sun, 16 Aug 2020 07:28:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200811092924.6256-2-pmenzel@molgen.mpg.de>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Received: by 2002:a5d:6cd3:0:0:0:0:0 with HTTP; Sun, 16 Aug 2020 07:28:30
+ -0700 (PDT)
+Reply-To: sctnld11170@tlen.pl
+From:   "Mr. Scott Donald" <confianzayrentabilidad@gmail.com>
+Date:   Sun, 16 Aug 2020 07:28:30 -0700
+Message-ID: <CANrrfX7wwL97G=jb--8nb9jH8oRO8T90L6NGSfg1HfnzMyyHcw@mail.gmail.com>
+Subject: Hello, Please
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-embedded-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-On Tue 2020-08-11 11:29:24, Paul Menzel wrote:
-> Commit f17a32e97e (let LOG_BUF_SHIFT default to 17) from 2008 was the
-> last time, the the default log buffer size bump was increased.
-> 
-> Machines have evolved, and on current hardware, enough memory is
-> present, and some devices have over 200 PCI devices, like a two socket
-> Skylake-E server, resulting a lot of lines.
-> 
-> Therefore, increase the default from 128 KB to 512 KB. Anyone, with
-> limited memory, can still lower it.
-> 
-> --- a/init/Kconfig
-> +++ b/init/Kconfig
-> @@ -681,9 +681,9 @@ config IKHEADERS
->  	  kheaders.ko is built which can be loaded on-demand to get access to headers.
->  
->  config LOG_BUF_SHIFT
-> -	int "Kernel log buffer size (16 => 64KB, 17 => 128KB)"
-> +	int "Kernel log buffer size (17 => 128KB, 19 => 512KB)"
->  	range 12 25
-> -	default 17
-> +	default 19
->  	depends on PRINTK
->  	help
->  	  Select the minimal kernel log buffer size as a power of 2.
+--=20
+Dear Friend,
 
-Honestly, I do not have experience with changing the defaults. People
-hacking small devices might complain. Well, this can be solved
-by increasing the default only when BASE_FULL is set.
+I'm Mr. Scott Donald a Successful businessMan dealing with
+Exportation, I got your mail contact through search to let you know my
+intension and my Ugly Situation Am a dying Man here in Los Angeles
+California Hospital Bed in (USA), I Lost my Wife and my only Daughter
+for Covid-19 and I also have a problem in my Health and I can die
+anytime I Know,
 
-I am personally fine with increasing the default when BASE_FULL
-is set. The amount of messages is growing over time because of
-increasing complexity of both the hardware and software.
-Fortunately also the amount of available memory is growing.
+I have a project that I am about to hand over to you. and I already
+instructed the Bankia S.A. Madrid, Spain(BSA) to transfer my fund sum
+of =C2=A33,7M GBP. Equivalent to =E2=82=AC4,077,033.91 EUR, to you as to en=
+able you
+to give 50% of this fund to Charitable Home in your State and take 50%
+don't think otherwise and why would anybody send someone you barely
+know to help you deliver a message, help me do this for the happiness
+of my soul and for God to mercy me and my Family and give Us a good
+place.
 
-Well, this should get discussed in wider audience. Adding some
-people into CC.
+please, do as I said there was someone from your State that I deeply
+love so very very much and I miss her so badly I have no means to
+reach any Charitable Home there. that is why I go for a personal
+search of the Country and State and I got your mail contact through
+search to let you know my Bitterness and please, help me is getting
+Dark I ask my Doctor to help me keep you notice failure for me to
+reach you in person Your urgent Response, here is my Doctor Whats-app
+Number for urgent notice +13019692737
 
-JFYI, it started with report of lost messages, see
-https://lore.kernel.org/lkml/264bfbae-122d-9c41-59ea-6413f91bd866@molgen.mpg.de/
+Hope To Hear From You. I'm sending this email to you for the second
+time yet no response from you.
 
-Best Regards,
-Petr
+My Regards.
+
+Mr. Scott Donald
+CEO
