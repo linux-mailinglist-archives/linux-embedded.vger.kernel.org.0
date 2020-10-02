@@ -2,45 +2,65 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4F8D627F04D
-	for <lists+linux-embedded@lfdr.de>; Wed, 30 Sep 2020 19:25:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 778B6281BDF
+	for <lists+linux-embedded@lfdr.de>; Fri,  2 Oct 2020 21:23:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731494AbgI3RYN (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 30 Sep 2020 13:24:13 -0400
-Received: from [110.74.151.213] ([110.74.151.213]:36213 "EHLO
-        mail.bless.gov.my" rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1725837AbgI3RYN (ORCPT
-        <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 30 Sep 2020 13:24:13 -0400
-Received: from User (unknown [172.20.84.1])
-        by mail.bless.gov.my (Postfix) with SMTP id 3992868525BE;
-        Wed, 30 Sep 2020 18:45:48 +0800 (MYT)
-Reply-To: <iinfo446@gmail.com>
-From:   "Mrs. Susan Carter" <test@mail.bless.gov.my>
-Subject: Good day,    
-Date:   Wed, 30 Sep 2020 11:46:09 +0100
+        id S2388611AbgJBTXb convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 2 Oct 2020 15:23:31 -0400
+Received: from mx.metalurgs.lv ([81.198.125.103]:50644 "EHLO mx.metalurgs.lv"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2388603AbgJBTXa (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
+        Fri, 2 Oct 2020 15:23:30 -0400
+X-Greylist: delayed 471 seconds by postgrey-1.27 at vger.kernel.org; Fri, 02 Oct 2020 15:23:30 EDT
+Received: from mx.metalurgs.lv (localhost [127.0.0.1])
+        by mx.metalurgs.lv (Postfix) with ESMTP id 4FFC862B11
+        for <linux-embedded@vger.kernel.org>; Fri,  2 Oct 2020 22:15:38 +0300 (EEST)
+Received: from kas30pipe.localhost (localhost [127.0.0.1])
+        by mx.metalurgs.lv (Postfix) with ESMTP id 0F15E62AD9
+        for <linux-embedded@vger.kernel.org>; Fri,  2 Oct 2020 22:15:38 +0300 (EEST)
+Received: by mx.metalurgs.lv (Postfix, from userid 1005)
+        id 5E16862A6B; Fri,  2 Oct 2020 22:15:35 +0300 (EEST)
+Received: from [100.64.1.74] (unknown [190.15.125.50])
+        (Authenticated sender: admin)
+        by mx.metalurgs.lv (Postfix) with ESMTPA id C8B7262005;
+        Fri,  2 Oct 2020 22:15:28 +0300 (EEST)
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="Windows-1251"
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2600.0000
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
-Message-Id: <20200930104549.3992868525BE@mail.bless.gov.my>
-To:     undisclosed-recipients:;
+Content-Description: Mail message body
+To:     Recipients <financialcapability6@gmail.com>
+From:   "Mr. Hashim Bin" <financialcapability6@gmail.com>
+Date:   Fri, 02 Oct 2020 16:15:21 -0300
+Reply-To: binmurrah@gmail.com
+X-SpamTest-Envelope-From: financialcapability6@gmail.com
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 71303 [Jan 01 2015]
+X-SpamTest-Info: {TO: forged address, i.e. recipient, investors, public, etc.}
+X-SpamTest-Info: {DATE: unreal year}
+X-SpamTest-Method: none
+X-SpamTest-Rate: 55
+X-SpamTest-Status: Not detected
+X-SpamTest-Status-Extended: not_detected
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
+Message-ID: <20201002191535.5E16862A6B@mx.metalurgs.lv>
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 8BIT
+Subject: Low Rate Loan.
+X-Anti-Virus: Kaspersky Anti-Virus for Linux Mail Server 5.6.39/RELEASE,
+         bases: 20140401 #7726142, check: 20201002 notchecked
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Good day,
+Hello Dear,
 
-My name are Mrs. Susan Carter an America but a United Kingdom Citizen, I???m 57 years old, widow, married to late Eng Martins Carter who is a British, who until his death worked with Dutch Filtration for Twenty-Six years before he died in the year 2015 after a brief illness that lasted only five days.
+We are Investment Company offering Corporate and Personal
+Loan at 3% Interest Rate for a duration of 10Years.
 
-When my late husband was alive he deposited the sum of US$50 Million in bank USA through his Financial Lawyer in the United State of America and we all agreed as a couple to donate all of that to charity. Following my health (Lung Cancer), my Doctor told me that I may not live longer than required due to my health condition.
+We also pay 1% commission to brokers, who introduce project
+owners for finance or other opportunities.
 
-Looking forward to seeing someone who can use the money for charitable work.
+Please get back to me if you are interested for more
+details.
 
-Best Regards
-Yours sincerely
-Mrs. Susan Carter
+Yours faithfully,
+Hashim Bin 
