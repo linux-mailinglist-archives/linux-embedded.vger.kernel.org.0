@@ -2,61 +2,97 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 24AE929A797
-	for <lists+linux-embedded@lfdr.de>; Tue, 27 Oct 2020 10:18:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C47C029F7A0
+	for <lists+linux-embedded@lfdr.de>; Thu, 29 Oct 2020 23:16:09 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2404149AbgJ0JSE (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Tue, 27 Oct 2020 05:18:04 -0400
-Received: from mail.fullbizgoal.com ([80.211.27.207]:45596 "EHLO
-        server1.mail.fullbizgoal.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S2394889AbgJ0JSE (ORCPT
-        <rfc822;linux-embedded@vger.kernel.org>);
-        Tue, 27 Oct 2020 05:18:04 -0400
-Received: by server1.mail.fullbizgoal.com (Postfix, from userid 1001)
-        id CBDE8A31A3; Tue, 27 Oct 2020 09:05:57 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fullbizgoal.com;
-        s=mail; t=1603789565;
-        bh=1A+RQztZunBjkjQlXgr2uQY18vlGaIq8j7jGOmWqiI0=;
-        h=Date:From:To:Subject:From;
-        b=T7BRM2y4VJIsC6PzSt2zX2TrJ56scAs21Zz+T1vfzhY2H0sb9ujo9KLgMOPnFKBBy
-         fpF6+f1Fs6/sXltyJoGW6hzTvyU0CdUxAW06CeaHLlX29d3y/C53D6Q9OM37yem43n
-         LBSTD70JP5vrsACUL7XQFHfkQSGRQ9d+pG9uQyvJc4tR+MZtP1csq4aZZoFHdLl6mi
-         H63b3NChh5gCblST/vPoEqEx93VnLkeNUWk6bKJH3/ad6YY5VyF5sX7UqsHyl0izrJ
-         ya6BTwjbWjsnLHOAG1cxXOFfo2ukO4O0eY1YeTzNLXDD5kdzecSv+EZv+1zfaJr8hf
-         E1wjYrYHx8mIA==
-Received: by mail.fullbizgoal.com for <linux-embedded@vger.kernel.org>; Tue, 27 Oct 2020 09:05:49 GMT
-Message-ID: <20201027074501-0.1.23.amy7.0.qlxb4znl4w@fullbizgoal.com>
-Date:   Tue, 27 Oct 2020 09:05:49 GMT
-From:   "Ethan Smith" <ethan.smith@fullbizgoal.com>
-To:     <linux-embedded@vger.kernel.org>
-Subject: Disinfectant
-X-Mailer: mail.fullbizgoal.com
+        id S1725826AbgJ2WQF (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 29 Oct 2020 18:16:05 -0400
+Received: from mx3.molgen.mpg.de ([141.14.17.11]:37275 "EHLO mx1.molgen.mpg.de"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1725780AbgJ2WQF (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
+        Thu, 29 Oct 2020 18:16:05 -0400
+Received: from [192.168.0.2] (ip5f5af462.dynamic.kabel-deutschland.de [95.90.244.98])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        (Authenticated sender: pmenzel)
+        by mx.molgen.mpg.de (Postfix) with ESMTPSA id 33E6A20646219;
+        Thu, 29 Oct 2020 23:16:02 +0100 (CET)
+Subject: Re: [PATCH v2 2/2] init/Kconfig: Increase default log buffer size
+ from 128 KB to 512 KB
+To:     Petr Mladek <pmladek@suse.com>
+Cc:     Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+        linux-kernel@vger.kernel.org,
+        John Ogness <john.ogness@linutronix.de>,
+        Linus Torvalds <torvalds@linuxfoundation.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-embedded@vger.kernel.org
+References: <20200811092924.6256-1-pmenzel@molgen.mpg.de>
+ <20200811092924.6256-2-pmenzel@molgen.mpg.de> <20200811105352.GG6215@alley>
+From:   Paul Menzel <pmenzel@molgen.mpg.de>
+Message-ID: <92a13465-d133-0b39-f64b-7074dbbb3fcc@molgen.mpg.de>
+Date:   Thu, 29 Oct 2020 23:16:01 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20200811105352.GG6215@alley>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Good morning,
+Dear Petr,
 
-looking for companies interested in raising additional capital by diversi=
-fying their offer in soaps, liquids and gels for hand disinfection and co=
-smetics for body and hair care.
 
-The distribution of innovative products corresponding to the current pref=
-erences of customers in the field of hygiene and preventive healthcare al=
-lows our partners to gain new markets and achieve better economic results=
-=2E
+Am 11.08.20 um 12:53 schrieb Petr Mladek:
+> On Tue 2020-08-11 11:29:24, Paul Menzel wrote:
+>> Commit f17a32e97e (let LOG_BUF_SHIFT default to 17) from 2008 was the
+>> last time, the the default log buffer size bump was increased.
+>>
+>> Machines have evolved, and on current hardware, enough memory is
+>> present, and some devices have over 200 PCI devices, like a two socket
+>> Skylake-E server, resulting a lot of lines.
+>>
+>> Therefore, increase the default from 128 KB to 512 KB. Anyone, with
+>> limited memory, can still lower it.
+>>
+>> --- a/init/Kconfig
+>> +++ b/init/Kconfig
+>> @@ -681,9 +681,9 @@ config IKHEADERS
+>>   	  kheaders.ko is built which can be loaded on-demand to get access to headers.
+>>   
+>>   config LOG_BUF_SHIFT
+>> -	int "Kernel log buffer size (16 => 64KB, 17 => 128KB)"
+>> +	int "Kernel log buffer size (17 => 128KB, 19 => 512KB)"
+>>   	range 12 25
+>> -	default 17
+>> +	default 19
+>>   	depends on PRINTK
+>>   	help
+>>   	  Select the minimal kernel log buffer size as a power of 2.
+> 
+> Honestly, I do not have experience with changing the defaults. People
+> hacking small devices might complain. Well, this can be solved
+> by increasing the default only when BASE_FULL is set.
+> 
+> I am personally fine with increasing the default when BASE_FULL
+> is set. The amount of messages is growing over time because of
+> increasing complexity of both the hardware and software.
+> Fortunately also the amount of available memory is growing.
+> 
+> Well, this should get discussed in wider audience. Adding some
+> people into CC.
+> 
+> JFYI, it started with report of lost messages, see
+> https://lore.kernel.org/lkml/264bfbae-122d-9c41-59ea-6413f91bd866@molgen.mpg.de/
 
-In addition to products with bactericidal action, our range includes show=
-er gels, shampoos and hair conditioners, as well as efficient, concentrat=
-ed detergents.
+As there was no objection, is it possible to apply the two patches, and 
+maybe even get them into Linux 5.10?
 
-The versatility (suitable for all skin types) combined with an affordable=
- price means that customers make an informed choice of a product among ot=
-hers available on the market.
 
-Are you interested in cooperation?
+Kind regards,
 
-Ethan Smith
+Paul
