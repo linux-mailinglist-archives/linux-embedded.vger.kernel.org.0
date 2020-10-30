@@ -2,105 +2,83 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C48D929FF6D
-	for <lists+linux-embedded@lfdr.de>; Fri, 30 Oct 2020 09:09:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 745DC2A089E
+	for <lists+linux-embedded@lfdr.de>; Fri, 30 Oct 2020 15:58:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725896AbgJ3IJJ (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 30 Oct 2020 04:09:09 -0400
-Received: from mail-yb1-f194.google.com ([209.85.219.194]:37531 "EHLO
-        mail-yb1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725355AbgJ3IJI (ORCPT
+        id S1726919AbgJ3O6e (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 30 Oct 2020 10:58:34 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39124 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726880AbgJ3O6d (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 30 Oct 2020 04:09:08 -0400
-Received: by mail-yb1-f194.google.com with SMTP id h196so4423988ybg.4;
-        Fri, 30 Oct 2020 01:09:07 -0700 (PDT)
+        Fri, 30 Oct 2020 10:58:33 -0400
+Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com [IPv6:2a00:1450:4864:20::542])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D92D4C0613E1
+        for <linux-embedded@vger.kernel.org>; Fri, 30 Oct 2020 07:58:31 -0700 (PDT)
+Received: by mail-ed1-x542.google.com with SMTP id v4so7011992edi.0
+        for <linux-embedded@vger.kernel.org>; Fri, 30 Oct 2020 07:58:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=9fkQXWnoPSypfyxvIrXWSyd1r4Ua0eeDJczOBpIf/BU=;
+        b=cba/prsbSBmYoHoIyJJ/4nz72WNuXyuE8Im8hHokykrknu6T+ZGQ3oNaEZCnDQMKfK
+         7InrWK9/LAehftIUxFF07tvuUQ/41xDXt8c8cRINmlHgR1biRfbdW9zZPxVC6xa8zOlP
+         K6M6oRsBtl8MN1IVNiGcNelh1LOXBPRCedQHjpXjHdhTZUoXOfQ5ssal2G05i4dOSCvv
+         FIx5VhgkFc0MSmWonLWORS6bGxkDSNKyYqWmGabj1TsHCGlpIexLxPpAsXs6aOmBy4OY
+         u1xNW9W0JHHwE2pLQBvrBX9wQMtbUIk6CF2f6hu1cvsgwIaE0/cl0h377THHVavVg8oE
+         Ypbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=7/jzjKrd2GSFI2jORP6qlsLl+sejwVXANXoHe0KfMn0=;
-        b=UQH25hvagVGSdccd5gmk8rBs2vwkNop09Lhs6mwDbriqGPAvUiB96KXrdeqqsTDj6A
-         PWxytEMToIkQF7DIoziQx9xBuVGhXw5F3okEXWWSqiUNIL7lunsEItAoyHmFQ626+eqo
-         6Dqv0q8iPCD/jyeABEx9N59GlTZ+p67qImNQYTGT+5BLvGBUX/XVLVxB5VZQakBsdQyP
-         zoLH+iqz/D0klsn2dLX34mbySUCIcCbcTKnqHP5uvfUgEGrhQwo1Dze21QUXkUu9Zm8c
-         wiBocvNnjd6FW7ss4F0XIwROpweOxZp8G7zoNE7E3e+Nb4/bp39y5cYuqOnOdCCyFU9C
-         IMUw==
-X-Gm-Message-State: AOAM531+bVnm2zKWbRy5+kJRLaYjFH8C8+h7wfBXpwA8QZqvLFQeR2JX
-        awKPk8hgd0DRt7Y9oApm0xy54X2FFX+xMnmeBqTKp0zHtaZF/w==
-X-Google-Smtp-Source: ABdhPJyroTn2hs8jXpOD6BmbCWkQFZDlqvELgCsyP8SvMUf3WczXlOpvoh9Rk8Bijl+J/NHtvz7DYPpJepHo+4MUsm0=
-X-Received: by 2002:a9d:3b76:: with SMTP id z109mr754329otb.250.1604044886252;
- Fri, 30 Oct 2020 01:01:26 -0700 (PDT)
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=9fkQXWnoPSypfyxvIrXWSyd1r4Ua0eeDJczOBpIf/BU=;
+        b=ZXlfQsAQolM4+pv9qknuGFvT+E7NqZo0hzRwZ8R99dN2M0jAdRiMbBv4/Ds0vh8vwU
+         yjQR631Q8RvRXhsW/tD7ZgNgdrKtj21w51qVym9WsuIT9XofXXsw9J7EP/MhSbD5I8sv
+         Dq7l6BGITv9BT/XNwo6RxMzSAL57F0EvW4vtrm8cF3kZPRXpDxIurW/eZzYOytGU88k6
+         0utW1sPDMojNfRjHy428aDrQj1jgtkHbSss+IdJH7mS6MwKu/b2HHm/gl+lj/xXVozn9
+         UJAvYDhhhrTC0X/N/8s9JMSCZBnZwwExSivpGeS6YepNWbN589IYKVMjDpFAuauYKoyZ
+         /sMg==
+X-Gm-Message-State: AOAM530RnveUE6afpXQa2PKQ+WvRHZ0FEHzZ/cq4hP/AuuAZ+CILRRne
+        bE8Hos22TVZRSfsvLpEotGt/YbNAGUX0cLiZeg==
+X-Google-Smtp-Source: ABdhPJz2xsjxOvoK0J4Ck702AA6tUztWDi8Hr+jNkMDLFNqNVV9sSKYCidfmYBReGemdlea1AJeouFi1w4gUiDPqlYM=
+X-Received: by 2002:a50:9e82:: with SMTP id a2mr2760020edf.117.1604069910083;
+ Fri, 30 Oct 2020 07:58:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200811092924.6256-1-pmenzel@molgen.mpg.de> <20200811092924.6256-2-pmenzel@molgen.mpg.de>
- <20200811105352.GG6215@alley>
-In-Reply-To: <20200811105352.GG6215@alley>
-From:   Geert Uytterhoeven <geert@linux-m68k.org>
-Date:   Fri, 30 Oct 2020 09:01:15 +0100
-Message-ID: <CAMuHMdVfxiJ8evasLQ6Hc59jMJdU7R6Eyn7X3rM20O3T4Z6nKg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] init/Kconfig: Increase default log buffer size
- from 128 KB to 512 KB
-To:     Petr Mladek <pmladek@suse.com>
-Cc:     Paul Menzel <pmenzel@molgen.mpg.de>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        John Ogness <john.ogness@linutronix.de>,
-        Linus Torvalds <torvalds@linuxfoundation.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Linux Embedded <linux-embedded@vger.kernel.org>
+Received: by 2002:a50:f14c:0:0:0:0:0 with HTTP; Fri, 30 Oct 2020 07:58:29
+ -0700 (PDT)
+Reply-To: li.anable85@gmail.com
+From:   Liliane Abel <k.griest04@gmail.com>
+Date:   Fri, 30 Oct 2020 15:58:29 +0100
+Message-ID: <CABAZL7kO5JQZMDhdiGK6i8XTXe8pbB5xWmsnDKzGXmDahQmacQ@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-On Tue, Aug 11, 2020 at 12:55 PM Petr Mladek <pmladek@suse.com> wrote:
-> On Tue 2020-08-11 11:29:24, Paul Menzel wrote:
-> > Commit f17a32e97e (let LOG_BUF_SHIFT default to 17) from 2008 was the
-> > last time, the the default log buffer size bump was increased.
-> >
-> > Machines have evolved, and on current hardware, enough memory is
-> > present, and some devices have over 200 PCI devices, like a two socket
-> > Skylake-E server, resulting a lot of lines.
-> >
-> > Therefore, increase the default from 128 KB to 512 KB. Anyone, with
-> > limited memory, can still lower it.
-> >
-> > --- a/init/Kconfig
-> > +++ b/init/Kconfig
-> > @@ -681,9 +681,9 @@ config IKHEADERS
-> >         kheaders.ko is built which can be loaded on-demand to get access to headers.
-> >
-> >  config LOG_BUF_SHIFT
-> > -     int "Kernel log buffer size (16 => 64KB, 17 => 128KB)"
-> > +     int "Kernel log buffer size (17 => 128KB, 19 => 512KB)"
-> >       range 12 25
-> > -     default 17
-> > +     default 19
-> >       depends on PRINTK
-> >       help
-> >         Select the minimal kernel log buffer size as a power of 2.
->
-> Honestly, I do not have experience with changing the defaults. People
-> hacking small devices might complain. Well, this can be solved
-> by increasing the default only when BASE_FULL is set.
->
-> I am personally fine with increasing the default when BASE_FULL
-> is set. The amount of messages is growing over time because of
-> increasing complexity of both the hardware and software.
-> Fortunately also the amount of available memory is growing.
+Dearest
 
-Note that making this change means that some of the embedded
-defconfigs may need to gain a CONFIG_LOG_BUF_SHIFT=17
-line...
+Greeting my dear, I am Liliane Abel by name, The only daughter of late
+Mr.Benson Abel. My father is one of the top Politician in our country
+and my mother is a farmers and cocoa merchant when they were both
+alive. After the death of my mother, long ago, my father was
+controlling their business until he was poisoned by his business
+associates which he suffered and died.
 
-Gr{oetje,eeting}s,
-
-                        Geert
-
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+Before the death of my father, He told me about (two million five
+hundred thousand united states dollars) which he deposited in the bank
+in Lome-Togo, It was the money he intended to transfer overseas for
+investment before he was poisoned. He also instructed me that I should
+seek for foreign partners in any country of my choice who will assist
+me transfer this money in overseas account where the money will be
+wisely invested.
+I am seeking for your kind assistance in the following ways:  (1) to
+provide a safe bank account into where the money will be transferred
+for investment. (2) To serve as a guardian of this fund since I am a
+girl of 19 years old. (3) To make arrangement for me to come over to
+your country to further my education. This is my reason for writing to
+you. Please if you are willing to assist me I will offer you 25% of
+the total money. Reply if  you are interested
+Best regards.
+Liliane Abel.
