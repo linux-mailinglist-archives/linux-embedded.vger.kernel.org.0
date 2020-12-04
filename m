@@ -2,69 +2,55 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1501A2BC9B4
-	for <lists+linux-embedded@lfdr.de>; Sun, 22 Nov 2020 22:50:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 138E72CF829
+	for <lists+linux-embedded@lfdr.de>; Sat,  5 Dec 2020 01:48:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726484AbgKVVss (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Sun, 22 Nov 2020 16:48:48 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33552 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726339AbgKVVsr (ORCPT
+        id S1730988AbgLEAq7 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 4 Dec 2020 19:46:59 -0500
+Received: from vsm-gw.hyogo-dai.ac.jp ([202.244.76.12]:49526 "EHLO
+        vsm-gw.hyogo-dai.ac.jp" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726485AbgLEAq5 (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Sun, 22 Nov 2020 16:48:47 -0500
-Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com [IPv6:2a00:1450:4864:20::543])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9C5BAC0613CF;
-        Sun, 22 Nov 2020 13:48:47 -0800 (PST)
-Received: by mail-ed1-x543.google.com with SMTP id v22so15121421edt.9;
-        Sun, 22 Nov 2020 13:48:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=message-id:sender:from:mime-version:content-transfer-encoding
-         :content-description:subject:to:date:reply-to;
-        bh=holMzMixu6L4mPkY4KLX0AXrH3B7KLU6Q1+gVZ1hbDo=;
-        b=L8HjKiihiPx+36wj4ohlg7qsou0aD7ALzss85+MkopfG9wU1Mc73I2beQBGCs8R+Gg
-         yOcepxTJFlESOLaDE9DX9YqF1QzRUK7ymB4YDw8Kvg3s0ElJxhObtcWmeDMo0JaVtDc3
-         U2+AR0ZxsBAS7q2vCq7SGVie2bdRnsgrYWvCcROstqts3noGdSp+nvK7kp78KaBZk8ak
-         IS3JJXxQ0vfrcnrNIRteEWJN/TM+J2wOCo1tgdsVwaVxjoR5gRRmsu8OzO/7aL7jq7oV
-         k9hVhev59O3P8wgHwSOKsSR7RjRd+73QNm/rTYmx9YfsoWl3QXiFNGSfX4LXyVdLn6F9
-         re+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:message-id:sender:from:mime-version
-         :content-transfer-encoding:content-description:subject:to:date
-         :reply-to;
-        bh=holMzMixu6L4mPkY4KLX0AXrH3B7KLU6Q1+gVZ1hbDo=;
-        b=X8c0hpW8f3D76Lhn7UlyhQKPI2OutmJVI3SHIFaIcPMB3LEi/9mdbVmeJQAT+bZOMH
-         ZoM4GOStS2c6t7ZxDpP4955ZsBD3iEBjXkALDbQc/o9A52HDOmpfuGR6TDgFqf/nwsae
-         SQfndtH4tbr3rHTYF8xbMNyPYTfGWP5CP8Nx/iJXXQ+I1et79pR+NnfNbQJMTwhlWOWw
-         a4e/1h7FxHgTzPBitb+ulaPJXXixX2KXmoWqGzGv2dBsi408C2X2na30nLibxv+P6vev
-         U4NFCwOWbHu3IjKFqrO0TnFMtMJVIg9rywOw+CQD6Cbd+FQBplaAFqDPBSHu5CNDtVEu
-         ZgVg==
-X-Gm-Message-State: AOAM53033rVZHhDNFwfMriaZS7iNVIZf/xu46CjwEnxDvq2xbi0nDdtN
-        UkiAUYonOn5+7lsTLoQhR40=
-X-Google-Smtp-Source: ABdhPJyjnn+NAmErmU7wOYbqzi7ReaD9FxWcaXj455SY9XvACEY284we1RBLMScLxHZpexSfKgwmYQ==
-X-Received: by 2002:a05:6402:b8b:: with SMTP id cf11mr44659838edb.74.1606081726384;
-        Sun, 22 Nov 2020 13:48:46 -0800 (PST)
-Received: from [192.168.43.48] ([197.210.35.67])
-        by smtp.gmail.com with ESMTPSA id e17sm4016232edc.45.2020.11.22.13.48.41
-        (version=TLS1 cipher=AES128-SHA bits=128/128);
-        Sun, 22 Nov 2020 13:48:45 -0800 (PST)
-Message-ID: <5fbadcbd.1c69fb81.8dfc7.11ae@mx.google.com>
-Sender: Baniko Diallo <banidiallo23@gmail.com>
-From:   Adelina Zeuki <adelinazeuki@gmail.com>
-X-Google-Original-From: "Adelina Zeuki" <  adelinazeuki@gmail.comm >
-Content-Type: text/plain; charset="iso-8859-1"
+        Fri, 4 Dec 2020 19:46:57 -0500
+X-Greylist: delayed 14573 seconds by postgrey-1.27 at vger.kernel.org; Fri, 04 Dec 2020 19:46:41 EST
+Received: from humans-kc.hyogo-dai.ac.jp (humans-kc.hyogo-dai.ac.jp [202.244.77.11])
+        by vsm-gw.hyogo-dai.ac.jp (Postfix) with ESMTP id 274A31A5589;
+        Sat,  5 Dec 2020 04:44:55 +0900 (JST)
+Received: from humans-kc.hyogo-dai.ac.jp (humans-kc.hyogo-dai.ac.jp [127.0.0.1])
+        by postfix.imss71 (Postfix) with ESMTP id E5C39838858;
+        Sat,  5 Dec 2020 04:44:54 +0900 (JST)
+Received: from hyogo-dai.ac.jp (unknown [202.244.77.11])
+        by humans-kc.hyogo-dai.ac.jp (Postfix) with SMTP id B84F6838260;
+        Sat,  5 Dec 2020 04:44:54 +0900 (JST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: Hello !!
-To:     Recipients <adelinazeuki@gmail.comm>
-Date:   Sun, 22 Nov 2020 21:48:35 +0000
-Reply-To: adelinazeuki@gmail.com
+Message-ID: <20201204194454.00002B21.0147@hyogo-dai.ac.jp>
+Date:   Sat, 05 Dec 2020 04:44:54 +0900
+From:   "Dr.Raymond" <tabata@hyogo-dai.ac.jp>
+To:     <infocarferr1@aim.com>
+Reply-To: <infocarfer@aim.com>
+Subject: I am Vice Chairman of Hang Seng Bank, Dr. Raymond Chien
+         Kuo Fung I have Important Matter to Discuss with you concerning
+         my late client. Died without a NEXT OF KIN. Send me your private
+         email for full details information. 
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MAILER: Active! mail
+X-TM-AS-MML: disable
+X-TM-AS-Product-Ver: IMSS-7.1.0.1808-8.2.0.1013-25446.007
+X-TM-AS-Result: No--4.326-5.0-31-10
+X-imss-scan-details: No--4.326-5.0-31-10
+X-TM-AS-User-Approved-Sender: No
+X-TMASE-MatchedRID: +T4Z3mpR0x5ITndh1lLRASsOycAMAhSTkCM77ifYafsBLhz6t76Ce/bj
+        Enpjm61/Gf23dqZJjE4Erxo5p8V1/E1+zyfzlN7y/sToY2qzpx7w5nZ/qYg41XEWw1TkKAjcYff
+        qdBtG2ocgOkCKsW/kbuunGEBqPil++coAzulIP8gMTyJMXCOBhj9BWL7GG0LsKrauXd3MZDUZaR
+        NzIP3XI5u3uLPgwbAMH5RdHnhWfwyq9gpuf+A6coDeeVSgzszVDx5n520Z3eZyT7DDRtYlKaWBy
+        ZE9nSaC/rhfyjvqkZu/pNa4BidtZEMMprcbiest
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Hi dear,
+infocarfer@aim.com
 
-Can i talk with you ?
+
+
