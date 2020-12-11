@@ -2,54 +2,68 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C4D82D1F8D
-	for <lists+linux-embedded@lfdr.de>; Tue,  8 Dec 2020 01:52:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A64C72D724C
+	for <lists+linux-embedded@lfdr.de>; Fri, 11 Dec 2020 09:54:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728528AbgLHAvj (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Mon, 7 Dec 2020 19:51:39 -0500
-Received: from vsm-gw.hyogo-dai.ac.jp ([202.244.76.12]:35012 "EHLO
-        vsm-gw.hyogo-dai.ac.jp" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727744AbgLHAvi (ORCPT
+        id S2392437AbgLKIwp (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 11 Dec 2020 03:52:45 -0500
+Received: from mail.persuitflow.com ([89.46.74.132]:43512 "EHLO
+        server1.mail.persuitflow.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S2392876AbgLKIwX (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Mon, 7 Dec 2020 19:51:38 -0500
-Received: from humans-kc.hyogo-dai.ac.jp (humans-kc.hyogo-dai.ac.jp [202.244.77.11])
-        by vsm-gw.hyogo-dai.ac.jp (Postfix) with ESMTP id CBA0F1A606C;
-        Tue,  8 Dec 2020 04:09:26 +0900 (JST)
-Received: from humans-kc.hyogo-dai.ac.jp (humans-kc.hyogo-dai.ac.jp [127.0.0.1])
-        by postfix.imss71 (Postfix) with ESMTP id 71FC683826D;
-        Tue,  8 Dec 2020 04:09:26 +0900 (JST)
-Received: from hyogo-dai.ac.jp (unknown [202.244.77.11])
-        by humans-kc.hyogo-dai.ac.jp (Postfix) with SMTP id 426EA83825B;
-        Tue,  8 Dec 2020 04:09:26 +0900 (JST)
+        Fri, 11 Dec 2020 03:52:23 -0500
+Received: by server1.mail.persuitflow.com (Postfix, from userid 1001)
+        id 8D6C2A40BC; Fri, 11 Dec 2020 08:51:26 +0000 (GMT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=persuitflow.com;
+        s=mail; t=1607676695;
+        bh=LIG/EV9hZypKEB8e9JkxJFCirHVIBsQt3YrIS4TkXUA=;
+        h=Date:From:To:Subject:From;
+        b=Nqap3H4cBd4ivFzXgJCZXjHAvUGuHiud2GIUWv7f6xIl9SNCvIeXkSu1vaQrKXFeV
+         +kPiIY1DTa12OZbfT/7iv8QxKH2u+xGq3y2I2ei64aRu1+CiwEQYmlLCxBEHa/s78O
+         dVQSiFow2DXbqlhMVk1ZVr/LO4LqViDp7mkdkFIu5XaK6vlljUqCwQMauBeIehnXZ5
+         kAFxxn/kh6sI1MBPwg/wVQe5OPHANFqHUCQ/y3Oc90o8hoJagd9voYEsC0Mf7Rhmtn
+         Eso3mRbGDeRRHydVcEmWuSKUnDeB5MlaSYb0uWaIDg5DN/gaG2vDgULgqqNI/975Vd
+         K9syfFgoZjeEQ==
+Received: by mail.persuitflow.com for <linux-embedded@vger.kernel.org>; Fri, 11 Dec 2020 08:50:56 GMT
+Message-ID: <20201211074501-0.1.1y.92mb.0.zckxskolbu@persuitflow.com>
+Date:   Fri, 11 Dec 2020 08:50:56 GMT
+From:   "Raquel Carvalho" <raquel.carvalho@persuitflow.com>
+To:     <linux-embedded@vger.kernel.org>
+Subject: Desinfetante
+X-Mailer: mail.persuitflow.com
 MIME-Version: 1.0
-Message-ID: <20201207190926.000057A2.0664@hyogo-dai.ac.jp>
-Date:   Tue, 08 Dec 2020 04:09:26 +0900
-From:   "Raymond " <hozumi@hyogo-dai.ac.jp>
-To:     <infocarferw1@aim.com>
-Reply-To: <infocarfer@aim.com>
-Subject: I am Vice Chairman of Hang Seng Bank, Dr. Raymond Chien
-         Kuo Fung I have Important Matter to Discuss with you concerning
-         my late client. Died without a NEXT OF KIN. Send me your private
-         email for full details information.
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MAILER: Active! mail
-X-TM-AS-MML: disable
-X-TM-AS-Product-Ver: IMSS-7.1.0.1808-8.2.0.1013-25446.007
-X-TM-AS-Result: No--2.951-5.0-31-10
-X-imss-scan-details: No--2.951-5.0-31-10
-X-TM-AS-User-Approved-Sender: No
-X-TMASE-MatchedRID: X41QhRrT5f5ITndh1lLRASsOycAMAhSTkCM77ifYafsBLhz6t76Ce6P0
-        clhHAFPyJA6GJqxAEzL554DD9nXlqqPFjJEFr+olfeZdJ1XsoriOub3SYcq1hJf7eAx/Ae/AbQo
-        eraIcZBRw7u01FqNA2K1Ia4IbeAdLm9ukrtqhno/rIUidklntLAP5zT0d393cymsk/wUE4hoZaR
-        NzIP3XI5u3uLPgwbAMH5RdHnhWfwyq9gpuf+A6coDeeVSgzszVDx5n520Z3eZyT7DDRtYlKaWBy
-        ZE9nSaC/rhfyjvqkZu/pNa4BidtZEMMprcbiest
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-email:kraymond75@aol.com
+Bom Dia,
+
+A demanda por desinfetantes eficazes que permitam a elimina=C3=A7=C3=A3o =
+de microrganismos prejudiciais =C3=A9 continuamente alta em todo o mundo.
+
+Expandir a oferta com uma gama profissional de produtos com atividade vir=
+icida e bactericida permite aumentar a posi=C3=A7=C3=A3o competitiva da e=
+mpresa e construir novas redes de vendas.
+
+Diversificamos a linha de atacadistas e distribuidores com sabonetes, l=C3=
+=ADquidos e g=C3=A9is para desinfec=C3=A7=C3=A3o das m=C3=A3os e outros p=
+rodutos de limpeza, entre eles: g=C3=A9is de banho, shampoos e condiciona=
+dores de cabelo, al=C3=A9m de detergentes concentrados.
+
+Nossos parceiros de neg=C3=B3cios est=C3=A3o aumentando sua participa=C3=A7=
+=C3=A3o no mercado externo devido =C3=A0 crescente satisfa=C3=A7=C3=A3o d=
+o cliente e oferta diversificada.
+
+O potencial de crescimento de nossas solu=C3=A7=C3=B5es resulta de pre=C3=
+=A7os acess=C3=ADveis, alto desempenho e versatilidade para se adaptar a =
+todos os tipos de pele.
+
+A extens=C3=A3o da gama de produtos proposta =C3=A9 um campo interessante=
+ para a coopera=C3=A7=C3=A3o?
 
 
-
+Cumprimentos,
+Raquel Carvalho
+Conselheiro do Cliente
