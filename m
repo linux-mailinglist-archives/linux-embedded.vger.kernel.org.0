@@ -2,49 +2,52 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C2C242F8D38
-	for <lists+linux-embedded@lfdr.de>; Sat, 16 Jan 2021 13:04:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 517BE2F9004
+	for <lists+linux-embedded@lfdr.de>; Sun, 17 Jan 2021 02:17:48 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726355AbhAPMES (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Sat, 16 Jan 2021 07:04:18 -0500
-Received: from cirse-smtp-out.extra.cea.fr ([132.167.192.148]:58162 "EHLO
-        cirse-smtp-out.extra.cea.fr" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726262AbhAPMES (ORCPT
+        id S1727062AbhAQBQ2 convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-embedded@lfdr.de>);
+        Sat, 16 Jan 2021 20:16:28 -0500
+Received: from mail.electricaltakeoff.net ([142.93.64.83]:53868 "EHLO
+        mail.electricaltakeoff.net" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726385AbhAQBQ1 (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Sat, 16 Jan 2021 07:04:18 -0500
-X-Greylist: delayed 622 seconds by postgrey-1.27 at vger.kernel.org; Sat, 16 Jan 2021 07:04:17 EST
-Received: from epeire1.extra.cea.fr (epeire1.extra.cea.fr [132.167.198.31])
-        by cirse-sys.extra.cea.fr (8.14.7/8.14.7/CEAnet-Internet-out-4.0) with ESMTP id 10GBrETm033950
-        for <linux-embedded@vger.kernel.org>; Sat, 16 Jan 2021 12:53:14 +0100
-Received: from epeire1.extra.cea.fr (localhost [127.0.0.1])
-        by localhost (Postfix) with SMTP id EC06A5CAB18
-        for <linux-embedded@vger.kernel.org>; Sat, 16 Jan 2021 12:53:13 +0100 (CET)
-Received: from orpin1-smtp-out.extra.cea.fr (orpin1-smtp-out.extra.cea.fr [132.167.198.46])
-        by epeire1.extra.cea.fr (Postfix) with ESMTP id D8ABA5CA9EB
-        for <linux-embedded@vger.kernel.org>; Sat, 16 Jan 2021 12:53:13 +0100 (CET)
-Received: from moskowasan.extra.cea.fr (moskowasan.extra.cea.fr [132.167.200.145])
-        by orpin1-sys.extra.cea.fr (8.14.7/8.14.7/CEAnet-Internet-out-4.0) with ESMTP id 10GBrDZm020435
-        for <linux-embedded@vger.kernel.org>; Sat, 16 Jan 2021 12:53:13 +0100
-Received: (from cast3m@localhost)
-        by moskowasan.extra.cea.fr (8.13.8/8.13.8/Submit) id 10GBrDIg013704;
-        Sat, 16 Jan 2021 12:53:13 +0100
-Date:   Sat, 16 Jan 2021 12:53:13 +0100
-Message-Id: <202101161153.10GBrDIg013704@moskowasan.extra.cea.fr>
-To:     linux-embedded@vger.kernel.org
-Subject: Support Cast3M - Autre
-From:   "linux-embedded@vger.kernel.org" <linux-embedded@vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: 8bit
+        Sat, 16 Jan 2021 20:16:27 -0500
+X-Greylist: delayed 106899 seconds by postgrey-1.27 at vger.kernel.org; Sat, 16 Jan 2021 20:16:27 EST
+Received: from [72.255.41.7] (helo=[192.168.18.54])
+        by mail.electricaltakeoff.net with esmtpa (Exim 4.94)
+        (envelope-from <bob@csiestimating.com>)
+        id 1l0Ur3-0006Xg-5t
+        for linux-embedded@vger.kernel.org; Fri, 15 Jan 2021 19:33:57 +0000
+Message-Id: <E14W6WAU-WI76-NLGO-6D7R-6DXKVLU246M@csiestimating.com>
+Mime-Version: 1.0
+From:   bob@csiestimating.com
+To:     "linux-embedded" <linux-embedded@vger.kernel.org>
+Subject: Quotes For Bid
+Date:   Fri, 15 Jan 2021 11:33:57 -0800
+X-Bounce-Tracking-Info: <bGludXgtZW1iZWRkZWQJCQlsaW51eC1lbWJlZGRlZEB2Z2VyLmtlcm5lbC5vcmcJUXVvdGVzIEZvciBCaWQJNDcJCTMxOTQ4CWJvdW5jZQlubwlubw==>
+Content-type: text/plain; charset=iso-8859-1; format=flowed
+Content-transfer-encoding: 8BIT
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Message envoyÈ le 16/01/2021 par linux-embedded@vger.kernel.org
+Hi,
 
-NumÈro d'enregistrement: 6845
+We are estimating Company provides complete accuracy in takeoffs. Please let us know if you need any estimating services regarding your projects.
 
-Version(s) Cast3M posant problËme: win32 win64 lin32 lin64 mac 
--------------------------------------------------------------------------
+Steps:
 
+Send over the plans and mention what exactly you want us to estimate.
+Shortly we will get back with a proposal on which our charges and turnaround time will be mentioned.
+ If you agreed to that proposal then we will proceed further with your projects.
 
-‚ù§Ô∏è Look at my photos here: http://bit.do/fMCDz?yjsi - do you like it? ‚ù§Ô∏è
+You may ask for samples as well.
+
+Thanks.
+Bob Lyon
+CSI ESTIMATING, LLC
+777 SW 37th S. 510
+M Florida 33135
+718-618-4485
+
