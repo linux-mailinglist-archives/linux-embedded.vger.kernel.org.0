@@ -2,52 +2,58 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 517BE2F9004
-	for <lists+linux-embedded@lfdr.de>; Sun, 17 Jan 2021 02:17:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 68C2F300F6B
+	for <lists+linux-embedded@lfdr.de>; Fri, 22 Jan 2021 22:59:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727062AbhAQBQ2 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-embedded@lfdr.de>);
-        Sat, 16 Jan 2021 20:16:28 -0500
-Received: from mail.electricaltakeoff.net ([142.93.64.83]:53868 "EHLO
-        mail.electricaltakeoff.net" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726385AbhAQBQ1 (ORCPT
+        id S1730576AbhAVVwT (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 22 Jan 2021 16:52:19 -0500
+Received: from mail.padangpariamankab.go.id ([103.94.3.123]:40924 "EHLO
+        mail.padangpariamankab.go.id" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1730365AbhAVVv4 (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Sat, 16 Jan 2021 20:16:27 -0500
-X-Greylist: delayed 106899 seconds by postgrey-1.27 at vger.kernel.org; Sat, 16 Jan 2021 20:16:27 EST
-Received: from [72.255.41.7] (helo=[192.168.18.54])
-        by mail.electricaltakeoff.net with esmtpa (Exim 4.94)
-        (envelope-from <bob@csiestimating.com>)
-        id 1l0Ur3-0006Xg-5t
-        for linux-embedded@vger.kernel.org; Fri, 15 Jan 2021 19:33:57 +0000
-Message-Id: <E14W6WAU-WI76-NLGO-6D7R-6DXKVLU246M@csiestimating.com>
-Mime-Version: 1.0
-From:   bob@csiestimating.com
-To:     "linux-embedded" <linux-embedded@vger.kernel.org>
-Subject: Quotes For Bid
-Date:   Fri, 15 Jan 2021 11:33:57 -0800
-X-Bounce-Tracking-Info: <bGludXgtZW1iZWRkZWQJCQlsaW51eC1lbWJlZGRlZEB2Z2VyLmtlcm5lbC5vcmcJUXVvdGVzIEZvciBCaWQJNDcJCTMxOTQ4CWJvdW5jZQlubwlubw==>
-Content-type: text/plain; charset=iso-8859-1; format=flowed
-Content-transfer-encoding: 8BIT
+        Fri, 22 Jan 2021 16:51:56 -0500
+X-Greylist: delayed 2959 seconds by postgrey-1.27 at vger.kernel.org; Fri, 22 Jan 2021 16:50:43 EST
+Received: from localhost (localhost [127.0.0.1])
+        by mail.padangpariamankab.go.id (Postfix) with ESMTP id 3E68F6E6C72;
+        Sat, 23 Jan 2021 03:48:10 +0700 (WIB)
+Received: from mail.padangpariamankab.go.id ([127.0.0.1])
+        by localhost (mail.padangpariamankab.go.id [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id kBGXOQypupm6; Sat, 23 Jan 2021 03:48:09 +0700 (WIB)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.padangpariamankab.go.id (Postfix) with ESMTP id 294CB6E6C77;
+        Sat, 23 Jan 2021 03:48:09 +0700 (WIB)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.padangpariamankab.go.id 294CB6E6C77
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=padangpariamankab.go.id; s=D2C6CDEC-3607-11EA-BC8A-EEDE4AB8B776;
+        t=1611348489; bh=4AhSoXRU63EAbbOwseUY/pxjidGey07DskAQ7pZ9AvE=;
+        h=Date:From:Message-ID:MIME-Version;
+        b=HThFhYOADhRCtO5N541vi9Gyg7fJmmutk/OT2THWWyfJ95sWN76AgwUEgQZtSvKhP
+         x/LxSc8MhKoXFOnNTieirEJIp/EcM8e1Pjx1VBDwhPK07CSOtfO2YNC/YwcDHmyfyz
+         2Lf9drxpZNkkPji5hrUXs8+6FbGouclsglppsLR4=
+X-Virus-Scanned: amavisd-new at padangpariamankab.go.id
+Received: from mail.padangpariamankab.go.id ([127.0.0.1])
+        by localhost (mail.padangpariamankab.go.id [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id mxYAXxb3FYdJ; Sat, 23 Jan 2021 03:48:08 +0700 (WIB)
+Received: from mail.padangpariamankab.go.id (mail.padangpariamankab.go.id [103.94.3.123])
+        by mail.padangpariamankab.go.id (Postfix) with ESMTP id B15016E6C6F;
+        Sat, 23 Jan 2021 03:48:05 +0700 (WIB)
+Date:   Sat, 23 Jan 2021 03:48:05 +0700 (WIB)
+From:   GREENLIGHT <rsud@padangpariamankab.go.id>
+Reply-To: "Greenlight Financial Services " <greenlightservices@usa.com>
+Message-ID: <1668595482.19502.1611348485649.JavaMail.zimbra@padangpariamankab.go.id>
+Subject: Update
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [103.94.3.123]
+X-Mailer: Zimbra 8.8.15_GA_3895 (zclient/8.8.15_GA_3895)
+Thread-Index: YwDzoLjYr5wvIyGTK9ZPzksGXyGLMw==
+Thread-Topic: Update
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Hi,
 
-We are estimating Company provides complete accuracy in takeoffs. Please let us know if you need any estimating services regarding your projects.
 
-Steps:
-
-Send over the plans and mention what exactly you want us to estimate.
-Shortly we will get back with a proposal on which our charges and turnaround time will be mentioned.
- If you agreed to that proposal then we will proceed further with your projects.
-
-You may ask for samples as well.
-
-Thanks.
-Bob Lyon
-CSI ESTIMATING, LLC
-777 SW 37th S. 510
-M Florida 33135
-718-618-4485
-
+We offer Reliable/Low Interest Rate Financial Services to Companies & Individuals including; Start-Up Business, Loans & Mortgage ETC. Apply Now
