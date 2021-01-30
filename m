@@ -2,101 +2,92 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 86FF7307F3A
-	for <lists+linux-embedded@lfdr.de>; Thu, 28 Jan 2021 21:11:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E02DD30973D
+	for <lists+linux-embedded@lfdr.de>; Sat, 30 Jan 2021 18:29:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231169AbhA1UJy (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Thu, 28 Jan 2021 15:09:54 -0500
-Received: from spe6-3.ucebox.co.za ([197.242.159.209]:33672 "EHLO
-        spe6-3.ucebox.co.za" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231351AbhA1UH4 (ORCPT
+        id S230281AbhA3R2n (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Sat, 30 Jan 2021 12:28:43 -0500
+Received: from sonic311-49.consmr.mail.bf2.yahoo.com ([74.6.131.223]:36936
+        "EHLO sonic311-49.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S229498AbhA3R2m (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Thu, 28 Jan 2021 15:07:56 -0500
-X-Greylist: delayed 6416 seconds by postgrey-1.27 at vger.kernel.org; Thu, 28 Jan 2021 15:07:02 EST
-Received: from cornucopia.aserv.co.za ([154.0.175.203])
-        by spe4.ucebox.co.za with esmtps (TLSv1.2:AES128-GCM-SHA256:128)
-        (Exim 4.92)
-        (envelope-from <manornutgrovemanor@gmail.com>)
-        id 1l5Brs-0002Dc-Q5; Thu, 28 Jan 2021 20:18:43 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by cornucopia.aserv.co.za (Postfix) with ESMTPA id 37618C1250;
-        Thu, 28 Jan 2021 20:17:07 +0200 (SAST)
+        Sat, 30 Jan 2021 12:28:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1612027676; bh=swjFzKWryy3sOX8AFtSHoDzy7h2wolCnmw3X8FGxf9o=; h=Date:From:Reply-To:Subject:References:From:Subject:Reply-To; b=SN6R6vToDBl7Yfd8Og72Gn4Tgs0aYMABGVLzmvDoMNkOXhDuva073rtxYj+wDpe7F3HZU9O/mzt4QmAaE0E0zWKVTnKvFyVcsACVqXqpi2/cchosI5yM1lY5nC6eRBU0htGEvevSZbCjOfpGCxN185MCXvNVS2YVEKFc0H4QhGO0KGfhqvH3L8orFifvrxiQaXg++ZK70vtIBvRmkBPHgUU3piESphIv1oKSWnsUj6L03UAM7KBv8kh1au04T6grQzOMMQ5naL/3R+yEA6+m194YHOSAiauLXZRu/zhAFGbD+tyP9CV+5/XA+H9LFFGzZ/vNyMd2hkhjYxQLOkq2Nw==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1612027676; bh=DcWVkQoLavCCwH8ygCeMLKLPl96zPEv6TcBAdz1G7fQ=; h=Date:From:Subject:From:Subject:Reply-To; b=sOUiThYtCQibD6sbKnBQhpog0/j93gBq32gt+hB/M6h5bdDuvjYxRtEkm82XR5ufueUwk5V2kTFd4Sgm0WV634G9ihSV9eDpN65924C+0sUdhEkkMzGLzR3ab+KvSU2lJgtRsF9YwnlH8Vb9rt8bzckpK1P5x8XCGWtHBUlogB2BIppbDdlsK5BjrpooPEo5VoEzerya1h30Z7v2AMDEEC2/PMZ3U28i/9OvnCk/+w/JTKJj4SygCeplMUn11bdvyIvJ2W9W4bfrYzXTXn7bL6E80G74NpEGLWqkuazceE9JRwOjouWz92wAtta5S9g/V8NcjKOLUUSYpBafO9O7ug==
+X-YMail-OSG: hiwT2m4VM1mP.rhuAY6.TqzhBkYJASeNJzx83eTFg1zOFOUuPJiIlPbBRaVIP2U
+ YST1Qo_6KNyDpCYZr2VWVNLmgm0Dn.Nkz6Hu_Zeb2g_H9d.fSiZp3E3VWNdZr9VzfIpmTUfEYCYL
+ 5qL4_7.Tkg1H6Te1.vijfjantnRdLqBcLlApCIdXCryhQZfMAR48PjKrFWN85PJxkAwgGOpLZ5O7
+ uE8k00Qw8twEUY2IwQGzPAq9YbmXo9m7MZyi_Agdr.wdB7x82uGKZaDxUTyNBQCDITJ9C2SJnEuN
+ mi38cwpFJ1GVepanOO9lI_qHzSh2ZsPyxNDSCeYnRrSsRwMWBo2qOABOOKmc64PXvaoIpf6ysvx6
+ .ZoNH4LiQJr21A6FUPxgfAZFUS6_9oZFNkhsVJUIBpwOyd9hKYqFYGnCA_03E6a4.Std6WS1egsJ
+ hheEIAR.hJxkhaaUdf0xLQE8XuX6Ia3n1XyUR5xPj_h.0HrZGrS4QWuSVAgmJUZy.yM3W5eGVvEG
+ b54KdJ7UVRIO2ihKdFINQWXcHqFkvObpExsnVhKVDhjzstImi9VcKDFZ4DKdIALbplX9OZMowYca
+ lohVTT6VGStw9fWvl.i09aoTgZg0ri.Bw.WNced8zCNG0tsBpPrl0Rp.Cj3BJBdXeNzXqCUZ2xRk
+ hi.RjNaCF9uBWNF.g5qqsR0ltAbeoPm3vbkeSdNeZqsLR0smgJJafCQD1hw.44BR6.uZS7TQgcGX
+ ijhBeqjGidP4i6LmLEtqheVWd6A4TFIy8tewxM6Fl75KHKDx2BnUJcKxPABiI9YGJwIAk5cQIPdP
+ C1mqWJu9DUQiGxe_i9pDKJYCSIgKe_u6fLfj.0tPH85auFqEz3LD7DW09FXakvYA8DJJQJ55Nq88
+ IhhjSi6IQZnytbFyESYu9dNQV4ozS39i83c50Kqlm61wJlIENZxlLKKbId98Ix4u21unskI2.irk
+ rZKfyX8LbEHqkH5LVFAcwLYNiNYwBvmoKm_ZtGJKu0_D3vOCOy1dwIAp.ydSLoy_7Mvh9Jb.OYK3
+ O5pgbrNXMwLuQwBhc59VtAyxw_cV.VODgMD8Kxo8zWxZXSk05OSTE_8MlsQ1CcXyyd7HZFdmLdYP
+ WWUkpNlxbRqwBj3_tCruJbJLoKsD.k.sUYbnxWOSoBmers_Izhckm3sGmyO6dc8PCtJ_J9hqGHuN
+ IEVuKYrCMTSC7541wSjIoFuGQr8AW9Eq2U3A79AdG8qQf_pYodJ3Yf0KqAsrUBSOIcEJywgfXBbP
+ nCushOQCzMl3h678ZVQhdi.Kc.VWh.ehFM1dcKqMneRUyfLz1Cd7bGyn1JI4oGyk3C_7.7SZhvI0
+ 97OYR724WZVTUdhzhmHQfQgLfVva67sj86T8vmjYO0nlFwQoqVbBzWWBnzF9yEtP6GYt4DxBeJ7n
+ NDIm_fsUc3YCkxOP9ZeRZNSrl4uFkVgW507ZtSKk.wMu8.e0riTtmmK6IBZv26T3giizBtPfvxsJ
+ 9kpCCXJv3vsuGN4xxkzksEwBdkb0Ftg5tcOYDM8kkIJye97EaKC6igMc7A6DCBYcB4OrzvYeq0vC
+ su2.RDmmgwMc6rvo9NpnkCbFrX3z41mxIR9cdTBLKq8DvHWDia_iqw3tEkeIHhZtlENXoA9oeIQC
+ 20VBrQdLdaLLkJ84JtMIegdniNwGyD1rG4NlqVCyS5mONcSu6q65z14zGomCkDA3lZwb7mGYJ5Ul
+ XaFcIte5fwCmWO9G6n8_ezpuiYHD6v9JSm.a5CkIL2hxEu_XBnF.FvPiIfNHEZg9JVhqHF6c5KAf
+ tIaHP9sED9cz9DVFDv9yJx2joybO2bkMUHRQ9UeKdpt2RrOQJfC7qYycgrxOMJhGWy.zhNgj2vpM
+ IK9.7kBxTkrfQoElVyfbsC.WBtbJF.bnggPNhxBl0DdNdwWHW0xsqo99oLd702VdduIRGwkV7Bvc
+ A308IxcPfvSzb7MZiHNNNWMil3TxXuj7mneXDiaoXutWPPTGAEzWbim4MuYatekCuXYi0X2Oopt0
+ 01v0X9IdVZRPxiOJMXed4qgOz0T0NvX0uHJYjmF0uWZg.wtOBxXKRaOM6q1ENYz2lgbYkJnysVv2
+ xjAFWGz1ZiH_g0CzchzueLYKCMN.KaAWVZUpzG5Y0ANHRnEqlrlxDff3c7X738BDexm4B3kAgniE
+ zuN5mPBWE.twOuPJBk1QDN.mdYFWE7YoIE3tgj4Ty.O3_9q05_OZ8UBrSotvvGFJFAXqNZoC_XAo
+ NajSJvkPklhOMGsrubRZ237GDKR1mnuw05Ri98udZDBvDMELiCuPM.rjbMBh0td9wbfG42dYLcMK
+ ANzLq.fFaHL6JDYYre78uNEyg3BSR55odgHC5cZHjYjBmrMieqATuEX1w63tqKcA.e386eayKcRZ
+ lXEt4HafATOZdMQogxWZ6TNmUBVImGX57JocV9p8oxgV2eK6hOE79_6yCI0U4FF9dgbGEPQIWSRO
+ CHg2JNmJCd8nNwOFvRmdruh0phHCjF71F2ZHnCy.VNoNpV8XWRjeIWaulcR3m4PxDr9WQMn9.IfV
+ jlSJKFWYMORuvdfFOe7d6DrWmvQKRMgQjPhtkIFAcOy.xzfDJL196A4SBlR8Z4IADG9I3lVRjQ6t
+ b9.klInc4SdMjCv7kFJyecVZNEUuwiu7h63CHqDlx2x6aIyGjvNeOlzKF622_rUrYwR0EVIhDtAH
+ hwD9LqRkxicHKJEbsJ7v7__GeWNNIUqh016HvdBzbm85K2SgHRh8.pcbdinMPp3NU8X358gss22U
+ llGQsfSGwEx6XdrkS9BMmnDacdDeWl4.M49wT9SxKotsL623jMgBwk8tHygZcBVtY91lyQDaEW0h
+ wUn4re1OUL7ovuFdrG7yivjElik.acTwgxU.LADnKUAu.dGESOKK7tBFWNt0aVo5jms4a9rtLJb.
+ 3rVrUBvvgtbqaS.I7oKehMHolLo.wPmdfhIJTmSrpm_Fb4H1HUyGVioiyo9csy_opRdLgoa8dYPd
+ _of8xJmqw73PACelgTMLgjIEGR.i_sVeHV1UxB8qoR17oZQeZikSiZXHDDNm1q3xAXJYEiYaSPX7
+ GnYrrCilZqu2tedO8S7XFuo5ySbIXNrV9bJvlYeKbL8qWM.paF4YxGS1kYrVoqCGxvXnFyaaXcFi
+ .K.r2vX7Tkonll58z9mFdZIwattYyReiGbVFWDinTVRtIkBpjEq1I_CXiEaLi8HX6YlbVEPIswYq
+ 4TjSIUFB_sYNowGZRmK1ZAP2e3gDJw5cRZb.hHnp1Z8PsvouCB4g3DHXwFihmu1tFGC7CW_6h55b
+ o7x2O52F4r5NRPIZGUfZecfLs.2xbPCdmM8CL6e4w3ktkv.mUgsdlD8ZYAQu_iC9a5Ua7zH2Gymn
+ DQW65lhqwkqGLodJPebjJI7oNfFdru7ibOl3KfrqbFxv3V2kK8dIpS66mw6POmFvs50Di71A40VC
+ 0uULsr117fwynZOwhXLP92yJnTXJqjLZHU3EaQVIG_GHc.iRJeEe13Jl4QDEI6spAZ7BErBZmGjs
+ emmmA.BcDw5pVMrkxWj5sG.YCANN4SOA3Ew4sy1HhM41R4DiyVcaTf6ldgIvbGs9JJ5hcwKGqv6d
+ d6L0nyoly2MVCM4kXflc7ZDiXaYGo3eQ0xAmuLxXxUFHfrQ2y4R0srErIOSFAIzW9hEl.xt33Zcb
+ kY2b1GldoSYscaaxd4kLz4K_aHHJ_y2lSPI30d4E2jpNXYxZdGSe5ZGF0_JJrpRqnlWBs.ikO8FZ
+ rBoaoeXU442Ryk0qrHocJ8q.2_3kizioEWfXD3JaJBmBq4B4dGlyVMSMee3UDY6dnRjsj3itz0QR
+ QpJK8VuFDXnsB.H0LHLA2pBsdop.Q_29aKS0E
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic311.consmr.mail.bf2.yahoo.com with HTTP; Sat, 30 Jan 2021 17:27:56 +0000
+Date:   Sat, 30 Jan 2021 17:25:55 +0000 (UTC)
+From:   "Mrs. Maureen Hinckley" <mau32@cgjzo.in>
+Reply-To: maurhinck4@gmail.com
+Message-ID: <1885069889.397995.1612027555601@mail.yahoo.com>
+Subject: RE
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Date:   Thu, 28 Jan 2021 20:17:07 +0200
-From:   Nut Grove Manor <manornutgrovemanor@gmail.com>
-To:     undisclosed-recipients:;
-Subject: Invitation To Quote
-User-Agent: Roundcube Webmail/1.4.1
-Message-ID: <b09951c581c69bcd4c3d48c21f6885b3@gmail.com>
-X-Sender: manornutgrovemanor@gmail.com
-X-Originating-IP: 154.0.175.203
-X-Afrihost-Domain: pesci.aserv.co.za
-X-Afrihost-Username: 154.0.175.203
-Authentication-Results: ucebox.co.za; auth=pass smtp.auth=154.0.175.203@pesci.aserv.co.za
-X-Afrihost-Outgoing-Class: unsure
-X-Afrihost-Outgoing-Evidence: Combined (0.71)
-X-Recommended-Action: accept
-X-Filter-ID: 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
- F2m4bBx/YCvbzEWyHpfJdFJnGm+sTRDggxgVxQ==
-X-Report-Abuse-To: spam@spe1.ucebox.co.za
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+References: <1885069889.397995.1612027555601.ref@mail.yahoo.com>
+X-Mailer: WebService/1.1.17648 YMailNodin Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Good Day Sir
 
-We are please to invite you/your company to quote the following item
-listed
-below:
 
-Product/Model No: TM9653 PRESSURE REGULATOR
-Product Name:MEKO
-Qty. 30 units
+I am Maureen Hinckley and my foundation is donating (Five hundred and fifty=
+ thousand USD) to you. Contact us via my email at (maurhinck4@gmail.com) fo=
+r further details.
 
-Compulsory,Kindly send your quotation
-for immediate approval.
-
-Kind Regards,
-Albert Bourla
-PFIZER B.V Supply Chain Manager
-Tel: +31(0)208080 880
-ADDRESS: Rivium Westlaan 142, 2909 LD
-Capelle aan den IJssel, Netherlands
+Best Regards,
+Mrs. Maureen Hinckley,
+Copyright =C2=A92021 The Maureen Hinckley Foundation All Rights Reserved.
