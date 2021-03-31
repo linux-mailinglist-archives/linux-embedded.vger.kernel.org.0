@@ -2,30 +2,30 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BC41D34FDAC
-	for <lists+linux-embedded@lfdr.de>; Wed, 31 Mar 2021 12:01:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E863D34FDB0
+	for <lists+linux-embedded@lfdr.de>; Wed, 31 Mar 2021 12:01:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235011AbhCaKAV (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 31 Mar 2021 06:00:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44026 "EHLO
+        id S235026AbhCaKA0 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Wed, 31 Mar 2021 06:00:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44044 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234957AbhCaJ7t (ORCPT
+        with ESMTP id S234984AbhCaJ7v (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 31 Mar 2021 05:59:49 -0400
-Received: from baptiste.telenet-ops.be (baptiste.telenet-ops.be [IPv6:2a02:1800:120:4::f00:13])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5555CC06174A
-        for <linux-embedded@vger.kernel.org>; Wed, 31 Mar 2021 02:59:48 -0700 (PDT)
+        Wed, 31 Mar 2021 05:59:51 -0400
+Received: from andre.telenet-ops.be (andre.telenet-ops.be [IPv6:2a02:1800:120:4::f00:15])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DFA97C06175F
+        for <linux-embedded@vger.kernel.org>; Wed, 31 Mar 2021 02:59:50 -0700 (PDT)
 Received: from ramsan.of.borg ([IPv6:2a02:1810:ac12:ed20:ada2:b4da:6568:5ad5])
-        by baptiste.telenet-ops.be with bizsmtp
-        id mxzd240015W9KJv01xzdKe; Wed, 31 Mar 2021 11:59:48 +0200
+        by andre.telenet-ops.be with bizsmtp
+        id mxzc2400c5W9KJv01xzcoU; Wed, 31 Mar 2021 11:59:49 +0200
 Received: from rox.of.borg ([192.168.97.57])
         by ramsan.of.borg with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
         (Exim 4.93)
         (envelope-from <geert@linux-m68k.org>)
-        id 1lRXdQ-00BseR-73; Wed, 31 Mar 2021 11:59:36 +0200
+        id 1lRXdQ-00BseR-3H; Wed, 31 Mar 2021 11:59:36 +0200
 Received: from geert by rox.of.borg with local (Exim 4.93)
         (envelope-from <geert@linux-m68k.org>)
-        id 1lRXBt-001bpo-DX; Wed, 31 Mar 2021 11:31:09 +0200
+        id 1lRXdP-001cdD-ED; Wed, 31 Mar 2021 11:59:35 +0200
 From:   Geert Uytterhoeven <geert+renesas@glider.be>
 To:     Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
         Steven Rostedt <rostedt@goodmis.org>,
@@ -43,68 +43,65 @@ Cc:     Linus Torvalds <torvalds@linux-foundation.org>,
         iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
         linux-embedded@vger.kernel.org,
         Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: [PATCH 3/3] lib/vsprintf: Use pr_crit() instead of long fancy messages
-Date:   Wed, 31 Mar 2021 11:31:04 +0200
-Message-Id: <20210331093104.383705-4-geert+renesas@glider.be>
+Subject: [PATCH] clk: Align provider-specific CLK_* bit definitions
+Date:   Wed, 31 Mar 2021 11:59:19 +0200
+Message-Id: <505e19bac2deb6015e76391ce7ad044c43499681.1617184676.git.geert+renesas@glider.be>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210331093104.383705-1-geert+renesas@glider.be>
-References: <20210331093104.383705-1-geert+renesas@glider.be>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-While long fancy messages have a higher probability of being seen than
-small messages, they may scroll of the screen fast, if visible at all,
-and may still be missed.  In addition, they increase boot time and
-kernel size.
+The definition of CLK_MULTIPLIER_ROUND_CLOSEST is not aligned to the two
+bit definitions next to it.  A deeper inspection reveals that the
+alignment of CLK_MULTIPLIER_ROUND_CLOSEST does match the most common
+alignment.
 
-The correct mechanism to increase importance of a kernel message is not
-to draw fancy boxes with more text, but to shout louder, i.e. increase
-the message's reporting level.  Making sure the administrator of the
-system is aware of such a message is a system policy, and is the
-responsability of a user-space log daemon.
+Align the bit definitions for the various provider types throughout the
+file at 40 columns, to increase uniformity.
 
-Fix this by increasing the reporting level from KERN_WARNING to
-KERN_CRIT, and removing irrelevant text and graphics.
-
-This reduces kernel size by ca. 0.5 KiB.
-
-Fixes: 5ead723a20e0447b ("lib/vsprintf: no_hash_pointers prints all addresses as unhashed")
 Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
 ---
- lib/vsprintf.c | 17 +++--------------
- 1 file changed, 3 insertions(+), 14 deletions(-)
+ include/linux/clk-provider.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/lib/vsprintf.c b/lib/vsprintf.c
-index 9b423359bb6433d3..0293f1b89064b287 100644
---- a/lib/vsprintf.c
-+++ b/lib/vsprintf.c
-@@ -2193,20 +2193,9 @@ static int __init no_hash_pointers_enable(char *str)
+diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
+index 58f6fe866ae9b797..8f37829565f9640e 100644
+--- a/include/linux/clk-provider.h
++++ b/include/linux/clk-provider.h
+@@ -342,7 +342,7 @@ struct clk_fixed_rate {
+ 	unsigned long	flags;
+ };
  
- 	no_hash_pointers = true;
+-#define CLK_FIXED_RATE_PARENT_ACCURACY		BIT(0)
++#define CLK_FIXED_RATE_PARENT_ACCURACY	BIT(0)
  
--	pr_warn("**********************************************************\n");
--	pr_warn("**   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **\n");
--	pr_warn("**                                                      **\n");
--	pr_warn("** This system shows unhashed kernel memory addresses   **\n");
--	pr_warn("** via the console, logs, and other interfaces. This    **\n");
--	pr_warn("** might reduce the security of your system.            **\n");
--	pr_warn("**                                                      **\n");
--	pr_warn("** If you see this message and you are not debugging    **\n");
--	pr_warn("** the kernel, report this immediately to your system   **\n");
--	pr_warn("** administrator!                                       **\n");
--	pr_warn("**                                                      **\n");
--	pr_warn("**   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **\n");
--	pr_warn("**********************************************************\n");
--
-+	pr_crit("This system shows unhashed kernel memory addresses\n");
-+	pr_crit("via the console, logs, and other interfaces. This\n");
-+	pr_crit("might reduce the security of your system.\n");
- 	return 0;
- }
- early_param("no_hash_pointers", no_hash_pointers_enable);
+ extern const struct clk_ops clk_fixed_rate_ops;
+ struct clk_hw *__clk_hw_register_fixed_rate(struct device *dev,
+@@ -984,8 +984,8 @@ struct clk_fractional_divider {
+ 
+ #define to_clk_fd(_hw) container_of(_hw, struct clk_fractional_divider, hw)
+ 
+-#define CLK_FRAC_DIVIDER_ZERO_BASED		BIT(0)
+-#define CLK_FRAC_DIVIDER_BIG_ENDIAN		BIT(1)
++#define CLK_FRAC_DIVIDER_ZERO_BASED	BIT(0)
++#define CLK_FRAC_DIVIDER_BIG_ENDIAN	BIT(1)
+ 
+ extern const struct clk_ops clk_fractional_divider_ops;
+ struct clk *clk_register_fractional_divider(struct device *dev,
+@@ -1033,9 +1033,9 @@ struct clk_multiplier {
+ 
+ #define to_clk_multiplier(_hw) container_of(_hw, struct clk_multiplier, hw)
+ 
+-#define CLK_MULTIPLIER_ZERO_BYPASS		BIT(0)
++#define CLK_MULTIPLIER_ZERO_BYPASS	BIT(0)
+ #define CLK_MULTIPLIER_ROUND_CLOSEST	BIT(1)
+-#define CLK_MULTIPLIER_BIG_ENDIAN		BIT(2)
++#define CLK_MULTIPLIER_BIG_ENDIAN	BIT(2)
+ 
+ extern const struct clk_ops clk_multiplier_ops;
+ 
 -- 
 2.25.1
 
