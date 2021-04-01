@@ -2,25 +2,33 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D276C350188
-	for <lists+linux-embedded@lfdr.de>; Wed, 31 Mar 2021 15:41:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EF7273511B0
+	for <lists+linux-embedded@lfdr.de>; Thu,  1 Apr 2021 11:16:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235850AbhCaNkb (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 31 Mar 2021 09:40:31 -0400
-Received: from mail.kernel.org ([198.145.29.99]:58998 "EHLO mail.kernel.org"
+        id S232565AbhDAJO5 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 1 Apr 2021 05:14:57 -0400
+Received: from mx2.suse.de ([195.135.220.15]:51584 "EHLO mx2.suse.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S235989AbhCaNkK (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 31 Mar 2021 09:40:10 -0400
-Received: from gandalf.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 9AFB761981;
-        Wed, 31 Mar 2021 13:40:08 +0000 (UTC)
-Date:   Wed, 31 Mar 2021 09:40:07 -0400
-From:   Steven Rostedt <rostedt@goodmis.org>
-To:     Geert Uytterhoeven <geert+renesas@glider.be>
-Cc:     Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Ingo Molnar <mingo@redhat.com>, Petr Mladek <pmladek@suse.com>,
+        id S233258AbhDAJOt (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
+        Thu, 1 Apr 2021 05:14:49 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1617268488; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=fNVeVEJsE2NrNnpG1ONXT+uOw5bYJLkau4SXRA3zVtY=;
+        b=GRFP7NyKhoU4R3Df8eXeg/mty4f651aCNMyk12y/rdwQeK6fl4bVrfiimdQlcVB0giY/k6
+        NLUIG/qpYN1Odp3Xmygn+0Z+MjnFMv47Lp9hQJTw4JhqBOsBl8MNXXPsZhYruek/IXkQzp
+        GNzwnEg1mD2Q4UsVtqYP3SO7sHaryIc=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id F3BD8AE6D;
+        Thu,  1 Apr 2021 09:14:47 +0000 (UTC)
+Date:   Thu, 1 Apr 2021 11:14:47 +0200
+From:   Petr Mladek <pmladek@suse.com>
+To:     Steven Rostedt <rostedt@goodmis.org>
+Cc:     Geert Uytterhoeven <geert+renesas@glider.be>,
+        Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Ingo Molnar <mingo@redhat.com>,
         Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
         Linus Torvalds <torvalds@linux-foundation.org>,
         Andrew Morton <akpm@linux-foundation.org>,
@@ -33,32 +41,64 @@ Cc:     Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
         Vlastimil Babka <vbabka@suse.cz>,
         iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
         linux-embedded@vger.kernel.org
-Subject: Re: [PATCH 2/3] tracing: Use pr_crit() instead of long fancy
- messages
-Message-ID: <20210331094007.77aa5194@gandalf.local.home>
-In-Reply-To: <20210331093104.383705-3-geert+renesas@glider.be>
+Subject: Re: [PATCH 2/3] tracing: Use pr_crit() instead of long fancy messages
+Message-ID: <YGWPB8hPVVOIx4AG@alley>
 References: <20210331093104.383705-1-geert+renesas@glider.be>
-        <20210331093104.383705-3-geert+renesas@glider.be>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ <20210331093104.383705-3-geert+renesas@glider.be>
+ <20210331094007.77aa5194@gandalf.local.home>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210331094007.77aa5194@gandalf.local.home>
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-On Wed, 31 Mar 2021 11:31:03 +0200
-Geert Uytterhoeven <geert+renesas@glider.be> wrote:
+On Wed 2021-03-31 09:40:07, Steven Rostedt wrote:
+> On Wed, 31 Mar 2021 11:31:03 +0200
+> Geert Uytterhoeven <geert+renesas@glider.be> wrote:
+> 
+> > This reduces kernel size by ca. 0.5 KiB.
+> 
+> If you are worried about size, disable tracing and it will go away
+> entirely. 0.5KiB is a drop in the bucket compared to what tracing adds in
+> size overhead.
+> 
+> Sorry, but NAK.
+> 
+> This has been very successful in stopping people from adding trace_printk()
+> to the kernel, and I like to keep it that way.
 
-> This reduces kernel size by ca. 0.5 KiB.
+I agree with Steven. I believe that the eye-catching form is
+important.
 
-If you are worried about size, disable tracing and it will go away
-entirely. 0.5KiB is a drop in the bucket compared to what tracing adds in
-size overhead.
+Anyway, all three patches are replacing text that have
+many common parts. It is:
 
-Sorry, but NAK.
+	pr_warn("\n");
+	pr_warn("**********************************************************\n");
+	pr_warn("**   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **\n");
+	pr_warn("**                                                      **\n");
+	pr_warn("** <Something is enabled/used.>			 **\n");
+	pr_warn("**                                                      **\n");
+	pr_warn("** <Description of the effect and why it should not     **\n");
+	pr_warn("** happen on production kernel>			**\n");
+	pr_warn("**                                                      **\n");
+	pr_warn("** If you see this message and you are not debugging    **\n");
+	pr_warn("** the kernel, report this immediately to your vendor!  **\n");
+	pr_warn("**                                                      **\n");
+	pr_warn("**   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **\n");
+	pr_warn("**********************************************************\n");
 
-This has been very successful in stopping people from adding trace_printk()
-to the kernel, and I like to keep it that way.
+It might be useful to avoid cut&pasting this entire blob and unify the
+common parts.
 
--- Steve
+My only concern is how to define the caller-specific lines so that
+they fit with the common ones. They should not be longer than the
+header and footer. We need to find a good compromise between
+usability and over-engineering.
+
+Also we have to keep bikeshading under control ;-)
+
+Best Regards,
+Petr
