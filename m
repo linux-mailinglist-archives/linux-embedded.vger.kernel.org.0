@@ -2,61 +2,82 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6902735758E
-	for <lists+linux-embedded@lfdr.de>; Wed,  7 Apr 2021 22:09:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 068B3376CA2
+	for <lists+linux-embedded@lfdr.de>; Sat,  8 May 2021 00:24:55 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233999AbhDGUJ3 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 7 Apr 2021 16:09:29 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38286 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239002AbhDGUJ3 (ORCPT
+        id S230056AbhEGWZt (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 7 May 2021 18:25:49 -0400
+Received: from bosmailout03.eigbox.net ([66.96.186.3]:45669 "EHLO
+        bosmailout03.eigbox.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229470AbhEGWZo (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 7 Apr 2021 16:09:29 -0400
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com [IPv6:2607:f8b0:4864:20::d2a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1AD60C06175F
-        for <linux-embedded@vger.kernel.org>; Wed,  7 Apr 2021 13:09:19 -0700 (PDT)
-Received: by mail-io1-xd2a.google.com with SMTP id j26so15578028iog.13
-        for <linux-embedded@vger.kernel.org>; Wed, 07 Apr 2021 13:09:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=XGaENESI2XfSMzRuu5h2NLMo1s/wV090jzAHbm9+pCA=;
-        b=DzjyRKRU4qMRM2ZqNFLAFeIqTH79fqqfcyVAV/KnNRjj6Vt5YuQxPX0jCPxY9F9+Xe
-         t6DOjcGnUVZssNVraKwGscgGO4M0Bb52f03+W0n+po2SGevKrHEm37XbVYuuAGiRM1Mt
-         sMjYp3T8DJvt2LmRuzZ/NXinGSVqJaAZFCJ+f2ypsH9aebP9GJTRRQZbPXDyZKGJKoOP
-         GQgYTT3TxBemMPShnmU6g5pDs9lFa3KhwHWZb4+Gy/jkN4ylZaAxRzs6VsiCky2Cmu8Y
-         qzoEOPX614DIfCuTEL4MzGBxS62F3tC/F8MXg8txxArBV9pc59QlzCD7gyWPguRrWyt4
-         eQDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=XGaENESI2XfSMzRuu5h2NLMo1s/wV090jzAHbm9+pCA=;
-        b=WF95qimCQKnWXvyhgZCRr9NKBxwNW7PtNNN3KHm32u2FXJbEnw7vrR7cIjOz0UDiHv
-         1edEmGbTHP7E5vtsNeO59UOfNMBS1vvzRENbZy7Jq7yowA3ZddWzwvUm//QbGkoI8Tex
-         tnvDCGRsBr6+k/SGmT56kzMH49JWjRwk+p2nOQvH8ohHO95AuAlP7WIhTUI2MEN3ND3P
-         1VBrprtuHiynUM45mnVRn/vNDN7b/xtCvZAXnCbiyE2lRQP+rgLFwpeZJ7nsXgl8R9b9
-         ecl62Ti7ffzEaJaBdrp+ZnZQ5HXmrc4pImS1uvmsUo/xX+TEAZ6K7z2XPZmiTKAgEweW
-         1k4A==
-X-Gm-Message-State: AOAM5302tfhST/kjt20G10CAR/36qbsEs+J+mNO/cgWSSD43K/TrM49X
-        sCmrK10cxTia2WpEqyxbDFsnC65/B6O0CV8U3VLhOXSPN8Y=
-X-Google-Smtp-Source: ABdhPJxYVww8Zbrm9xJp49GEIonItA5uo4V5seiQ2LLCNsqTP3LB7zWhck9HoEJIpjiiPnHL+QsYT7uaLFyXD8Rgt/I=
-X-Received: by 2002:a6b:ea04:: with SMTP id m4mr3838566ioc.160.1617826158284;
- Wed, 07 Apr 2021 13:09:18 -0700 (PDT)
+        Fri, 7 May 2021 18:25:44 -0400
+X-Greylist: delayed 1816 seconds by postgrey-1.27 at vger.kernel.org; Fri, 07 May 2021 18:25:34 EDT
+Received: from bosmailscan08.eigbox.net ([10.20.15.8])
+        by bosmailout03.eigbox.net with esmtp (Exim)
+        id 1lf8QM-0003Fa-7M; Fri, 07 May 2021 17:54:18 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=godsofu4.com; s=dkim; h=Sender:Content-Transfer-Encoding:Content-Type:
+        Message-ID:Reply-To:Subject:To:From:Date:MIME-Version:Cc:Content-ID:
+        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+        List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=aM9bUFGSTpfnep8zAVAJMnojqhcwpuHDFPgQnPqW4M4=; b=I+6Bb1DJY/YYTRas0wZTN+AC1D
+        vtIg40M7SDAM/b29+/wY3GjGjzug9/OzX2aPoevJgNlEKSTs0SrEPfP3WhSQM0PCLHlkQfkyX8QT9
+        UZ7TTwAz03WtyNGtE+DdqqC0pYUcPkHvqE4MDSKlo5Vm1z1vJqGpkJRtWe2MFWIr6++JBuHOfV7Fd
+        34Die1lJ1lpPfDh70Zq++IiTaMjdlcGGo7pbn4hVn1WweIC9h772TR5+6npXCISSeeyCgPsBbikdE
+        ZWIrJkpukBwvBgblKKCxDugovauKoCEDbS56mNadJP+sg7ztteNlHrnEQFJYYsCNrcdD1v8ilxnSi
+        f8nqykSw==;
+Received: from [10.115.3.32] (helo=bosimpout12)
+        by bosmailscan08.eigbox.net with esmtp (Exim)
+        id 1lf8QK-0002fP-Rn; Fri, 07 May 2021 17:54:16 -0400
+Received: from boswebmail06.eigbox.net ([10.20.16.6])
+        by bosimpout12 with 
+        id 1xuC2500D07qujN01xuFUj; Fri, 07 May 2021 17:54:16 -0400
+X-EN-SP-DIR: OUT
+X-EN-SP-SQ: 1
+Received: from [127.0.0.1] (helo=homestead)
+        by boswebmail06.eigbox.net with esmtp (Exim)
+        id 1lf8PX-0006IT-Ae; Fri, 07 May 2021 17:53:27 -0400
+Received: from [197.239.81.229]
+ by emailmg.homestead.com
+ with HTTP (HTTP/1.1 POST); Fri, 07 May 2021 17:53:27 -0400
 MIME-Version: 1.0
-From:   Trevor Woerner <twoerner@gmail.com>
-Date:   Wed, 7 Apr 2021 16:09:07 -0400
-Message-ID: <CAHUNapQ75myQ7hN61yvxNsqih3be_7qOyQd0y1r2eJk2ZTta=g@mail.gmail.com>
-Subject: Yocto Project Summit - registration open
-To:     linux-embedded@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Date:   Fri, 07 May 2021 21:53:27 +0000
+From:   Mrs Suzara Maling Wan <fast65@godsofu4.com>
+To:     undisclosed-recipients:;
+Subject: URGENT REPLY NEEDED
+Reply-To: suzara2017malingwan@gmail.com
+Mail-Reply-To: suzara2017malingwan@gmail.com
+Message-ID: <4c6a48748f6731dac9b66cce1916443b@godsofu4.com>
+X-Sender: fast65@godsofu4.com
+User-Agent: Roundcube Webmail/1.3.14
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+X-EN-AuthUser: fast65@godsofu4.com
+Sender:  Mrs Suzara Maling Wan <fast65@godsofu4.com>
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Registration is now open for the upcoming Yocto Project Summit!!
 
-details: https://www.yoctoproject.org/yocto-project-virtual-summit-2021/
-CfP: https://pretalx.com/yocto-project-summit-2021/cfp
-registration: https://www.cvent.com/d/yjq4dr/4W?ct=868bfddd-ca91-46bb-aaa5-62d2b61b2501
 
-PS: Don't forget to get in your talk proposals! The CfP closes April 25th
+My names are Mrs Suzara Maling Wan, I am a Nationality of the Republic
+of the Philippine presently base in West Africa B/F, dealing with
+exportation of Gold, I was diagnose of blood Causal decease, and my
+doctor have announce to me that I have few days to leave due to the
+condition of my sickness.
+
+I have a desire to build an orphanage home in your country of which i
+cannot execute the project myself due to my present health condition,
+I am willing to hand over the project under your care for you to help
+me fulfill my dreams and desire of building an orphanage home in your
+country.
+
+Reply in you are will to help so that I can direct you to my bank for
+the urgent transfer of the fund/money require for the project to your
+account as I have already made the fund/money available.
+
+With kind regards
+Mrs Suzara Maling Wan
