@@ -2,82 +2,124 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 068B3376CA2
-	for <lists+linux-embedded@lfdr.de>; Sat,  8 May 2021 00:24:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 42DB2382431
+	for <lists+linux-embedded@lfdr.de>; Mon, 17 May 2021 08:21:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230056AbhEGWZt (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 7 May 2021 18:25:49 -0400
-Received: from bosmailout03.eigbox.net ([66.96.186.3]:45669 "EHLO
-        bosmailout03.eigbox.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229470AbhEGWZo (ORCPT
+        id S235011AbhEQGWl (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Mon, 17 May 2021 02:22:41 -0400
+Received: from mail-vk1-f174.google.com ([209.85.221.174]:42760 "EHLO
+        mail-vk1-f174.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231238AbhEQGWl (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 7 May 2021 18:25:44 -0400
-X-Greylist: delayed 1816 seconds by postgrey-1.27 at vger.kernel.org; Fri, 07 May 2021 18:25:34 EDT
-Received: from bosmailscan08.eigbox.net ([10.20.15.8])
-        by bosmailout03.eigbox.net with esmtp (Exim)
-        id 1lf8QM-0003Fa-7M; Fri, 07 May 2021 17:54:18 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=godsofu4.com; s=dkim; h=Sender:Content-Transfer-Encoding:Content-Type:
-        Message-ID:Reply-To:Subject:To:From:Date:MIME-Version:Cc:Content-ID:
-        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-        List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=aM9bUFGSTpfnep8zAVAJMnojqhcwpuHDFPgQnPqW4M4=; b=I+6Bb1DJY/YYTRas0wZTN+AC1D
-        vtIg40M7SDAM/b29+/wY3GjGjzug9/OzX2aPoevJgNlEKSTs0SrEPfP3WhSQM0PCLHlkQfkyX8QT9
-        UZ7TTwAz03WtyNGtE+DdqqC0pYUcPkHvqE4MDSKlo5Vm1z1vJqGpkJRtWe2MFWIr6++JBuHOfV7Fd
-        34Die1lJ1lpPfDh70Zq++IiTaMjdlcGGo7pbn4hVn1WweIC9h772TR5+6npXCISSeeyCgPsBbikdE
-        ZWIrJkpukBwvBgblKKCxDugovauKoCEDbS56mNadJP+sg7ztteNlHrnEQFJYYsCNrcdD1v8ilxnSi
-        f8nqykSw==;
-Received: from [10.115.3.32] (helo=bosimpout12)
-        by bosmailscan08.eigbox.net with esmtp (Exim)
-        id 1lf8QK-0002fP-Rn; Fri, 07 May 2021 17:54:16 -0400
-Received: from boswebmail06.eigbox.net ([10.20.16.6])
-        by bosimpout12 with 
-        id 1xuC2500D07qujN01xuFUj; Fri, 07 May 2021 17:54:16 -0400
-X-EN-SP-DIR: OUT
-X-EN-SP-SQ: 1
-Received: from [127.0.0.1] (helo=homestead)
-        by boswebmail06.eigbox.net with esmtp (Exim)
-        id 1lf8PX-0006IT-Ae; Fri, 07 May 2021 17:53:27 -0400
-Received: from [197.239.81.229]
- by emailmg.homestead.com
- with HTTP (HTTP/1.1 POST); Fri, 07 May 2021 17:53:27 -0400
+        Mon, 17 May 2021 02:22:41 -0400
+Received: by mail-vk1-f174.google.com with SMTP id m129so1126168vkh.9;
+        Sun, 16 May 2021 23:21:25 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=+soxiwcsp656/78/AvClx6ZPB3VDNbEc7o/vVgGMog4=;
+        b=V36x0EG/9K79KlcUOvZSWqcQaXL/56M80rsEWlLHqJ39f5aIErDQAogW7ouxtpgDXO
+         GBIy4YIYGQiE8lyKdYJLhcjXJixJahNR8jnP2ssORM4rrDAR11uQJJh5mnYBZfZLaGAq
+         ISGn6a20+vd2CLa1WKIjYs9jYZ3fWX2M/OJwdZZPz+wDUJx5Mc9tSZcBhimQRycVz0E4
+         f7JIm6O2dyziHQLI5sW4g2oN1yuglkBIbvvOZj7Do7MIja5rcR07UnIb6QsaRWmhex68
+         XwN7bCtfH1mrOk5cJrnpc9TXy2EWIHWg9sAyP64iy7AWhyfcM3NI/VmZ+5hI1SjXwgJ7
+         Uo7w==
+X-Gm-Message-State: AOAM530rTagX5Zxye/HVaM2/3oAbYqKXpNRxZtoZACAyhsdiM7N5d/8O
+        1IZbxMWjFpUQZ15cn7TqFqmEtA3hg7l5B1t0vmg=
+X-Google-Smtp-Source: ABdhPJxqu67241VYbrxg5v7ZVCJWJgKvmEh9hQtt3sFTA/LiQZuzefbOW0dD0vuwF5zYW6osx9/cw/4rucqOcoEGcqg=
+X-Received: by 2002:a1f:a388:: with SMTP id m130mr44908380vke.1.1621232484718;
+ Sun, 16 May 2021 23:21:24 -0700 (PDT)
 MIME-Version: 1.0
-Date:   Fri, 07 May 2021 21:53:27 +0000
-From:   Mrs Suzara Maling Wan <fast65@godsofu4.com>
-To:     undisclosed-recipients:;
-Subject: URGENT REPLY NEEDED
-Reply-To: suzara2017malingwan@gmail.com
-Mail-Reply-To: suzara2017malingwan@gmail.com
-Message-ID: <4c6a48748f6731dac9b66cce1916443b@godsofu4.com>
-X-Sender: fast65@godsofu4.com
-User-Agent: Roundcube Webmail/1.3.14
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-X-EN-AuthUser: fast65@godsofu4.com
-Sender:  Mrs Suzara Maling Wan <fast65@godsofu4.com>
+References: <20210331093104.383705-1-geert+renesas@glider.be> <20210331093104.383705-4-geert+renesas@glider.be>
+In-Reply-To: <20210331093104.383705-4-geert+renesas@glider.be>
+From:   Geert Uytterhoeven <geert@linux-m68k.org>
+Date:   Mon, 17 May 2021 08:21:12 +0200
+Message-ID: <CAMuHMdXQArCn9BS_8p0iUAgomfEHWe8ypg=B_SGfvJu8c_L5vg@mail.gmail.com>
+Subject: Re: [PATCH 3/3] lib/vsprintf: Use pr_crit() instead of long fancy messages
+To:     Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ingo Molnar <mingo@redhat.com>, Petr Mladek <pmladek@suse.com>,
+        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
+Cc:     Linus Torvalds <torvalds@linux-foundation.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        John Ogness <john.ogness@linutronix.de>,
+        Marco Elver <elver@google.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Linux IOMMU <iommu@lists.linux-foundation.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Embedded <linux-embedded@vger.kernel.org>,
+        Geert Uytterhoeven <geert+renesas@glider.be>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
+On Wed, Mar 31, 2021 at 11:59 AM Geert Uytterhoeven
+<geert+renesas@glider.be> wrote:
+> While long fancy messages have a higher probability of being seen than
+> small messages, they may scroll of the screen fast, if visible at all,
+> and may still be missed.  In addition, they increase boot time and
+> kernel size.
+>
+> The correct mechanism to increase importance of a kernel message is not
+> to draw fancy boxes with more text, but to shout louder, i.e. increase
+> the message's reporting level.  Making sure the administrator of the
+> system is aware of such a message is a system policy, and is the
+> responsability of a user-space log daemon.
+>
+> Fix this by increasing the reporting level from KERN_WARNING to
+> KERN_CRIT, and removing irrelevant text and graphics.
+>
+> This reduces kernel size by ca. 0.5 KiB.
+>
+> Fixes: 5ead723a20e0447b ("lib/vsprintf: no_hash_pointers prints all addresses as unhashed")
+> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+
+No comments?
+Unlike the cases handled by the other two patches in this series,
+this one cannot be configured out.
+
+Thanks!
+
+> --- a/lib/vsprintf.c
+> +++ b/lib/vsprintf.c
+> @@ -2193,20 +2193,9 @@ static int __init no_hash_pointers_enable(char *str)
+>
+>         no_hash_pointers = true;
+>
+> -       pr_warn("**********************************************************\n");
+> -       pr_warn("**   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **\n");
+> -       pr_warn("**                                                      **\n");
+> -       pr_warn("** This system shows unhashed kernel memory addresses   **\n");
+> -       pr_warn("** via the console, logs, and other interfaces. This    **\n");
+> -       pr_warn("** might reduce the security of your system.            **\n");
+> -       pr_warn("**                                                      **\n");
+> -       pr_warn("** If you see this message and you are not debugging    **\n");
+> -       pr_warn("** the kernel, report this immediately to your system   **\n");
+> -       pr_warn("** administrator!                                       **\n");
+> -       pr_warn("**                                                      **\n");
+> -       pr_warn("**   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **\n");
+> -       pr_warn("**********************************************************\n");
+> -
+> +       pr_crit("This system shows unhashed kernel memory addresses\n");
+> +       pr_crit("via the console, logs, and other interfaces. This\n");
+> +       pr_crit("might reduce the security of your system.\n");
+>         return 0;
+>  }
+>  early_param("no_hash_pointers", no_hash_pointers_enable);
+
+Gr{oetje,eeting}s,
+
+                        Geert
 
 
-My names are Mrs Suzara Maling Wan, I am a Nationality of the Republic
-of the Philippine presently base in West Africa B/F, dealing with
-exportation of Gold, I was diagnose of blood Causal decease, and my
-doctor have announce to me that I have few days to leave due to the
-condition of my sickness.
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
 
-I have a desire to build an orphanage home in your country of which i
-cannot execute the project myself due to my present health condition,
-I am willing to hand over the project under your care for you to help
-me fulfill my dreams and desire of building an orphanage home in your
-country.
-
-Reply in you are will to help so that I can direct you to my bank for
-the urgent transfer of the fund/money require for the project to your
-account as I have already made the fund/money available.
-
-With kind regards
-Mrs Suzara Maling Wan
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
