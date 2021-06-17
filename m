@@ -2,94 +2,60 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id ED8BE38AF40
-	for <lists+linux-embedded@lfdr.de>; Thu, 20 May 2021 14:53:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2DDE73AB411
+	for <lists+linux-embedded@lfdr.de>; Thu, 17 Jun 2021 14:52:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241924AbhETMyw (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Thu, 20 May 2021 08:54:52 -0400
-Received: from mx2.suse.de ([195.135.220.15]:60182 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S243263AbhETMxO (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
-        Thu, 20 May 2021 08:53:14 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-        t=1621515111; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=VbT6WFYy0bkSk8HAYhg7anUqtgOM3QEr3KjCoKwSfHQ=;
-        b=gOKAeXWpE3pQwkKpXwPHYoc4ERb31lQ3gBN7nTVt1yldwdnn1/3/XyAFth9rfgDimJkoQH
-        agqxk+9Aox0SUUfXdjH85VkMEQazH8fYJyaFRs2tPVAJC3VdcHlyCnVzQyWN5LMIv2YHXJ
-        O5RoTQ3j+3gflRxjf1BSBzx8QDoYDOo=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id 8A566ABE8;
-        Thu, 20 May 2021 12:51:51 +0000 (UTC)
-Date:   Thu, 20 May 2021 14:51:50 +0200
-From:   Petr Mladek <pmladek@suse.com>
-To:     Geert Uytterhoeven <geert@linux-m68k.org>
-Cc:     Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        John Ogness <john.ogness@linutronix.de>,
-        Marco Elver <elver@google.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Linux IOMMU <iommu@lists.linux-foundation.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux Embedded <linux-embedded@vger.kernel.org>,
-        Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: Re: [PATCH 3/3] lib/vsprintf: Use pr_crit() instead of long fancy
- messages
-Message-ID: <YKZbZhACyIENhM8S@alley>
-References: <20210331093104.383705-1-geert+renesas@glider.be>
- <20210331093104.383705-4-geert+renesas@glider.be>
- <CAMuHMdXQArCn9BS_8p0iUAgomfEHWe8ypg=B_SGfvJu8c_L5vg@mail.gmail.com>
+        id S231733AbhFQMyw convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 17 Jun 2021 08:54:52 -0400
+Received: from 6-200-5-45.rpnnetprovedor.com.br ([45.5.200.6]:59721 "EHLO
+        srv01.rpnnetprovedor.com.br" rhost-flags-OK-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S230507AbhFQMyw (ORCPT
+        <rfc822;linux-embedded@vger.kernel.org>);
+        Thu, 17 Jun 2021 08:54:52 -0400
+Received: from [84.38.130.143] (helo=IP-130-143.dataclub.eu)
+        by srv01.rpnnetprovedor.com.br with esmtpa (Exim 4.92.2)
+        (envelope-from <robertnellsona@citromail.hu>)
+        id 1ltkuE-0000zD-5L
+        for linux-embedded@vger.kernel.org; Thu, 17 Jun 2021 02:49:34 -0300
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAMuHMdXQArCn9BS_8p0iUAgomfEHWe8ypg=B_SGfvJu8c_L5vg@mail.gmail.com>
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: CAN YOU INVEST WITH ME?...6
+To:     linux-embedded@vger.kernel.org
+From:   "Mr.  Robert" <robertnellsona@citromail.hu>
+Date:   Thu, 17 Jun 2021 08:49:26 +0300
+Reply-To: robertnellsona@citromail.hu
+Message-Id: <E1ltkuE-0000zD-5L@srv01.rpnnetprovedor.com.br>
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-On Mon 2021-05-17 08:21:12, Geert Uytterhoeven wrote:
-> On Wed, Mar 31, 2021 at 11:59 AM Geert Uytterhoeven
-> <geert+renesas@glider.be> wrote:
-> > While long fancy messages have a higher probability of being seen than
-> > small messages, they may scroll of the screen fast, if visible at all,
-> > and may still be missed.  In addition, they increase boot time and
-> > kernel size.
-> >
-> > The correct mechanism to increase importance of a kernel message is not
-> > to draw fancy boxes with more text, but to shout louder, i.e. increase
-> > the message's reporting level.  Making sure the administrator of the
-> > system is aware of such a message is a system policy, and is the
-> > responsability of a user-space log daemon.
-> >
-> > Fix this by increasing the reporting level from KERN_WARNING to
-> > KERN_CRIT, and removing irrelevant text and graphics.
-> >
-> > This reduces kernel size by ca. 0.5 KiB.
-> >
-> > Fixes: 5ead723a20e0447b ("lib/vsprintf: no_hash_pointers prints all addresses as unhashed")
-> > Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
-> 
-> No comments?
-> Unlike the cases handled by the other two patches in this series,
-> this one cannot be configured out.
 
-IMHO, the best solution would be to create a generic API for
-eye-catching messages.
+ATTENTION; linux-embedded@vger.kernel.org,
 
-I am sure that WARN() is misused on many locations all over the kernel
-because people just wanted eye-catching message, for example, see
-https://lore.kernel.org/r/2149df3f542d25ce15d049e81d6188bb7198478c.camel@fi.rohmeurope.com
+IMPORTANT INVESTMENT INFORMATION
 
-It might be a win-win solution.
+We have a good investment program going on now.
+We have $95m USD for Investment in your Country.
+We use this opportunity to invest you to join the investment program and you will never regret it.
+Please kindly invest with us and you will be receiving monthly income/return/profit every month.
+We can also give you Loan, 
 
-Best Regards,
-Petr
+We have: 
+
+1. Short Term Loan, 
+
+2. Medium Term Loan 
+
+3. and Long Term Loan, 
+
+There is no need of collateral security. We will use our company to sign agreement and guarantee on your behalf and our Lawyer will sign on your behalf.
+
+Reply for more detail.
+
+Thank you Sir.
+
+Robert Nellson.
+INVESTMENT MANAGER.
