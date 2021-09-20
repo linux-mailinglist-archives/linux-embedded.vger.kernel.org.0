@@ -2,59 +2,94 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 595BD40D219
-	for <lists+linux-embedded@lfdr.de>; Thu, 16 Sep 2021 05:40:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E04F4110A8
+	for <lists+linux-embedded@lfdr.de>; Mon, 20 Sep 2021 10:06:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234154AbhIPDmE (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 15 Sep 2021 23:42:04 -0400
-Received: from dkpb0ek.cn ([106.75.27.222]:35926 "EHLO dkpb0ek.cn"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S234176AbhIPDmD (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 15 Sep 2021 23:42:03 -0400
-Received: from subw (unknown [122.226.180.195])
-        by dkpb0ek.cn (Postfix) with ESMTPA id D571D336B248
-        for <linux-embedded@vger.kernel.org>; Thu, 16 Sep 2021 11:28:26 +0800 (CST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dkpb0ek.cn; s=default;
-        t=1631762906;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding;
-        bh=NmOO/c3V7/Uv8s8CwfS3PAZrLrm9dzq+boyceywpR3k=;
-        b=hMQRApllYJC/Q2UJPx/9oB/Mxdl6Ly2aMPV+nKVBp9tKdbQqCmZyyLGpFHNorZi28x+X+6
-        X/RpAn5kbwLJNlwhR9TR/uAZ6pNAQtxF5Zgnb7/GhJcQZOdV/Xbdix/uu+FSUVmKL+Vu2m
-        amncizZ9OC9VER8seG9rVz9PaVAomig=
-Message-ID: <20210916112826214806@dkpb0ek.cn>
-From:   =?utf-8?B?RVRD44K144O844OT44K544KS44GU5Yip55So44Gu44GK5a6i5qeY?= 
-        <ETC-update-account@dkpb0ek.cn>
-To:     <linux-embedded@vger.kernel.org>
-Subject: =?utf-8?B?RVRD44K144O844OT44K544KS44GU5Yip55So44Gu44GK5a6i5qeY?=
-Date:   Thu, 16 Sep 2021 11:28:20 +0800
+        id S235353AbhITIIS (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Mon, 20 Sep 2021 04:08:18 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48094 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S235312AbhITIIO (ORCPT
+        <rfc822;linux-embedded@vger.kernel.org>);
+        Mon, 20 Sep 2021 04:08:14 -0400
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A5286C061574
+        for <linux-embedded@vger.kernel.org>; Mon, 20 Sep 2021 01:06:47 -0700 (PDT)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+        by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.92)
+        (envelope-from <ukl@pengutronix.de>)
+        id 1mSEK0-00082D-9J; Mon, 20 Sep 2021 10:06:40 +0200
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+        by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.92)
+        (envelope-from <ukl@pengutronix.de>)
+        id 1mSEJw-0006KY-SZ; Mon, 20 Sep 2021 10:06:36 +0200
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.92)
+        (envelope-from <ukl@pengutronix.de>)
+        id 1mSEJw-0003M4-Ra; Mon, 20 Sep 2021 10:06:36 +0200
+From:   =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= 
+        <u.kleine-koenig@pengutronix.de>
+To:     linux-kernel@vger.kernel.org,
+        Paul Gortmaker <paul.gortmaker@windriver.com>,
+        David Woodhouse <dwmw2@infradead.org>,
+        linux-embedded@vger.kernel.org,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        linux-crypto@vger.kernel.org
+Cc:     kernel@pengutronix.de
+Subject: [PATCH] MAINTAINERS: Remove Matt Mackall as his identity is obsolete
+Date:   Mon, 20 Sep 2021 10:06:35 +0200
+Message-Id: <20210920080635.253826-1-u.kleine-koenig@pengutronix.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: base64
-X-mailer: Vbsil 6
-X-Spam: Yes
+Content-Type: text/plain; charset=UTF-8
+X-Patch-Hashes: v=1; h=sha256; i=JmFmbOHCaUQX0Fi64F4JOj20/z+ShGf7acD7NrWNdig=; m=DZ9cF2kSq++C4+4iiqrtTzNtuaQQfEiGGvXFXH0Rd5A=; p=kH9k+kSpxGng/RA/4mRvCsfsXcxRp6M02E54V1lUC/o=; g=9317de317163ef7cc5405692d019b7d79b2ea3a0
+X-Patch-Sig: m=pgp; i=u.kleine-koenig@pengutronix.de; s=0x0D2511F322BFAB1C1580266BE2DCDD9132669BD6; b=iQEzBAABCgAdFiEEfnIqFpAYrP8+dKQLwfwUeK3K7AkFAmFIQQUACgkQwfwUeK3K7AlpzggAnuq /7ZWl1VP12eITlz2e/NXE6vUKBQvs8gLohpytjs3jlbVUSLvVkdYAlCeVRy7LPBEFwu9YjVBTt/a6 1uKXf2AmgDvwBNc7NvsHxh0VUaZ3aMuxH4B4H7An8qzMDDEA2w0qW7acWONHA7rOXx7wWK4nUwxsL a68TPNrxw2LDxCoR0TsE7bhij/4soszFol9vomb3EME4XxoHx6ncz0AOWjx2rGddtCZOUL0+D0NZm RRRgV7X3jxF087Onx+wzywUhNhYPUaxY7MYuz71an4deVslS2BkbIrcHgBmC7cXZHjF1eQW3/k7HK krg/ovRz5iDyMyFkJQ9dcNDfx1Tz7fQ==
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-embedded@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-RVRD44K144O844OT44K544KS44GU5Yip55So44Gu44GK5a6i5qeYOg0KDQpFVEPjgrXjg7zjg5Pj
-grnjga/nhKHlirnjgavjgarjgorjgb7jgZfjgZ/jgIINCuW8leOBjee2muOBjeOCteODvOODk+OC
-ueOCkuOBlOWIqeeUqOOBhOOBn+OBoOOBjeOBn+OBhOWgtOWQiOOBr+OAgeS4i+iomOODquODs+OC
-r+OCiOOCiuips+e0sOOCkuOBlOeiuuiqjeOBj+OBoOOBleOBhOOAgg0KDQrkuIvoqJjjga7mjqXn
-tprjgYvjgonlgZzmraLljp/lm6DjgpLnorroqo3jgZfjgabjgY/jgaDjgZXjgYQNCg0KaHR0cHM6
-Ly9ldGMtbWVpc2FpLmpwLmZuLWluZm8udG9wLw0KDQoo55u05o6l44Ki44Kv44K744K544Gn44GN
-44Gq44GE5aC05ZCI44Gv44CB5omL5YuV44Gn44OW44Op44Km44K244Gr44Kz44OU44O844GX44Gm
-6ZaL44GE44Gm44GP44Gg44GV44GEKQ0KDQrigLvjgZPjga7jg6Hjg7zjg6vjga/pgIHkv6HlsILn
-lKjjgafjgZnjgIINCuOAgOOBk+OBruOCouODieODrOOCueOBq+mAgeS/oeOBhOOBn+OBoOOBhOOB
-puOCgui/lOS/oeOBhOOBn+OBl+OBi+OBreOBvuOBmeOBruOBp+OAgeOBguOCieOBi+OBmOOCgeOB
-lOS6huaJv+mhmOOBhOOBvuOBmeOAgg0K4oC744Gq44GK44CB44GU5LiN5piO44Gq54K544Gr44Gk
-44GN44G+44GX44Gm44Gv44CB44GK5omL5pWw44Gn44GZ44GM44CBDQogIEVUQ+OCteODvOODk+OC
-ueS6i+WLmeWxgOOBq+OBiuWVj+OBhOWQiOOCj+OBm+OBj+OBoOOBleOBhOOAgg0KDQrilqBFVEPl
-iKnnlKjnhafkvJrjgrXjg7zjg5Pjgrnkuovli5nlsYANCuW5tOS4reeEoeS8keOAgDk6MDDvvZ4x
-ODowMA0K44OK44OT44OA44Kk44Ok44Or44CAMDU3MC0wMTAxMzkNCu+8iOODiuODk+ODgOOCpOOD
-pOODq+OBjOOBlOWIqeeUqOOBhOOBn+OBoOOBkeOBquOBhOOBiuWuouOBleOBvuOAgDA0NS03NDQt
-MTM3Mu+8iQ0KMDQ1LTc0NC00MDkNCg==
+The mails I sent to Matt on September 14 and 20 both were refused by the
+MTA responsible for selenic.com (i.e. waste.org) with:
 
+	554 5.7.1 <mpm@selenic.com>: Recipient address rejected: This identity is obsolete
+
+Also the most recent commit that involved him (ignoring "Cc: Matt
+Mackall <mpm@selenic.com>" footers) is commit 330e0a01d54c (MAINTAINERS:
+Theodore Ts'o is taking over the random driver) where he was removed
+from the entry for random number drivers in 2012.
+
+So drop him completely from the list of maintainers.
+
+Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+---
+ MAINTAINERS | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d7b4f32875a9..805630c67a1f 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -6812,7 +6812,6 @@ F:	drivers/media/usb/em28xx/
+ 
+ EMBEDDED LINUX
+ M:	Paul Gortmaker <paul.gortmaker@windriver.com>
+-M:	Matt Mackall <mpm@selenic.com>
+ M:	David Woodhouse <dwmw2@infradead.org>
+ L:	linux-embedded@vger.kernel.org
+ S:	Maintained
+@@ -8157,7 +8156,6 @@ F:	include/trace/events/hwmon*.h
+ K:	(devm_)?hwmon_device_(un)?register(|_with_groups|_with_info)
+ 
+ HARDWARE RANDOM NUMBER GENERATOR CORE
+-M:	Matt Mackall <mpm@selenic.com>
+ M:	Herbert Xu <herbert@gondor.apana.org.au>
+ L:	linux-crypto@vger.kernel.org
+ S:	Odd fixes
+-- 
+2.30.2
 
