@@ -2,58 +2,58 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8DDC14332E9
-	for <lists+linux-embedded@lfdr.de>; Tue, 19 Oct 2021 11:56:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 359A743414F
+	for <lists+linux-embedded@lfdr.de>; Wed, 20 Oct 2021 00:24:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234887AbhJSJ6x convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-embedded@lfdr.de>);
-        Tue, 19 Oct 2021 05:58:53 -0400
-Received: from mail-vk1-f169.google.com ([209.85.221.169]:33720 "EHLO
-        mail-vk1-f169.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231652AbhJSJ6w (ORCPT
+        id S229880AbhJSW0Y (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Tue, 19 Oct 2021 18:26:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60492 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229702AbhJSW0Y (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Tue, 19 Oct 2021 05:58:52 -0400
-Received: by mail-vk1-f169.google.com with SMTP id r26so656416vkq.0;
-        Tue, 19 Oct 2021 02:56:39 -0700 (PDT)
+        Tue, 19 Oct 2021 18:26:24 -0400
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com [IPv6:2607:f8b0:4864:20::1031])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B065CC06161C
+        for <linux-embedded@vger.kernel.org>; Tue, 19 Oct 2021 15:24:10 -0700 (PDT)
+Received: by mail-pj1-x1031.google.com with SMTP id lk8-20020a17090b33c800b001a0a284fcc2so990932pjb.2
+        for <linux-embedded@vger.kernel.org>; Tue, 19 Oct 2021 15:24:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:in-reply-to:references:date:message-id
+         :mime-version:content-transfer-encoding;
+        bh=1HjkJ/s77qpPQedlx0RgSf6Pe/gtFpXgvkvC8dCGFU0=;
+        b=BxTLhk9+ebegQi7VeiuJ8gELz4u56+OXRjyqMZBoX0LqA7qfsOxJSz29PFrPQ2a5RY
+         LcxqHlpG5bSgJ3CFC57RhTH/R1HJkTDhjH7E7MLDPRTHfCwF3VUpggNElqDqkUS2LMrz
+         WrNip9ynF/P+x0QTDG0K5z9ZML7kLwU/Wcllgd4JYzKccvn0TPybqUlBx1mDIHh66jJF
+         cahqD9ok9M1Xuk1xeoHgN0qA9CMsGamHAulesB+mv/0r6Qwjtu5IdwmFHnOlMxAZ7Zge
+         8pj6oZJmyZ45JDp8Niu4HYLZB6PLDBK0UzjfbGSLG2hZeMLFKj0odEo1QVoz6EIjCDWe
+         OMuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=Wa3+/NxbJXKxsVHmrMUZvmSmQSRoGR1Z/ThSOCypBgU=;
-        b=RLiuBPgyDuMALuG+PDoK+Ix7F0gDK9B0QI+rfwFL+0gA8Gibk1OretBZt/ejSX30Uc
-         y8ReFiGv2p8N3SShcWZGmGUqDLQEvMHJsC/aQ1P2lyMOH6cCM3+WW5Od+r/jNUuQJThH
-         YvNgQCL5FJmbIzPXuWw0hH8xXh8MBQyMmylTcQ9VeyO+f5nT8Vj8nNMiGdGxZWVdkoam
-         Gzz/xR5pQWg0xecxOFaJxgLs9Iy4WAB2hA1AB/rg5EgrA1z4Q4xzOOg3UIMwUXBn11W+
-         AutH3+Q4CbC1nXJJ9zZzMJDXCFAGUEAOn+EcTG0nYg8a2Ni/ZDts4+qLYTvXPB2XWU5t
-         CY7w==
-X-Gm-Message-State: AOAM532gqlKOYIKq6Jb1rpc2najyFP6rw75RpVEO3XR16L9AzN6/k/jV
-        ud06l5GsMVNHGbfJ6nIkhq1bfwnh6A0BqA==
-X-Google-Smtp-Source: ABdhPJzo4xjW1UUlCXp9Z2apl1bmANu5bFYEOnoA/kQsv80ihNO15arTt5W1FGrYR9o/ka+IpNH0/w==
-X-Received: by 2002:a1f:f241:: with SMTP id q62mr11152778vkh.12.1634637398714;
-        Tue, 19 Oct 2021 02:56:38 -0700 (PDT)
-Received: from mail-ua1-f49.google.com (mail-ua1-f49.google.com. [209.85.222.49])
-        by smtp.gmail.com with ESMTPSA id 33sm3452622vkn.2.2021.10.19.02.56.37
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 19 Oct 2021 02:56:38 -0700 (PDT)
-Received: by mail-ua1-f49.google.com with SMTP id u5so12529217uao.13;
-        Tue, 19 Oct 2021 02:56:37 -0700 (PDT)
-X-Received: by 2002:a05:6102:290c:: with SMTP id cz12mr33705536vsb.35.1634637397645;
- Tue, 19 Oct 2021 02:56:37 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210920080635.253826-1-u.kleine-koenig@pengutronix.de>
- <CA+bK7J741D=DgZMNeEC5xg9kDDSaJu19QsRunVvXkBGx1mKGnQ@mail.gmail.com>
- <YW5r61ZQx+E9xfuH@pendragon.ideasonboard.com> <57122a67509bebdf0d1b9f5bc15db116e0124e5d.camel@infradead.org>
- <YW6UGP10hfGJ2kYy@pendragon.ideasonboard.com>
-In-Reply-To: <YW6UGP10hfGJ2kYy@pendragon.ideasonboard.com>
-From:   Geert Uytterhoeven <geert@linux-m68k.org>
-Date:   Tue, 19 Oct 2021 11:56:26 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdVCrC5_AjNDJN+nwrnn=EVTfD-8ddG=FaFBBh_0UY5acQ@mail.gmail.com>
-Message-ID: <CAMuHMdVCrC5_AjNDJN+nwrnn=EVTfD-8ddG=FaFBBh_0UY5acQ@mail.gmail.com>
-Subject: Re: [PATCH] MAINTAINERS: Remove Matt Mackall as his identity is obsolete
-To:     Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+        h=x-gm-message-state:from:to:cc:subject:in-reply-to:references:date
+         :message-id:mime-version:content-transfer-encoding;
+        bh=1HjkJ/s77qpPQedlx0RgSf6Pe/gtFpXgvkvC8dCGFU0=;
+        b=mCDVnqGEu+ZGFEQLaOckN/Yx5GGRmxmdVtMob684pSYQZzKT6Ufa3GEsiiHsRYC27s
+         DQNZuz8DaWVWgMJ+XIJFvvzG8PINISFaukc8PzmlgC1y92MS8QFaVoiztlNtEWKqA9mj
+         MolVd7ucJZ4NQxJO5MlEXWwgb69mKUFOhZemZiCYBnniGTUadPaQrg+iss7WjGUbZhkT
+         9UWN+FSWZLttkSLUPXnHkL/26MdTjE7F1Kbouqpwoa0rUf8WJkPAXFH6gKzOe9ubhDW+
+         d82PdT702t/XB98ODafSUQ5hFvw9o0QeJQ1zxI5XtHiXxf1jamzFykpXEheBAGzR6UlH
+         zzCw==
+X-Gm-Message-State: AOAM5320ugE+0ds8okSrQI7t4hwziySRfI5467+wwkGtsRv052MzBBcc
+        DQA5uQBoqGIYekf+ggrOx9Sqnw==
+X-Google-Smtp-Source: ABdhPJwLQqa9/353IjPEVTMx7skJRSXdLKW1mf1YwaUVOFV6ydmL3thqxJXuxdriUBbXxED+AQ4PcA==
+X-Received: by 2002:a17:902:7804:b0:13e:d4c6:e701 with SMTP id p4-20020a170902780400b0013ed4c6e701mr35682103pll.66.1634682250190;
+        Tue, 19 Oct 2021 15:24:10 -0700 (PDT)
+Received: from localhost (c-71-197-186-152.hsd1.wa.comcast.net. [71.197.186.152])
+        by smtp.gmail.com with ESMTPSA id z124sm227235pfb.108.2021.10.19.15.24.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 Oct 2021 15:24:09 -0700 (PDT)
+From:   Kevin Hilman <khilman@baylibre.com>
+To:     Geert Uytterhoeven <geert@linux-m68k.org>,
+        Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Cc:     David Woodhouse <dwmw2@infradead.org>,
         Tim Bird <tbird20d@gmail.com>,
-        =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= 
+        Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= 
         <u.kleine-koenig@pengutronix.de>,
         Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
         Paul Gortmaker <paul.gortmaker@windriver.com>,
@@ -62,66 +62,76 @@ Cc:     David Woodhouse <dwmw2@infradead.org>,
         Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
         Sascha Hauer <kernel@pengutronix.de>,
         Matt Porter <mporter@konsulko.com>,
-        Kevin Hilman <khilman@baylibre.com>,
         Thomas Gleixner <tglx@linutronix.de>,
         Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
         Tim Bird <tim.bird@sony.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8BIT
+Subject: Re: [PATCH] MAINTAINERS: Remove Matt Mackall as his identity is
+ obsolete
+In-Reply-To: <CAMuHMdVCrC5_AjNDJN+nwrnn=EVTfD-8ddG=FaFBBh_0UY5acQ@mail.gmail.com>
+References: <20210920080635.253826-1-u.kleine-koenig@pengutronix.de>
+ <CA+bK7J741D=DgZMNeEC5xg9kDDSaJu19QsRunVvXkBGx1mKGnQ@mail.gmail.com>
+ <YW5r61ZQx+E9xfuH@pendragon.ideasonboard.com>
+ <57122a67509bebdf0d1b9f5bc15db116e0124e5d.camel@infradead.org>
+ <YW6UGP10hfGJ2kYy@pendragon.ideasonboard.com>
+ <CAMuHMdVCrC5_AjNDJN+nwrnn=EVTfD-8ddG=FaFBBh_0UY5acQ@mail.gmail.com>
+Date:   Tue, 19 Oct 2021 15:24:08 -0700
+Message-ID: <7hlf2oejqv.fsf@baylibre.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-On Tue, Oct 19, 2021 at 11:48 AM Laurent Pinchart
-<laurent.pinchart@ideasonboard.com> wrote:
-> On Tue, Oct 19, 2021 at 10:33:10AM +0100, David Woodhouse wrote:
-> > On Tue, 2021-10-19 at 09:55 +0300, Laurent Pinchart wrote:
-> > > On Mon, Oct 18, 2021 at 03:17:22PM -0600, Tim Bird wrote:
-> > > > I think an overhaul of the "EMBEDDED LINUX" MAINTAINERS entry
-> > > > is long-overdue.
-> > > >
-> > > > No offense to any of the 3 persons listed, but I think the kernel developer
-> > > > community would be better served by a group of individuals with a more
-> > > > current active role in embedded linux.  I have a few names I'll
-> > > > toss out for
-> > > > candidates: Matt Porter, Kevin Hilman, Thomas Gleixner,  Thomas
-> > > > Petazonni, Laurent Pinchart, and Uwe Kleine-König (and maybe even
-> > > > myself).
-> > > >
-> > > > This entry in the MAINTAINERS file is somewhat special, in that it
-> > > > covers a "field of endeavor" rather than a specific set of files or
-> > > > directories.
-> > > >
-> > > > Thoughts?
-> > >
-> > > Thank you for volunteering me :-)
-> > >
-> > > I was indeed wondering about this particular MAINTAINERS entry. As it
-> > > doesn't cover any particular set of files, directories, drivers,
-> > > subsystems or architectures, what does being listed here endeavour ?
-> >
-> > Basically nothing; I was going to suggest removing it entirely. There's
-> > certainly no point listing me there any more.
-> >
-> > Once upon a time it involved a certain amount of heckling about memory
-> > usage and "your hash table doesn't need to be that large" but that ship
-> > sailed a long time ago :)
+Geert Uytterhoeven <geert@linux-m68k.org> writes:
+
+> On Tue, Oct 19, 2021 at 11:48 AM Laurent Pinchart
+> <laurent.pinchart@ideasonboard.com> wrote:
+>> On Tue, Oct 19, 2021 at 10:33:10AM +0100, David Woodhouse wrote:
+>> > On Tue, 2021-10-19 at 09:55 +0300, Laurent Pinchart wrote:
+>> > > On Mon, Oct 18, 2021 at 03:17:22PM -0600, Tim Bird wrote:
+>> > > > I think an overhaul of the "EMBEDDED LINUX" MAINTAINERS entry
+>> > > > is long-overdue.
+>> > > >
+>> > > > No offense to any of the 3 persons listed, but I think the kernel =
+developer
+>> > > > community would be better served by a group of individuals with a =
+more
+>> > > > current active role in embedded linux.  I have a few names I'll
+>> > > > toss out for
+>> > > > candidates: Matt Porter, Kevin Hilman, Thomas Gleixner,  Thomas
+>> > > > Petazonni, Laurent Pinchart, and Uwe Kleine-K=C3=B6nig (and maybe =
+even
+>> > > > myself).
+>> > > >
+>> > > > This entry in the MAINTAINERS file is somewhat special, in that it
+>> > > > covers a "field of endeavor" rather than a specific set of files or
+>> > > > directories.
+>> > > >
+>> > > > Thoughts?
+>> > >
+>> > > Thank you for volunteering me :-)
+>> > >
+>> > > I was indeed wondering about this particular MAINTAINERS entry. As it
+>> > > doesn't cover any particular set of files, directories, drivers,
+>> > > subsystems or architectures, what does being listed here endeavour ?
+>> >
+>> > Basically nothing; I was going to suggest removing it entirely. There's
+>> > certainly no point listing me there any more.
+>> >
+>> > Once upon a time it involved a certain amount of heckling about memory
+>> > usage and "your hash table doesn't need to be that large" but that ship
+>> > sailed a long time ago :)
+>>
+>> Heckling is still an option without a MAINTAINERS entry I suppose :-)
 >
-> Heckling is still an option without a MAINTAINERS entry I suppose :-)
+> Don't worry, I keep on sailing ;-)
+>
+>> I wouldn't object if we were to remove it.
+>
+> +1
+>
 
-Don't worry, I keep on sailing ;-)
+Agreed.  Let's just drop this entry.
 
-> I wouldn't object if we were to remove it.
-
-+1
-
-Gr{oetje,eeting}s,
-
-                        Geert
-
---
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+Kevin
