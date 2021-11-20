@@ -2,87 +2,69 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4723344F2A5
-	for <lists+linux-embedded@lfdr.de>; Sat, 13 Nov 2021 12:06:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3115B457DE5
+	for <lists+linux-embedded@lfdr.de>; Sat, 20 Nov 2021 13:32:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234552AbhKMLJ1 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Sat, 13 Nov 2021 06:09:27 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60682 "EHLO
+        id S237467AbhKTMfN (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Sat, 20 Nov 2021 07:35:13 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42062 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231735AbhKMLJ0 (ORCPT
+        with ESMTP id S237487AbhKTMfM (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Sat, 13 Nov 2021 06:09:26 -0500
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com [IPv6:2607:f8b0:4864:20::b31])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B91A5C061766
-        for <linux-embedded@vger.kernel.org>; Sat, 13 Nov 2021 03:06:34 -0800 (PST)
-Received: by mail-yb1-xb31.google.com with SMTP id j75so30763737ybj.6
-        for <linux-embedded@vger.kernel.org>; Sat, 13 Nov 2021 03:06:34 -0800 (PST)
+        Sat, 20 Nov 2021 07:35:12 -0500
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com [IPv6:2a00:1450:4864:20::429])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DE89AC06175E
+        for <linux-embedded@vger.kernel.org>; Sat, 20 Nov 2021 04:32:08 -0800 (PST)
+Received: by mail-wr1-x429.google.com with SMTP id d5so23124643wrc.1
+        for <linux-embedded@vger.kernel.org>; Sat, 20 Nov 2021 04:32:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=10bBwmN8LRilUfVQ+V/MGnP938K8arpcWJVfmKkA5t0=;
-        b=mrX+iiOXUEuIfXBIUmy0zW5GX6Li2WR+DTKj+pnJ5/8ZIXCDMOMrflEky2ByUSeNnr
-         y51Glwgd7eHIyZmNhD6CD9amQiftoWl4rgdq196u9NQMmh5d3kyoFDEU5i75FDttYWC+
-         p+55sOF3ZfH+1JIp5fBlaUZQlFz9ZA4TmM8bNP/mEdSujPyWTb8L6JryTLOpsaqoz2/0
-         RmeuJ3RgIYBG25SehjT+PHMaXmdj2Og0wOGKdAUkCzSF9rtdTnZxJ4Sh4exkpPM7mppC
-         q87X8MTi5N0SYYruDEypIfJYHE0oV6cFg55lXm2kQEsXyOeH72uglwLant0LeJWWD8Uw
-         iGCw==
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=w2dLnl5hsLVKZTBAdcVFnDnMtM7+guW1LU+8LG4nir0=;
+        b=dp08c78RK/cKdkLcEe5oTWVItQbA/mSBZUvcdNjKjoEonsOgmj+I3GKva3iaWNyMkt
+         CCIs2ktfIKSlFzCn5+8Hr9rfVlkW2xAcoXH1NXzpdeplBMm6CMUWlUfjratbW5VZHZi+
+         F9u0WOzvv98/gWky6NQmlXJ00LlZSkTFxJTib1hT7PzOpvi2Uj3UQhxu519lTe29nn3R
+         FGtT3XYT43FZo3BFQHxyg+mAUYc7bFOWL4Kk4ANIfllPu/Hp+Feij1RVqcZIqoH0rhBk
+         /Yyd0Iw0yxFXZsMEB4UxgpAwAMU/pU7UOhZoAIzibYPkn+XBxkoaEtLGL8Ldp5BwmYSC
+         xjJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=10bBwmN8LRilUfVQ+V/MGnP938K8arpcWJVfmKkA5t0=;
-        b=QGrzskc5N5HBkNLJTjqNo+/YNxngQBLtCK4wpQnqz4g2XALKW/6syBOt5QP6FWxNwY
-         sNmcvhwW359LASvt1FTIiPPHAg9iOd2XGU4NsM+lp3EYgyMH3/ZrpWRKiEuEC8vajLzm
-         33z6cjZgrBXsq8RLMtaWbJ/TRxpNqFc0dpYFdh3r0cwzjdPU+C5Ui/xpbJGElK3Lfsix
-         bwIWcbeCL422/vj9/mR998eLBmhlZ568zT5fAAPf6lHULtf2XQN/ogbUvuoQ9XIHj+np
-         Wp9Ij2Na6WdsJ52w9A5hK+FV42RT7c+WzM99ZXRlXWmXNQgYG0aD0W6G+FdSHQlpgC7W
-         CBKw==
-X-Gm-Message-State: AOAM532JAYZnRAgK5VxH9zs0k+DUXjooTcvgVzaK4bIz0lhLU3m5z+Jl
-        DX4xKgNuHJfativCh+joS4o86sD3wBgMpzwEseA=
-X-Google-Smtp-Source: ABdhPJzpIFiTQGnzD7/df9Z+oq03ZxU1CR63jfKBDozOeX4YWK9TDThUdCieQVEntcTW4QQabFW+F5zhES3Y7f86KKI=
-X-Received: by 2002:a25:c78c:: with SMTP id w134mr24197047ybe.30.1636801592882;
- Sat, 13 Nov 2021 03:06:32 -0800 (PST)
+         :subject:to;
+        bh=w2dLnl5hsLVKZTBAdcVFnDnMtM7+guW1LU+8LG4nir0=;
+        b=gWFWWjNEgUMHM9NDWx/yas2nkpzIJb7Jb0geISmpz9ZzkeWNThk/lso27BtETo0aT0
+         Sfmfx5clVY/JAnfvpoIXucy/sSj4dgOUgdrdixjZbdJQo8N+1nHxHCCbNb2IpLtqmN8A
+         m/lLRbBEK6GP7WJqtnqX2RNW+f6juqAgUfo1OPEQ+tH5qy2esPT5Nm9lHjR5Ty3OdpYR
+         nJ+rxH10ul461oqub0Jv048P3gYMGyeX7zmYBHvTHXE9vgvlgflSUKhKITmlDZY3HkWR
+         s6iTbyjTLlIvcsKUW898ZQPgbW6gn03rlR9Gj8k9HnNSVw/qvw4OPS4YQoVTGsxM4AyZ
+         weRQ==
+X-Gm-Message-State: AOAM530hYHU1SWqbX7khGQRjNgy0UAMm1HWkJzWQ233D7FIbit6Cczsy
+        Vlq+x2lw95+b625YfPCNK1kgKSrVo91Q7yguX5k=
+X-Google-Smtp-Source: ABdhPJzrwFa7TFTqFvwFs5k0Rdhif8Z7uuK1FAOvH+K0kUx2WcLdYM3cuBXUcAo32aObeRSjQ/+f3OHahwiwxApMIiU=
+X-Received: by 2002:adf:cd06:: with SMTP id w6mr16900697wrm.431.1637411526963;
+ Sat, 20 Nov 2021 04:32:06 -0800 (PST)
 MIME-Version: 1.0
-Received: by 2002:a05:7010:5a44:b0:1e1:44c5:86a8 with HTTP; Sat, 13 Nov 2021
- 03:06:32 -0800 (PST)
-Reply-To: maureenhinckley24@aol.com
-From:   "Mrs. Maureen Hinckley" <prettypresh1990@gmail.com>
-Date:   Sat, 13 Nov 2021 12:06:32 +0100
-Message-ID: <CAL6Zp7znZzLsB1KmuM9R4sxbkVVEkvXzCm+DDwn3Ogp_7QVcHw@mail.gmail.com>
-Subject: BRAUCHEN SIE EINEN KREDIT??
+Received: by 2002:adf:f989:0:0:0:0:0 with HTTP; Sat, 20 Nov 2021 04:32:05
+ -0800 (PST)
+Reply-To: mitchellvivian01@gamil.com
+From:   Mitchell Vivian <duplanmartine36@gmail.com>
+Date:   Sat, 20 Nov 2021 12:32:05 +0000
+Message-ID: <CAO-XXH4jKctBjrghKocs7TkK4=OXKnJketarRZEG9rUSFpG4Ng@mail.gmail.com>
+Subject: Hello
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
---=20
-Ben=C3=B6tigen Sie eine pers=C3=B6nliche & gesch=C3=A4ftliche oder
-Investitionsf=C3=B6rderung, ohne Stress und schnelle Genehmigung? Wenn ja,
-kontaktieren Sie uns noch heute, da wir derzeit Kredite zu einem
-hervorragenden Zinssatz von 3% anbieten. Unsere Finanzierung ist
-gesichert und sicher. Das Gl=C3=BCck unserer Kunden ist unsere St=C3=A4rke.
-Darlehen in H=C3=B6he von 5.000 =E2=82=AC bis 1.000.000 =E2=82=AC USD Euro =
-und Pfund sind
-ab sofort verf=C3=BCgbar: Gesch=C3=A4fts-, Privat-, Haus-, Reise- und
-Studentendarlehen usw. F=C3=BCr weitere Informationen Kreditsachbearbeiter.
+Hello
 
-ANGABEN ZUM kreditnehmer
+My name is Miss Vivian Mitchell. I want to donate my fund $ 4.5
+million USD to you on a charity name to help the poor People.
 
-Dein Name:
-Kreditbetrag:
-Kreditlaufzeit:
-Land
-Die Anschrift:
-G=C3=BCltige Handynummer:
+As soon as I read from you I will give you more details on how to
+achieve this goal and get this fund transferred into your bank
+account.
 
-Danke f=C3=BCr dein Verst=C3=A4ndnis.
-
-Gr=C3=BC=C3=9Fe
-Verwaltung
-
-F=C3=BCr dringende Antworten sehr gerne verf=C3=BCgbar E-Mail: maureenhinck=
-ley24@aol.com
+Thanks have a nice day,
+Miss.vivian
