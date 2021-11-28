@@ -2,77 +2,59 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7F12745F7A1
-	for <lists+linux-embedded@lfdr.de>; Sat, 27 Nov 2021 01:48:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 643FC46127D
+	for <lists+linux-embedded@lfdr.de>; Mon, 29 Nov 2021 11:34:48 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344079AbhK0Avv (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 26 Nov 2021 19:51:51 -0500
-Received: from sgmrmt12-fen.alpha-prm.jp ([157.205.202.226]:34086 "EHLO
-        sgmrmt12-fen.alpha-prm.jp" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1344208AbhK0Atv (ORCPT
-        <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 26 Nov 2021 19:49:51 -0500
-X-Greylist: delayed 1329 seconds by postgrey-1.27 at vger.kernel.org; Fri, 26 Nov 2021 19:49:51 EST
-Received: from sgmtsf13_tsfppi.alpha-prm.jp ([157.205.230.86])
-          by sgmmta19.alpha-prm.jp with ESMTP
-          id <20211127002427.TCKI18148.sgmmta19.alpha-prm.jp@sgmtsf13_tsfppi.alpha-prm.jp>
-          for <linux-embedded@vger.kernel.org>;
-          Sat, 27 Nov 2021 09:24:27 +0900
-Received: from sgmtsf13_tsfppo.alpha-prm.jp (localhost [127.0.0.1])
-        by sgmtsf13_tsfppi.alpha-prm.jp (Postfix) with ESMTP id 40178400006F
-        for <linux-embedded@vger.kernel.org>; Sat, 27 Nov 2021 09:24:27 +0900 (JST)
-Received: from sgmtsf13_tsfccm.alpha-prm.jp (localhost [127.0.0.1])
-        by sgmtsf13_tsfppo.alpha-prm.jp (Postfix) with ESMTP id 3F8D840002E4
-        for <linux-embedded@vger.kernel.org>; Sat, 27 Nov 2021 09:24:27 +0900 (JST)
-Received: from sgmiso06.alpha-prm.jp (sgmiso06-fen.alpha-prm.jp [157.205.230.102])
-        by sgmtsf13_tsfccm.alpha-prm.jp (Postfix) with ESMTP id 3F114400006F
-        for <linux-embedded@vger.kernel.org>; Sat, 27 Nov 2021 09:24:27 +0900 (JST)
-Received: from sgmiso06.alpha-prm.jp (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 32FD84043
-        for <linux-embedded@vger.kernel.org>; Sat, 27 Nov 2021 09:24:27 +0900 (JST)
-Received: from sgmiso06.alpha-prm.jp (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 1EC204046
-        for <linux-embedded@vger.kernel.org>; Sat, 27 Nov 2021 09:24:27 +0900 (JST)
-Received: from sgmmsa21.alpha-prm.jp (unknown [157.205.203.50])
-        by sgmiso06.alpha-prm.jp (Postfix) with ESMTP
-        for <linux-embedded@vger.kernel.org>; Sat, 27 Nov 2021 09:24:27 +0900 (JST)
-Received: from jls.ehle.ac.jp ([49.212.207.12]) by sgmmsa21.alpha-prm.jp
-          with ESMTP
-          id <20211127002427.PIWT4045.sgmmsa21.alpha-prm.jp@jls.ehle.ac.jp>
-          for <linux-embedded@vger.kernel.org>;
-          Sat, 27 Nov 2021 09:24:27 +0900
-Date:   Sat, 27 Nov 2021 00:24:26 +0000
-To:     linux-embedded@vger.kernel.org
-From:   =?UTF-8?B?44Ko44O844Or5a2m5ZyS44CA5pel5pys6Kqe5pWZ6IKy5a2m56eR?= 
-        <jls@ehle.ac.jp>
-Subject: =?UTF-8?B?44GK5ZWP44GE5ZCI44KP44Gb44GC44KK44GM44Go44GG44GU44GW44GE44G+?=
- =?UTF-8?B?44GZ44CC?=
-Message-ID: <BHYTTI8FxgYMpE4a8LswQUXJ3ALAl7LMbj1aJU0cPo@jls.ehle.ac.jp>
-X-Mailer: WPMailSMTP/Mailer/smtp 3.1.0
+        id S1343763AbhK2KiE (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Mon, 29 Nov 2021 05:38:04 -0500
+Received: from mail.vallenar.cl ([200.54.241.89]:35548 "EHLO mail.vallenar.cl"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S235743AbhK2KgC (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
+        Mon, 29 Nov 2021 05:36:02 -0500
+Received: from localhost (localhost [127.0.0.1])
+        by mail.vallenar.cl (Postfix) with ESMTP id 70A371CEF776;
+        Sun, 28 Nov 2021 14:07:12 -0300 (-03)
+Received: from mail.vallenar.cl ([127.0.0.1])
+        by localhost (mail.vallenar.cl [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id BaEeZa31vyGI; Sun, 28 Nov 2021 14:07:12 -0300 (-03)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.vallenar.cl (Postfix) with ESMTP id 4F34E1D0777A;
+        Sun, 28 Nov 2021 12:25:19 -0300 (-03)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.vallenar.cl 4F34E1D0777A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vallenar.cl;
+        s=EC098874-C7DE-11E7-B3B1-1A9A6030413E; t=1638113119;
+        bh=IQxUcKgLaEia+DMrVj9OEHbWOH8TffrzQMeZgAxYubI=;
+        h=MIME-Version:To:From:Date:Message-Id;
+        b=jf1I9xxTxaZ6C1OPQA/zc1UFnqDmEwitooMxMRjabthONAuC6U3R0IP//IvSQA3V3
+         sfxJI4SikGFyh3v7uBTruIne42iLkWnWkZNU3zB0BjyXTvsF0LPExIxWa4y6YNo/bh
+         DtNsSa0kkZwc/WRDUBSg0kVbHW06Kzf4dZkjqoDKZ0pgz2jgI6qw6K207FW1a19leR
+         l4FjJvip+pfZsC3/06O14Txg0Kl/Y6GLesCDFtUzF9XRRP0Ncs/mJThhrkAY9YE6W4
+         XrL3QMNmR8R/nhSHbokwg8YetJ7RMD8qoG/i//791FMtFN6LcYW6TYf2PmEOL3H3NU
+         ubd9HD/OXMlGw==
+X-Virus-Scanned: amavisd-new at vallenar.cl
+Received: from mail.vallenar.cl ([127.0.0.1])
+        by localhost (mail.vallenar.cl [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id pryR-6tLuzzF; Sun, 28 Nov 2021 12:25:19 -0300 (-03)
+Received: from [192.168.8.101] (unknown [105.0.3.102])
+        by mail.vallenar.cl (Postfix) with ESMTPSA id 183F31D08C99;
+        Sun, 28 Nov 2021 11:21:38 -0300 (-03)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: 2.000.000,00. Euro
+To:     Recipients <yperez@vallenar.cl>
+From:   "manuel franco" <yperez@vallenar.cl>
+Date:   Sun, 28 Nov 2021 16:29:08 +0200
+Reply-To: manuelfrancospende00@gmail.com
+Message-Id: <20211128142139.183F31D08C99@mail.vallenar.cl>
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-❤️ Alice want to meet you! Click Here: http://bit.do/fSGXu?8k5y ❤️様
+Sie haben eine Spende von 2.000.000,00. Euro
 
-お問い合わせありがとうございます。
-
-入力された内容は以下のとおりです。
- 
-＊お名前/Name：❤️ Alice want to meet you! Click Here: http://bit.do/fSGXu?8k5y ❤️
-＊年齢/Age： dg1lbgjc
-＊性別/SEX： 女性 Woman
-＊送付先のE-mail/Contact E-mail Adress：linux-embedded@vger.kernel.org
-＊ご連絡先  電話番号/Tel：523345807206-523345807206-523345807206
-＊国籍/Nationality：qi2ufcnp
-＊最終学歴/Your Final Academic Degree：3fvn46k
-＊日本語力/日本語学習歴 / Japanese Ability ／Study Record of Japanese(hours)：a1w5ap
-＊留学後の計画 / Your Future Plan：u0945b0o
-
-＊質問
-z712huqk
-
+Mein Name ist Manuel Franco aus den Vereinigten Staaten.
+Ich habe die Amerika-Lotterie im Wert von 768 Millionen US-Dollar gewonnen =
+und spende einen Teil davon an nur 5 gl=FCckliche Menschen und ein paar Wai=
+senh=E4user als Wohlwollen f=FCr die Menschheit.
