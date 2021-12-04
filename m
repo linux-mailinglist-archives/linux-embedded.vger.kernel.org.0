@@ -2,78 +2,70 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A2013464CD6
-	for <lists+linux-embedded@lfdr.de>; Wed,  1 Dec 2021 12:34:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D020E468372
+	for <lists+linux-embedded@lfdr.de>; Sat,  4 Dec 2021 10:05:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1349020AbhLALhi (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 1 Dec 2021 06:37:38 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33532 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1348952AbhLALhe (ORCPT
+        id S1384342AbhLDJIo (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Sat, 4 Dec 2021 04:08:44 -0500
+Received: from sv7461.xserver.jp ([202.254.239.142]:50892 "EHLO
+        sv7461.xserver.jp" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1354761AbhLDJIo (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 1 Dec 2021 06:37:34 -0500
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com [IPv6:2607:f8b0:4864:20::430])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6A40BC06175F
-        for <linux-embedded@vger.kernel.org>; Wed,  1 Dec 2021 03:34:10 -0800 (PST)
-Received: by mail-pf1-x430.google.com with SMTP id 8so24084708pfo.4
-        for <linux-embedded@vger.kernel.org>; Wed, 01 Dec 2021 03:34:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:sender:from:date:message-id:subject:to;
-        bh=l4J9Z+m4hmgZbWtQHlC70w1zjUmiI7wjClCwm6dHAnY=;
-        b=nKE9e+4jEQRb21OhoYPSbxPLfJ2IuSmNXU0U6wmcP4ykCacrWpdbtE0jjuz/hSLLGi
-         3CHjeG+lFmWzoULwCsmlhVFgDEk5dLFaYb51pw7bXGjZ9H8t0j91dP9aL17MRQYkMPZK
-         Snvty/Yp8/ZrWZr2EuFXHqBxUdbU8X39ik45viERJ1Dn7qW8BPCFp2vlafV2okU0kn5j
-         QPTIDY8QJSy8zAVbK10d6+AY0lky+mrQRAAg0uS1DacQStzD/dQtt/uBz/RlGIdZCai/
-         BHep24kmiLdl1nvBvHYMFonu8NoJvJlErv7lbZlg2+2c277BpkzmDA4WwPZoxzlIf0Mh
-         Af5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-         :to;
-        bh=l4J9Z+m4hmgZbWtQHlC70w1zjUmiI7wjClCwm6dHAnY=;
-        b=sHwBJlS2luz2LCR6sPgHWP2qA5UK5loT4grTRbTU/GVsHltFWJea3Mw7AiRV4Jly+N
-         QXNIJ57SAuVcDanZYZ8zKVMGEfTXjpDn3mnGxW4U3mlKTOnexJD107Vr1tA7XU2rnxQS
-         Q/k7wuiXXHBV/JyFbTZDytTnbZxn2YzzXCShDjULu3doSj5sCp3cJo2mb4wTOv3NNUOx
-         9PhGYyRxV+XYlIL5VDwI9TExtE2tMEZCxZMe4cvnwEYXYwT4LjrMFVfVioQRgwJ5F/4/
-         vd76qaToIto+t1Fob8jk7UNgukx2SvnSoWVdMIoCYoTnofK8Y6RPP67pK77/cgSaFl5H
-         DMNg==
-X-Gm-Message-State: AOAM531Rv/wuudXN0O3CRyrvwoJDglp9Ie21O8rp+1OEp3rYXenD8I6E
-        1DTVqfF0Uo7e66MCUBuwKcuhJcJuAu8YLZjgyijI1VeIKxQ=
-X-Google-Smtp-Source: ABdhPJwK+H50pzFgfv5CJPfAwBzUdMqIKHh+Ckkuju2lG2knVlJrzqINPiiwPjc/Uz6xuSJez7Fkn5YZPcfa5CPpvro=
-X-Received: by 2002:a67:ef4d:: with SMTP id k13mr6266305vsr.4.1638358439020;
- Wed, 01 Dec 2021 03:33:59 -0800 (PST)
+        Sat, 4 Dec 2021 04:08:44 -0500
+X-Greylist: delayed 326 seconds by postgrey-1.27 at vger.kernel.org; Sat, 04 Dec 2021 04:08:43 EST
+Received: from virusgw7003.xserver.jp (virusgw7003.xserver.jp [202.254.239.243])
+        by sv7461.xserver.jp (Postfix) with ESMTP id E1CAC3A4B4782F
+        for <linux-embedded@vger.kernel.org>; Sat,  4 Dec 2021 17:59:50 +0900 (JST)
+Received: from sv7461.xserver.jp (202.254.239.142)
+ by virusgw7003.xserver.jp (F-Secure/fsigk_smtp/521/virusgw7003.xserver.jp);
+ Sat, 04 Dec 2021 17:59:50 +0900 (JST)
+X-Virus-Status: clean(F-Secure/fsigk_smtp/521/virusgw7003.xserver.jp)
+Received: by sv7461.xserver.jp (Postfix, from userid 20050)
+        id DFF333A4B47829; Sat,  4 Dec 2021 17:59:50 +0900 (JST)
+To:     linux-embedded@vger.kernel.org
+Subject: =?ISO-2022-JP?B?GyRCJCpMZDlnJG8kOyQiJGokLCRIJCYkNCQ2JCQkXiQ5ISMbKEI=?=
+Date:   Sat, 4 Dec 2021 08:59:50 +0000
+From:   WordPress <info@ikebata-farm.com>
+Reply-To: ikebata.noriaki999@gmail.com
+Message-ID: <df0cb34406ec289084e79f7be89c42cf@ikebata-farm.com>
+X-Mailer: PHPMailer 5.2.22 (https://github.com/PHPMailer/PHPMailer)
 MIME-Version: 1.0
-Sender: unitednationawardwinner@gmail.com
-Received: by 2002:ab0:6c55:0:0:0:0:0 with HTTP; Wed, 1 Dec 2021 03:33:58 -0800 (PST)
-From:   "Mrs. Orgil Baatar" <mrs.orgilbaatar21@gmail.com>
-Date:   Wed, 1 Dec 2021 03:33:58 -0800
-X-Google-Sender-Auth: uTQ_nfkzXaWGWaTWp1BSFqK3Ucs
-Message-ID: <CAJ4dHaSrD-X=xpfKNZV-hXSiMV6mNYrgy5vWCNkKm6iu5RQStg@mail.gmail.com>
-Subject: Your long awaited part payment of $2.5.000.00Usd
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=ISO-2022-JP
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Attention: Beneficiary, Your long awaited part payment of
-$2.5.000.00Usd (TWO MILLION FIVE Hundred Thousand United State
-Dollars) is ready for immediate release to you, and it was
-electronically credited into an ATM Visa Card for easy delivery.
+?? Alice want to meet you! Click Here: http://bit.do/fSMno?4su4 ??　様
 
-Your new Payment Reference No.- 6363836,
-Pin Code No: 1787
-Your Certificate of Merit Payment No: 05872,
+お問合わせありがとうございます。
 
-Your Names: |
-Address: |
+内容を確認後、ご連絡しますので
+少々お待ち下さい。
 
-Person to Contact:MR KELLY HALL the Director of the International
-Audit unit ATM Payment Center,
+以下は、お客様から送信いただいた内容ですので、
+再度、ご確認ください。
 
-Email: uba-bf@e-ubabf.com
-TELEPHONE: +226 64865611 You can whatsApp the bank
+■お名前
+?? Alice want to meet you! Click Here: http://bit.do/fSMno?4su4 ??
 
-Regards.
-Mrs ORGIL BAATAR
+■フリガナ
+7dfqmu
+
+■Email
+linux-embedded@vger.kernel.org
+
+■TEL（電話連絡が必要な場合）
+189008215781
+
+■お問い合わせ内容
+o4e7zvzo
+
+
+有限会社　池端牧場
+
+〒061-3251　
+北海道石狩市樽川97-11
+TEL／0133-8538
+FAX／0133-73-6522
+Email. info@ikebata-farm.com
+
