@@ -2,84 +2,67 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BE11949ED3C
-	for <lists+linux-embedded@lfdr.de>; Thu, 27 Jan 2022 22:12:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D4DE4A33F7
+	for <lists+linux-embedded@lfdr.de>; Sun, 30 Jan 2022 05:30:04 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S245433AbiA0VKv (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Thu, 27 Jan 2022 16:10:51 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59248 "EHLO
+        id S1354158AbiA3E2T (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Sat, 29 Jan 2022 23:28:19 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38008 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1344139AbiA0VKu (ORCPT
+        with ESMTP id S1354166AbiA3E2P (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Thu, 27 Jan 2022 16:10:50 -0500
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com [IPv6:2607:f8b0:4864:20::835])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AAF12C061758
-        for <linux-embedded@vger.kernel.org>; Thu, 27 Jan 2022 13:10:49 -0800 (PST)
-Received: by mail-qt1-x835.google.com with SMTP id o3so3549985qtm.12
-        for <linux-embedded@vger.kernel.org>; Thu, 27 Jan 2022 13:10:49 -0800 (PST)
+        Sat, 29 Jan 2022 23:28:15 -0500
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com [IPv6:2607:f8b0:4864:20::b33])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 338DDC06175C
+        for <linux-embedded@vger.kernel.org>; Sat, 29 Jan 2022 20:28:15 -0800 (PST)
+Received: by mail-yb1-xb33.google.com with SMTP id i10so30409147ybt.10
+        for <linux-embedded@vger.kernel.org>; Sat, 29 Jan 2022 20:28:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=wXM0hly6tyNlZq07rMipvtfpnu3wRqtV0B2JSV05g3E=;
-        b=m0D8ivz9PDCDCKh/arptMpR3/ao+LhFd+WDbL0Ndw6mZAYZf1UgxGLzVj40s+AmZjb
-         DuEwjd7NT9LFwA9OjKx7vr7puLYpS6zkJNbh+1BfuQgx4db+dU06Jgc7C75K093Hwjn/
-         9mCc5rYI5j3y1VvMx9vpxL5dad+OafMT9QhIQgFRN9dvv+QgByQ7o1yzKGSP02L54Znm
-         q7FBXWGkelfiR3xpWnnkdKDqg2UlG70uCnsM1s4SP7cRlEb+IJNQAjeVKHpZy42mZonq
-         RnHAdJAaDrxUHvlQWr6CsD5rnkBvpJUkcJOYzRgUFr/Bb7DCHALpPY9Ux9K4Rjywr0lt
-         YgYA==
+        bh=B5teSI3NqSzeGu7ngV/22RiyR60khzQ8THYZDZ9DX3Q=;
+        b=QI2firgHOSt+2ZiRAEUqBnRqfCndbuygIyUz1kdYlPzS6AXkdk+mfMubksdM+6U8hJ
+         A4UbXdfo0bhasYFmsw5ceBBj4ub2bgaEqkI+Cp5foQd/M11l9HiEax3hX9+hB29fNDF1
+         4XtAbOKK0Jrn48roHo8mUNvKaz7FG0Csy4DWdnw8Q+/oXs7GbWFZBjN+ifwhy6Rfe8k0
+         Pzhs5uXUX+5v6iQyGpPCJWV84GisQUz+5cfOraMc3PalgV6vYI9t2Z4JMkhIMshepKV2
+         BM+Zj3o1QTUTRt1Kxwo+5vz+cvvR7n44irHUjPq0LbDCW52O0lwQK7qPtMHxw7vn0Id9
+         5U2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:reply-to:from:date:message-id
          :subject:to;
-        bh=wXM0hly6tyNlZq07rMipvtfpnu3wRqtV0B2JSV05g3E=;
-        b=lSKevQya3qT586nkIELum/3OXKza3KIxnPr6/7T/FxTLZIybU19hGQbyY5qG1sCGRm
-         /AhTdbExPKTkWqez5ugJhJRfB1+Ci2yg6llzL6fcyS9DbRePeIJu7Mtx2A94rnwphKKN
-         8kolfE8+15MLQnrpw+kgjJNXZgX3SQp3al0YoUJUW5NfiYlZniRQQTes86ah7DNDeXTH
-         QZA1tSVKwWxtD90mZiSi+5m5rIGENT5Aq0f9c+rWIFEg0s+ifkO3pfPMHPvcg7IUIHC+
-         pagbnZTUj41NAcb3SQ5ozZzVzYmAeo4xGr+ldtKarLC01NBs+yln/uHoBODxPqwH4Zgq
-         dAjg==
-X-Gm-Message-State: AOAM533dRjsmNvH8mW/U6WSiRLokg7RzLtdFNekdZd8zC3gekRqAIXKo
-        6wZ1AimcIboaqrJ3p/de2/hyGKpR58oR+Y4z9x0=
-X-Google-Smtp-Source: ABdhPJxjfwa8g49rNfb5xQ4Dtq316EM5E6QepnaR+uvM+BcTaI+qmB/caHz8VslukXXXqzp0798ys0wp0mZ+YQ4gMH8=
-X-Received: by 2002:ac8:4e48:: with SMTP id e8mr4202203qtw.64.1643317847801;
- Thu, 27 Jan 2022 13:10:47 -0800 (PST)
+        bh=B5teSI3NqSzeGu7ngV/22RiyR60khzQ8THYZDZ9DX3Q=;
+        b=Sqmzm9djTJqXGU+2pw6QkT2Q6BoSkce2EnrRxOlq21ROf5ybLnWCOYYVBpOXf0ynAL
+         26mU7OJi2NRXXFbOBw5KTAeNgTlTNyFk01yXJKZbx/jlhE5VJ8mZkqQYezc1SMxJLP2G
+         MN4IOOZQyXS5oF9mOX8cyJ1n4nq0jQNFo4VayqBINDS1iWlgRxDueArCE0V+MN0NxVY7
+         yxVgOacFJxAHRAylKrwj9DT1kqlgORMkH1MrcoDPTNPE2z4uwBlEloYQI8i5i5mq2LNP
+         aNvdyyAOdSt0QMcQ9MPaVo7MKkU+6jJTj8E+EDv3glq13bQbVf+jmKoASYNQ9+UuZQoB
+         Lfiw==
+X-Gm-Message-State: AOAM532CvzTHeEiI0h7TxPeX43r0qvKlGhU7EbGmeOyLB6QLX2RCcaCK
+        4VTBuoUyLQ1azq4IwleHw2LYXlk8xCPt3OE1iEo=
+X-Google-Smtp-Source: ABdhPJz3bgso8viJFkNwiW8XigzdjL6JZBPDE3NfxKOCgEqvWjdU/qagorQKM5joSRLXylFmq9/zlHP85rUYuZ5fTGQ=
+X-Received: by 2002:a25:6d45:: with SMTP id i66mr23246397ybc.352.1643516893721;
+ Sat, 29 Jan 2022 20:28:13 -0800 (PST)
 MIME-Version: 1.0
-Received: by 2002:a05:6214:e4b:0:0:0:0 with HTTP; Thu, 27 Jan 2022 13:10:46
- -0800 (PST)
-Reply-To: eanna00111@gmail.com
-From:   Mrs Anna Edward <mussaaliooooo7@gmail.com>
-Date:   Thu, 27 Jan 2022 13:10:46 -0800
-Message-ID: <CAFbf-n2dj0f-EXo2OhZA4D_6QXVYoysuMB5_+AOQv9Sb_nGe0w@mail.gmail.com>
-Subject: Urgent Reply
+Received: by 2002:a05:7010:2312:b0:201:cd76:102e with HTTP; Sat, 29 Jan 2022
+ 20:28:13 -0800 (PST)
+Reply-To: mrs.bill.chantalone01@gmail.com
+From:   "Mrs.Bill.Chantal" <grassroot309@gmail.com>
+Date:   Sun, 30 Jan 2022 05:28:13 +0100
+Message-ID: <CAO3iUMDzg_ZovNWXtuQhU6sDXk7LsNwvNc2pOb7zvX7pPCdMAw@mail.gmail.com>
+Subject: Hello....
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Greeting to you,
-Please forgive me for stressing you with my predicaments and I sorry
-to approach you through this media because it serves the fastest means
-of communication. I came across your E-mail from my personal search
-and I decided to contact you believing you will be honest to fulfill
-my final wish before I die.
+You have been compensated with the sum of 9.5 million dollars in this
+united nation the payment will be issue into atm visa  card and send
+to you from the santander bank we need your address and your
+Whatsapp number  + 1 6465853907  this my email.ID
+( mrs.bill.chantal.roland@gmail.com )  contact  me
 
-I am Mrs Anna Edward, 63 years, from USA, I am childless and I am
-suffering from a pro-long critical cancer, my doctors confirmed I may
-not live beyond two months from now as my ill health has defiled all
-forms of medical treatment. Since my days are numbered, I have decided
-willingly to fulfill my long-time promise to donate you the sum
-($5.000.000.00) million dollars I inherited from my late husband Mr.
-Edward Herbart, foreign bank account over years. I need a very honest
-person who can assist in transfer of this money to his or her account
-and use the funds for charity work of God while you use 50% for
-yourself. I want you to know there is no risk involved; it is 100%
-hitch free & safe.
+Thanks my
 
-If you are interested in assisting in getting this fund into your
-account for a charity project to fulfill my promise before I die
-please let me know immediately.
-
-I will appreciate your utmost confidentiality as I wait for your reply.
-Best Regards,
-Mrs Anna Edward
+mrs bill chantal
