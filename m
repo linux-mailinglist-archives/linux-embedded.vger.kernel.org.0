@@ -1,92 +1,73 @@
 Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
-Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 129D14A51B6
-	for <lists+linux-embedded@lfdr.de>; Mon, 31 Jan 2022 22:41:03 +0100 (CET)
+Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
+	by mail.lfdr.de (Postfix) with ESMTP id 5C5B94A90FA
+	for <lists+linux-embedded@lfdr.de>; Fri,  4 Feb 2022 00:04:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1381268AbiAaVjK (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Mon, 31 Jan 2022 16:39:10 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51590 "EHLO
+        id S238236AbiBCXDI (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 3 Feb 2022 18:03:08 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36622 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1381154AbiAaViU (ORCPT
+        with ESMTP id S233999AbiBCXDH (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Mon, 31 Jan 2022 16:38:20 -0500
-Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com [IPv6:2607:f8b0:4864:20::242])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 553DEC06175C
-        for <linux-embedded@vger.kernel.org>; Mon, 31 Jan 2022 13:38:10 -0800 (PST)
-Received: by mail-oi1-x242.google.com with SMTP id y23so29316836oia.13
-        for <linux-embedded@vger.kernel.org>; Mon, 31 Jan 2022 13:38:10 -0800 (PST)
+        Thu, 3 Feb 2022 18:03:07 -0500
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com [IPv6:2a00:1450:4864:20::433])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 08F2EC061714
+        for <linux-embedded@vger.kernel.org>; Thu,  3 Feb 2022 15:03:07 -0800 (PST)
+Received: by mail-wr1-x433.google.com with SMTP id k18so7900289wrg.11
+        for <linux-embedded@vger.kernel.org>; Thu, 03 Feb 2022 15:03:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=RcCyF58LaRxi/j1nHAT0ApLeXmQ9s66f3iMVqhPacvY=;
-        b=dEuqzCa7Zlz6s4mRGbRbRWXXanD59qsT+xmKk7tBbCVL8shmNgt9pnuL3r3GZQALql
-         Y63DqHUGCnZO0yzAtzp7ZNS2CuC8pMKUMaMtNqE3s9gB45FDt9/C7CdeYDqwmv7HZJbj
-         h6fZit5aG7dGp8FvXKTscfcGshyIKAGZl/Y4NFvWe+GDkg5MDDBzPsbgzyvzZ7B1mfX4
-         ltlQ0tRJrdsWlCdvxMPpvS+PhwNDM1Zp7MYHnfnHzWMTP4bbhrhxbQSB0Xw9LPR0gSp/
-         L2Vas/DZH4ZiZyplfhihUfOHaOD2GjtH1tg3ZI6lVgxDcwRnl8d4U3qCI5tj+07J/ZXk
-         SzvA==
+        h=message-id:mime-version:content-transfer-encoding
+         :content-description:subject:to:from:date:reply-to;
+        bh=hLKKlTamHmOeS5867qC1N70RfK9okumqJMQVjg6BpqI=;
+        b=GTcoXOAsnRIoBxgJIieOMW5H7K9UBM0sktPnJP84c6JfITu/3DyCnyyhgA9sYdeGsx
+         +iDyN14kvS09+JZRzdHOdUR1Zp3R5WBAw654kom0HE8Ws2hX/oXtodjl4vfQhf7TvlCh
+         reyBjpoRk/nzANCpyJc/OrRhZVpRBl5Yrk0LsQ4atroeRummKM0eJ+tnVgEbQEukkk9k
+         s3yPe8zuF16lvwHUuIZ/ulRqzUrlFd1o3w04XBRAexCiQzSC15oH/1hFjLBnzrTwtOf1
+         uKrY+nVfXAgwniGFcg7CPioIjuItzyzBsjAgRNccUiE12LUiqj3hs896SxX8uEH1EJFe
+         ZmNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=RcCyF58LaRxi/j1nHAT0ApLeXmQ9s66f3iMVqhPacvY=;
-        b=XBh8cYZD3/Bcuu8/PquGHgPqfmncmMp3YO/TqhtTTLQP8N62/pFXeq6QsYtrF/U4u/
-         NZHXC1rPoiju+pC+U/VcXuNkbKJ2E3CoVESvOgCJkYKvDv2g8tT7dV7zlYT3/EA/UbWr
-         /KIecpN428tAzPwJaZ7Ik/k2mE1Do7FTXHjHmSR5a3j3Ja/WpksmKQP3EYICkKkTMrP1
-         fHUPfOBsPNFqjBwb9712N2qdIoA2Lj/zdeAzYGkw6RBDh9bQ7foBnPGKI123rvTYD/vn
-         Xm4My2rSlGTMQpgjXrAwXqJXhuRP0hWP0eLCe9ZrsRiCNfW1Et0FJbYxLBDN6w4yiutl
-         LXAA==
-X-Gm-Message-State: AOAM530Pnfpbv3BauNu1j6pgXqF2Gtut04jJoPnXXmbPy4+nB3b6SPEq
-        7nYTzQ2WXAVxwMkgvOYElizI4CpMpt6X+bLk1Gs=
-X-Google-Smtp-Source: ABdhPJzjG4nHBnpm1YeRsvfpKVsM6nmNJIeFJaztEJrNHMe+iyJctx1iGavTAT23A2IhS4j6LtYbunRiUquAn1xj08o=
-X-Received: by 2002:a54:4490:: with SMTP id v16mr14818764oiv.157.1643665089421;
- Mon, 31 Jan 2022 13:38:09 -0800 (PST)
+        h=x-gm-message-state:message-id:mime-version
+         :content-transfer-encoding:content-description:subject:to:from:date
+         :reply-to;
+        bh=hLKKlTamHmOeS5867qC1N70RfK9okumqJMQVjg6BpqI=;
+        b=q0v0ArFGG20HtVrQuMqCZztIfAkFK24MwVK+G4W0jqB3dZOqm+I4FnMG2altdVUDGe
+         uegeaP6uB1HWPjAysEn0m2Hg8+L+erfYOV3YKPjnOhj8QW1u7jh9e8bshLvrTkcyNpjZ
+         waVA5rc39WNPkzPu9/uxfjqTx5N7/UCz3bTTyStlQ2hcXLCIb8yFRKl+sqJmzskS6AMQ
+         n7MNAOD8GQM0nWt2sFoeJMb1IRRAPXG79t0dya5zWKA/LqmKJGbHxEpAWR/oGdmBRWmk
+         kMacVkCWgOvau9Tb9cWMbux0c2pL3eOyPerfmlhCrGQ0F3v91ASUZrGJSMGiBOsmeUGa
+         xQgA==
+X-Gm-Message-State: AOAM531jWRIY6BG0q8rtMyxoXRRol/a7fJKV0w4r8SV4CdRK7mXc0ge3
+        1bNAKq2u18AF/IMd5aombyc=
+X-Google-Smtp-Source: ABdhPJwq9P88byIcdGUkeaGLz0Qgf4wQORE/maFA/8GEqBB2s53BedExQhBKXVbruJMkCgj0fttcAA==
+X-Received: by 2002:adf:fbc8:: with SMTP id d8mr152060wrs.64.1643929385599;
+        Thu, 03 Feb 2022 15:03:05 -0800 (PST)
+Received: from [192.168.43.45] ([102.91.4.98])
+        by smtp.gmail.com with ESMTPSA id j12sm129356wru.38.2022.02.03.15.03.00
+        (version=TLS1 cipher=AES128-SHA bits=128/128);
+        Thu, 03 Feb 2022 15:03:04 -0800 (PST)
+Message-ID: <61fc5f28.1c69fb81.78359.0a90@mx.google.com>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Received: by 2002:a4a:c30d:0:0:0:0:0 with HTTP; Mon, 31 Jan 2022 13:38:09
- -0800 (PST)
-Reply-To: westerunion909@gmail.com
-From:   "Antonia Lloyd." <anthonylloydatmxxx04@gmail.com>
-Date:   Mon, 31 Jan 2022 13:38:09 -0800
-Message-ID: <CAExPwBBpihjV-rv_-+hYqb1WD3wpSWx81B_Q3ES15U3TXSPsyw@mail.gmail.com>
-Subject: Dear Email ID Owner.(USD$4000 IMF COMPENSATION FUND TO PICK UP TODAY).
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Mein Zeugnis
+To:     Recipients <harryben5177@gmail.com>
+From:   harryben5177@gmail.com
+Date:   Fri, 04 Feb 2022 00:03:00 +0100
+Reply-To: maureenhinckley24@aol.com
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Dear Email ID Owner.
+Mein Zeugnis
 
-The IMF is compensating all the email address that was funds as one of
-the ward win Victims and your email address and your name is among the
-listed one of approved to pay the sum of $3.6 million U.S Dollars. We
-have concluded to effect your own payment through Western Union Money
-Transfer for easy pick-up of those funds in good condition,$4000 twice
-daily,till the $3.6 million is completely transferred to you.We now
-need your information where we will be sending the funds,such
-as;Receiver name(Your full Name)address and phone number.Contact
-Western Union agent with this Email: ( westerunion995@gmail.com  ) for
-your payment fund.
-
-Ms.Maria Zatto
-E-mail:westerunion995@gmail.com
-Telephone: +229 682 97 169
-
-Contact Ms.Maria,immediately you get this mail through western union
-email address above to enable her speed-up.your payment and release
-the $4000 dollars MTCN today for you to pick up the payment OK.
-
-You are expected to provide us with the details as prescribed below to
-enable safe and easy release of your funds today.
-
-(1)Your Full name:
-(2)Your Phone number:
-(3)Your Country:
-(4)Your Age:
-
-Thank you,
-Dr.Antonia Lloyd.
-Contact Dir.Western Union Money Transfer,
-Cotonou-Benin Republic.
+Ich bin heute froh, dass ich nach vielen Jahren finanzieller Not ein Darleh=
+en von diesem seri=F6sen Unternehmen erhalten habe und dabei auch betrogen =
+wurde, bis ich diese gro=DFartige Frau traf, die mir mit einem Darlehen von=
+ 53.000 Euro geholfen hat und zu der ich allen Kreditsuchenden raten werde =
+Kontaktieren Sie dieses Unternehmen unter: F=FCr dringende Antworten sehr g=
+erne verf=FCgbare E-Mail: maureenhinckley24@aol.com
