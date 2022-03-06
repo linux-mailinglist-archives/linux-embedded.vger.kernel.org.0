@@ -2,72 +2,76 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8DE914A9EE5
-	for <lists+linux-embedded@lfdr.de>; Fri,  4 Feb 2022 19:23:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EA66C4CE9D1
+	for <lists+linux-embedded@lfdr.de>; Sun,  6 Mar 2022 07:52:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1377506AbiBDSVY (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 4 Feb 2022 13:21:24 -0500
-Received: from e234-6.smtp-out.ap-northeast-1.amazonses.com ([23.251.234.6]:37715
-        "EHLO e234-6.smtp-out.ap-northeast-1.amazonses.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1377504AbiBDSVX (ORCPT <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 4 Feb 2022 13:21:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-        s=ok2ydnk2gwzkjqje3k7apqelbxs6dolw; d=reciproseeds.com;
-        t=1643998881;
-        h=Date:To:From:Reply-To:Subject:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
-        bh=F7bKI+GzIWqx8ccTxylrngDq5r2JI3xnnHJRCDqd57Y=;
-        b=eRiEdfjaEjkVOAYSlHdz7FsYePUaB+ILSYC7aP1X4ZztZDb7D3WyUYfMZSRReyzF
-        Am2MMaypsbn78X3Euw62JWIi/3JwyEQz+NdZxoYJOvZxUvSTxF3Rh9kCtXTjqiv+lFQ
-        WsjYd1FCdVv1ljjwHVLPgL2Oe/IBpYE1XXAO81Jo=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-        s=wf7ez2pjvcsodozkoqksj277kza7wu47; d=amazonses.com; t=1643998881;
-        h=Date:To:From:Reply-To:Subject:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID;
-        bh=F7bKI+GzIWqx8ccTxylrngDq5r2JI3xnnHJRCDqd57Y=;
-        b=AG700jEBztq9Qr3RfrURxIbeH34tFfwunmXqvQofZ3f5D7Lt3K6trhyWlTOStBoz
-        d+FBsU2sSvULctTcEoGH9nZ+nuNkKsEAe7Mz4MMWb+rTk38cdbXUEugaJpoxOmNyjOQ
-        JC6W7HzFzWVFLFAnZzHuQk1mkTx17huFcI2QCxKE=
-Date:   Fri, 4 Feb 2022 18:21:21 +0000
-To:     linux-embedded@vger.kernel.org
-From:   "info.reciproseeds@gmail.com" <info@reciproseeds.com>
-Reply-To: info.reciproseeds@gmail.com
-Subject: =?UTF-8?B?cmVjaXByb3NlZWRz44G444Gu44GK5ZWP44GE5ZCI44KP44Gb5YaF5a65?=
-Message-ID: <0106017ec5f8266f-7b5174db-1036-4d65-ac1c-66d241cc5e6d-000000@ap-northeast-1.amazonses.com>
-X-Mailer: WPMailSMTP/Mailer/smtp 2.5.1
+        id S233050AbiCFGvq (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Sun, 6 Mar 2022 01:51:46 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33638 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233029AbiCFGvo (ORCPT
+        <rfc822;linux-embedded@vger.kernel.org>);
+        Sun, 6 Mar 2022 01:51:44 -0500
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com [IPv6:2a00:1450:4864:20::22f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8B13431DD7
+        for <linux-embedded@vger.kernel.org>; Sat,  5 Mar 2022 22:50:50 -0800 (PST)
+Received: by mail-lj1-x22f.google.com with SMTP id r22so768200ljd.4
+        for <linux-embedded@vger.kernel.org>; Sat, 05 Mar 2022 22:50:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
+        bh=VaaSLAJ+hgNGNq49WyPsh3ndDLo+mnrYcswrOHpJSv8=;
+        b=KDgAx1nMZI4VA0728iAuqALj69hyn7X0WLLUiz2m+OH09NDtWJqkn0K0IjhaqXccDL
+         nYA9IS56U+BvEYDp5ZuYOTDJ28DkbGQXOo4nCoFRXwOq8btCUGBKve+nLdvXGAtQGfZd
+         8/3HmQyIohZytZNIAaZ2YSJ+VGfF2cuAbX+92kqJIy7dPjcCYPV+qxcIVHj5OJkNioe8
+         RnnPJV63I7FofbcYlKCR7cawwHR+Gyj/OksLFoNh7LOBENUnMHRRrWfgS+R5N0DbQgRd
+         FM7OvtlHYW5haJ9bCovh/xFv8pj40s/F/HFWyLhlvxnDTkjGlvvz7xTkeBicCtgptiHh
+         fIkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:sender:from:date
+         :message-id:subject:to;
+        bh=VaaSLAJ+hgNGNq49WyPsh3ndDLo+mnrYcswrOHpJSv8=;
+        b=pe/oGOs6NIdEZqoz72x+SQ3EIVI/icv+jnYwsvFUWUWHvWe4WlIuEKvRmtqSSoOwhE
+         A2jmATiMYB5WihjHZINwewxFDwHoMpdMy+yuML9NEQ5SZuQsFvwRXVzB7tS83aTb+4EM
+         8qZi96PtQZ6VeNqLuqRHX5k1vgZpYC/tizdzYtWe8u1Dd9/5kkX/80rwjb5Rb1GTk6mj
+         vttvDKNvUcWxjZsGU/E157XeenzxHX7V+uOaVyTYwzEhw/0xgwWp/w/ou0senOGQG1BB
+         HhZBmB9PTn7y8/mjsAsP1U41AETO/wAdbq6qETchRgz8cjrk1E5WCAQB9boIy4iiPVZX
+         iOgQ==
+X-Gm-Message-State: AOAM5335xFuPNqgiRJ1MOySWJ5VVb564e3d+FqegGjAWqhKoD2AYmhY1
+        rQT2On3XKoZrn0bg83Dq71zTRwvabKIYJ4/tPaI=
+X-Google-Smtp-Source: ABdhPJzq04i8VJyC6uwySEx5tzgrtxCg/XL0hqdBTWFWm66/zQAuy3m2ubrZV75jrYUP9jvmG0PdhfRUhLuebg8/B7w=
+X-Received: by 2002:a2e:94c7:0:b0:247:de4e:e9bc with SMTP id
+ r7-20020a2e94c7000000b00247de4ee9bcmr2397951ljh.397.1646549448778; Sat, 05
+ Mar 2022 22:50:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Feedback-ID: 1.ap-northeast-1.yye8D2LxXy03YazVlRDdIlMo/5AawHCJcep8TUqAXD4=:AmazonSES
-X-SES-Outgoing: 2022.02.04-23.251.234.6
+Reply-To: mrs.susanelwoodhara17@gmail.com
+Sender: mrs.arawyann@gmail.com
+Received: by 2002:ab3:7d89:0:0:0:0:0 with HTTP; Sat, 5 Mar 2022 22:50:48 -0800 (PST)
+From:   Mrs Susan Elwood Hara <mrs.susanelwoodhara17@gmail.com>
+Date:   Sun, 6 Mar 2022 06:50:48 +0000
+X-Google-Sender-Auth: NOWRSnt_sskMD3s295a30bcHvEs
+Message-ID: <CACppo47TD9J4Sy+vaJu1wXHqd88WqFwMNn6OdkY1khwXu3TuFw@mail.gmail.com>
+Subject: GOD BLESS YOU AS YOU REPLY URGENTLY
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        SUBJ_ALL_CAPS,T_HK_NAME_FM_MR_MRS,T_SCC_BODY_TEXT_LINE,UNDISC_MONEY
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
+X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
+        lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-❤️ Carolyn is interested in your profile! Click Here: http://inx.lv/DOrO?ubh ❤️ 様
+GOD BLESS YOU AS YOU REPLY URGENTLY
 
-この度はお問い合わせ誠にありがとうございます。
-
-以下の内容でお問い合わせを受け付けいたしました。後ほど、担当者よりご連絡をさせていただきます。今しばらくお待ちください。
-
-□■□    お問い合わせ内容　□■□
-
-お名前：
-❤️ Carolyn is interested in your profile! Click Here: http://inx.lv/DOrO?ubh ❤️　様
-
-組織名：
-xn7qmnrs　
-
-部署名：
-gyh70j　
-
-メールアドレス：
-linux-embedded@vger.kernel.org
-
-電話番号:
-421509637043
-
-お問い合せ内容：
-486efi
-
-
-
+ Hello Dear,
+Greetings, I am contacting you regarding an important information i
+have for you please reply to confirm your email address and for more
+details Thanks
+Regards
+Mrs Susan Elwood Hara.
