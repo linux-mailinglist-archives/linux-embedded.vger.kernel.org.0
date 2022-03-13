@@ -2,76 +2,84 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EA66C4CE9D1
-	for <lists+linux-embedded@lfdr.de>; Sun,  6 Mar 2022 07:52:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2AA484D73B3
+	for <lists+linux-embedded@lfdr.de>; Sun, 13 Mar 2022 09:30:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233050AbiCFGvq (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Sun, 6 Mar 2022 01:51:46 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33638 "EHLO
+        id S233782AbiCMI31 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Sun, 13 Mar 2022 04:29:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43020 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233029AbiCFGvo (ORCPT
+        with ESMTP id S232259AbiCMI3Y (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Sun, 6 Mar 2022 01:51:44 -0500
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com [IPv6:2a00:1450:4864:20::22f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8B13431DD7
-        for <linux-embedded@vger.kernel.org>; Sat,  5 Mar 2022 22:50:50 -0800 (PST)
-Received: by mail-lj1-x22f.google.com with SMTP id r22so768200ljd.4
-        for <linux-embedded@vger.kernel.org>; Sat, 05 Mar 2022 22:50:50 -0800 (PST)
+        Sun, 13 Mar 2022 04:29:24 -0400
+X-Greylist: delayed 400 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sun, 13 Mar 2022 00:28:14 PST
+Received: from rivercrane.com (smtp04.webike.net [59.106.218.148])
+        by lindbergh.monkeyblade.net (Postfix) with SMTP id 163F8BC9D
+        for <linux-embedded@vger.kernel.org>; Sun, 13 Mar 2022 00:28:12 -0800 (PST)
+Comment: DKIM? See http://www.dkim.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
-        bh=VaaSLAJ+hgNGNq49WyPsh3ndDLo+mnrYcswrOHpJSv8=;
-        b=KDgAx1nMZI4VA0728iAuqALj69hyn7X0WLLUiz2m+OH09NDtWJqkn0K0IjhaqXccDL
-         nYA9IS56U+BvEYDp5ZuYOTDJ28DkbGQXOo4nCoFRXwOq8btCUGBKve+nLdvXGAtQGfZd
-         8/3HmQyIohZytZNIAaZ2YSJ+VGfF2cuAbX+92kqJIy7dPjcCYPV+qxcIVHj5OJkNioe8
-         RnnPJV63I7FofbcYlKCR7cawwHR+Gyj/OksLFoNh7LOBENUnMHRRrWfgS+R5N0DbQgRd
-         FM7OvtlHYW5haJ9bCovh/xFv8pj40s/F/HFWyLhlvxnDTkjGlvvz7xTkeBicCtgptiHh
-         fIkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:sender:from:date
-         :message-id:subject:to;
-        bh=VaaSLAJ+hgNGNq49WyPsh3ndDLo+mnrYcswrOHpJSv8=;
-        b=pe/oGOs6NIdEZqoz72x+SQ3EIVI/icv+jnYwsvFUWUWHvWe4WlIuEKvRmtqSSoOwhE
-         A2jmATiMYB5WihjHZINwewxFDwHoMpdMy+yuML9NEQ5SZuQsFvwRXVzB7tS83aTb+4EM
-         8qZi96PtQZ6VeNqLuqRHX5k1vgZpYC/tizdzYtWe8u1Dd9/5kkX/80rwjb5Rb1GTk6mj
-         vttvDKNvUcWxjZsGU/E157XeenzxHX7V+uOaVyTYwzEhw/0xgwWp/w/ou0senOGQG1BB
-         HhZBmB9PTn7y8/mjsAsP1U41AETO/wAdbq6qETchRgz8cjrk1E5WCAQB9boIy4iiPVZX
-         iOgQ==
-X-Gm-Message-State: AOAM5335xFuPNqgiRJ1MOySWJ5VVb564e3d+FqegGjAWqhKoD2AYmhY1
-        rQT2On3XKoZrn0bg83Dq71zTRwvabKIYJ4/tPaI=
-X-Google-Smtp-Source: ABdhPJzq04i8VJyC6uwySEx5tzgrtxCg/XL0hqdBTWFWm66/zQAuy3m2ubrZV75jrYUP9jvmG0PdhfRUhLuebg8/B7w=
-X-Received: by 2002:a2e:94c7:0:b0:247:de4e:e9bc with SMTP id
- r7-20020a2e94c7000000b00247de4ee9bcmr2397951ljh.397.1646549448778; Sat, 05
- Mar 2022 22:50:48 -0800 (PST)
+        d=rivercrane.com; s=default; x=1647764894; h=Comment:
+        DomainKey-Signature:Received:Received:Date:To:From:Subject:
+        Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
+        bh=lIq6bXVZ3B1NMCCSsA/MJlT6fArapyOcviPHUT7ZDcw=; b=bpf9AS1kUlxCF
+        d/YRxT6WUODZDg0o/VHiyt/DmboZlW6sSxhhRUiZd1l27dQlqx6rrNJ59oADjfz9
+        wvkfCgiiqAzgxuMt32ZoxRI6IvW5yDCEmWSbU0e+YkkhSQWZORwl+fg6TFddKC6x
+        4mhVyTl8EwzyEGOenjk2pCCDC7BqPg=
+Comment: DomainKeys? See http://antispam.yahoo.com/domainkeys
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws;
+        s=default; d=rivercrane.com;
+        h=Received:Received:Date:To:From:Subject:Message-ID:X-Mailer:MIME-Version:Content-Type:Content-Transfer-Encoding;
+        b=JezNN8bvpjEGyjXxLGi5D+L7lyFCt2hNI8QNESoxkACSyHc1yuhw/fq7UaEftC
+        9G38b7GqY1dvrJrcqib44uEybW3LmvgGPg72T2/DFZ45Wdp4Gr2oxRaUd2Kfcijq
+        JvN0AGhcAYGBfDUnSVHHiFo80azmRp89MQGao9HRam2kk=;
+Received: (qmail 7487 invoked from network); 13 Mar 2022 17:21:31 +0900
+Received: from 189.231.238.202.static.iijgio.jp (HELO localhost.localdomain) (202.238.231.189)
+  by smtp04.webike.net with SMTP; 13 Mar 2022 17:21:31 +0900
+Date:   Sun, 13 Mar 2022 08:21:31 +0000
+To:     linux-embedded@vger.kernel.org
+From:   =?UTF-8?B?5qCq5byP5Lya56S+44Oq44OQ44O844Kv44Os44Kk44M=?= 
+        <fc_recruit@rivercrane.com>
+Subject: =?UTF-8?B?44GU5b+c5Yuf44GC44KK44GM44Go44GG44GU44GW44GE44G+44GZ77yI5qCq?=
+ =?UTF-8?B?5byP5Lya56S+44Oq44OQ44O844Kv44Os44Kk44Oz77yJ?=
+Message-ID: <dmgYTd3C7zy2w9xECo629zNF3HM3DxQe3b2xE2Q@localhost.localdomain>
+X-Mailer: WPMailSMTP/Mailer/smtp 3.1.0
 MIME-Version: 1.0
-Reply-To: mrs.susanelwoodhara17@gmail.com
-Sender: mrs.arawyann@gmail.com
-Received: by 2002:ab3:7d89:0:0:0:0:0 with HTTP; Sat, 5 Mar 2022 22:50:48 -0800 (PST)
-From:   Mrs Susan Elwood Hara <mrs.susanelwoodhara17@gmail.com>
-Date:   Sun, 6 Mar 2022 06:50:48 +0000
-X-Google-Sender-Auth: NOWRSnt_sskMD3s295a30bcHvEs
-Message-ID: <CACppo47TD9J4Sy+vaJu1wXHqd88WqFwMNn6OdkY1khwXu3TuFw@mail.gmail.com>
-Subject: GOD BLESS YOU AS YOU REPLY URGENTLY
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        SUBJ_ALL_CAPS,T_HK_NAME_FM_MR_MRS,T_SCC_BODY_TEXT_LINE,UNDISC_MONEY
-        autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=3.5 required=5.0 tests=BAYES_99,BAYES_999,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: ***
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-GOD BLESS YOU AS YOU REPLY URGENTLY
+🍓 Patsy want to meet you! Click here: https://clck.ru/dcqDj?ebga 🍓様
 
- Hello Dear,
-Greetings, I am contacting you regarding an important information i
-have for you please reply to confirm your email address and for more
-details Thanks
-Regards
-Mrs Susan Elwood Hara.
+株式会社リバークレイン 採用担当です。
+この度は弊社アルバイト/パート募集に御応募いただきましてありがとうございます。
+
+ご登録いただいたメールアドレス宛に担当から選考について折り返しご連絡いたします。
+今しばらくお待ちいただけますようよろしくお願いいたします。
+
+
+氏名：🍓 Patsy want to meet you! Click here: https://clck.ru/dcqDj?ebga 🍓
+生年月日：2020年12月31日
+電話番号：810712810167
+メールアドレス：linux-embedded@vger.kernel.org
+希望職種：【中央林間】倉庫内軽作業スタッフ
+その他特記事項：c4h0akc1
+
+
+※折り返しのご連絡が届かない場合には何らかのメールエラーが考えられます。
+大変お手数ですが、その場合には「fc_recruit@rivercrane.com」宛に直接ご連絡をお願いいたします。
+
+----------------------------------------------
+株式会社リバークレイン 採用担当
+fc_recruit@rivercrane.com
+https://www.rivercrane.com/
+----------------------------------------------
+
