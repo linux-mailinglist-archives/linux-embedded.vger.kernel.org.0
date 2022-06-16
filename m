@@ -2,35 +2,66 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 25A55547E95
-	for <lists+linux-embedded@lfdr.de>; Mon, 13 Jun 2022 06:30:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8C7B954DF0E
+	for <lists+linux-embedded@lfdr.de>; Thu, 16 Jun 2022 12:27:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233462AbiFME2w (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Mon, 13 Jun 2022 00:28:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46402 "EHLO
+        id S1376467AbiFPKZ2 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 16 Jun 2022 06:25:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41752 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232599AbiFME2t (ORCPT
+        with ESMTP id S1376475AbiFPKZY (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Mon, 13 Jun 2022 00:28:49 -0400
-X-Greylist: delayed 44059 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sun, 12 Jun 2022 21:28:46 PDT
-Received: from yodobashi.com (unknown [106.75.87.74])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id D552318E18
-        for <linux-embedded@vger.kernel.org>; Sun, 12 Jun 2022 21:28:45 -0700 (PDT)
-Sender: info@yodobashi.com
-Date:   Mon, 13 Jun 2022 12:28:39 +0800
-From:   "yodobashi" <admin@yodobashi.com>
-To:     <linux-embedded@vger.kernel.org>
-Subject: =?gb2312?B?peilyaXQpbelyaXDpcils6Xgo7qhuKSqv82YlMfpiPOhuaXRpbml7w==?=
-        =?gb2312?B?qWClyYnkuPykzt9CvWo=?=
-Message-ID: <20220613122846623201@yodobashi.com>
-X-mailer: Foxmail 6, 13, 102, 15 [cn]
-Mime-Version: 1.0
-Content-Type: text/plain;
-        charset="gb2312"
-Content-Transfer-Encoding: base64
-X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,RCVD_IN_PBL,RDNS_NONE,
-        SPF_FAIL,SPF_HELO_FAIL,T_SCC_BODY_TEXT_LINE autolearn=no
-        autolearn_force=no version=3.4.6
+        Thu, 16 Jun 2022 06:25:24 -0400
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com [IPv6:2a00:1450:4864:20::12a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7F5815DA29
+        for <linux-embedded@vger.kernel.org>; Thu, 16 Jun 2022 03:25:19 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id t25so1518903lfg.7
+        for <linux-embedded@vger.kernel.org>; Thu, 16 Jun 2022 03:25:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=lLG88JCPgF7Yhflf4FNi4GQedsSNMbwmPtgneUr9Mu0=;
+        b=W910NhxhsjMJh8xmTqiBb+n/d8vNhkQvEK3uQsx019H/NVF/HsRkR91Mwgf5NoOA2o
+         +G9NG8HKS3dufLn4HoWATUwViMwR/sm7gdhYVGjSBp65IoH9/VzeePSRwsxtnWyD2IYd
+         /P+anhEIznyuyfYSv0fd8QvDY0LuzCx2TbyvmZF5dM2Nj4uA7+9FyoHxvD1xuHmQyiMU
+         TCzjnL3q1oIV583xyWy0s+D4KRyb2LgtwArAnNeV+m1AO8ORaxA26nm4VB9kA/9NXW1T
+         yHcu0NzK0YGRQb2+53awbQan+6daAbhIX2qCkYqY9Qavm2WmKJIEIH3npl/ZhVNAwvQV
+         qPgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=lLG88JCPgF7Yhflf4FNi4GQedsSNMbwmPtgneUr9Mu0=;
+        b=z2X4189UF97iARV19MTbKY7krV1Jv/5a3I5fLtAjH1/VzYU0AmbkQ/Z+FI+eTewGfM
+         2NSH3zQHePKqcu4Lj0ffSW5MFQb7DCXZQP8I/1Zvy/KpYyaYOf/yEfd9UHX+TVtNkm1l
+         8fMJxwVtNIOBqiKyIiii038t5HTHGsp1Vz1ebKR8GRiHUgL5cljWEFQSb+5VLMNdrmvu
+         8LitG/+PT5YpS82QLuLQ7cdOZ7ec2eIVGzz8/4VRv5ygHP8J58CksBHhoA0fhVTWInS/
+         zxlTCPTnJ4X+6qlHV0Es1Q9TB5AqcPf5pKbII8zKK98XrTfxaIQAgZe9llp7T2UVvb2h
+         /K1w==
+X-Gm-Message-State: AJIora8l1IeaOZuykZS+dk72MFnVpapYNwjYi6j7TkJbaroP/Ec9muCZ
+        f8WcUQfnxI/8laUx+THYBHvYvAktOJtelom0IVM=
+X-Google-Smtp-Source: AGRyM1v2MTXGyROmKEYPPr3IJqOTubJyWU9u6UFQYhvDngD40bhPycsNsVME02FGDV5945mXaS61m+8B4cqbLiC7v1U=
+X-Received: by 2002:a05:6512:3448:b0:479:10f0:11c7 with SMTP id
+ j8-20020a056512344800b0047910f011c7mr2248569lfr.521.1655375117521; Thu, 16
+ Jun 2022 03:25:17 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a05:6520:28c2:b0:1f3:cf5:e20d with HTTP; Thu, 16 Jun 2022
+ 03:25:16 -0700 (PDT)
+Reply-To: clmloans9@gmail.com
+From:   MR ANTHONY EDWARD <bashirusman02021@gmail.com>
+Date:   Thu, 16 Jun 2022 11:25:16 +0100
+Message-ID: <CAGOBX5aJ01nW_foH2aLY6UF6s28QePJ4_J3aCt=hjQSuJNsdog@mail.gmail.com>
+Subject: DARLEHENSANGEBOT
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=4.3 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
+        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
+        version=3.4.6
 X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -38,25 +69,13 @@ Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-ofah9qH2obikqr/NmJTH6Yjzobml0aW5pe+pYKXJieS4/KTO30K9aqH2ofah9g0Ko6iks6TOpeGp
-YKXrpM+hosXk0MWMn9PDpM6loqXJpeyluaTHxeTQxaS1pOykxqSkpN6kuaOpDQoNCqSqv82YlKTO
-pKq/zZiUx+mI84nkuPzK1r5BpK2k8qSqpLOkyqSkpN6kt6S/oaMNCsTayN2kzqS0tF/VSqTypKru
-iqSkpKSkv6S3pN6kuaGjDQqjqKXRpbml76lgpcmkz6Gise3KvqS3pMakqqTqpN6ku6Tzo6kNCg0K
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0NCqG+ieS4/Iydz/OkzrvhhlSl0aW5pe+pYKXJob8NCrvhhlRJRKGhOqGhbGludXgtZW1iZWRk
-ZWRAdmdlci5rZXJuZWwub3JnDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KDQqh8YnkuPyktaTspL+kqr/NmJTH6YjzIA0KLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCuuK
-1JK3rLrFDQrI1dbQpM6ktN9CvWrPyOuK1JK3rLrFDQoNCqS0tcflaMfpiPOkz6Giz8LTm6G4pKq/
-zZiUjJ/Tw6XaqWCluKG5pKuk6aS0tF/VSqSvpMCktaSkoaMNCg0KqIukqr/NmJSMn9PDpdqpYKW4
-DQpodHRwczovL3d3dy15b2RvYmFzaC1jb20ubGluZ2VycDYudGVjaA0KDQotLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0Kofmks6TOpeGp
-YKXrxNrI3aTL0MSkoqS/pOqkzqTKpKSI9rrPpM+hoqSqytbK/aTHpLmkrKGipeilyaXQpbc/pcml
-w6XIP6WzpeCkqoaWpKS6z6TvpLu3mb/apNjWwbyxpLTfQr1qpPKkqu6KpKSkpKS/pLek3qS5oaMN
-Cg0KpLOkzqXhqWCl66TPoaLF5NDFjJ/Tw6TOpaKlyaXspbmkx8Xk0MWktaTspMakpKTepLmhow0K
-pKrK1sr9pPKkqpLspLGkpKS/pLek3qS5pKyhoqSzpM6l4algpeukzsTayN2ky6TEpKSkxqTOpKqG
-lqSkus+k76S7pM/PwtObpM7fQr1qz8ik3qTHpKruiqSkpKSkv6S3pN6kuaGjDQoNCqXopcml0KW3
-pcmlw6XIpbOl4CCkqoaWpKS6z6TvpLu3mb/aDQpFbWFpbDogaW5mb0B5b2RvYmFzaGkuY29tDQoN
-Cg0KQ29weXJpZ2h0MjAyMiBZb2RvYmFzaGkgQ2FtZXJhIENvLixMdGQuDQo=
+--=20
+Ben=C3=B6tigen Sie ein Gesch=C3=A4ftsdarlehen oder ein Darlehen jeglicher A=
+rt?
+Wenn ja, kontaktieren Sie uns
 
-
+*Vollst=C3=A4ndiger Name:
+* Ben=C3=B6tigte Menge:
+*Leihdauer:
+*Mobiltelefon:
+*Land:
