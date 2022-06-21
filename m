@@ -2,74 +2,108 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1368254FA50
-	for <lists+linux-embedded@lfdr.de>; Fri, 17 Jun 2022 17:31:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D9098552EEF
+	for <lists+linux-embedded@lfdr.de>; Tue, 21 Jun 2022 11:41:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1383125AbiFQP32 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 17 Jun 2022 11:29:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57556 "EHLO
+        id S1349244AbiFUJjs (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Tue, 21 Jun 2022 05:39:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51580 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1383121AbiFQP31 (ORCPT
+        with ESMTP id S1349214AbiFUJjq (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 17 Jun 2022 11:29:27 -0400
-Received: from mail.altsetonline.com (mail.altsetonline.com [51.254.119.51])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 870043D1DE
-        for <linux-embedded@vger.kernel.org>; Fri, 17 Jun 2022 08:29:26 -0700 (PDT)
-Received: by mail.altsetonline.com (Postfix, from userid 1002)
-        id CC0672574E; Fri, 17 Jun 2022 15:28:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=altsetonline.com;
-        s=mail; t=1655479701;
-        bh=ZWOA/1seUbDdknp7vWPZTi/LTxkJxgWJ33h0PDOotrA=;
-        h=Date:From:To:Subject:From;
-        b=i9LRHozvPqccuxiH9NmaU2k+KixUVxp2YcSRS2heUq3EgZm1zuQJEkmM96BBqNlEo
-         E5PJe02oMzVPANZ3g7KTda9J+AVtxRDqZtr0X9ZT8c2eiA8fIZVAAsFLSkg+qHM7KX
-         0w2mwggu7NuI4yQaDFzKkdhZsCwDePX0Iv6g8ktxVHg/pEXxLpIOA5L9dXf//d36E2
-         2+PsMUIGQY8+lxh3BrzUxLwLC9sTHsDCmHZtSkKjmg0EeAcDIzmutzVwZcGrRHFDaF
-         uMHwA0guGtAxjUCG1rrl6Eek0uTYmP9UUbWcknTaH+P3nmWxQjD9aNgs7ve36+KLto
-         zqlbM4KAb+n5Q==
-Received: by mail.altsetonline.com for <linux-embedded@vger.kernel.org>; Fri, 17 Jun 2022 15:28:05 GMT
-Message-ID: <20220617141500-0.1.13.53kd.0.2dp0edhfme@altsetonline.com>
-Date:   Fri, 17 Jun 2022 15:28:05 GMT
-From:   "Walker Cooney" <walker.cooney@altsetonline.com>
-To:     <linux-embedded@vger.kernel.org>
-Subject: SEO analysis 
-X-Mailer: mail.altsetonline.com
+        Tue, 21 Jun 2022 05:39:46 -0400
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com [IPv6:2607:f8b0:4864:20::112f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C61DC27B04
+        for <linux-embedded@vger.kernel.org>; Tue, 21 Jun 2022 02:39:45 -0700 (PDT)
+Received: by mail-yw1-x112f.google.com with SMTP id 00721157ae682-3177e60d980so103130037b3.12
+        for <linux-embedded@vger.kernel.org>; Tue, 21 Jun 2022 02:39:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=/0bRExIb6Mv4sy5raFRmeQINC+UUx7zEZcUUOWWOPJg=;
+        b=NKhg6kSkfnglJlsPDVUWhCY3Iibudx7OhZC5CePFgeNekYJKNrcmU8wB8gkktmjPqY
+         f0o4DET3nwW7oGb1WQAmWVCm6yLISrVrQXMY/9qoCppMNLX7K/jA/JZ+JMs1mNT38j+N
+         qSlM2vTiSOIkQo5cZ6oY4dkMVda7fWn0vzKRT295Q67AStI8u0BTanvw38uSxo4IMvFm
+         mtbeFJOQugEk6bmbrSLJZHxNWvSEoU0AT9TQz59V3jAGDZbWiI6U0Fx8UlroTYMr9wGQ
+         +xC78kHT5AZK7k/f6wmWhdDj3ThC5Cy20ctCKCcYvb/idPExEpgvQXB/UX/ziCu3vO07
+         Q2/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=/0bRExIb6Mv4sy5raFRmeQINC+UUx7zEZcUUOWWOPJg=;
+        b=HFwFQLxyTR09KojKcR0Z6GhDmq4Gggx6cPDmqCu5KyRD4KQegNg6j5SKyGnOEb0pX6
+         9sbGWsrkFoFPmuXVSsRjfmRNMQhyU00N51F5xIQaQiujC4tR4pR8aQY4wkp34aTaEWdN
+         QMG4/Soz/LAC1c4W3ddmOjfc+r0+xdy2JrwxNb0eNW+LB3nWeP0GGuTLNj7lXcPc3Lqw
+         QaPJriJl59E0CEn7S5m2qUJLD8UgqxtRcR1imSFzafRKZoGBlM0mf7Gx0mU8gWFXAhCK
+         FWJBVG/3SGp0msaCHPKzH/WpIZ97Lg5ef7oAxW4b+2Kas/UWI1ABxYYAgkRytkCUN0Ve
+         GqHw==
+X-Gm-Message-State: AJIora+jdw5B3AATv2Dx1nim313f2g4GKBXqWpoKNOXUAlR4X1dUKI18
+        LwbksVAd1Ytu9G7p8rAZYHzlXa2v8alnsQZyiTc=
+X-Google-Smtp-Source: AGRyM1sTF/SvvxCyraPE52znD36ZX02jNmxmam87lP8bWzXT3yTfChS1a9JgJI9LjBXh9tpS4qLO5E/t+5efudcEruY=
+X-Received: by 2002:a0d:d7c7:0:b0:317:bfe8:4f2 with SMTP id
+ z190-20020a0dd7c7000000b00317bfe804f2mr12417910ywd.276.1655804384555; Tue, 21
+ Jun 2022 02:39:44 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 2002:a05:7010:e10a:b0:2d9:e631:94d0 with HTTP; Tue, 21 Jun 2022
+ 02:39:44 -0700 (PDT)
+Reply-To: dimitryedik@gmail.com
+From:   Dimitry Edik <lsbthdwrds@gmail.com>
+Date:   Tue, 21 Jun 2022 02:39:44 -0700
+Message-ID: <CAGrL05aBO8rbFuij24J-APa+Luis69gEjhj35iv_GZfkHCVYDQ@mail.gmail.com>
+Subject: Dear Partner,
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: Yes, score=7.8 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        LOTS_OF_MONEY,MONEY_FREEMAIL_REPTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_MONEY_PERCENT,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM,
+        UNDISC_MONEY autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2607:f8b0:4864:20:0:0:0:112f listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5000]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [lsbthdwrds[at]gmail.com]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        *  0.0 LOTS_OF_MONEY Huge... sums of money
+        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
+        *  2.2 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+        *  2.0 MONEY_FREEMAIL_REPTO Lots of money from someone using free
+        *      email?
+        *  0.0 T_MONEY_PERCENT X% of a lot of money for you
+        *  2.0 UNDISC_MONEY Undisclosed recipients + money/fraud signs
+X-Spam-Level: *******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Hello,
+Hello Dear,
 
-would you like to reach more clients?
+My Name is Dimitry Edik from Russia A special assistance to my Russia
+boss who deals in oil import and export He was killed by the Ukraine
+soldiers at the border side. He supplied
+oil to the Philippines company and he was paid over 90 per cent of the
+transaction and the remaining $18.6 Million dollars have been paid into a
+Taiwan bank in the Philippines..i want a partner that will assist me
+with the claims. Is a (DEAL ) 40% for you and 60% for me
+I have all information for the claims.
+Kindly read and reply to me back is 100 per cent risk-free
 
-As one of the first SEO agencies in Europe, we=E2=80=99ve introduced SEO =
-360 service (SEO, UX, and SEM), which assures a multidimensional approach=
- to optimising company=E2=80=99s visibility online and increasing website=
- traffic.
-
-We provide a free consultation with our specialist, during which we will =
-conduct a detailed analysis of your website or e-shop, positioning indica=
-tors and check the actions and results achieved by your competitors.
-
-Our clients gain notable results by using a dedicated strategy, extensive=
- website analytics, technical optimisation, adding new subpages and link =
-building.
-
-With 14 years of experience and the skills of over 350 specialists workin=
-g on 3 continents, you can increase your sales and become an industry lea=
-der.
-
-Please let us know if you want to learn more about our methods and possib=
-le results.
-
-Yours sincerely,
-
-Walker Cooney
+Yours Sincerely
+Dimitry Edik
