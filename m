@@ -2,49 +2,78 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DA8B355C3D9
-	for <lists+linux-embedded@lfdr.de>; Tue, 28 Jun 2022 14:48:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 72C0A56B123
+	for <lists+linux-embedded@lfdr.de>; Fri,  8 Jul 2022 05:56:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1345325AbiF1LHO (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Tue, 28 Jun 2022 07:07:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35130 "EHLO
+        id S237123AbiGHDyQ (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 7 Jul 2022 23:54:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42794 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1345302AbiF1LHM (ORCPT
+        with ESMTP id S236471AbiGHDyQ (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Tue, 28 Jun 2022 07:07:12 -0400
-X-Greylist: delayed 3635 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 28 Jun 2022 04:06:59 PDT
-Received: from www2055.sakura.ne.jp (www2055.sakura.ne.jp [59.106.171.65])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 265E831933;
-        Tue, 28 Jun 2022 04:06:58 -0700 (PDT)
-Received: from fsav315.sakura.ne.jp (fsav315.sakura.ne.jp [153.120.85.146])
-        by www2055.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 25S97Gs4026639;
-        Tue, 28 Jun 2022 18:07:16 +0900 (JST)
-        (envelope-from 1955@kkden.co.jp)
-Received: from www2055.sakura.ne.jp (59.106.171.65)
- by fsav315.sakura.ne.jp (F-Secure/fsigk_smtp/550/fsav315.sakura.ne.jp);
- Tue, 28 Jun 2022 18:07:16 +0900 (JST)
-X-Virus-Status: clean(F-Secure/fsigk_smtp/550/fsav315.sakura.ne.jp)
-Received: from www2055.sakura.ne.jp (localhost [127.0.0.1])
-        by www2055.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 25S97Dso026581;
-        Tue, 28 Jun 2022 18:07:16 +0900 (JST)
-        (envelope-from 1955@kkden.co.jp)
-Received: (from kkden@localhost)
-        by www2055.sakura.ne.jp (8.15.2/8.15.2/Submit) id 25S97DN6026577;
-        Tue, 28 Jun 2022 18:07:13 +0900 (JST)
-        (envelope-from 1955@kkden.co.jp)
-Message-Id: <202206280907.25S97DN6026577@www2055.sakura.ne.jp>
-X-Authentication-Warning: www2055.sakura.ne.jp: kkden set sender to 1955@kkden.co.jp using -f
-Subject: THIS IS VERY CONFIDENTIAL
-From:   Steve Dibenedetto <1955@kkden.co.jp>
-To:     stevedibenedetto17@gmail.com
+        Thu, 7 Jul 2022 23:54:16 -0400
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com [IPv6:2607:f8b0:4864:20::42e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 34C4C74DE2;
+        Thu,  7 Jul 2022 20:54:15 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id w185so18788492pfb.4;
+        Thu, 07 Jul 2022 20:54:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=boMoiQ7O+iidCb90Ajv0DmnlcZVRw9XoN19BAZFvz0Q=;
+        b=PAyzN5zd/pXMr0RfDgSRgyz4Ab0+ZK907q7JkXafq6rbA3DcUNwLv5MiOJ1OBvPZ+V
+         PVwOxqIDf+vtFY20qOvDzu8QOgWCau6I5AogopFe/fL+KRzzw7fPvgYyfQjaENFMCxhJ
+         xLnU5P3XiTqEpk0xes2ZN95I1wdpTFL/r5fwqOTpj1OW5kHdzSVneiInXKAqbFOLXcif
+         Rx0w5p3ICf4IeSQO/dC5l5RzTrNu45MfvHpOF+VXMXh30W4oBpxVxTb65yarIDtu2UYR
+         dg7BmRy3zDyStQBKIswemyXYyeh+2InZad8Uhd0gu8M0zAWb0SXaAkTX33OP42l7MT1W
+         zTyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=boMoiQ7O+iidCb90Ajv0DmnlcZVRw9XoN19BAZFvz0Q=;
+        b=2Zu7t1R6VC20tw2RcVnLF9f8RFw2Zp1a1lkqjl91oHj+jgUVFIZNd8XMZ9Fc+XG9ID
+         J6hhrQj8g02goKSYX5geY47T9w5LnNBjP2fKtKk5G8P3gE7P0MQoO81GzuAJrIHTDERr
+         cJ//YMgGDAA6ha00E7CqIZObSYq9q5Ex03DyaDiS6uACnKgDze+NQpUMoP3Y5a7qbjDh
+         w5VkoqkVCNWBKf9pNZS6tgl+zGNARbApmIGwqjD1QT6tvEfEDjWtTyNKokUgoz2tVQpo
+         F3KYfpsKX4oOwFoiTzHSRKSllKfdCQftsbvuXt0vgiFN7DQeMMRqjJXUu3LXv66TtHrD
+         WTNw==
+X-Gm-Message-State: AJIora9YIYQYSNki5BgHXVhS8KI7ivB5/PLseu8H4TeGul1DYxWEn0d5
+        HD/XJVrmqJqFFeJs7WM9U/A=
+X-Google-Smtp-Source: AGRyM1t23AvMiJ2iSX9LEY552bKPo4g7Ld4jiIqNqJH5gcXFwBw4gYJY+WMm0c7ZlvzZqAqDp1aeiQ==
+X-Received: by 2002:a63:6d5:0:b0:412:ac9d:814e with SMTP id 204-20020a6306d5000000b00412ac9d814emr1507543pgg.90.1657252454656;
+        Thu, 07 Jul 2022 20:54:14 -0700 (PDT)
+Received: from [192.168.1.3] (ip72-194-116-95.oc.oc.cox.net. [72.194.116.95])
+        by smtp.gmail.com with ESMTPSA id a8-20020aa78e88000000b0052534ade61dsm27766700pfr.185.2022.07.07.20.54.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 07 Jul 2022 20:54:14 -0700 (PDT)
+Message-ID: <8d42d2f2-1da5-0f23-6e43-a505e9d9d41f@gmail.com>
+Date:   Thu, 7 Jul 2022 20:54:13 -0700
 MIME-Version: 1.0
-Date:   Tue, 28 Jun 2022 18:07:13 +0900
-Content-Type: text/plain; charset="ISO-2022-JP"
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=1.3 required=5.0 tests=BAYES_50,SPF_HELO_NONE,
-        SPF_NONE,SUBJ_ALL_CAPS,T_SCC_BODY_TEXT_LINE autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Level: *
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.0.1
+Subject: Re: [PATCH] MAINTAINERS: Remove Matt Mackall as his identity is
+ obsolete
+Content-Language: en-US
+To:     =?UTF-8?Q?Uwe_Kleine-K=c3=b6nig?= <u.kleine-koenig@pengutronix.de>,
+        linux-kernel@vger.kernel.org,
+        Paul Gortmaker <paul.gortmaker@windriver.com>,
+        David Woodhouse <dwmw2@infradead.org>,
+        linux-embedded@vger.kernel.org,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        linux-crypto@vger.kernel.org
+Cc:     kernel@pengutronix.de
+References: <20210920080635.253826-1-u.kleine-koenig@pengutronix.de>
+From:   Florian Fainelli <f.fainelli@gmail.com>
+In-Reply-To: <20210920080635.253826-1-u.kleine-koenig@pengutronix.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
@@ -52,18 +81,23 @@ List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
 
-Hello,
 
-My name is Steve Dibenedetto.
-I apologize to have contacted you this way without a direct relationship. There is an opportunity to collaborate with me in the sourcing of some materials needed by our company for production of the different medicines we are researching.
+On 9/20/2021 1:06 AM, Uwe Kleine-König wrote:
+> The mails I sent to Matt on September 14 and 20 both were refused by the
+> MTA responsible for selenic.com (i.e. waste.org) with:
+> 
+> 	554 5.7.1 <mpm@selenic.com>: Recipient address rejected: This identity is obsolete
+> 
+> Also the most recent commit that involved him (ignoring "Cc: Matt
+> Mackall <mpm@selenic.com>" footers) is commit 330e0a01d54c (MAINTAINERS:
+> Theodore Ts'o is taking over the random driver) where he was removed
+> from the entry for random number drivers in 2012.
+> 
+> So drop him completely from the list of maintainers.
+> 
+> Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
 
-I'm aware that this might be totally outside your professional specialization, but it will be a great source for generating extra revenue. I  discovered a manufacturer who can supply us at a lower rate than our company's previous purchases.
-I will give you more specific details when/if I receive feedback from you showing interest.
-
-Warm Regards  
-Steve Dibenedetto
-Production & Control Manager,
-Green Field Laboratories
-Gothic House, Barker Gate,
-Nottingham, NG1 1JU,
-United Kingdom.
+This has not been applied and we still have entries in MAINTAINERS that 
+are bouncing for mpm@selenic.com, can we apply this patch?
+-- 
+Florian
