@@ -2,62 +2,70 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B3F0D5753C1
-	for <lists+linux-embedded@lfdr.de>; Thu, 14 Jul 2022 19:10:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5A4A2575D55
+	for <lists+linux-embedded@lfdr.de>; Fri, 15 Jul 2022 10:25:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239258AbiGNRIg (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Thu, 14 Jul 2022 13:08:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39504 "EHLO
+        id S230024AbiGOIWn (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 15 Jul 2022 04:22:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46922 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231892AbiGNRIf (ORCPT
+        with ESMTP id S230467AbiGOIWm (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Thu, 14 Jul 2022 13:08:35 -0400
-X-Greylist: delayed 455 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 14 Jul 2022 10:08:32 PDT
-Received: from wmx06.wadax.ne.jp (wmx06.wadax.ne.jp [203.137.83.67])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0AFD15F127
-        for <linux-embedded@vger.kernel.org>; Thu, 14 Jul 2022 10:08:31 -0700 (PDT)
-Received: from wx25.wadax.ne.jp (wx25.wadax.ne.jp [203.137.114.2])
-        by wmx06.wadax.ne.jp (Postfix) with ESMTP id 6D06E2095C72
-        for <linux-embedded@vger.kernel.org>; Fri, 15 Jul 2022 02:00:55 +0900 (JST)
-Received: by wx25.wadax.ne.jp (Postfix, from userid 1239)
-        id AD96DC0088; Fri, 15 Jul 2022 02:00:52 +0900 (JST)
-To:     linux-embedded@vger.kernel.org
-Subject: =?UTF-8?B?5pyJ6ZmQ5Lya56S+IOadieWxsSAi44Gd44Gu5LuWIg==?=
-X-PHP-Originating-Script: 1239:class-phpmailer.php
-Date:   Thu, 14 Jul 2022 17:00:52 +0000
-From:   =?UTF-8?B?5pyJ6ZmQ5Lya56S+IOadieWxsQ==?= 
-        <s.tomoyuki@sugiyama-ibaraki.com>
-Reply-To: s.tomoyuki@sugiyama-ibaraki.com
-Message-ID: <cf562cb39d05ab24f645446a864fb1a6@www.sugiyama-ibaraki.com>
-X-Mailer: PHPMailer 5.2.27 (https://github.com/PHPMailer/PHPMailer)
+        Fri, 15 Jul 2022 04:22:42 -0400
+X-Greylist: delayed 692 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 15 Jul 2022 01:22:41 PDT
+Received: from mail.hybridsaleonline.com (mail.hybridsaleonline.com [149.154.159.243])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 91A5B7479A
+        for <linux-embedded@vger.kernel.org>; Fri, 15 Jul 2022 01:22:41 -0700 (PDT)
+Received: by mail.hybridsaleonline.com (Postfix, from userid 1001)
+        id DA119430C6; Fri, 15 Jul 2022 10:06:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=hybridsaleonline.com;
+        s=mail; t=1657872375;
+        bh=DBuh6B8CLUW/jIcug/4PeUKsE0WScqATqj8HG/nC+Fs=;
+        h=Date:From:To:Subject:From;
+        b=ZPAI0+enEzshI5ryderDM6oZ3aEDDmdSTpfa3IfmAk4CqCqPOICuFriGPnpHzQa4p
+         Zc1UiwsRiLuUDDi/SOhE8zIlbEsXd1inbr5nM+o79SQGKjcS+u1Lu4PO4rCXBJuf7C
+         omeLCusWxUV2do0FLlIAgmoZjVYsVHcdQPaDkp4ID8CNeNtXxBAUyKJ4QCMVu3fOMr
+         lL5Tv6m6diCQj9nITND0+FwCbeHgxtvkBXExARhTjA87Jj6l34aOnDoHhPUV0ds5lY
+         lhCEYU9ZqIhEBo7Xpz9+JAfq2KaQn54zu3RWdyvkbLuKYq/bOyOJE/0hDWjTUvNTTJ
+         lIXcliPlqSrGw==
+Received: by mail.hybridsaleonline.com for <linux-embedded@vger.kernel.org>; Fri, 15 Jul 2022 08:06:13 GMT
+Message-ID: <20220715084506-0.1.2j.7rdg.0.92l3dyn9zf@hybridsaleonline.com>
+Date:   Fri, 15 Jul 2022 08:06:13 GMT
+From:   "Drew Hancock" <drew.hancock@hybridsaleonline.com>
+To:     <linux-embedded@vger.kernel.org>
+Subject: New collaboration
+X-Mailer: mail.hybridsaleonline.com
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=3.9 required=5.0 tests=BAYES_99,BAYES_999,
-        HEADER_FROM_DIFFERENT_DOMAINS,RCVD_IN_DNSWL_NONE,SPF_HELO_PASS,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Level: ***
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=2.8 required=5.0 tests=BAYES_95,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-qg2r4f
-🧡 You have pending messages (3) from Cheryl! Reply Now: https://letsg0dancing.page.link/go?zmf 🧡 様
+Hello,
 
-この度は、弊社サイトへのお問い合わせありがとうございます。
-本メールは自動回答メールとなっております。
-お問い合わせ内容につきましては、内容により関係部門に確認を行い、
-回答が必要な場合には、改めてご連絡致します。
+Would you like to consider the possibility of cooperation with our compan=
+y?
 
-● 電話番号
-031089348032
+We provide SEO services at the top level and are highly effective in buil=
+ding conversions.
+We go beyond the well-known patterns and our work is not reduced to algor=
+ithms.=20
 
-● お問合せ内容
-2wkazy
+We build on effective and original solutions adjusted to the specific nat=
+ure of your sector.
+Our company is a competent team of experienced employees and specialists =
+with precisely set goals.=20
 
----------------------------------------------------- 
-このメールは 有限会社 杉山 (http://www.sugiyama-ibaraki.com) のお問い合わせフォームから送信されました
+We implement key assumptions of the strategy of further dynamic developme=
+nt and successively enter new foreign markets.
 
+If my offer seems to be interesting, feel free to contact us.
+
+Drew Hancock
