@@ -2,98 +2,69 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0A3C462169A
-	for <lists+linux-embedded@lfdr.de>; Tue,  8 Nov 2022 15:30:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E57006338AA
+	for <lists+linux-embedded@lfdr.de>; Tue, 22 Nov 2022 10:37:46 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234014AbiKHO2x (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Tue, 8 Nov 2022 09:28:53 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58142 "EHLO
+        id S232713AbiKVJgE (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Tue, 22 Nov 2022 04:36:04 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38028 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233964AbiKHO0Y (ORCPT
+        with ESMTP id S231655AbiKVJgC (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Tue, 8 Nov 2022 09:26:24 -0500
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com [IPv6:2607:f8b0:4864:20::62e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 11AD81008
-        for <linux-embedded@vger.kernel.org>; Tue,  8 Nov 2022 06:25:13 -0800 (PST)
-Received: by mail-pl1-x62e.google.com with SMTP id j12so14316075plj.5
-        for <linux-embedded@vger.kernel.org>; Tue, 08 Nov 2022 06:25:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
-        b=qJPWO9SMfKs9CV4DzOtfpg0tG5L2kEZQtV/LBBChMrnKplvig/HcfOA36QzOFbaour
-         tgINSm9CFH0IH0weUkbi8oL7C5P0uFU99A+FANpQrOPV/x2at1b6HjUUAphEgu/Nt2rO
-         YdZzEeguInvIt6hR0YTDbuGc0g6QmBH3JOdUVEiMakuZ8pUv0rSqDGDPPz36WP9L+M70
-         Yi8Qvn61/fVJa/s6+O6bNGj9Vrx81J7VmEWQcrrTipgg1zMWjvYHOXsRX3Tp8F7t1isZ
-         URWNY0E6DDGhkUjSdRf6tRRt6Dm01iRomcQNGIBkoA7vu4q8ZFmcmXCe9DgPR3TaW/OT
-         odpw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
-        b=RLOhY0k9vUuPLpDu6Q/xrWaOAyxEbgtzsRA+/ifi5oTn3ZHWWYBI83luTFgXuZmmN5
-         QqISNpPTfE6wgBEaSPBCoJQIJKE81AAQN+xSHSzL94V0RoN+EreGnr+mOnsbe1lqf6dj
-         jaeD2uV79eWzwd48sGR9i3phxAa+L03GRzxTgne+mrOQoI9svP7/fTVCDlWAebkm726A
-         ZsqRa/Q4SEUw+MJ7ajuyvh4OZ6OSCY4iVhj70fsrd7KbWoDKBst97ZuuMeRMFC3aEPwC
-         Hv6EGAvQzzNS9+Ba3VmLUI2bNJWSFszHip4D4OC/4ZwAXkDF2T1FkgWLKvLra08ddr4Z
-         GXfg==
-X-Gm-Message-State: ACrzQf137drRYSQFUModQxcH9h+5IdO0GFg8ayXT7sJ5PqOkFK4eZ4HQ
-        qmn+pE8sbHAd4p3xz6fy2atBEcLpD0Q00UMKNQI=
-X-Google-Smtp-Source: AMsMyM7xjnW3BCIcPmRXceI8CMPrgJsNpwknP0oXmxg9pb3hPM8UnVyASTbWsNqLc31U8nSLRepoWwOH4L/DHUye4LA=
-X-Received: by 2002:a17:90b:1d90:b0:213:c798:86f6 with SMTP id
- pf16-20020a17090b1d9000b00213c79886f6mr52558648pjb.84.1667917512394; Tue, 08
- Nov 2022 06:25:12 -0800 (PST)
+        Tue, 22 Nov 2022 04:36:02 -0500
+X-Greylist: delayed 1800 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 22 Nov 2022 01:36:02 PST
+Received: from mail.axisfairfi.com (mail.axisfairfi.com [94.177.230.134])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5C11A4A055
+        for <linux-embedded@vger.kernel.org>; Tue, 22 Nov 2022 01:36:02 -0800 (PST)
+Received: by mail.axisfairfi.com (Postfix, from userid 1001)
+        id 3CA05825A8; Tue, 22 Nov 2022 09:00:31 +0000 (GMT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=axisfairfi.com;
+        s=mail; t=1669107641;
+        bh=0BgaW9t8GFER5QecxVkFsHrVi3gO/4V5KAZgJaiRYBs=;
+        h=Date:From:To:Subject:From;
+        b=oPVotSjpUBe7drLY13HrZyf6uM3q5+Foz/xFFu9yqPQZg1GAjYfzIzOEuPRX6vUrk
+         lvTygyUPItuy/2WNFu4n31vLMaO/deVoxmPRZb85Ne1pD+Zm+FGiphleIrf/ttmCK/
+         8iaXmglX6Ng32dT0ww06+dwjcXTS/VwLrBIs2XVWDfmNnnkBZ4BECW9HlXqR0RE7Ff
+         x+V+1tUG1hlOvrqtqUNyxHAMSEcQY4OYZrBetc5VRha4i1fbGF0qaTQIiGyvjjuMYx
+         ccJ4BjjBOrjtQ38fY36uVg2UwJZwJVwd/2ER2ighdACNZkGZWDJGahXHlA6pkGLLEH
+         4Nl5zSrsHXtbg==
+Received: by mail.axisfairfi.com for <linux-embedded@vger.kernel.org>; Tue, 22 Nov 2022 09:00:23 GMT
+Message-ID: <20221122074500-0.1.d.nio.0.fdvb08eq4a@axisfairfi.com>
+Date:   Tue, 22 Nov 2022 09:00:23 GMT
+From:   "Zbynek Spacek" <zbynek.spacek@axisfairfi.com>
+To:     <linux-embedded@vger.kernel.org>
+Subject: Silikonmischungen
+X-Mailer: mail.axisfairfi.com
 MIME-Version: 1.0
-Received: by 2002:a05:7300:5388:b0:85:81c6:896c with HTTP; Tue, 8 Nov 2022
- 06:25:11 -0800 (PST)
-Reply-To: mr.abraham022@gmail.com
-From:   "Mr.Abraham" <davidkekeli11@gmail.com>
-Date:   Tue, 8 Nov 2022 14:25:11 +0000
-Message-ID: <CAPBO+FJ3Nhd2ncX9Z_fDUqYStiGQU821nC6EEFSDx5iCTdXkaQ@mail.gmail.com>
-Subject: Greeting
-To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.0 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:62e listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.4995]
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [mr.abraham022[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [davidkekeli11[at]gmail.com]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [davidkekeli11[at]gmail.com]
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.0 T_HK_NAME_FM_MR_MRS No description available.
-        *  2.9 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FROM_FMBLA_NEWDOM14,
+        SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: *
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-My Greeting, Did you receive the letter i sent to you. Please answer me.
-Regard, Mr.Abraham
+Good morning,
+
+do you need intermediates for processing, plastics (e.g. rubber) or silic=
+one mixtures?
+
+We provide a wide range of silicone rubbers with various properties, sili=
+cone mixtures from renowned manufacturers such as Wacker, Elastosil LR an=
+d dyes, stabilizers, primers and anti-adhesive additives.
+
+We also produce technical silicone compounds with increased resistance to=
+ oils, resistant to high temperatures and water vapor, conductive and man=
+y more.
+
+We provide fast order fulfillment, timely deliveries and cost optimizatio=
+n.
+
+Can I introduce what we can offer you?
+
+
+Zbynek Spacek
