@@ -2,79 +2,70 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DDD3A642DED
-	for <lists+linux-embedded@lfdr.de>; Mon,  5 Dec 2022 17:52:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 049096444B6
+	for <lists+linux-embedded@lfdr.de>; Tue,  6 Dec 2022 14:37:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232696AbiLEQuI (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Mon, 5 Dec 2022 11:50:08 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47024 "EHLO
+        id S234443AbiLFNgB (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Tue, 6 Dec 2022 08:36:01 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37102 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231639AbiLEQtl (ORCPT
+        with ESMTP id S234260AbiLFNfx (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Mon, 5 Dec 2022 11:49:41 -0500
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com [IPv6:2607:f8b0:4864:20::342])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4DC4920F78
-        for <linux-embedded@vger.kernel.org>; Mon,  5 Dec 2022 08:48:54 -0800 (PST)
-Received: by mail-ot1-x342.google.com with SMTP id v19-20020a9d5a13000000b0066e82a3872dso5581949oth.5
-        for <linux-embedded@vger.kernel.org>; Mon, 05 Dec 2022 08:48:54 -0800 (PST)
+        Tue, 6 Dec 2022 08:35:53 -0500
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com [IPv6:2607:f8b0:4864:20::112a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E1DC22B245
+        for <linux-embedded@vger.kernel.org>; Tue,  6 Dec 2022 05:35:51 -0800 (PST)
+Received: by mail-yw1-x112a.google.com with SMTP id 00721157ae682-3f15a6f72d0so46011737b3.1
+        for <linux-embedded@vger.kernel.org>; Tue, 06 Dec 2022 05:35:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=O4WPtqOs6pYDke8VCfpzwsIX+8zN33o8tLS2XMy/lFU=;
-        b=EvWmzEra/azIE+dhpMGnktmqmSoesb8PSCiM/05QKkVO5anMKEbRHSG7nojCSOyYWk
-         9IDI1UgS5rC+uB5j5uOW4no2X6seMos8u1Uby8q6RKzl1vCALcAn7vpiT6rpclAi8Jt0
-         gPKoEl0xikkT9S+7dg4LTBa5X4VHIsnKU2e6OrEO/j4h9xN1NPllzu29Dg0k3gFH+bOt
-         HMDW+rYw/YqhqvZ6y4oXgIeqTNVodnF9zHtiwgFo2Y0tEc6ReoK23o3+Epe6dWg/8ai1
-         Z4r7fWQ42rAk0Fys+lVH3VBvE+2FTvVvceopyfVxKS8DxJV3KaRTE9M5zTY24mYt1gIO
-         /rEQ==
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
+        b=TCK443oiEJFvojnvhbzqc3uMLoscq7n2jFvnlC6zxMliQXUJOSEmIcB7ySZg/5Nswe
+         Hbr9Hvsg10w79MmD1YPPp+L1bXs2NIAAAejAsGUI+/UibW3/Q/zLb+6VLxswodO91BIL
+         b2zJL5DgCeTBzhHolW3SzYRpEJw6FD7Y62znQalxJ564b8iG8KFAgyLi8iC//4gIZ530
+         g0J5MDDRcg3bqblKJ+8SVtykIFIaysjjkxD/XgSghs9/hLQsdawc0uXPBWSgLgVEyytZ
+         nAFRuOzxBzzA9s8zv/zUdDm+kitKQJVuM12S4+23kHZAcVx/26fg0JxnmdDNdLuzKaBS
+         nisQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=O4WPtqOs6pYDke8VCfpzwsIX+8zN33o8tLS2XMy/lFU=;
-        b=ZIHvGkigqOMkTM8LxN6L5uJr7Aatvyk+WePok7NP3FPh10VtX0o9/ZmbaJwwLCwpRv
-         hu0HT7+TZEUy3bxgKCug5IV1w+SfcJ3hmOaCJzUJ6JETD6Kaa+SWAGbexOwj88HSfcJA
-         U42p4z0X0MUq/InS/9qMGRtE59r89cjw+pevardmtD97LmRlmcm9fM1cSHvV0iI6mQKd
-         ikraUsAxiJs/n0fsSMM3yX98wWiLfqiH1A4FszhXT6KLQrTLeb5IcAzMyEd3PfU+gY2F
-         HVFITr8+UBkXzIRIcxbM1FOHsV3Wf1JAnW71Z4y5uNXvWQINz+9ffxuBJCbW6u3+yFRn
-         k8bg==
-X-Gm-Message-State: ANoB5pn8N6SmFi9JIJAPdU+/+FiXfCTrzloUuR2BHkW4vCtYVIFgYHVc
-        tovYuwoUBbQLNnJwCHjEaSav5hqN4UBN9yTcpw8=
-X-Google-Smtp-Source: AA0mqf6rJpockmAlPLGWb5IdXxyZXi5oeB/VlA7nQtTh5mH5GBjbP93nFRUHbmrw3A3v2AKvxeLYo6EVgAyGoUC2980=
-X-Received: by 2002:a05:6830:61ce:b0:66b:e4e2:8d25 with SMTP id
- cc14-20020a05683061ce00b0066be4e28d25mr41635604otb.152.1670258933537; Mon, 05
- Dec 2022 08:48:53 -0800 (PST)
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
+        b=7G7b9Qrr+dNakPGImVvu/Swf85dj2HEbjHpUcxIBf4Z8UbJ361W3cMzCEsGNKCyWKl
+         b+5U2DYaQHtRfk9swMKcuTwhGodBzliD8ZMkWNLNd575DWvAoG1Os74jxh0IPDIufwOJ
+         0z8oJJA7UsBSKRh3139PLHeeBFEOXE+BDRxFuvsveXyG6txNGGGA5p0B8SpUhCwDubSM
+         f3q2xNy/6ipaBZwPyPXkParsd9cosFXeMFlAWNRwPViZDqLUW8dPjc+MD5Aoz2X/JwJq
+         LMdnpRQMRtcVNU59GlP7XGGdgUJ/WPF0NScc4rGNJDgkgAnhEVX0LSHku/oEHCg2DPNS
+         xQBQ==
+X-Gm-Message-State: ANoB5plP3rKUPjPkpFaILH2wT4Ts+hjhoP6ZpRVK7GXGBj/h2BPDFceZ
+        a8iDkq9EKd8p+fk4J+31uUHYByyMUfk4sToQNYo=
+X-Google-Smtp-Source: AA0mqf7PeQ6MX4rXU0c5RBrAC8mWU0XIcPU5wXJ9ovfjUldkzuZzqBzDkJDKDyAUOkQSTG8CriEXwDPaJjIZfMoc63s=
+X-Received: by 2002:a0d:cad7:0:b0:360:65a3:46c with SMTP id
+ m206-20020a0dcad7000000b0036065a3046cmr1297350ywd.119.1670333751094; Tue, 06
+ Dec 2022 05:35:51 -0800 (PST)
 MIME-Version: 1.0
-Received: by 2002:a05:6358:7211:b0:dd:1fa2:ef73 with HTTP; Mon, 5 Dec 2022
- 08:48:53 -0800 (PST)
-Reply-To: plml47@hotmail.com
-From:   Philip Manul <lometogo1999@gmail.com>
-Date:   Mon, 5 Dec 2022 08:48:53 -0800
-Message-ID: <CAFtqZGFXDNDSmyfAW1goTwuOjaKBWi=RMxR7avPMnWxdOUFKOg@mail.gmail.com>
-Subject: REP:
-To:     in <in@proposal.net>
+Received: by 2002:a05:7010:a205:b0:314:d2a3:70a with HTTP; Tue, 6 Dec 2022
+ 05:35:50 -0800 (PST)
+Reply-To: mr.abraham022@gmail.com
+From:   "Mr.Abraham" <mrkojofofone01@gmail.com>
+Date:   Tue, 6 Dec 2022 13:35:50 +0000
+Message-ID: <CACJtp8s5dnnJ0WK9eKtMtoiSithTta4FV2iCzTtQdcgQsoKQrA@mail.gmail.com>
+Subject: Hi
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=2.1 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
         FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Level: **
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
---=20
-Guten tag,
-Mein Name ist Philip Manul. Ich bin von Beruf Rechtsanwalt. Ich habe
-einen verstorbenen Kunden, der zuf=C3=A4llig denselben Namen mit Ihnen
-teilt. Ich habe alle Papierdokumente in meinem Besitz. Ihr Verwandter,
-mein verstorbener Kunde, hat hier in meinem Land einen nicht
-beanspruchten Fonds zur=C3=BCckgelassen. Ich warte auf Ihre Antwort zum
-Verfahren.
-Philip Manul.
+My Greeting, Did you receive the letter i sent to you. Please answer me.
+Regard, Mr.Abraham
