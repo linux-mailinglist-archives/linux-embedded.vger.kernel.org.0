@@ -2,64 +2,71 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C38006457F1
-	for <lists+linux-embedded@lfdr.de>; Wed,  7 Dec 2022 11:35:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 243E465D37E
+	for <lists+linux-embedded@lfdr.de>; Wed,  4 Jan 2023 13:56:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229595AbiLGKeG (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 7 Dec 2022 05:34:06 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60252 "EHLO
+        id S234373AbjADMyq (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Wed, 4 Jan 2023 07:54:46 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35488 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229694AbiLGKeD (ORCPT
+        with ESMTP id S234536AbjADMye (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 7 Dec 2022 05:34:03 -0500
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com [IPv6:2a00:1450:4864:20::434])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 934BA2654C
-        for <linux-embedded@vger.kernel.org>; Wed,  7 Dec 2022 02:34:02 -0800 (PST)
-Received: by mail-wr1-x434.google.com with SMTP id o5so27449608wrm.1
-        for <linux-embedded@vger.kernel.org>; Wed, 07 Dec 2022 02:34:02 -0800 (PST)
+        Wed, 4 Jan 2023 07:54:34 -0500
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com [IPv6:2607:f8b0:4864:20::72b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8C4321D0E7
+        for <linux-embedded@vger.kernel.org>; Wed,  4 Jan 2023 04:54:32 -0800 (PST)
+Received: by mail-qk1-x72b.google.com with SMTP id c9so16214355qko.6
+        for <linux-embedded@vger.kernel.org>; Wed, 04 Jan 2023 04:54:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=2jC2qunKKFsnR9Q6KbVKNlsWYRFq6RV5DR+wfv0ecN8=;
-        b=a72f4gegtBNx1hsvDY2mxMuj82D/pkTg1v6hU70SO2CPKtFBfMpIFZR+b1Rzl7NKDD
-         UOA30bLR0cOOlE951ckYX5iYM02L0hmKSwnntCsIUgvZLtuP4QOU+gWj4ZTSd1/yRfKD
-         dYd//97NLktnYS/+WlM0Ya9ohseQBxgwywXN/v5RHMojI39Rke46n9sQyKk0p2nkhJQU
-         3jo2EAByqvMTeDVD4M01aymASleIzrNQO1rfrpBKVkDOGCD6FwImSvMH/5WPx19ejElK
-         6heL5y8OH7Ro/X7FP6qH9TkM1R0YlL3TOqu36iT1yLUTCe4b0EfFA+8ytJtCbmhsz3am
-         Wc7w==
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=g2m/uNsCm/OsAUZxAnJOSdXXDa9Gh4wg88n4VPL2lMU=;
+        b=WgtPiGBL7pKpeGAONT7jyOZBlPA87PF+BcZ0At3DRbjh8r4a90VkFTuegmf7v5I05U
+         8O8yRsMlEC8d3azBuhTVnh5a19IMri1yaM5CNo7nGSQjhbPmAzApkJwS9Ixgc01L8XVA
+         9+oXPryfLJjc92HnUP6sxIyah9VARXZTMfFxXMcqBFJ6snOmablGghR0F2+Y0sgoHgie
+         QmoiaDCXomaXijXUVGiYmzsfSWGfWMMdh1Ev9V0gp78bfPbYO2S9uBzuU4GRDkm7vJO6
+         RsJ5hkLkj5KAchsYozNwRuUxQUGpmscZ9Mbjv/HN5G//qfUumyrbxcj+0dSg+lcPq80U
+         5Wuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=2jC2qunKKFsnR9Q6KbVKNlsWYRFq6RV5DR+wfv0ecN8=;
-        b=Km2umllrKhcs6Y9VY/NltrM0eLDhVQpRdOIq51d5KSLE4cTZSjgihP25op2LuZz7fZ
-         5T0FhWNJhA5oE/CrI4h6U78t0czW8XNosGbzOYotkTQMC4QQyqLECj2aqv0Tn6+VxGsL
-         YUCZ1aF3JGm0cyzh4lgnIuWvlheG6T3/vrlBfhNqdLA8otlPQ3jPYAFPGgLKx7nIF4SN
-         nUXs2kGQz0Lljx+ylMtQIW1/DkOeVx9gSwEQj/Q5ww9ORnTjQAX4sw2NsCkYZORFNvnD
-         0/aIw5LhY9wy56724OOl/+sTKM5wd+cVpoesdMO8EVPwIFt8IvLJdyv6m2SDpPIyj1to
-         Ye1A==
-X-Gm-Message-State: ANoB5pl4jiYZbawhEECoG5ZmIm66MVpgeHicD0VDnLA0OWJhb5uITFAl
-        GU2dKSFB/9BTUs0d5Wx0zqvHEGmvaEfBLJvV19VGTbLf/Gl3oQ==
-X-Google-Smtp-Source: AA0mqf7PYDadOl9nFvNGZhpCI89uTC4vgjkvOZsKAeLpIy+UvlS9gkhA3/0KWM5hTfR3+Da9P5lM4pE48Z88GxX5ytE=
-X-Received: by 2002:adf:f789:0:b0:242:129b:9cb9 with SMTP id
- q9-20020adff789000000b00242129b9cb9mr23789829wrp.373.1670409240906; Wed, 07
- Dec 2022 02:34:00 -0800 (PST)
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=g2m/uNsCm/OsAUZxAnJOSdXXDa9Gh4wg88n4VPL2lMU=;
+        b=qwlDxlU4xwdFjyEwcElfOVvI/SN4FC6sOYIUjmzTi5ZdzcdBWysUZpQB/c06cq21MH
+         zsDcqOwLqN1ibS9xt39lCun4XwZ8/goxWT3OgOB2r62G6WptBzcgGj0s7kWmu6WoYyjD
+         WwF2slXcY95DgSU9U2kUwn1+ByCvZ5UqTrn9DQf4sn0CK7nOzUhEqc3Wl+1VpCD2Ye1+
+         JEcMURk0FJiO449MsNymj5ULBcVeFbHb4p2zKGYe8H/Q4Kw7K5MvCVcNzG4kGlxOSedb
+         B1lS5QypozBfz9uBg6JdRzr8ZvsZYK3OCjptx1ej3ppU1og24A5AKraiNVl8LvfotZ4H
+         Hh0A==
+X-Gm-Message-State: AFqh2kqLO7vek9NEmYhCccQNLRnH9eu6zOlQKrLhB34SCNSwgIEcV5Na
+        mPvenBLnL0Tn7/40YDFVYFGV9oO8/U1n7TRLHx8=
+X-Google-Smtp-Source: AMrXdXulKMdRBV/p4kXNikXMHFtLk5IOIYLDRJA7lpoRUfUF8+2cEqH8pHXLi4qSeE4J34Id+Th3n/mMQjaZgJWZFyc=
+X-Received: by 2002:a05:620a:8502:b0:704:ad9e:ad7 with SMTP id
+ pe2-20020a05620a850200b00704ad9e0ad7mr1970941qkn.574.1672836871311; Wed, 04
+ Jan 2023 04:54:31 -0800 (PST)
 MIME-Version: 1.0
-From:   Leon Schmidt <leonjohannesschmidt@gmail.com>
-Date:   Wed, 7 Dec 2022 11:33:49 +0100
-Message-ID: <CAO+mVXbPXUhzqA-yhne85EK2jc7vK_UCNhZLEeQgsJV7R3W2FQ@mail.gmail.com>
+Received: by 2002:a05:6200:5d91:b0:4a5:78e9:2012 with HTTP; Wed, 4 Jan 2023
+ 04:54:30 -0800 (PST)
+Reply-To: Gregdenzell9@gmail.com
+From:   Greg Denzell <mzsophie@gmail.com>
+Date:   Wed, 4 Jan 2023 12:54:30 +0000
+Message-ID: <CAEoj5=a-iCsZoe4s4S8=o2P=8nfbDVvG8sm_YZ9wpP37ZOqYKA@mail.gmail.com>
 Subject: 
-To:     linux-embedded@vger.kernel.org
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,TVD_SPACE_RATIO
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=4.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-        auth 14372317 subscribe linux-embedded leonjohannesschmidt@gmail.com
+Seasons Greetings!
+
+This will remind you again that I have not yet received your reply to
+my last message to you.
