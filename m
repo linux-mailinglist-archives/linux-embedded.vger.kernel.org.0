@@ -2,71 +2,68 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 243E465D37E
-	for <lists+linux-embedded@lfdr.de>; Wed,  4 Jan 2023 13:56:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 22CA4666D08
+	for <lists+linux-embedded@lfdr.de>; Thu, 12 Jan 2023 09:54:04 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234373AbjADMyq (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 4 Jan 2023 07:54:46 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35488 "EHLO
+        id S236734AbjALIwR (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 12 Jan 2023 03:52:17 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46144 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234536AbjADMye (ORCPT
+        with ESMTP id S235405AbjALIvk (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 4 Jan 2023 07:54:34 -0500
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com [IPv6:2607:f8b0:4864:20::72b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8C4321D0E7
-        for <linux-embedded@vger.kernel.org>; Wed,  4 Jan 2023 04:54:32 -0800 (PST)
-Received: by mail-qk1-x72b.google.com with SMTP id c9so16214355qko.6
-        for <linux-embedded@vger.kernel.org>; Wed, 04 Jan 2023 04:54:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=g2m/uNsCm/OsAUZxAnJOSdXXDa9Gh4wg88n4VPL2lMU=;
-        b=WgtPiGBL7pKpeGAONT7jyOZBlPA87PF+BcZ0At3DRbjh8r4a90VkFTuegmf7v5I05U
-         8O8yRsMlEC8d3azBuhTVnh5a19IMri1yaM5CNo7nGSQjhbPmAzApkJwS9Ixgc01L8XVA
-         9+oXPryfLJjc92HnUP6sxIyah9VARXZTMfFxXMcqBFJ6snOmablGghR0F2+Y0sgoHgie
-         QmoiaDCXomaXijXUVGiYmzsfSWGfWMMdh1Ev9V0gp78bfPbYO2S9uBzuU4GRDkm7vJO6
-         RsJ5hkLkj5KAchsYozNwRuUxQUGpmscZ9Mbjv/HN5G//qfUumyrbxcj+0dSg+lcPq80U
-         5Wuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=g2m/uNsCm/OsAUZxAnJOSdXXDa9Gh4wg88n4VPL2lMU=;
-        b=qwlDxlU4xwdFjyEwcElfOVvI/SN4FC6sOYIUjmzTi5ZdzcdBWysUZpQB/c06cq21MH
-         zsDcqOwLqN1ibS9xt39lCun4XwZ8/goxWT3OgOB2r62G6WptBzcgGj0s7kWmu6WoYyjD
-         WwF2slXcY95DgSU9U2kUwn1+ByCvZ5UqTrn9DQf4sn0CK7nOzUhEqc3Wl+1VpCD2Ye1+
-         JEcMURk0FJiO449MsNymj5ULBcVeFbHb4p2zKGYe8H/Q4Kw7K5MvCVcNzG4kGlxOSedb
-         B1lS5QypozBfz9uBg6JdRzr8ZvsZYK3OCjptx1ej3ppU1og24A5AKraiNVl8LvfotZ4H
-         Hh0A==
-X-Gm-Message-State: AFqh2kqLO7vek9NEmYhCccQNLRnH9eu6zOlQKrLhB34SCNSwgIEcV5Na
-        mPvenBLnL0Tn7/40YDFVYFGV9oO8/U1n7TRLHx8=
-X-Google-Smtp-Source: AMrXdXulKMdRBV/p4kXNikXMHFtLk5IOIYLDRJA7lpoRUfUF8+2cEqH8pHXLi4qSeE4J34Id+Th3n/mMQjaZgJWZFyc=
-X-Received: by 2002:a05:620a:8502:b0:704:ad9e:ad7 with SMTP id
- pe2-20020a05620a850200b00704ad9e0ad7mr1970941qkn.574.1672836871311; Wed, 04
- Jan 2023 04:54:31 -0800 (PST)
+        Thu, 12 Jan 2023 03:51:40 -0500
+Received: from mail.glencoeaur.com (mail.glencoeaur.com [217.61.97.113])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C2A461BEA8
+        for <linux-embedded@vger.kernel.org>; Thu, 12 Jan 2023 00:49:56 -0800 (PST)
+Received: by mail.glencoeaur.com (Postfix, from userid 1001)
+        id 3C37681F40; Thu, 12 Jan 2023 08:31:17 +0000 (GMT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=glencoeaur.com;
+        s=mail; t=1673512299;
+        bh=2S0GQFScndXkBEK4sqdoOhOYLqsB2sEH8Q5XQfVvKpo=;
+        h=Date:From:To:Subject:From;
+        b=lHGNDt5LRlQ4zkoTpAPzU7j4YSV+WU6Ppsqp1tIE9ZBbJzMS7AL+V5L7G/PaS89fh
+         Ifl+v7I/kODDolVRHkUpQuQEILn3VnzQymzJ1xOBRWF7B3PgL1etvpX94fEIkHhMNj
+         9FrQnQWwZ/lFyI7frVXEQ6Cva6d+iBurFnFTVTyK3kY1eHwnFquXwBmgx89+/RRH3J
+         d3iYsgbXPFHE9oz309+v5L6CyrEJB2C+0PJPgxHieOTqW1JOAowAs/NT2iY0mZOFCW
+         6JmPoZaDfIybC2giKRkhizQGOJMuUcTmeH4+Y/+C2vCO/e6JyjZVm9Iht+bWvAvE+g
+         IokPq6P9hlqXQ==
+Received: by mail.glencoeaur.com for <linux-embedded@vger.kernel.org>; Thu, 12 Jan 2023 08:31:00 GMT
+Message-ID: <20230112074500-0.1.z.3fcl.0.nrilk620jr@glencoeaur.com>
+Date:   Thu, 12 Jan 2023 08:31:00 GMT
+From:   "Zbynek Spacek" <zbynek.spacek@glencoeaur.com>
+To:     <linux-embedded@vger.kernel.org>
+Subject: Silikonmischungen
+X-Mailer: mail.glencoeaur.com
 MIME-Version: 1.0
-Received: by 2002:a05:6200:5d91:b0:4a5:78e9:2012 with HTTP; Wed, 4 Jan 2023
- 04:54:30 -0800 (PST)
-Reply-To: Gregdenzell9@gmail.com
-From:   Greg Denzell <mzsophie@gmail.com>
-Date:   Wed, 4 Jan 2023 12:54:30 +0000
-Message-ID: <CAEoj5=a-iCsZoe4s4S8=o2P=8nfbDVvG8sm_YZ9wpP37ZOqYKA@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-0.2 required=5.0 tests=BAYES_40,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
+        autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Seasons Greetings!
+Good morning,
 
-This will remind you again that I have not yet received your reply to
-my last message to you.
+do you need intermediates for processing, plastics (e.g. rubber) or silic=
+one mixtures?
+
+We provide a wide range of silicone rubbers with various properties, sili=
+cone mixtures from renowned manufacturers such as Wacker, Elastosil LR an=
+d dyes, stabilizers, primers and anti-adhesive additives.
+
+We also produce technical silicone compounds with increased resistance to=
+ oils, resistant to high temperatures and water vapor, conductive and man=
+y more.
+
+We provide fast order fulfillment, timely deliveries and cost optimizatio=
+n.
+
+Can I introduce what we can offer you?
+
+
+Best regards
+Zbynek Spacek
