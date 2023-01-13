@@ -2,68 +2,69 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 22CA4666D08
-	for <lists+linux-embedded@lfdr.de>; Thu, 12 Jan 2023 09:54:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B614D668C67
+	for <lists+linux-embedded@lfdr.de>; Fri, 13 Jan 2023 07:19:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236734AbjALIwR (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Thu, 12 Jan 2023 03:52:17 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46144 "EHLO
+        id S240256AbjAMGRW (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Fri, 13 Jan 2023 01:17:22 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59050 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235405AbjALIvk (ORCPT
+        with ESMTP id S238936AbjAMGQc (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Thu, 12 Jan 2023 03:51:40 -0500
-Received: from mail.glencoeaur.com (mail.glencoeaur.com [217.61.97.113])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C2A461BEA8
-        for <linux-embedded@vger.kernel.org>; Thu, 12 Jan 2023 00:49:56 -0800 (PST)
-Received: by mail.glencoeaur.com (Postfix, from userid 1001)
-        id 3C37681F40; Thu, 12 Jan 2023 08:31:17 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=glencoeaur.com;
-        s=mail; t=1673512299;
-        bh=2S0GQFScndXkBEK4sqdoOhOYLqsB2sEH8Q5XQfVvKpo=;
-        h=Date:From:To:Subject:From;
-        b=lHGNDt5LRlQ4zkoTpAPzU7j4YSV+WU6Ppsqp1tIE9ZBbJzMS7AL+V5L7G/PaS89fh
-         Ifl+v7I/kODDolVRHkUpQuQEILn3VnzQymzJ1xOBRWF7B3PgL1etvpX94fEIkHhMNj
-         9FrQnQWwZ/lFyI7frVXEQ6Cva6d+iBurFnFTVTyK3kY1eHwnFquXwBmgx89+/RRH3J
-         d3iYsgbXPFHE9oz309+v5L6CyrEJB2C+0PJPgxHieOTqW1JOAowAs/NT2iY0mZOFCW
-         6JmPoZaDfIybC2giKRkhizQGOJMuUcTmeH4+Y/+C2vCO/e6JyjZVm9Iht+bWvAvE+g
-         IokPq6P9hlqXQ==
-Received: by mail.glencoeaur.com for <linux-embedded@vger.kernel.org>; Thu, 12 Jan 2023 08:31:00 GMT
-Message-ID: <20230112074500-0.1.z.3fcl.0.nrilk620jr@glencoeaur.com>
-Date:   Thu, 12 Jan 2023 08:31:00 GMT
-From:   "Zbynek Spacek" <zbynek.spacek@glencoeaur.com>
-To:     <linux-embedded@vger.kernel.org>
-Subject: Silikonmischungen
-X-Mailer: mail.glencoeaur.com
+        Fri, 13 Jan 2023 01:16:32 -0500
+X-Greylist: delayed 895 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 12 Jan 2023 22:10:46 PST
+Received: from mp-relay-01.fibernetics.ca (mp-relay-01.fibernetics.ca [208.85.217.136])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5AE591BCB6;
+        Thu, 12 Jan 2023 22:10:42 -0800 (PST)
+Received: from mailpool-fe-01.fibernetics.ca (mailpool-fe-01.fibernetics.ca [208.85.217.144])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+        (No client certificate requested)
+        by mp-relay-01.fibernetics.ca (Postfix) with ESMTPS id D016EE0D73;
+        Fri, 13 Jan 2023 05:45:50 +0000 (UTC)
+Received: from localhost (mailpool-mx-02.fibernetics.ca [208.85.217.141])
+        by mailpool-fe-01.fibernetics.ca (Postfix) with ESMTP id 9144B26892;
+        Fri, 13 Jan 2023 05:45:50 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at 
+X-Spam-Score: 3.651
+X-Spam-Level: ****
+X-Spam-Status: No, score=4.3 required=5.0 tests=BAYES_60,
+        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,SPF_HELO_NONE,
+        SPF_PASS,SUBJ_ALL_CAPS autolearn=no autolearn_force=no version=3.4.6
+Received: from mailpool-fe-01.fibernetics.ca ([208.85.217.144])
+        by localhost (mail-mx-02.fibernetics.ca [208.85.217.141]) (amavisd-new, port 10024)
+        with ESMTP id kVGLbP-el9qG; Fri, 13 Jan 2023 05:45:50 +0000 (UTC)
+Received: from localhost (unknown [208.85.220.72])
+        by mail.ca.inter.net (Postfix) with ESMTP id 9E6262688E;
+        Fri, 13 Jan 2023 05:45:47 +0000 (UTC)
+Received: from reverse.rain.network (reverse.rain.network [197.184.176.8])
+ by webmail.ca.inter.net (Horde Framework) with HTTP; Fri, 13 Jan 2023
+ 00:45:47 -0500
+Message-ID: <20230113004547.66912vqb15xco557@webmail.ca.inter.net>
+Date:   Fri, 13 Jan 2023 00:45:47 -0500
+From:   INFO <boothg@istar.ca>
+Reply-to: s.g0392440821@gmail.com
+To:     undisclosed-recipients:;
+Subject: IST DIESE E-MAIL AKTIV?
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-0.2 required=5.0 tests=BAYES_40,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
-        autolearn=unavailable autolearn_force=no version=3.4.6
+Content-Type: text/plain;
+ charset=ISO-8859-1;
+ DelSp="Yes";
+ format="flowed"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+User-Agent: Internet Messaging Program (IMP) H3 (4.3.7)
+X-Originating-User-Info: boothg@istar.ca 208.85.219.96
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Good morning,
-
-do you need intermediates for processing, plastics (e.g. rubber) or silic=
-one mixtures?
-
-We provide a wide range of silicone rubbers with various properties, sili=
-cone mixtures from renowned manufacturers such as Wacker, Elastosil LR an=
-d dyes, stabilizers, primers and anti-adhesive additives.
-
-We also produce technical silicone compounds with increased resistance to=
- oils, resistant to high temperatures and water vapor, conductive and man=
-y more.
-
-We provide fast order fulfillment, timely deliveries and cost optimizatio=
-n.
-
-Can I introduce what we can offer you?
 
 
-Best regards
-Zbynek Spacek
+Sehr geehrter E-Mail-Begünstigter, Sie wurden für eine Spende in Höhe  
+von 3.500.000,00 ? ausgewählt. Wenden Sie sich an diese  
+E-Mail-Adresse: s.g0392440821@gmail.com, um weitere Informationen zum  
+Erhalt Ihrer Spende zu erhalten. Vielen Dank
+
