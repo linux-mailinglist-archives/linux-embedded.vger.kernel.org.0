@@ -2,69 +2,90 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B614D668C67
-	for <lists+linux-embedded@lfdr.de>; Fri, 13 Jan 2023 07:19:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9B51B69DC4B
+	for <lists+linux-embedded@lfdr.de>; Tue, 21 Feb 2023 09:42:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240256AbjAMGRW (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 13 Jan 2023 01:17:22 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59050 "EHLO
+        id S232955AbjBUIkg (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Tue, 21 Feb 2023 03:40:36 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58264 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238936AbjAMGQc (ORCPT
+        with ESMTP id S233787AbjBUIk0 (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 13 Jan 2023 01:16:32 -0500
-X-Greylist: delayed 895 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 12 Jan 2023 22:10:46 PST
-Received: from mp-relay-01.fibernetics.ca (mp-relay-01.fibernetics.ca [208.85.217.136])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5AE591BCB6;
-        Thu, 12 Jan 2023 22:10:42 -0800 (PST)
-Received: from mailpool-fe-01.fibernetics.ca (mailpool-fe-01.fibernetics.ca [208.85.217.144])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by mp-relay-01.fibernetics.ca (Postfix) with ESMTPS id D016EE0D73;
-        Fri, 13 Jan 2023 05:45:50 +0000 (UTC)
-Received: from localhost (mailpool-mx-02.fibernetics.ca [208.85.217.141])
-        by mailpool-fe-01.fibernetics.ca (Postfix) with ESMTP id 9144B26892;
-        Fri, 13 Jan 2023 05:45:50 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at 
-X-Spam-Score: 3.651
-X-Spam-Level: ****
-X-Spam-Status: No, score=4.3 required=5.0 tests=BAYES_60,
-        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,SPF_HELO_NONE,
-        SPF_PASS,SUBJ_ALL_CAPS autolearn=no autolearn_force=no version=3.4.6
-Received: from mailpool-fe-01.fibernetics.ca ([208.85.217.144])
-        by localhost (mail-mx-02.fibernetics.ca [208.85.217.141]) (amavisd-new, port 10024)
-        with ESMTP id kVGLbP-el9qG; Fri, 13 Jan 2023 05:45:50 +0000 (UTC)
-Received: from localhost (unknown [208.85.220.72])
-        by mail.ca.inter.net (Postfix) with ESMTP id 9E6262688E;
-        Fri, 13 Jan 2023 05:45:47 +0000 (UTC)
-Received: from reverse.rain.network (reverse.rain.network [197.184.176.8])
- by webmail.ca.inter.net (Horde Framework) with HTTP; Fri, 13 Jan 2023
- 00:45:47 -0500
-Message-ID: <20230113004547.66912vqb15xco557@webmail.ca.inter.net>
-Date:   Fri, 13 Jan 2023 00:45:47 -0500
-From:   INFO <boothg@istar.ca>
-Reply-to: s.g0392440821@gmail.com
-To:     undisclosed-recipients:;
-Subject: IST DIESE E-MAIL AKTIV?
+        Tue, 21 Feb 2023 03:40:26 -0500
+X-Greylist: delayed 504 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 21 Feb 2023 00:39:48 PST
+Received: from mail.surechiers.com (mail.surechiers.com [80.211.239.236])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C0A21E5DE
+        for <linux-embedded@vger.kernel.org>; Tue, 21 Feb 2023 00:39:48 -0800 (PST)
+Received: by mail.surechiers.com (Postfix, from userid 1002)
+        id B57EF82C65; Tue, 21 Feb 2023 09:31:15 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=surechiers.com;
+        s=mail; t=1676968282;
+        bh=xg3VVY9SU+I+f+ynMyY8e0Lum0EY/KrTvpy5BYTg7yw=;
+        h=Date:From:To:Subject:From;
+        b=S6PzWK9piJtyEB6UhllSdixsnFbmdGGzme2FCJPjQ423BNFQgY1XTq/D++ui7SxLB
+         dPAQqiUVjPEF/+oUjg1hfyfU+dOL5EpZm8ei2rTQgoPIrlviWOv9NhPYASI0DdBmxG
+         G7DBEjvNtpxYEc0evbJ0nuN1kQyWDyb681Phl9g1/IqGt08TRidzTNQTuYGfgWBweQ
+         W7ioy4kqk6Bz2CEg9r5KQBdO4O/DhZK3uBH6V0LTpimm6PMakPOZVxwxJDA8+ebNiN
+         LpNGY9JgwDF4dtglLlP9j/V3b5uC3ZLBJOZJwtFXqTama4OrYqAyiccGTuHKsxpX+F
+         j7WJzWF82WPWQ==
+Received: by mail.surechiers.com for <linux-embedded@vger.kernel.org>; Tue, 21 Feb 2023 08:31:09 GMT
+Message-ID: <20230221084500-0.1.9.8fc.0.9gketdnpha@surechiers.com>
+Date:   Tue, 21 Feb 2023 08:31:09 GMT
+From:   =?UTF-8?Q? "J=C3=A1chym_Zdr=C3=A1hal" ?= 
+        <jachym.zdrahal@surechiers.com>
+To:     <linux-embedded@vger.kernel.org>
+Subject: Renovace podlahy
+X-Mailer: mail.surechiers.com
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=ISO-8859-1;
- DelSp="Yes";
- format="flowed"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-User-Agent: Internet Messaging Program (IMP) H3 (4.3.7)
-X-Originating-User-Info: boothg@istar.ca 208.85.219.96
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: Yes, score=5.7 required=5.0 tests=BAYES_20,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FROM_FMBLA_NEWDOM,
+        RCVD_IN_SBL_CSS,SPF_HELO_NONE,SPF_PASS,URIBL_CSS_A,URIBL_DBL_SPAM
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: *  2.5 URIBL_DBL_SPAM Contains a spam URL listed in the Spamhaus DBL
+        *      blocklist
+        *      [URIs: surechiers.com]
+        *  3.3 RCVD_IN_SBL_CSS RBL: Received via a relay in Spamhaus SBL-CSS
+        *      [80.211.239.236 listed in zen.spamhaus.org]
+        *  0.1 URIBL_CSS_A Contains URL's A record listed in the Spamhaus CSS
+        *      blocklist
+        *      [URIs: surechiers.com]
+        * -0.0 BAYES_20 BODY: Bayes spam probability is 5 to 20%
+        *      [score: 0.1880]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        *  0.0 FROM_FMBLA_NEWDOM From domain was registered in last 7 days
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
+Dobr=C3=A9 r=C3=A1no,
+
+m=C4=9Bli byste z=C3=A1jem o beze=C5=A1v=C3=A9, chemicky, n=C3=A1razu a o=
+t=C4=9Bru odoln=C3=A9 podlahy?
+
+Zaji=C5=A1=C5=A5uj=C3=AD spolehlivost bez ohledu na to, zda je pou=C5=BE=C3=
+=ADv=C3=A1te v n=C3=A1ro=C4=8Dn=C3=BDch v=C3=BDrobn=C3=ADch prostorech, s=
+kladech, komunika=C4=8Dn=C3=ADch tras=C3=A1ch nebo komer=C4=8Dn=C3=ADch p=
+rostor=C3=A1ch.
+
+Navrhli jsme snadno =C4=8Distiteln=C3=A9, hygienick=C3=A9 a protiskluzov=C3=
+=A9 podlahy pro pr=C5=AFmyslov=C3=A9 i komer=C4=8Dn=C3=AD pou=C5=BEit=C3=AD=
+=2E
+
+Mohu nab=C3=ADdnout bezplatn=C3=BD audit va=C5=A1ich podlah spolu s kompl=
+exn=C3=AD anal=C3=BDzou podkladu. Mohu o tomhle zavolat?
 
 
-Sehr geehrter E-Mail-Begünstigter, Sie wurden für eine Spende in Höhe  
-von 3.500.000,00 ? ausgewählt. Wenden Sie sich an diese  
-E-Mail-Adresse: s.g0392440821@gmail.com, um weitere Informationen zum  
-Erhalt Ihrer Spende zu erhalten. Vielen Dank
-
+J=C3=A1chym Zdr=C3=A1hal
