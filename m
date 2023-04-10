@@ -2,59 +2,58 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B05016BC984
-	for <lists+linux-embedded@lfdr.de>; Thu, 16 Mar 2023 09:43:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A33096DD11B
+	for <lists+linux-embedded@lfdr.de>; Tue, 11 Apr 2023 06:42:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230521AbjCPIlo (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Thu, 16 Mar 2023 04:41:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58004 "EHLO
+        id S230105AbjDKEky convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-embedded@lfdr.de>);
+        Tue, 11 Apr 2023 00:40:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52916 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230481AbjCPIle (ORCPT
+        with ESMTP id S229507AbjDKEkx (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Thu, 16 Mar 2023 04:41:34 -0400
-Received: from mail.paretdee.com (mail.paretdee.com [141.95.17.174])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 96D194D2AA
-        for <linux-embedded@vger.kernel.org>; Thu, 16 Mar 2023 01:41:32 -0700 (PDT)
-Received: by mail.paretdee.com (Postfix, from userid 1002)
-        id 115D0A2C31; Thu, 16 Mar 2023 08:40:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=paretdee.com; s=mail;
-        t=1678956081; bh=FLMIyM7qOCOVEMp1o/ltkgnLeuU0ZBlT9xWiZMBZ7Ag=;
-        h=Date:From:To:Subject:From;
-        b=CJQMj42bymNjhEcE0NQykBj2PYttXax9AFde6IA1nuskIsGzhqqABF03x0/XMqdyn
-         1+pWv6Emoui2iBQbYwHcSJxtQ4G/UikPuCyWPpyvzUvbekuL88orLMULnhSuMj84Pp
-         fy9T/U5e0WWGRE/ppMfOpeVxadVrffxmtHURW2p4OpAGWUWNOxnlzQyKS7NNZA68sB
-         1laxGY4BlJeAig0a/76+1FwvhPPJs13qhTywb2hgYvfAucftbkiktWBUgi/kv7Z9Kt
-         05zymbjBj3VGv1+GAyNeEHR956BdYMHejI3pVtKd/FEvjVy9E8J1Pem/B91ZE6Ke7T
-         KtNzQOnA3QGvA==
-Received: by mail.paretdee.com for <linux-embedded@vger.kernel.org>; Thu, 16 Mar 2023 08:40:33 GMT
-Message-ID: <20230316074500-0.1.5h.cm23.0.ue6qc6m7kc@paretdee.com>
-Date:   Thu, 16 Mar 2023 08:40:33 GMT
-From:   "Zbynek Spacek" <zbynek.spacek@paretdee.com>
-To:     <linux-embedded@vger.kernel.org>
-Subject: Rubber Molded
-X-Mailer: mail.paretdee.com
+        Tue, 11 Apr 2023 00:40:53 -0400
+X-Greylist: delayed 23768 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 10 Apr 2023 21:40:51 PDT
+Received: from zimbra-dc.paul-scerri.ch (dc.paul-scerri.ch [62.220.130.141])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AD7041708;
+        Mon, 10 Apr 2023 21:40:51 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+        by zimbra-dc.paul-scerri.ch (Postfix) with ESMTP id 765715E2C87;
+        Mon, 10 Apr 2023 22:09:41 +0200 (CEST)
+Received: from zimbra-dc.paul-scerri.ch ([127.0.0.1])
+        by localhost (zimbra-dc.paul-scerri.ch [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id 4N1rggO2H8MZ; Mon, 10 Apr 2023 22:09:41 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+        by zimbra-dc.paul-scerri.ch (Postfix) with ESMTP id 801FA59387C;
+        Mon, 10 Apr 2023 21:56:56 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at zimbra-dc.paul-scerri.ch
+Received: from zimbra-dc.paul-scerri.ch ([127.0.0.1])
+        by localhost (zimbra-dc.paul-scerri.ch [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id 2p4mzTMSQK-s; Mon, 10 Apr 2023 21:56:56 +0200 (CEST)
+Received: from [185.169.4.108] (unknown [185.169.4.108])
+        by zimbra-dc.paul-scerri.ch (Postfix) with ESMTPSA id 025FB5E2276;
+        Mon, 10 Apr 2023 21:34:30 +0200 (CEST)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
-        autolearn=unavailable autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: Re
+To:     Recipients <wiki@paul-scerri.ch>
+From:   "Maria-Elisabeth Schaeffler" <wiki@paul-scerri.ch>
+Date:   Mon, 10 Apr 2023 12:34:29 -0700
+Reply-To: mariaelisabeths457@gmail.com
+Message-Id: <20230410193432.025FB5E2276@zimbra-dc.paul-scerri.ch>
+X-Spam-Status: No, score=2.8 required=5.0 tests=FREEMAIL_FORGED_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,SPF_HELO_NONE,SPF_PASS autolearn=no
+        autolearn_force=no version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Good morning,
+Your email account has been selected for a donation of €1,700,000. Please contact for more information.
 
-we can offer unbeatable conditions for the supply of various silicone com=
-pounds and rubbers, liquid silicone rubber (LSR).
-
-In our assortment you will also find cross-linking agents, stabilizers, d=
-yes and individual silicone mixtures that we will develop for your needs.
-
-Do you want to know what we can offer you?
-
-
-Best regards
-Zbynek Spacek
+Mrs Maria Elisabeth Schaeffler
+CEO SCHAEFFLER.
