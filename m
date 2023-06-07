@@ -2,75 +2,69 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5E01A709658
-	for <lists+linux-embedded@lfdr.de>; Fri, 19 May 2023 13:19:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 96F34727600
+	for <lists+linux-embedded@lfdr.de>; Thu,  8 Jun 2023 06:17:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231805AbjESLRt (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 19 May 2023 07:17:49 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53842 "EHLO
+        id S233748AbjFHEPo (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 8 Jun 2023 00:15:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47852 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231513AbjESLRr (ORCPT
+        with ESMTP id S232241AbjFHEPm (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 19 May 2023 07:17:47 -0400
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com [IPv6:2a00:1450:4864:20::631])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4126310EC
-        for <linux-embedded@vger.kernel.org>; Fri, 19 May 2023 04:17:44 -0700 (PDT)
-Received: by mail-ej1-x631.google.com with SMTP id a640c23a62f3a-969f90d71d4so480048466b.3
-        for <linux-embedded@vger.kernel.org>; Fri, 19 May 2023 04:17:44 -0700 (PDT)
+        Thu, 8 Jun 2023 00:15:42 -0400
+X-Greylist: delayed 9289 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 07 Jun 2023 21:15:39 PDT
+Received: from cau.edu.cn (mx3.cau.edu.cn [211.82.95.95])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 434D92126
+        for <linux-embedded@vger.kernel.org>; Wed,  7 Jun 2023 21:15:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684495063; x=1687087063;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YmxaI1amCfTksu6ynk2557PwK0HJxrBQmYIx/Pz5hBs=;
-        b=Eiw4JAU3c1Q2BJpBu1tvSTZba4z8SbBucbbhiR3frhv7VlB6Qa8tbmbHXfQfqk9GA8
-         UEo8VemXoK1wKqQFZOpC8T91jLsWsbwSFdtaaLUeA/Vwz81AcxZdsuKZX4h/NtnKKzmC
-         2tvQXLcfGBiepPGjbJe1B2KwvsVp0S6ct1r4pwgcr9Ad/erjUhWNo2wdI7StoD2mJqjA
-         ZgBYyriSfxevToJukWdFsz73GWHJq4E4bG+PiaobB+o5pECZFFXEF2f8vPMokQOdAjd1
-         Rc2Wj9xb+DHV8rPGR9rM6kDSkczPvwBV4gzggVrmfXpI6aMAOJ5GMWJqos/IT+JfHY7l
-         hIXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684495063; x=1687087063;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=YmxaI1amCfTksu6ynk2557PwK0HJxrBQmYIx/Pz5hBs=;
-        b=HFdfQfqL8grfgbl2eyLcbGkb577jqXQRjmQqx4jdWbnLPUvkIpKQ36rBzygbUpTkvd
-         q6qHtlKIlfqHOTo5haQTXtFW52uda/cj6YFSmChWzEoKqyqAuaiYuKQsmpKYzHCXone+
-         Z7sQhM1LH51FmyObHbtem1BhW4xKr32RnKIv2u8ZxUEppxy6qsAd54fK2FpHYykpfnvP
-         fiuF5B/cFaSBwYOfxqmRfy3KmuQorSGKWddEPw9Lks/QaQivrT+tnhJxjKYRqcpKYNcA
-         QZcGRL0R650GPuHWPBZeaMs4yhAlMdWk2l3wPrSLcjeOjRrUimHhS5tMYYV3AAfSVuJ2
-         QGfQ==
-X-Gm-Message-State: AC+VfDzDDSqIShYlXz3L1yTu4lWHJKiT4y9dAkxXfsTyoSkpLIt23zuS
-        rD0t2/Z/B2cr0mIwsUm/wMKX2H7muee3I07oaro=
-X-Google-Smtp-Source: ACHHUZ4GcdKjctEWmkMJD/Q5ZDCusH7zrjV+w4c4EgP8GDbM+BMa7NNuPpP4cOMUW2oAUk/kOHHzW6hqw5zKR98kQX0=
-X-Received: by 2002:a17:907:1b12:b0:8b8:c06e:52d8 with SMTP id
- mp18-20020a1709071b1200b008b8c06e52d8mr1298232ejc.36.1684495062361; Fri, 19
- May 2023 04:17:42 -0700 (PDT)
+        d=cau.edu.cn; s=dkim; h=Received:Content-Type:MIME-Version:
+        Content-Transfer-Encoding:Content-Description:Subject:To:From:
+        Date:Reply-To:Message-Id; bh=3zfvbm3iRpbhnSma4AEzNVZJYT38cdJE1Hc
+        jirq8ThA=; b=vOeMsFiRiAe+C1JSTKWNNY0veMlgV+04BMoc4oVuXQM7wuLUltI
+        fNR5dNNysbx9+i26KiGn+o/OphFALl5aaQJT8TNXpYZni3ty48OsQBIsupdm5udr
+        Qezq7zhFNr+vNIBuNnmSXG+6GjQ2DklV5Ew33TWw/e3UPDQ8F7gOyNJ8=
+Received: from [103.179.185.190] (unknown [103.179.185.190])
+        by mailapp2 (Coremail) with SMTP id X19S0wB3vB158oBk+BYdAA--.34795S572;
+        Thu, 08 Jun 2023 05:59:06 +0800 (CST)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Received: by 2002:a17:907:7dab:b0:94f:7d03:8e8b with HTTP; Fri, 19 May 2023
- 04:17:41 -0700 (PDT)
-Reply-To: ninacoulibaly03@myself.com
-From:   nina coulibaly <ninacoulibaly199@gmail.com>
-Date:   Fri, 19 May 2023 04:17:41 -0700
-Message-ID: <CAM7Z2JAd00KW6b=O8M27vwRnsJ1w3AmDO5tP+gSmzkaHvk6=CA@mail.gmail.com>
-Subject: from nina coulibaly
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.8 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Re:Investment ??
+To:     Recipients <syuan@cau.edu.cn>
+From:   "Mrs. E. Al-Hashimi" <syuan@cau.edu.cn>
+Date:   Wed, 07 Jun 2023 14:58:56 -0700
+Reply-To: nationalbureau@kakao.com
+X-CM-TRANSID: X19S0wB3vB158oBk+BYdAA--.34795S572
+Message-Id: <6480FDCC.03D116.13054@cau.edu.cn>
+Authentication-Results: mailapp2; spf=neutral smtp.mail=syuan@cau.edu.
+        cn;
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+        VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjDUYxBIdaVFxhVjvjDU0xZFpf9x0zRUUUUUUUUU
+        =
+X-CM-SenderInfo: pv1xt0o6fd3hxhgxhubq/
+X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HK_NAME_MR_MRS,SPF_HELO_PASS,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: *
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Dear,
+Hello Sir/Ma,
 
-Please grant me permission to share a very crucial discussion with
-you. I am looking forward to hearing from you at your earliest
-convenience.
+My name is Mrs. Reem E. Al-Hashimi, The Emirates Minister of State  United =
+Arab Emirates.I have a great business proposal to discuss with you, if you =
+are interested in Foreign Investment/Partnership please reply with your lin=
+e of interest.
 
-Mrs. Nina Coulibal
+
+I can invest with  BTC, Banince and All Cryptocurrencies
+
+PLEASE REPLY ME : rrrhashimi2022@kakao.com
+
+Reem
+
