@@ -2,111 +2,119 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B46C75A532
-	for <lists+linux-embedded@lfdr.de>; Thu, 20 Jul 2023 06:43:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7DB5775A858
+	for <lists+linux-embedded@lfdr.de>; Thu, 20 Jul 2023 09:57:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229587AbjGTElg (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Thu, 20 Jul 2023 00:41:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60196 "EHLO
+        id S231540AbjGTHzf (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 20 Jul 2023 03:55:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40580 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229477AbjGTElf (ORCPT
+        with ESMTP id S231516AbjGTHzd (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Thu, 20 Jul 2023 00:41:35 -0400
-Received: from outgoing.mit.edu (outgoing-auth-1.mit.edu [18.9.28.11])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 472E41998
-        for <linux-embedded@vger.kernel.org>; Wed, 19 Jul 2023 21:41:33 -0700 (PDT)
-Received: from cwcc.thunk.org (pool-173-48-116-181.bstnma.fios.verizon.net [173.48.116.181])
-        (authenticated bits=0)
-        (User authenticated as tytso@ATHENA.MIT.EDU)
-        by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 36K4fK8T018002
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 20 Jul 2023 00:41:21 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
-        t=1689828082; bh=WDkuzsGfOvgmcwkIftU4ohf8YDiv8w29EGl2vrbIwtc=;
-        h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
-        b=lm4z5U3hUf4M4K+hUJVD3HeEgIgziEjlSeT2rYFQzPcGb+LWoSBd127vHYZDb7Dax
-         Wj8KZNtIPtaKLz/AyfwKcWBDlgSaIwsVwFRyvFuogCnUrDKTH5zYmVgvMew2ablErc
-         J8B2VvKNbQx0HVwLAIHloX/L7Hfvsn0Ab5J6gRX/siZphLTi677yegCcKmV784SXPj
-         tRecXeA5hZVzQl0fkXhni+vbIvb2xaumo1eF4lJgJ4nUq6cLBsDnr+3blmAgRBGZyL
-         R3Peux0rUpfUunywAPKdP1WAEN02osN0N1zpPzvnVplAsI2zZbb0o33cW/UfyrZBa4
-         N9aenpL3D8+YQ==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
-        id 9728615C026A; Thu, 20 Jul 2023 00:41:20 -0400 (EDT)
-Date:   Thu, 20 Jul 2023 00:41:20 -0400
-From:   "Theodore Ts'o" <tytso@mit.edu>
-To:     Kai Tomerius <kai@tomerius.de>
+        Thu, 20 Jul 2023 03:55:33 -0400
+X-Greylist: delayed 91947 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 20 Jul 2023 00:55:26 PDT
+Received: from mail.lichtvoll.de (lichtvoll.de [IPv6:2001:67c:14c:12f::11:100])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 35A95269F;
+        Thu, 20 Jul 2023 00:55:26 -0700 (PDT)
+Received: from 127.0.0.1 (localhost [127.0.0.1])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (secp384r1) server-digest SHA384)
+        (No client certificate requested)
+        by mail.lichtvoll.de (Postfix) with ESMTPSA id 225317497FD;
+        Thu, 20 Jul 2023 09:55:23 +0200 (CEST)
+Authentication-Results: mail.lichtvoll.de;
+        auth=pass smtp.auth=martin smtp.mailfrom=martin@lichtvoll.de
+From:   Martin Steigerwald <martin@lichtvoll.de>
+To:     Theodore Ts'o <tytso@mit.edu>
 Cc:     "Alan C. Assis" <acassis@gmail.com>,
-        =?iso-8859-1?Q?Bj=F8rn?= Forsman <bjorn.forsman@gmail.com>,
-        linux-embedded@vger.kernel.org,
+        =?ISO-8859-1?Q?Bj=F8rn?= Forsman <bjorn.forsman@gmail.com>,
+        Kai Tomerius <kai@tomerius.de>, linux-embedded@vger.kernel.org,
         Ext4 Developers List <linux-ext4@vger.kernel.org>,
         dm-devel@redhat.com
-Subject: Re: File system robustness
-Message-ID: <20230720044120.GB5764@mit.edu>
-References: <20230717075035.GA9549@tomerius.de>
- <CAG4Y6eTU=WsTaSowjkKT-snuvZwqWqnH3cdgGoCkToH02qEkgg@mail.gmail.com>
- <20230718053017.GB6042@tomerius.de>
- <CAEYzJUGC8Yj1dQGsLADT+pB-mkac0TAC-typAORtX7SQ1kVt+g@mail.gmail.com>
- <CAG4Y6eTN1XbZ_jAdX+t2mkEN=KoNOqprrCqtX0BVfaH6AxkdtQ@mail.gmail.com>
- <20230718213212.GE3842864@mit.edu>
- <20230719105138.GA19936@tomerius.de>
+Subject: Nobarrier mount option (was: Re: File system robustness)
+Date:   Thu, 20 Jul 2023 09:55:22 +0200
+Message-ID: <38426448.10thIPus4b@lichtvoll.de>
+In-Reply-To: <20230720042034.GA5764@mit.edu>
+References: <20230717075035.GA9549@tomerius.de> <4835096.GXAFRqVoOG@lichtvoll.de>
+ <20230720042034.GA5764@mit.edu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230719105138.GA19936@tomerius.de>
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-On Wed, Jul 19, 2023 at 12:51:39PM +0200, Kai Tomerius wrote:
-> > In answer to Kai's original question, the setup that was described
-> > should be fine --- assuming high quality hardware.
+Theodore Ts'o - 20.07.23, 06:20:34 CEST:
+> On Wed, Jul 19, 2023 at 08:22:43AM +0200, Martin Steigerwald wrote:
+> > Is "nobarrier" mount option still a thing? I thought those mount
+> > options have been deprecated or even removed with the introduction
+> > of cache flush handling in kernel 2.6.37?
 > 
-> I wonder how to judge that ... it's an eMMC supposedly complying to
-> some JEDEC standard, so it *should* be ok.
+> Yes, it's a thing, and if your server has a UPS with a reliable power
+> failure / low battery feedback, it's *possible* to engineer a reliable
+> system.  Or, for example, if you have a phone with an integrated
+> battery, so when you drop it the battery compartment won't open and
+> the battery won't go flying out, *and* the baseboard management
+> controller (BMC) will halt the CPU before the battery complete dies,
+> and gives a chance for the flash storage device to commit everything
+> before shutdown, *and* the BMC arranges to make sure the same thing
+> happens when the user pushes and holds the power button for 30
+> seconds, then it could be safe.
 
-JEDEC promulgates the eMMC interface specification.  That's the
-interface used to talk to the device, much like SATA and SCSI and
-NVMe.  The JEDEC eMMC specification says nothing about the quality of
-the implementation of the FTL, or whether it is safe from power drops,
-or how many wirte cycles are supported before the eMMC soldered on the
-$2000 MCU would expire.
+Thanks for clarification. I am aware that something like this can be 
+done. But I did not think that is would be necessary to explicitly 
+disable barriers, or should I more accurately write cache flushes, in 
+such a case:
 
-If you're a cell phone manufacturer, the way you judge it is *before*
-you buy a few million of the eMMC devices, you subject the samples to
-a huge amount of power drops and other torture tests (including
-verifying the claimed number of write cycles in spec sheet), before
-the device is qualified for use in your product.
+I thought that nowadays a cache flush would be (almost) a no-op in the 
+case the storage receiving it is backed by such reliability measures. 
+I.e. that the hardware just says "I am ready" when having the I/O 
+request in stable storage whatever that would be, even in case that 
+would be battery backed NVRAM and/or temporary flash.
 
-> But on another aspect: how about the interaction between dm-integrity
-> and ext4? Sure, they each have their own journal, and they're
-> independent layers. Is there anything that could go wrong, say a block
-> that can't be recovered in the dm-integrity layer, causing ext4 to run
-> into trouble, e.g., an I/O error that prevents ext4 from mounting?
-> 
-> I assume tne answer is "No", but can I be sure?
+At least that is what I thought was the background for not doing the 
+"nobarrier" thing anymore: Let the storage below decide whether it is 
+safe to basically ignore cache flushes by answering them (almost) 
+immediately.
 
-If there are I/O errors, with or without dm-integrity, you can have
-problems.  dm-integrity will turn bit-flips into hard I/O errors, but
-a bit-flip might cause silent file system cocrruption (at least at
-first), such that when you finally notice that there's a problem,
-several days or weeks or months may have passed, the data loss might
-be far worse.  So turning an innocous bit flip into a hard I/O error
-can be a feature, assuming that you've allowed for it in your system
-architecture.
+However, not sending the cache flushes in the first place would likely 
+still be more efficient although as far as I am aware block layer does not 
+return back a success / failure information to the upper layers anymore 
+since kernel 2.6.37.
 
-If you assume that the hardware doesn't introduce I/O errors or bit
-flips, and if you assume you don't have any attackers trying to
-corrupt the block device with bit flips, then sure, nothing will go
-wrong.  You can buy perfect hardware from the same supply store where
-high school physics teachers buy frictionless pulleys and massless
-ropes.  :-)
+Seems I got to update my Linux Performance tuning slides about this once 
+again.
 
-Cheers,
+> We also use nobarrier for a scratch file systems which by definition
+> go away when the borg/kubernetes job dies, and which will *never*
+> survive a reboot, let alone a power failure.  In such a situation,
+> there's no point sending the cache flush, because the partition will
+> be mkfs'ed on reboot.  Or, in if the iSCSI or Cloud Persistent Disk
+> will *always* go away when the VM dies, because any persistent state
+> is saved to some cluster or distributed file store (e.g., to the MySQL
+> server, or Big Table, or Spanner, etc.  In these cases, you don't
+> *want* the Cache Flush operation, since skipping it reduce I/O
+> overhead.
 
-						- Ted
+Hmm, right.
+
+> So if you know what you are doing, in certain specialized use cases,
+> nobarrier can make sense, and it is used today at my $WORK's data
+> center for production jobs *all* the time.  So we won't be making
+> ext4's nobarrier mount option go away; it has users.  :-)
+
+I now wonder why XFS people deprecated and even removed those mount 
+options. But maybe I better ask them separately instead of adding their 
+list in CC. Probably by forwarding this mail to the XFS mailing list 
+later on.
+
+Best,
+-- 
+Martin
+
+
