@@ -2,126 +2,97 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4B167759384
-	for <lists+linux-embedded@lfdr.de>; Wed, 19 Jul 2023 12:56:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 899E675A511
+	for <lists+linux-embedded@lfdr.de>; Thu, 20 Jul 2023 06:22:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229817AbjGSKyv (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Wed, 19 Jul 2023 06:54:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36138 "EHLO
+        id S229670AbjGTEUy (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 20 Jul 2023 00:20:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56606 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229567AbjGSKyu (ORCPT
+        with ESMTP id S229463AbjGTEUx (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Wed, 19 Jul 2023 06:54:50 -0400
-X-Greylist: delayed 174 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 19 Jul 2023 03:54:48 PDT
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de [81.169.146.163])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E9B79123;
-        Wed, 19 Jul 2023 03:54:47 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1689763901; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=YFE3oRIx5xOpJJkrH2X2V/kuuQ7dXiLg6xxrLpPcYM1jXz/zzdjAmrmf7fhceOM82S
-    ogQt+TotYoe4773Jn4uPBastZLsaOi5ir+Yp/hYlK/JMtvpI/hnUvg8G1UvuOOwqCXJy
-    v/WXn4jrRkn9pIIS38ychBdfiC5qOVdrlsko6a/9Zgwu6+QViFS2VVLTXdRObFf+5uAl
-    aWNzDbdaH4lJr4X0gnmsnm/eXTRBUQEe1seBJuuBbHNTIrP+SmsGZ+33cTeT7K+iqius
-    SOinfVhCFIZS/w4je3ypKMMvS5P46s60emDY3ZPb2quw3BCzrfsTO4WgKqivc7jP+0Bw
-    RzTw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1689763901;
-    s=strato-dkim-0002; d=strato.com;
-    h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=lvLGZstJ8wKorYy8rcLHdorayXbsT3iQ7MhbnharKpE=;
-    b=qHzVZrne5P4O25MRsho6FvQgsyWrjfiVzZJ31HhjAf92pDc5FhipQRyQaM0r4WjRN1
-    GkgVDC9q01lwiiKwPFhmyETrYmjJs5hpn1bb0ymnf459wNtzCFSTMcWKiCGpy/SQdNbe
-    ebKNXXKFTSLyoN8hJo+KoFV1Jw3+dPzfEqL7LgvLbxdBZ8SxTqmeF3zDYp1Y8vnroC0c
-    Sm7uOnQ2QWaZW0hFxmhVe1ceA6RgOcSEgi3lhBjoipSGjQmyr1nw/1gQ7pG50qGrn+8e
-    mRoTUA+V34KsQj1jetUEkePgvJBdiofQAohbWFRtLFDDmVTx148I+3O1tVrExTBMDfvC
-    Sbiw==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo00
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1689763901;
-    s=strato-dkim-0002; d=tomerius.de;
-    h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=lvLGZstJ8wKorYy8rcLHdorayXbsT3iQ7MhbnharKpE=;
-    b=M3N9Gj1Ihv8I9YUfstwtzWIFX3+X2U9J5CpGZ6oP7Di3hrzt3WsVVJv1AOAErs7Ove
-    CUu06Y8twnNwBNCHrSlB2nck7Vs5gxPbe0zltkHifMwKwABBUophuepqxMzpFUdWTCA3
-    Qap36HEHkzX9ZZ59g3CLLXZob5ZWjMinDx1ttADn2Ah8kn9kYVxYd6Lxygin2qWGA+MY
-    MruND7adGncDE2d/mlXQ2mp/HQtqB/n1A3qAQ11K0HNW7hKknR+WGr1NyByh5uKO+I5l
-    QtnBiarBhsYIBGx1XvhsYuZVbmKa+oCrmut3yi6UzUbQBfaIZEcBZGhDCEi1c+nXbBDa
-    +uiQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1689763901;
-    s=strato-dkim-0003; d=tomerius.de;
-    h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=lvLGZstJ8wKorYy8rcLHdorayXbsT3iQ7MhbnharKpE=;
-    b=izeiG+UjQBLTpfzhdAuho9H+oPiIG8m14QCvDr/1SnrXC/4LZIUG7e8H9/IuiaHNyB
-    l7nJ7yHBtDsAwrCpWADQ==
-X-RZG-AUTH: ":J20NVVSndvp4466vFhCXUxk5AzpkHwfKmUFBoZWB6MoGGjIYlcL1veuiArSdmAK/Sg=="
-Received: from jukebox.tomerius.de
-    by smtp.strato.de (RZmta 49.6.4 DYNA|AUTH)
-    with ESMTPSA id Y0a99ez6JApf0CC
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
-        (Client did not present a certificate);
-    Wed, 19 Jul 2023 12:51:41 +0200 (CEST)
-Received: from [192.168.3.20] (helo=tomerius.de)
-        by jukebox.tomerius.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        (Exim 4.92)
-        (envelope-from <kai@tomerius.de>)
-        id 1qM4mS-0005X8-JQ; Wed, 19 Jul 2023 12:51:40 +0200
-Date:   Wed, 19 Jul 2023 12:51:39 +0200
-From:   Kai Tomerius <kai@tomerius.de>
-To:     Theodore Ts'o <tytso@mit.edu>
+        Thu, 20 Jul 2023 00:20:53 -0400
+Received: from outgoing.mit.edu (outgoing-auth-1.mit.edu [18.9.28.11])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BCF21172A
+        for <linux-embedded@vger.kernel.org>; Wed, 19 Jul 2023 21:20:51 -0700 (PDT)
+Received: from cwcc.thunk.org (pool-173-48-116-181.bstnma.fios.verizon.net [173.48.116.181])
+        (authenticated bits=0)
+        (User authenticated as tytso@ATHENA.MIT.EDU)
+        by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 36K4KYAp010027
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Thu, 20 Jul 2023 00:20:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
+        t=1689826838; bh=3XJCOb5v+cTa0HgiQv1Jsq9Fu13cCQuFEnmD+Q/7lWA=;
+        h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
+        b=A9g+ho5jvo/zXkVA9BMs4PbJ7g86tVqZr6dtcpHRS2DUeJkGEsn3q+3F7HmujqSAY
+         DVK/oHf/oUarVIgbPh5Vsxvs62UJJu9kCACetLMOLnAdKcxtQ1wY4YlIZ+rA76lIkd
+         nN6MmX3BTuG7xWw6EFo8wBHmACJQEi0rlrFFZ21HpPV66dlp9gL3GrzQC+TDN368M5
+         1YEXv2OyTQuVt6a/tSI0rnARycn3eNd+YUs0CO3CevSN3qm7vFhNLMUu41IG7PmeXY
+         xSxuVTdM5NtIOoxcm5y+88XtGCi85pT9ePpdYHkp3upzuT5X+NDa7RRqbdYmRS71pt
+         Ycf675hnWvDzg==
+Received: by cwcc.thunk.org (Postfix, from userid 15806)
+        id 681A615C026A; Thu, 20 Jul 2023 00:20:34 -0400 (EDT)
+Date:   Thu, 20 Jul 2023 00:20:34 -0400
+From:   "Theodore Ts'o" <tytso@mit.edu>
+To:     Martin Steigerwald <martin@lichtvoll.de>
 Cc:     "Alan C. Assis" <acassis@gmail.com>,
         =?iso-8859-1?Q?Bj=F8rn?= Forsman <bjorn.forsman@gmail.com>,
-        linux-embedded@vger.kernel.org,
+        Kai Tomerius <kai@tomerius.de>, linux-embedded@vger.kernel.org,
         Ext4 Developers List <linux-ext4@vger.kernel.org>,
         dm-devel@redhat.com
 Subject: Re: File system robustness
-Message-ID: <20230719105138.GA19936@tomerius.de>
+Message-ID: <20230720042034.GA5764@mit.edu>
 References: <20230717075035.GA9549@tomerius.de>
- <CAG4Y6eTU=WsTaSowjkKT-snuvZwqWqnH3cdgGoCkToH02qEkgg@mail.gmail.com>
- <20230718053017.GB6042@tomerius.de>
- <CAEYzJUGC8Yj1dQGsLADT+pB-mkac0TAC-typAORtX7SQ1kVt+g@mail.gmail.com>
  <CAG4Y6eTN1XbZ_jAdX+t2mkEN=KoNOqprrCqtX0BVfaH6AxkdtQ@mail.gmail.com>
  <20230718213212.GE3842864@mit.edu>
+ <4835096.GXAFRqVoOG@lichtvoll.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230718213212.GE3842864@mit.edu>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <4835096.GXAFRqVoOG@lichtvoll.de>
 X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-> In answer to Kai's original question, the setup that was described
-> should be fine --- assuming high quality hardware.
+On Wed, Jul 19, 2023 at 08:22:43AM +0200, Martin Steigerwald wrote:
+> 
+> Is "nobarrier" mount option still a thing? I thought those mount options 
+> have been deprecated or even removed with the introduction of cache flush 
+> handling in kernel 2.6.37?
 
-I wonder how to judge that ... it's an eMMC supposedly complying to
-some JEDEC standard, so it *should* be ok.
+Yes, it's a thing, and if your server has a UPS with a reliable power
+failure / low battery feedback, it's *possible* to engineer a reliable
+system.  Or, for example, if you have a phone with an integrated
+battery, so when you drop it the battery compartment won't open and
+the battery won't go flying out, *and* the baseboard management
+controller (BMC) will halt the CPU before the battery complete dies,
+and gives a chance for the flash storage device to commit everything
+before shutdown, *and* the BMC arranges to make sure the same thing
+happens when the user pushes and holds the power button for 30
+seconds, then it could be safe.
 
-> ... if power is cut suddenly, the data used by the Flash
-> Translation Layer can be corrupted, in which case data written months
-> or years ago (not just recent data) could be lost.
+We also use nobarrier for a scratch file systems which by definition
+go away when the borg/kubernetes job dies, and which will *never*
+survive a reboot, let alone a power failure.  In such a situation,
+there's no point sending the cache flush, because the partition will
+be mkfs'ed on reboot.  Or, in if the iSCSI or Cloud Persistent Disk
+will *always* go away when the VM dies, because any persistent state
+is saved to some cluster or distributed file store (e.g., to the MySQL
+server, or Big Table, or Spanner, etc.  In these cases, you don't
+*want* the Cache Flush operation, since skipping it reduce I/O
+overhead.
 
-At least I haven't observed anything like that up to now.
+So if you know what you are doing, in certain specialized use cases,
+nobarrier can make sense, and it is used today at my $WORK's data
+center for production jobs *all* the time.  So we won't be making
+ext4's nobarrier mount option go away; it has users.  :-)
 
-But on another aspect: how about the interaction between dm-integrity
-and ext4? Sure, they each have their own journal, and they're
-independent layers. Is there anything that could go wrong, say a block
-that can't be recovered in the dm-integrity layer, causing ext4 to run
-into trouble, e.g., an I/O error that prevents ext4 from mounting?
+Cheers,
 
-I assume tne answer is "No", but can I be sure?
-
-Thx
-regards
-Kai
+					- Ted
