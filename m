@@ -2,70 +2,68 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0080075CAB1
-	for <lists+linux-embedded@lfdr.de>; Fri, 21 Jul 2023 16:53:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2BB8077F1BA
+	for <lists+linux-embedded@lfdr.de>; Thu, 17 Aug 2023 10:03:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231262AbjGUOvk (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Fri, 21 Jul 2023 10:51:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34316 "EHLO
+        id S1346352AbjHQIB2 (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Thu, 17 Aug 2023 04:01:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33972 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231266AbjGUOvj (ORCPT
+        with ESMTP id S1348691AbjHQIBM (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Fri, 21 Jul 2023 10:51:39 -0400
-Received: from mail.lichtvoll.de (lichtvoll.de [IPv6:2001:67c:14c:12f::11:100])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AEBEC171A;
-        Fri, 21 Jul 2023 07:51:34 -0700 (PDT)
-Received: from 127.0.0.1 (localhost [127.0.0.1])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (secp384r1) server-digest SHA384)
-        (No client certificate requested)
-        by mail.lichtvoll.de (Postfix) with ESMTPSA id E2FE274C065;
-        Fri, 21 Jul 2023 16:51:31 +0200 (CEST)
-Authentication-Results: mail.lichtvoll.de;
-        auth=pass smtp.auth=martin smtp.mailfrom=martin@lichtvoll.de
-From:   Martin Steigerwald <martin@lichtvoll.de>
-To:     Theodore Ts'o <tytso@mit.edu>
-Cc:     "Alan C. Assis" <acassis@gmail.com>,
-        =?ISO-8859-1?Q?Bj=F8rn?= Forsman <bjorn.forsman@gmail.com>,
-        Kai Tomerius <kai@tomerius.de>, linux-embedded@vger.kernel.org,
-        Ext4 Developers List <linux-ext4@vger.kernel.org>,
-        dm-devel@redhat.com
-Subject: Re: Nobarrier mount option (was: Re: File system robustness)
-Date:   Fri, 21 Jul 2023 16:51:31 +0200
-Message-ID: <4918028.0VBMTVartN@lichtvoll.de>
-In-Reply-To: <20230721133526.GF5764@mit.edu>
-References: <20230717075035.GA9549@tomerius.de> <38426448.10thIPus4b@lichtvoll.de>
- <20230721133526.GF5764@mit.edu>
+        Thu, 17 Aug 2023 04:01:12 -0400
+Received: from mail.venturelinkbiz.com (mail.venturelinkbiz.com [51.195.119.142])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 67E732D57
+        for <linux-embedded@vger.kernel.org>; Thu, 17 Aug 2023 01:01:09 -0700 (PDT)
+Received: by mail.venturelinkbiz.com (Postfix, from userid 1002)
+        id 285AA45FEE; Thu, 17 Aug 2023 08:00:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=venturelinkbiz.com;
+        s=mail; t=1692259267;
+        bh=Mjfq+hZZ0+rPTC06HjjASvlnsTMgj1yAndWxi/OAu2M=;
+        h=Date:From:To:Subject:From;
+        b=x6ChpDlmHfoGomOyRbVgOscDBdFsE4BL+XIRfT+n1+AGUWhrbDddmij8THXPKVGbv
+         9D61JMYY8T/W5Hb/RDejHppHW3atTR4qy8lMjLv0JLPucuBffol37DDeAQGEGQL47c
+         UAhl5FJTct0NFqeFXkgJ0B1d9UBilxwqs+GhGki+9K4hNOxnlIKWllPXPubUkIBq1m
+         Wq+X2YXgK4PzBMQPIXjjA6s7CZG3WtKwxOeOhQFTFyG1GcWYLE8fHaznO89GJS+47e
+         F2eSvoMwYEaQwBNM64rvj5yDVEG9BPPfgoKGOYPiE31xFvoC3sQvBrgJ6SF0A6p1Hu
+         GDTAavPRQmzFw==
+Received: by mail.venturelinkbiz.com for <linux-embedded@vger.kernel.org>; Thu, 17 Aug 2023 08:00:46 GMT
+Message-ID: <20230817064500-0.1.1u.4ubr.0.abob6t2h7x@venturelinkbiz.com>
+Date:   Thu, 17 Aug 2023 08:00:46 GMT
+From:   "Michal Rmoutil" <michal.rmoutil@venturelinkbiz.com>
+To:     <linux-embedded@vger.kernel.org>
+Subject: =?UTF-8?Q?Syst=C3=A9m_sledov=C3=A1n=C3=AD_a_optimalizace_v=C3=BDroby?=
+X-Mailer: mail.venturelinkbiz.com
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=3.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
+        RCVD_IN_SBL_CSS,SPF_HELO_NONE,SPF_PASS,URIBL_CSS_A,URIBL_DBL_SPAM
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ***
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Theodore Ts'o - 21.07.23, 15:35:26 CEST:
-> > At least that is what I thought was the background for not doing the
-> > "nobarrier" thing anymore: Let the storage below decide whether it
-> > is safe to basically ignore cache flushes by answering them (almost)
-> > immediately.
-> 
-> The problem is that the storage below (e.g., the HDD) has no idea that
-> all of this redundancy exists.  Only the system adminsitrator who is
-> configuring the file sysetm will know.  And if you are runninig a
-> hyper-scale cloud system, this kind of custom made system will be
-> much, MUCH, cheaper than buying a huge number of $$$ EMC storage
-> arrays.
+Dobr=C3=A9 r=C3=A1no
 
-Okay, that is reasonable.
+Zn=C3=A1te syst=C3=A9m, kter=C3=BD nejen hl=C3=ADd=C3=A1, ale i optimaliz=
+uje v=C3=BDrobu a p=C5=99in=C3=A1=C5=A1=C3=AD st=C3=A1l=C3=BD p=C5=99=C3=AD=
+jem?
 
-Thanks for explaining.
+D=C3=ADky nejnov=C4=9Bj=C5=A1=C3=ADm technologi=C3=ADm a anal=C3=BDze dat=
+ na=C5=A1e =C5=99e=C5=A1en=C3=AD identifikuje oblasti optimalizace, zv=C3=
+=BD=C5=A1en=C3=AD efektivity a sn=C3=AD=C5=BEen=C3=AD n=C3=A1klad=C5=AF. =
+Na=C5=A1i klienti zaznamenali n=C3=A1r=C5=AFst p=C5=99=C3=ADjm=C5=AF v pr=
+=C5=AFm=C4=9Bru o 20 % a dnes si to m=C5=AF=C5=BEete vyzkou=C5=A1et na 60=
+ dn=C3=AD zdarma.
 
--- 
-Martin
+Pokud chcete dal=C5=A1=C3=AD podrobnosti, odpov=C4=9Bzte pros=C3=ADm na k=
+ontaktn=C3=AD =C4=8D=C3=ADslo.
 
 
+Pozdravy
+Michal Rmoutil
