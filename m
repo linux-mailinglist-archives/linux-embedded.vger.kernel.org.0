@@ -2,81 +2,82 @@ Return-Path: <linux-embedded-owner@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DFF517D478D
-	for <lists+linux-embedded@lfdr.de>; Tue, 24 Oct 2023 08:33:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 15B017E174B
+	for <lists+linux-embedded@lfdr.de>; Sun,  5 Nov 2023 23:03:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232466AbjJXGbk (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
-        Tue, 24 Oct 2023 02:31:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34518 "EHLO
+        id S229997AbjKEWBd (ORCPT <rfc822;lists+linux-embedded@lfdr.de>);
+        Sun, 5 Nov 2023 17:01:33 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40898 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232441AbjJXGbj (ORCPT
+        with ESMTP id S229974AbjKEWBb (ORCPT
         <rfc822;linux-embedded@vger.kernel.org>);
-        Tue, 24 Oct 2023 02:31:39 -0400
-X-Greylist: delayed 28377 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 23 Oct 2023 23:31:37 PDT
-Received: from mail.tehinnovacii.ru (mail.tehinnovacii.ru [185.221.212.125])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DD323DD
-        for <linux-embedded@vger.kernel.org>; Mon, 23 Oct 2023 23:31:37 -0700 (PDT)
+        Sun, 5 Nov 2023 17:01:31 -0500
+X-Greylist: delayed 5275 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sun, 05 Nov 2023 14:01:28 PST
+Received: from SMTP-HCRC-200.brggroup.vn (unknown [42.112.212.144])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DF790BF;
+        Sun,  5 Nov 2023 14:01:28 -0800 (PST)
+Received: from SMTP-HCRC-200.brggroup.vn (localhost [127.0.0.1])
+        by SMTP-HCRC-200.brggroup.vn (SMTP-CTTV) with ESMTP id 78A28192B0;
+        Mon,  6 Nov 2023 01:57:51 +0700 (+07)
+Received: from zimbra.hcrc.vn (unknown [192.168.200.66])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by SMTP-HCRC-200.brggroup.vn (SMTP-CTTV) with ESMTPS id 719E219379;
+        Mon,  6 Nov 2023 01:57:51 +0700 (+07)
 Received: from localhost (localhost [127.0.0.1])
-        by mail.tehinnovacii.ru (Postfix) with ESMTP id D10D48454F793;
-        Mon, 23 Oct 2023 23:45:11 +0300 (MSK)
-Received: from mail.tehinnovacii.ru ([127.0.0.1])
-        by localhost (mail.tehinnovacii.ru [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id lBlgQ1e-s4y1; Mon, 23 Oct 2023 23:45:11 +0300 (MSK)
+        by zimbra.hcrc.vn (Postfix) with ESMTP id 0F17B1B8204A;
+        Mon,  6 Nov 2023 01:57:53 +0700 (+07)
+Received: from zimbra.hcrc.vn ([127.0.0.1])
+        by localhost (zimbra.hcrc.vn [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id Vw9WEJzCiyUm; Mon,  6 Nov 2023 01:57:52 +0700 (+07)
 Received: from localhost (localhost [127.0.0.1])
-        by mail.tehinnovacii.ru (Postfix) with ESMTP id 4119584B18CDC;
-        Mon, 23 Oct 2023 23:45:04 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.tehinnovacii.ru 4119584B18CDC
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tehinnovacii.ru;
-        s=mail; t=1698093904;
-        bh=Ws5TcS6EV4V7aiUY6u9eol5cuGGKUQT0mSrLKF+Le3s=;
+        by zimbra.hcrc.vn (Postfix) with ESMTP id D37601B8203A;
+        Mon,  6 Nov 2023 01:57:52 +0700 (+07)
+DKIM-Filter: OpenDKIM Filter v2.10.3 zimbra.hcrc.vn D37601B8203A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hcrc.vn;
+        s=64D43D38-C7D6-11ED-8EFE-0027945F1BFA; t=1699210672;
+        bh=WOZURJ77pkiMUL2pPLC14ifVPRvyTQIBEQmxuN1ezAA=;
         h=MIME-Version:To:From:Date:Message-Id;
-        b=fobuA4/+G+0gNyVIoH8l7rMun9rSOIlGICVPSSUVvcHL7lNZbAQsWIVQjo+UbhgrB
-         z6+McOXFsrUcLKfH6c2uVibMoe6EALTEn6YW0fPMG1mlYWkoIVhRK1Rd1M5rMFCG5K
-         MTf9uuAqmFQfos2J2A2CJl2xqqnWGcddLhx9tNOq7BqzLAAZMtHyEF33mUT9JrytVF
-         CpPLIKQxYFhfE2SBdI5S3anQlwKjQr435Ww+0aOWQINh0UDYe09gzATSY5aa3MEsms
-         DJoYjwjUT/8BQQaddbhtuITyA73jzpXTyNtPimwY6I/i+SsFohB6zi31+u3pxkxtoi
-         92VPwv+XyzQng==
-Received: from mail.tehinnovacii.ru ([127.0.0.1])
-        by localhost (mail.tehinnovacii.ru [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id 7vX1XrqYk-h8; Mon, 23 Oct 2023 23:45:04 +0300 (MSK)
-Received: from DESKTOP-0AG4O9B.lan (unknown [41.157.248.166])
-        by mail.tehinnovacii.ru (Postfix) with ESMTPSA id 7A3418615DF8C;
-        Mon, 23 Oct 2023 23:44:58 +0300 (MSK)
-Content-Type: text/plain; charset="iso-8859-1"
+        b=JkahOraNIHUY2hQjLMJ1MnGkZJ5NSgfEclU3aSlyb0jH9L2z9iWo8HOYms38Ck5SL
+         Pu2EnH2z8QEkabrPeTYZMKbUUEiLDRKsOKvTphvs/TfWBuJEHMQZK5PO/57UPek6aV
+         nC3peSjqe1ZXWiLJy0qgLcBb3JkDwSptIcyzOOFKJ6pVtvBRLA/svDboC2LyDxYE4D
+         QFD4ASXU/tglYMiNkWY8XAmqeu3YpUrmTscjHU+JW3qXRRctiNHmh0XYgvOdQW+I3G
+         SBPUKUuNk7L0d+YocQ5kUePABbqE19my9+KQRpDxBtc3NmwIcuUwnL5dyjh6vcslxa
+         HgSQ6C+ZmLxLQ==
+X-Virus-Scanned: amavisd-new at hcrc.vn
+Received: from zimbra.hcrc.vn ([127.0.0.1])
+        by localhost (zimbra.hcrc.vn [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id IWSbvtCDqU5a; Mon,  6 Nov 2023 01:57:52 +0700 (+07)
+Received: from [192.168.1.152] (unknown [51.179.100.52])
+        by zimbra.hcrc.vn (Postfix) with ESMTPSA id 53AB01B8252B;
+        Mon,  6 Nov 2023 01:57:46 +0700 (+07)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Description: Mail message body
-Subject: Brauchen Sie einen Kredit?
-To:     Recipients <zp@tehinnovacii.ru>
-From:   Georg Johannes Proksch <zp@tehinnovacii.ru>
-Date:   Mon, 23 Oct 2023 13:43:58 -0700
-Reply-To: kreditschufadeutsch0@gmail.com
-Message-Id: <20231023204458.7A3418615DF8C@mail.tehinnovacii.ru>
-X-Spam-Status: No, score=4.3 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+Subject: =?utf-8?b?4oKsIDEwMC4wMDAuMDAwPw==?=
+To:     Recipients <ch.31hamnghi@hcrc.vn>
+From:   ch.31hamnghi@hcrc.vn
+Date:   Sun, 05 Nov 2023 19:57:35 +0100
+Reply-To: joliushk@gmail.com
+Message-Id: <20231105185746.53AB01B8252B@zimbra.hcrc.vn>
+X-Spam-Status: No, score=2.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_BL_SPAMCOP_NET,SPF_HELO_NONE,
-        SPF_PASS autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <linux-embedded.vger.kernel.org>
 X-Mailing-List: linux-embedded@vger.kernel.org
 
-Brauchen Sie einen Kredit?
-Tr=E4umen Sie davon, ein Unternehmen zu gr=FCnden?
-Sie ben=F6tigen Geld f=FCr Ihre Gesch=E4ftsidee, ben=F6tigen aber eine gro=
-=DFe Finanzierung?
-Besitzen Sie ein Unternehmen und m=F6chten expandieren?
+Goededag,
+Ik ben mevrouw Joanna Liu en een medewerker van Citi Bank Hong Kong.
+Kan ik =E2=82=AC 100.000.000 aan u overmaken? Kan ik je vertrouwen
 
-Wir bieten Gesch=E4ftskredite, Privatkredite, Projektkredite und Autokredit=
-e mit einem Zinssatz von 2 % an.
 
-Vollst=E4ndiger Name:
-Kreditbetrag:
-Kreditlaufzeit:
-Land:
-Telefonnummer:
+Ik wacht op jullie reacties
+Met vriendelijke groeten
+mevrouw Joanna Liu
 
-Herr Georg Johannes Proksch
-Kreditberater/Berater
