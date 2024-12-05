@@ -1,238 +1,189 @@
-Return-Path: <linux-embedded+bounces-65-lists+linux-embedded=lfdr.de@vger.kernel.org>
+Return-Path: <linux-embedded+bounces-67-lists+linux-embedded=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CD3A9E4DF9
-	for <lists+linux-embedded@lfdr.de>; Thu,  5 Dec 2024 08:08:33 +0100 (CET)
-Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 12400188157C
-	for <lists+linux-embedded@lfdr.de>; Thu,  5 Dec 2024 07:08:33 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 04D0319D062;
-	Thu,  5 Dec 2024 07:08:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=chronox.de header.i=@chronox.de header.b="cBnajHKF";
-	dkim=permerror (0-bit key) header.d=chronox.de header.i=@chronox.de header.b="8mvCbNMu"
-X-Original-To: linux-embedded@vger.kernel.org
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de [85.215.255.23])
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AD069E58D7
+	for <lists+linux-embedded@lfdr.de>; Thu,  5 Dec 2024 15:47:54 +0100 (CET)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46F922F56
-	for <linux-embedded@vger.kernel.org>; Thu,  5 Dec 2024 07:08:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=85.215.255.23
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1BAD9286420
+	for <lists+linux-embedded@lfdr.de>; Thu,  5 Dec 2024 14:47:53 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A179A218EB8;
+	Thu,  5 Dec 2024 14:47:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="cgWs17y8"
+X-Original-To: linux-embedded@vger.kernel.org
+Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.11])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 241621B0F22
+	for <linux-embedded@vger.kernel.org>; Thu,  5 Dec 2024 14:47:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.11
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1733382508; cv=pass; b=oCDlLIeF1Eh2kNP1Ib5d9pzIkmiyJxzY+k8GJ2SQizEQ2OTWVzPIXkA4+IhuEs3jGo6kBwrbIW5xRkdmQC64Jzyb3YxnqJOw4VrahrGn0xAdw3gNEcQ/PrFChNqy3b3Hp6J0n7IVp73FQ3coM6PJer7NAvflZn2M9x6xoDMUZQk=
+	t=1733410059; cv=pass; b=iMJcjkh00CaSJzQLe43O/cf/ApbLeofRzkfwPBu6bZnJT8Y1Kse2te4ug4aZBrwzbMP94w9AVbSN2Ly5Rz9TNXABpPn0biNJKEMNDt1CF1SuGY3ppTcIGk5tNRwZdSe8pU9wFhZG62V3BayXIQPqfD7iixC3sDiTO+Ifg6w0/J4=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1733382508; c=relaxed/simple;
-	bh=7sPnPRpdOG/EOkMMJCOX6wwhmPR8XcveOMABz46o8Lk=;
+	s=arc-20240116; t=1733410059; c=relaxed/simple;
+	bh=p10y1Nre8H9JKT8LJQjBm3Cf0WrSAfSvU/wNmc95C5I=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Q9SP9tdILXHcS7aeW+7V+T4HYRbqb7GRwk7QrYxfSwrg+7iK4xfgERumSH8BWBCjaaIXHizV8O1pMYfKcdKiU7Xl/95hRxGmIdETETxd67c98TIepGvOL5CvVswC9hzQuE8pO6pcjCPXDXHbQP+clFDcG0/6ST/CQ+CCIU4hswE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=chronox.de; spf=none smtp.mailfrom=chronox.de; dkim=pass (2048-bit key) header.d=chronox.de header.i=@chronox.de header.b=cBnajHKF; dkim=permerror (0-bit key) header.d=chronox.de header.i=@chronox.de header.b=8mvCbNMu; arc=pass smtp.client-ip=85.215.255.23
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=chronox.de
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=chronox.de
-ARC-Seal: i=1; a=rsa-sha256; t=1733382144; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=JC45Ehh3OGS7TXb7RWQ3j6KSnDpo362T6Q6Xu6QEcEtvMKH250pLv9OeSdiUN5z9un
-    lgVc84KNxnZ5NFkuKyEfn+6BAQ1KOc/hpsaTU5a0gpoMw4fQwDBpgNkd4CLI5huae/kD
-    0I3SSASckCVUf42z6UUKC2G52wg+j6Y4WeWkm9xFuK8gjpdWXitb9O0An+vgNQq2sYEX
-    u7QJ9ah8o5bwN3ZY3mvInWwsaHHAWW2CcrGbXnxViypPcCgB3tgfj+jXx5H3yQXx4nwQ
-    U1UPNYPAbzrRGWhK6gnY1mvwi+30vrhe7f4tmBG4yK3cuadV5B/nNmyT8n0k072ftHv3
-    ogDw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1733382144;
-    s=strato-dkim-0002; d=strato.com;
-    h=References:In-Reply-To:Message-ID:Date:Subject:To:From:Cc:Date:From:
-    Subject:Sender;
-    bh=vPR6EBI93SJOsGdq9T0YJbkkgAl5aeAOBmrzLvNonWs=;
-    b=tPiIBv3HUsNheZLcjjm0WX/GP9wh+/BGNVNDQjWz+g0sGhXOb2h3jBdVqCxGhzRu1Y
-    EQaFSso8tngSt59NuFC4Gl3KZ3kSepIIPSSZdqgkPP0bAvzPNf93R8C4Kw/LAD8DL1ZX
-    G1Dj+aluEwvU38rsxrHYkkeB02EqKohmtNhB2xRCeYA6f4ykmf4MK5yzPgntRQvYYpQI
-    g4NaiRjCMYEkPzlPzxNeKiVPl5ksLZhGboSLiJ4tRooHtjiUU0jUREeSRt9deaoviEoQ
-    cwfOHFiiWK+m6chsUA+j+YopwsVFPThQuzsTlCqNqztHASG3lqQvmoDZza82pZHaJTPH
-    eDSw==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo00
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1733382144;
-    s=strato-dkim-0002; d=chronox.de;
-    h=References:In-Reply-To:Message-ID:Date:Subject:To:From:Cc:Date:From:
-    Subject:Sender;
-    bh=vPR6EBI93SJOsGdq9T0YJbkkgAl5aeAOBmrzLvNonWs=;
-    b=cBnajHKFKDXUn0Dquhd4mTmCrSxClEBxHWFGbEz/G2w0IdsxjdlO/wN5E65ybSug95
-    gskOeEeeGghiXD6EWcf4jRsngdWUAPadO/ZTwMv/C/Vlpq1kJvTY8xUPnqgyqR4HUNQL
-    aGb4Xm9ti3nOOxCvBHoGOzVXu/GuVEYDWx2NCnGatFu8k1jqiEXue61dkvCipP33ojO/
-    DiDHkhz2opFp4doJ+f3CgU1XnkoSyr6bDWjLMQ9uNOvwOZdrpluxRkOjrp1BHPWgKqju
-    1RxPHpstUm3t2+8sRRkBGs+WWmjIX9NsV9iuoq5bb9zwAwiwuVt4QKceJ253eSblLDnn
-    WWTw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1733382144;
-    s=strato-dkim-0003; d=chronox.de;
-    h=References:In-Reply-To:Message-ID:Date:Subject:To:From:Cc:Date:From:
-    Subject:Sender;
-    bh=vPR6EBI93SJOsGdq9T0YJbkkgAl5aeAOBmrzLvNonWs=;
-    b=8mvCbNMulvMrsel5TBu+bv61SaL52Ke9pXCT+al6Ur26ep6DfWqRYJhW/pyNl5lGMJ
-    90LeQEeLMrdCt9IDisBw==
-X-RZG-AUTH: ":P2ERcEykfu11Y98lp/T7+hdri+uKZK8TKWEqNyiHySGSa9k9zW4DNhHgExWlYfvTiILzU3H+E6rF6MBtE8BFxmvg/XQPF4tGa/5o"
-Received: from tauon.atsec.com
-    by smtp.strato.de (RZmta 51.2.11 AUTH)
-    with ESMTPSA id f9f4250B572ND95
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
-	(Client did not present a certificate);
-    Thu, 5 Dec 2024 08:02:23 +0100 (CET)
-From: Stephan Mueller <smueller@chronox.de>
-To: Francesco Valla <francesco@valla.it>,
- Linux Embedded <linux-embedded@vger.kernel.org>,
+	 MIME-Version:Content-Type; b=P7AoCz4NfGljNfVa0aCmpP8oyxiSkJtHEkL+IQ6ymZPbvC1urfeIyIaUAxeJfHIeDz3NDh2jgo+HnjlI1D2GjO30dNBl/Aobs2iAydxQWbl4uQqTzUfKTbkdmm6KgSUfhv3lEWnwI0psbCb+J0pvmv4emjoySyDs8qURAER4nAQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=cgWs17y8; arc=pass smtp.client-ip=185.56.87.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=instance-europe-west4-zjs6.prod.antispam.mailspamprotection.com; s=arckey; t=1733410056;
+	 b=B8CJYV8v+SHbSmqLUcdDO+fy4TxNr+pz+Q5d133vPUdS+LjFswFoEyZfaewHBfDxUvMwSLLSGx
+	  TqeAz4TPDJV9zRgNJjC/uALMFwmxwD/cac4tgTCUaNR8bAxKdMOeqZAxgGp3g95RuTt/H2vmsq
+	  TKRmU+56zQAgGZP2NNY1yqafNRGFsQz5NTyQxPtCjvvJfomuHkTyzJbrAbqCytjLXmah7Gr324
+	  llYHRI8hkFM26iR5IBwWa09pzoKQcc/MSq6mR47jyulaUoG0lcQP83RGSWYE2rCySNd9RrzPa4
+	  jkAsQQZV6s2JIUyUQ1Z73EbHaikeAQORdteUQqd2yWUIzA==;
+ARC-Authentication-Results: i=1; instance-europe-west4-zjs6.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
+	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
+	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+	arc=none
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=instance-europe-west4-zjs6.prod.antispam.mailspamprotection.com; s=arckey; t=1733410056;
+	bh=p10y1Nre8H9JKT8LJQjBm3Cf0WrSAfSvU/wNmc95C5I=;
+	h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	  Message-ID:Date:Subject:To:From:DKIM-Signature;
+	b=MFoAuE8uDy8uIxdbtZPImJ0MSqZTamI3FGd0I19cvMC3zZPsrzFFOeaS54VJbNOP2+weOaRa0I
+	  4dJkMCNipOXdyyQ6rbJ2Ijx4OfkoRJeqTQPfnEOXpnKXu6wfrqaVS9aHimaXoZxMz3/eXLZzAG
+	  POd/a+4VKLgsEpgqTbZ4WTgqqLzwrB9SMpuZWo/oL/7e9z24LZl2IfPC55XxE8nkSUeW94WhjO
+	  wvb+kKB1+qHLJVIKnX+c+tPjoN2mCOpCFWxp49qMX6Xtr9U6+bm5Pzw7zlRmklOvCJ3BuXd0N/
+	  CZbusp64WOwJHwpDfDeNjgXEGwJ0ngnec4nrgLPblnOQpg==;
+Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
+	by instance-europe-west4-zjs6.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.98)
+	(envelope-from <francesco@valla.it>)
+	id 1tJBQ2-00000004YXe-0LEz
+	for linux-embedded@vger.kernel.org;
+	Thu, 05 Dec 2024 12:57:24 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
+	s=default; h=Date:Subject:To:From:cc:list-help:list-unsubscribe:
+	list-subscribe:list-post:list-owner:list-archive;
+	bh=ghjoe1IxFA95gYyn7pMwiL0vycsHG75jEVQLeWya5T0=; b=cgWs17y8sDIEzJASIv+Ib7+7DR
+	4KiEH4CFeMRRmoq3lcodsucrBChSoilHYJOiGjHhAjxS6FzdcwZiSRKWqG4dfD5OgsDwFPxBXu4j4
+	iMoRnj2f+gedZDH9kRienO6un7qTIWd0Tgqh7XzJOl43OANP/1313+gldBMkc9Ujj5P4=;
+Received: from [176.200.182.84] (port=6445 helo=fedora.localnet)
+	by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.98)
+	(envelope-from <francesco@valla.it>)
+	id 1tJBPx-00000000788-0q81;
+	Thu, 05 Dec 2024 12:57:17 +0000
+From: Francesco Valla <francesco@valla.it>
+To: Linux Embedded <linux-embedded@vger.kernel.org>,
  "Bird, Tim" <Tim.Bird@sony.com>
 Subject:
- Re: [boot-time] jent_mod_init on beagleplay (was RE: [boot-time] [RFC]
- analyze-initcall-debug.py - a tool to analyze the initcall debug output
-Date: Thu, 05 Dec 2024 08:02:23 +0100
-Message-ID: <4095066.UUX0tPYDPe@tauon.atsec.com>
+ Re: [boot-time] [RFC] analyze-initcall-debug.py - a tool to analyze the
+ initcall debug output
+Date: Thu, 05 Dec 2024 13:57:17 +0100
+Message-ID: <2281836.vFx2qVVIhK@fedora>
 In-Reply-To:
- <MW5PR13MB5632D5A1AE2D16F53FA2391FFD362@MW5PR13MB5632.namprd13.prod.outlook.com>
+ <MW5PR13MB563207AD3DB4415E5A1678A6FD362@MW5PR13MB5632.namprd13.prod.outlook.com>
 References:
  <1964175.7Z3S40VBb9@fedora.fritz.box>
- <MW5PR13MB5632D5A1AE2D16F53FA2391FFD362@MW5PR13MB5632.namprd13.prod.outlook.com>
+ <MW5PR13MB563207AD3DB4415E5A1678A6FD362@MW5PR13MB5632.namprd13.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-embedded@vger.kernel.org
 List-Id: <linux-embedded.vger.kernel.org>
 List-Subscribe: <mailto:linux-embedded+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-embedded+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="utf-8"
-
-Am Dienstag, 3. Dezember 2024, 22:24:28 Mitteleurop=C3=A4ische Normalzeit s=
-chrieb=20
-Bird, Tim:
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - esm19.siteground.biz
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - valla.it
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SGantispam-id: 699eeb5c7cff772580a5b80aca9210c3
+AntiSpam-DLS: false
+AntiSpam-DLSP: 
+AntiSpam-DLSRS: 
+AntiSpam-TS: 1.0
+Authentication-Results: instance-europe-west4-zjs6.prod.antispam.mailspamprotection.com;
+	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
+	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+	arc=none
 
 Hi Tim,
 
+thank you for taking the time to review the tool. My reply too will be splitted in two parts.
+
+On Tuesday, 3 December 2024 at 21:33:06 Bird, Tim <Tim.Bird@sony.com> wrote:
+> Hey Francesco,
+> 
+> I appreciate the new tool, and have some feedback below.
+> 
+> I'll separate my response and ideas into 2 categories:
+>  - issues raised from your sample report
+>  - feedback on the tool itself
+> 
+> and send them as separate emails.
+> 
 > > -----Original Message-----
 > > From: Francesco Valla <francesco@valla.it>
 > > Dear fellow boot time optimizers,
-> >=20
-> > following the first boot time SIG meeting, which I lurked with much
-> > pleasure
- (but didn't participate to, as I was a bit in awe among such
-> > authorities), I'd like to introduce myself with code rather than a
-> > presentation or resume.=20
-> > Here is a python script which can analyze a dmesg output with
-> > initcall_debug
- option enabled and extract some useful information. It
-> > can for example be used to analyze the output of the grab-boot-data.sh
-> > tool that Tim presented on this list [1] just a few days ago.
-> >=20
-> > Usage is very simple, as the output of dmesg can be piped directly to i=
-t:
-> >=20
-> >=20
+> > 
+> > following the first boot time SIG meeting, which I lurked with much pleasure
+> > (but didn't participate to, as I was a bit in awe among such authorities), I'd
+> > like to introduce myself with code rather than a presentation or resume.
+> > 
+> > Here is a python script which can analyze a dmesg output with initcall_debug
+> > option enabled and extract some useful information. It can for example be used
+> > to analyze the output of the grab-boot-data.sh tool that Tim presented on this
+> > list [1] just a few days ago.
+> > 
+> > Usage is very simple, as the output of dmesg can be piped directly to it:
+> > 
 > >     dmesg | analyze-initcall-debug.py
-> >=20
-> >=20
-> > If no option is specified, it outputs a brief summary, like the followi=
-ng
-> > one
- (obtained on my Beagleplay):
-> >=20
+> > 
+> > If no option is specified, it outputs a brief summary, like the following one
+> > (obtained on my Beagleplay):
+> > 
 > > 1758 drivers has been initialized, of which 1758 before userspace
 > > 119 probes happened outside of the init of their driver
 > > 0 deferred probes pending
 > > ---
 > > Top 10 init/probes durations:
-> >=20
 > >  * 30200000.dss -> 523002us
+> 
+> This call, and a lot of the others are missing function names.  Did you compile the kernel with
+> CONFIG_KALLSYMS=y?
+> 
+> If that's the case, is there a way to use the System.map file for the kernel (used on
+> the machine where the dmesg was obtained from) to map these addresses
+> to their respective  function names?
+> 
+
+These are not in fact addresses, but rather device names. In my understanding, they are printed
+when a probe happens outside of the initialization function for their driver. I still don't have an idea
+on how to match probes with their original initcall, in order to present the user the complete picture.
+
 > >  * deferred_probe_initcall -> 487483us
-> >  * fd00000.gpu -> 162859us
-> >  * 8000f00.mdio -> 142521us
-> >  * 44043000.system-controller -> 71390us
-> >  * 2-004c -> 71178us
-> >  * 40900000.crypto -> 59350us
-> >  * 8000000.ethernet -> 58419us
-> >  * 44043000.system-controller:clock-controller -> 56599us
-> >  * jent_mod_init -> 52140us
->=20
->=20
-> This is odd.  On my beagleplay board, jent_mod_init only took 32326us.
-> (see
-> https://birdcloud.org/boot-time-files/boot-data-timslab-bp1-241203-134136=
-=2Et
-> xt)
-=20
-> I'm assuming that we have similar hardware, but possibly different config=
-s,
-> kernel cmdlines or kernel versions.  I'll take a look at this and see if I
-> can figure out what the difference is between our systems, that causes the
-> difference in the duration for this function.
->=20
-> This initcall (jent_mod_init) is on my list of initcalls to research to s=
-ee
-> if they
- can be improved or deferred.  I haven't seen any degradation in
-> system behavior by deferring this initcall on my system, but that could be
-> from lack of my system doing some related operation that needs the RNG
-> data, or my own ignorance of the effects of this call.
->=20
-> Can someone comment on what items or operations might depend on
-> jent_mod_init
- in early boot?  In particular, would we expect any
-> cryptographic problems if the initcall was deferred to a few seconds after
-> booting?
->=20
-> It can be configured as a module, which makes me think that maybe loading
-> it sometime in very late boot (or even later) is OK.
->=20
-> jent_mod_init is defined in crypto/jitterentropy-kcapi.c, and controlled =
-by
->=20
- CONFIG_CRYPTO_JITTERENTROPY (See crypto/Kconfig)
->=20
-> It appears to do some random number generator seeding by measuring
-> the jitter of a compressiong operation in the kernel. I assume some of the
-> cryptography
- configs affect the duration of the operations.  The initcall
-> duration results on my beagleplay seem to be relatively consistent (in the
-> 32ms range consistently), and from bobs_lab, on machine sam1, the duration
-> range is also consistent (at between 4800 and 5200 usecs).
->=20
-> I'd be interested to see if the range is consistent between runs on other
-> machines
-=20
-> Francesco - Can you submit another boot-data file (or 2 or 3) for
-> francsecoslab-beagleplay, to
- provide some data on this?
->=20
-> Also, can anyone else who sees this initcall in their boot sequence run
-> grab-boot-data.sh
- (from https://birdcloud.org/boot-time/Boot-time_Tools)
-> and submit the data for one or more of their machines?
->=20
-> Stephan Mueller - what are you seeing for the cost of this operation on y=
-our
-> machines?
+> 
+> I feel like this function is interfering with the ability to correctly assign
+> boot time delays to the correct initcall.
+> 
+> I would really like to see someone tackle this issue, by studying the deferred_probe_initcall
+> function, to see if there's a way to instrument it so that the cost of each
+> probe can be reported and then associated with corresponding initcall, when initcall_debug
+> is used.
+> 
+> Does anyone want to look into this issue?
 
-I have never done the measurements on my system, but with patch=20
-95a798d20060d2b648dd604321e347c85edfd783 the so-called oversampling rate wa=
-s=20
-changed which reduced the performance of the Jitter RNG (read: it takes a b=
-it=20
-more to gather all data).
-
-=20
-> This is one of the first initcalls I'm going to dive into to see if it can
-> be improved or deferred.
- Maybe some of the RNG seeding can be held over
-> from a previous boot, in order to eliminate the overhead on the early
-> portion of a current boot.  Any feedback on that idea?
->=20
-> Thanks.
->    -- Tim
->=20
+I can take a look, but probably toward the end of the year. Another similar area I'd like to investigate
+is related to initcall time vs actual probe time: for drivers instantiated multiple time, I'd like to know
+how much time each probe took rather than the overall time.
 
 
-Ciao
-Stephan
+Regards,
+Francesco
+
 
 
 
