@@ -1,81 +1,83 @@
-Return-Path: <linux-embedded+bounces-174-lists+linux-embedded=lfdr.de@vger.kernel.org>
+Return-Path: <linux-embedded+bounces-176-lists+linux-embedded=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11768B96417
-	for <lists+linux-embedded@lfdr.de>; Tue, 23 Sep 2025 16:30:45 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id AD692B9647F
+	for <lists+linux-embedded@lfdr.de>; Tue, 23 Sep 2025 16:34:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id F3C504E2EDE
-	for <lists+linux-embedded@lfdr.de>; Tue, 23 Sep 2025 14:30:43 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D8FF93AC633
+	for <lists+linux-embedded@lfdr.de>; Tue, 23 Sep 2025 14:30:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B00EE26B955;
-	Tue, 23 Sep 2025 14:23:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1BC7E2820C7;
+	Tue, 23 Sep 2025 14:23:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20230601.gappssmtp.com header.i=@thegoodpenguin-co-uk.20230601.gappssmtp.com header.b="XEWo6NZ0"
+	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20230601.gappssmtp.com header.i=@thegoodpenguin-co-uk.20230601.gappssmtp.com header.b="y1hA59cS"
 X-Original-To: linux-embedded@vger.kernel.org
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45CEB23B609
-	for <linux-embedded@vger.kernel.org>; Tue, 23 Sep 2025 14:23:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B78B26A087
+	for <linux-embedded@vger.kernel.org>; Tue, 23 Sep 2025 14:23:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758637427; cv=none; b=mnqr4JTSZYPkV3LXfUtFa+G8JP1Xl6/GftsUGB8/rEs6mHnuLMNb3o2uN2zPP8tD1sgG/rkYchTj25fh3jl92t2H3FQrdFSgjx1acsiEkbIFOVHEHuFVj9jvYnx0zg1zD11to9y6A4uNnMu/HL7bPjkvP7oCSndGLIiuAPgQd1o=
+	t=1758637428; cv=none; b=emx8nTLpIQrE1XOBIPUKNtv6GwOZNCYbUl42ORV7OS6RHvrAHz15UTC0i9gs5uR3qxhOQe+C3FMJYYRwfX04F+Q7JDLXpKNWqGNH7mO7YINGDG9TUYkvPcZGlJlpYC+Qxocof26UExzgTwbIBORXfy+qB+x0TwTGf11g3yDJRvU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758637427; c=relaxed/simple;
-	bh=6FO8a+198L0yCZHP/LeEkg85hrjVLC6HuaHtKTj90SU=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To; b=Px2cYu8J3qeXVqTjGiqBWyJ2WhZYrw27jZwd6tbo7V8nXOagDxuC1kBztjcLbAm6OqCfnEeTFbxslh7M48q/vVUuQfKMhMwk8Z5AaJPXQNZnwe//9kqBIO4JLv5jU611dPMnYJyRcB6H4EgxjAweXG4lu6d6326yJVK9qamWkSg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20230601.gappssmtp.com header.i=@thegoodpenguin-co-uk.20230601.gappssmtp.com header.b=XEWo6NZ0; arc=none smtp.client-ip=209.85.128.50
+	s=arc-20240116; t=1758637428; c=relaxed/simple;
+	bh=U6mohqVpod+nBTZyW4dDSUGkYymstOaRTEz+cEiC4Ps=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To; b=WkRagq2ZSP+eqS2SNAIpyoojWu/82uL3CIYGyxSF4QClmL75qNkvIMj5AoZYNE/fXjbuxuKmqR8U1fp5C8eDkt3ExSa1kKZkf3tHehsU9qeR0lfMAcZiIiIbT6arvuX8eab0HL5r5GH/QBCTx6GSv6YeMrk3rZULIlxjOT+jqO4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20230601.gappssmtp.com header.i=@thegoodpenguin-co-uk.20230601.gappssmtp.com header.b=y1hA59cS; arc=none smtp.client-ip=209.85.128.53
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-46b303f755aso28239995e9.1
-        for <linux-embedded@vger.kernel.org>; Tue, 23 Sep 2025 07:23:44 -0700 (PDT)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-45dcff2f313so35236915e9.0
+        for <linux-embedded@vger.kernel.org>; Tue, 23 Sep 2025 07:23:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thegoodpenguin-co-uk.20230601.gappssmtp.com; s=20230601; t=1758637423; x=1759242223; darn=vger.kernel.org;
-        h=to:content-transfer-encoding:mime-version:message-id:date:subject
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SA4KEYuWYqnqxZOpuOy5s964Az6vi7/7luAhH2FtIQA=;
-        b=XEWo6NZ0EaxspLm05XUOkoL2H1rDDY0KauzyDDFto1qXODfDY2AtPYXjb8wZz6Hh/T
-         AkQDXWSM7eV1Jaxt6ai+thEqjUAhM2cn4h5knO5yYH2zYJl0x4sOhpza31iUXtFRO/rJ
-         gw/12rkdLSl2+yHflG/lIysqTBiFESiA9rET/ZnuZzuIz2k7f1k8DU5TRo7xz1NruUd3
-         zMM+9gJxW2VAkVbCMqbH3sAA+jfWKfMQXAgyHuScTEgj/76PQLGMiEy3I61Tnp1wMZEJ
-         Ai3Mxqr+DWLU+aO+KhgZx07Ef0RhAGlgcy4Ff06wmi3PkaFPWTFLKdrxW18aMXF1pLDI
-         HdcA==
+        d=thegoodpenguin-co-uk.20230601.gappssmtp.com; s=20230601; t=1758637424; x=1759242224; darn=vger.kernel.org;
+        h=to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pcCzw2Jb6Yw8EddNdei0vfTCiphJLxP5Nk1ulfKoOug=;
+        b=y1hA59cSR3yypZPmFV2zwI0/rdsbclDfnzeYw8bs+4NGgk2uIWWkhlUQt/KVfU168V
+         fNTJFMygrgxB6qFXpkevM+hVjaXivHCVfO6ZOHdr9msFEEtcP/gFTxsuJbVD2oamPSqB
+         HnJwqkg+zPzgBfD1av+8eESVGK6YQrNx+qGzuD+DbBQjNZGG0vSI0Jp0uJuuGUUyzq0L
+         93f1W4DBrI8bW4+EAkg17SWvgzkI+4/M36X8VvXM2mszBwgfrlAYfKRCyPOMmwm1Gjhd
+         0eLEqW1SWdb3pydtWLL5UKMff6RANjTi9Nwru1AVRB1w+SXXpwuaDD37M/vFyHi5ce4t
+         ggvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758637423; x=1759242223;
-        h=to:content-transfer-encoding:mime-version:message-id:date:subject
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=SA4KEYuWYqnqxZOpuOy5s964Az6vi7/7luAhH2FtIQA=;
-        b=aNUhVeCF8hsqRLJ8m9dvad1cGUuhHEIAZSAHgIiqP/OCEHnCSVpgUojrKR4mwXIUTC
-         7za37BaD987j7xTqT9dTS4g3FTU3dY2tau6C3kX9O5SFG4VG0PU1NGfxsQhG9q8zocpB
-         DMTMP1dm0OT6jjBNGmTytAsTaQbYqcYTDpe28p/nEGQ+dlrRqM/htEmy/65ZDpQ7mkh/
-         ex4mGp2cJTl1Gro1aCz3yPEBGTrE5bmINMl33Z64+TeSgLL4IxMKBh0KXhfJzw0eUJVq
-         JrYd0Tmpv0ZdfCsL4ngfm5vILvV3gQbhorLyzIiIWQBQadpjZfALUqnSduDX6d93fyh/
-         +Lgw==
-X-Gm-Message-State: AOJu0YzV3uu5HE+rlrT7jQitEAisHkECOBmdfJCDCUyO2Lo7i8vIHXvl
-	5zCPThfwHVj/HjtzQ6rl2d1wbf9ToJuDToEIpsFWYEnFQjZ01Xbq8EKi2RLYg7+mUScu5+9KH8N
-	X4wsg+n0=
-X-Gm-Gg: ASbGncvTLjeAsMzzRm/DPwNoSah2k+hKizHPubHjP3jqR24+CrCWty65Ru3mmdQ6Qn4
-	Vg5fTe5/bOMzUQq2bSpH9WxSx0lNR8feavnQEu6sJjBvFqjC9wEhcsuh/UT23kvCOf4cQpV5KnA
-	f2e7ge1xSd5J6J09yoUCzxo2AeJ9KQwOTi87eQ0mZG77wX3qVxvpJgGnUJ2IeDB7xhexLBSTlZi
-	s51b9G2CD6sdKZ1Wv27lDsP65OatZ2D9kHuI3VtF0p9H3ciXGBgUM59+HlY+zY7F8jwtu8eMadD
-	DCZFVNB/VRxT9gAPu0duSZhldroNOMZuUC8flPBFR1oGieVa8Y3pmPTJVSQ1hpOzpODqC9+2lnc
-	MlkFglyH0HdwBV4uwo2MKh9zx1luW54yLeHs6M1AIkrFVZnOc5JACBI5UMWk28Z2T4BsrRtlflC
-	T5RnvqI2PsJat/kbcMVbM=
-X-Google-Smtp-Source: AGHT+IG9AOfrcw91Ek5bPvhmcJr+q0UX7e1lQaj8TJ9al8nmf3d2akJkxEPF6SieTD1vKHTpeFZGYA==
-X-Received: by 2002:a05:600c:3145:b0:46e:1d01:11dd with SMTP id 5b1f17b1804b1-46e1d9745c1mr24218315e9.2.1758637423518;
-        Tue, 23 Sep 2025 07:23:43 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1758637424; x=1759242224;
+        h=to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=pcCzw2Jb6Yw8EddNdei0vfTCiphJLxP5Nk1ulfKoOug=;
+        b=tDDyTVPDyQrSre5vtbHWJxzbRjWop704q0WRf37J/8KEIUwpzrAO5z2fAknmqOQr7l
+         9Axt6fqnx6/VhAhQ8BFctnULr9i61ZT41qsqy76Obr1RPzklDsi+B8JI3QIlxbeXj7ZY
+         BdYga6y6+w23vtGIz6ERBAG6KD/mOEtqagiDOVHfFXpS3nO6+oJJ5JNb2/3qHYATxOO9
+         IFQcY+pEAD4gre2sibj7xuIPJ7pVCLXbWO6V3MVZWiNc2n4ntZC+UwQOs59N/MxPUJQj
+         TWnRTV3IQ/B3k18eY6gTK796cQiXjRQiF5HJFfSO/WqBvvGNwneIBcdOvHKUMGfSZCz+
+         pVXw==
+X-Gm-Message-State: AOJu0YzIbRMs7xxkGjNfJUAaqfRjiRQdEE2Au9p4WXOcgcvJNIBv0PZs
+	F4mCrvaMFv9HVkSPgvKdX4N1Gm9ttqsZW5mjZ+0d/stqS0uI50om9huR5xKxmPr9gEMO5Ahjfvr
+	PabD3VfY=
+X-Gm-Gg: ASbGncsDxxfwPHyFAFmRsjH9VnKRJLjAA5QSP0nWImrNksN4yrHB2CEiwOY92ZsU13q
+	v0vs9xESuOleeAPmkOP1No7SW917AHg1q5NtXQcncy4no6TL7mU9Yfghgb3bLzKKrTvEiLA2kQu
+	iPgyiyUHIeaEQgjXwZrrIm/oT6vCQMWUQVW6X3kqSsdgpfwD2aw24ZMWDnr84T7VpjGACkxSE1g
+	+mVBDL+c2R8nuxPz+Ft3sUsFUhSJ3LNfjt4bTpp3lnMojKbSJY6K+WxQ1UGJbTjNvoUegbbIx6+
+	lwD5T4pxuH/T/lwgY5Dk04DLlGUpBgyDnzHLrUCNVeEx4nxQYXv1A2guRx2J7pntu1BxmxzFdPm
+	xhRQMLCFS38T9/6z/drQsksR6zDE4ic5RMaEjVc3eRDcTi52HYtD5C6y6bPIPm/TpADcp2bF0YA
+	qHukCS7moXpLdPQOi14xg=
+X-Google-Smtp-Source: AGHT+IGYvSUZKMNKdyiBB7klgjMnXq4vrTsDRCE8ifXmd/Wf3oLTaYjJA+/8+6BDg8TtcU1BaVy7vg==
+X-Received: by 2002:a05:600c:470e:b0:45d:da45:50c8 with SMTP id 5b1f17b1804b1-46e1dac813amr24242615e9.29.1758637424175;
+        Tue, 23 Sep 2025 07:23:44 -0700 (PDT)
 Received: from [127.0.1.1] (cpc145676-lewi19-2-0-cust696.2-4.cable.virginm.net. [82.0.238.185])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-464f64ad1b0sm278986535e9.21.2025.09.23.07.23.42
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-464f64ad1b0sm278986535e9.21.2025.09.23.07.23.43
         for <linux-embedded@vger.kernel.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 23 Sep 2025 07:23:43 -0700 (PDT)
 From: acampanella-thegoodpenguin <acampanella@thegoodpenguin.co.uk>
-Subject: [PATCH PREVIEW RFC 0/6] Add support for boot-time caching
-Date: Tue, 23 Sep 2025 15:23:37 +0100
-Message-Id: <20250923-bootcache-v1-0-4f86fdc38b4e@thegoodpenguin.co.uk>
+Date: Tue, 23 Sep 2025 15:23:38 +0100
+Subject: [PATCH PREVIEW RFC 1/6] base: bootcache: initial commit
 Precedence: bulk
 X-Mailing-List: linux-embedded@vger.kernel.org
 List-Id: <linux-embedded.vger.kernel.org>
@@ -84,66 +86,503 @@ List-Unsubscribe: <mailto:linux-embedded+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGmt0mgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDS0NT3aT8/JLkxOSMVF3DpOQ0g9RUgxTzJAMloPqCotS0zAqwWdFKQW7
- OSrG1tQCmNeFGYAAAAA==
-X-Change-ID: 20250915-bootcache-1bcf0ee0d7b0
+Message-Id: <20250923-bootcache-v1-1-4f86fdc38b4e@thegoodpenguin.co.uk>
+References: <20250923-bootcache-v1-0-4f86fdc38b4e@thegoodpenguin.co.uk>
+In-Reply-To: <20250923-bootcache-v1-0-4f86fdc38b4e@thegoodpenguin.co.uk>
 To: linux-embedded@vger.kernel.org
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1758637422; l=2010;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1758637422; l=13783;
  i=acampanella@thegoodpenguin.co.uk; s=20250829; h=from:subject:message-id;
- bh=6FO8a+198L0yCZHP/LeEkg85hrjVLC6HuaHtKTj90SU=;
- b=y7d9aaoXKRdZhlG2csw9s5KoNnN2jEyw3vSa6QGlVFaAPWHtUGWy45ZHXWfLtcC7OkbIP36pG
- yALbev6iwj/DIsM/rrU9244zaQVK70k356g9n6VlFIuWI4omEKPP2Xe
+ bh=U6mohqVpod+nBTZyW4dDSUGkYymstOaRTEz+cEiC4Ps=;
+ b=ORk+gRgMWZci+DTbdytW3pruq6Rk06mXBXl51sZWcsh7DsBeEZsHZx0E7cKZJOPSsw4JJA6OP
+ aANsdUVbfIqAecaXMS7PGZiWh5jxlAR2YvQJTwbcRmfJueNbLP0u0rk
 X-Developer-Key: i=acampanella@thegoodpenguin.co.uk; a=ed25519;
  pk=qruBFipuvuZJTNm9XzFhMz42Q9F+xwyW1On3NgZHwzg=
 
-This patch series provides a simple key-value cache for storing boot-time
-configuration data. The goal is to allow kernel components and drivers to
-cache time-consuming-to-compute values during boot, enabling faster
-subsequent boots by avoiding redundant initialization work.
+bootcache provides boot-time key-value cache to help improve
+boot performance by allowing drivers to cache expensive computations.
 
-During kernel boot, many subsystems perform expensive operations like:
+Simple API are provided:
+- bootcache_get_u16()/bootcache_set_u16() - retrieve/store u16 values
+- bootcache_get_u32()/bootcache_set_u32() - retrieve/store u32 values
+- bootcache_get_u64()/bootcache_set_u64() - retrieve/store u64 values
+- bootcache_get_string()/bootcache_set_string() - retrieve/store strings
+- bootcache_register_backend() - Backend registration
+- bootcache_add_entry() - Add cache entry into framework
 
-- Hardware detection and configuration
-- Performance tuning calculations
-- Resource allocation decisions
-- Driver initialization parameters
-
-These operations often produce the same results across boots on the same
-hardware, making them good candidates for caching.
-
-Signed-off-by: acampanella-thegoodpenguin <acampanella@thegoodpenguin.co.uk>
+Signed-off-by: Marc Kelly <mkelly@thegoodpenguin.co.uk>
+Signed-off-by: Andrea Campanella <acampanella@thegoodpenguin.co.uk>
 ---
-Andrew Murray (1):
-      crypto: use bootcache to cache fastest algorithm
+ MAINTAINERS               |   6 ++
+ drivers/base/Kconfig      |  11 +++
+ drivers/base/Makefile     |   1 +
+ drivers/base/bootcache.c  | 179 +++++++++++++++++++++++++++++++++++++
+ include/linux/bootcache.h | 219 ++++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 416 insertions(+)
 
-Marc Kelly (3):
-      base: bootcache: Add bootcache test backend
-      base: bootcache: Add bootcache memory backend
-      dt-bindings: bootcache: Add bindings for bootcache backend
+diff --git a/MAINTAINERS b/MAINTAINERS
+index daf520a13bdf6a991c0160a96620f40308c29ee0..4bf3766b30bbf75214911bd4ce5256a066f05726 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -4418,6 +4418,12 @@ S:	Maintained
+ F:	Documentation/devicetree/bindings/iio/imu/bosch,bmi323.yaml
+ F:	drivers/iio/imu/bmi323/
+ 
++BOOT CACHE
++M:	Andrea Campanella <acampanella@thegoodpenguin.co.uk>
++S:	Maintained
++F:	drivers/base/bootcache.c
++F:	include/linux/bootcache.h
++
+ BPF JIT for ARC
+ M:	Shahab Vahedi <list+bpf@vahedi.org>
+ L:	bpf@vger.kernel.org
+diff --git a/drivers/base/Kconfig b/drivers/base/Kconfig
+index 064eb52ff7e2d4d8745e9c39882b41dc4cf02a89..da02f95948d880da83c3025addc1e111dbce339a 100644
+--- a/drivers/base/Kconfig
++++ b/drivers/base/Kconfig
+@@ -73,6 +73,17 @@ config DEVTMPFS_SAFE
+ 	  with the PROT_EXEC flag. This can break, for example, non-KMS
+ 	  video drivers.
+ 
++config BOOTCACHE
++	bool "Boot-time cache for the kernel"
++	help
++	  Enable a simple key-value cache subsystem for storing boot-time
++	  configuration data. This allows drivers and kernel subsystems to
++	  cache expensive computations during boot, potentially improving
++	  boot performance on subsequent reboots by avoiding redundant
++	  hardware detection and initialization work
++
++	  If unsure, say N.
++
+ config STANDALONE
+ 	bool "Select only drivers that don't need compile-time external firmware"
+ 	default y
+diff --git a/drivers/base/Makefile b/drivers/base/Makefile
+index 8074a10183dcb720a6b820b8476b230716b37f01..10a16e6c2ea1ad778fb7793583b9ee54d2498b2b 100644
+--- a/drivers/base/Makefile
++++ b/drivers/base/Makefile
+@@ -8,6 +8,7 @@ obj-y			:= component.o core.o bus.o dd.o syscore.o \
+ 			   topology.o container.o property.o cacheinfo.o \
+ 			   swnode.o faux.o
+ obj-$(CONFIG_AUXILIARY_BUS) += auxiliary.o
++obj-$(CONFIG_BOOTCACHE)    += bootcache.o
+ obj-$(CONFIG_DEVTMPFS)	+= devtmpfs.o
+ obj-y			+= power/
+ obj-$(CONFIG_ISA_BUS_API)	+= isa.o
+diff --git a/drivers/base/bootcache.c b/drivers/base/bootcache.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..d74ead796b0f50ca9a90e84e7230b9ad6ca896d8
+--- /dev/null
++++ b/drivers/base/bootcache.c
+@@ -0,0 +1,179 @@
++// SPDX-License-Identifier: GPL-2.0
++#include <linux/init.h>
++#include <linux/kernel.h>
++#include <linux/slab.h>
++#include <linux/hashtable.h>
++#include <linux/string.h>
++#include <linux/stringhash.h>
++#include <linux/types.h>
++#include <linux/spinlock.h>
++#include <linux/errno.h>
++#include <linux/kobject.h>
++#include <linux/sysfs.h>
++#include <linux/bootcache.h>
++
++static DEFINE_HASHTABLE(bootcache_table, BOOTCACHE_HASH_BITS);
++static DEFINE_SPINLOCK(bootcache_lock);
++static struct kobject *bootcache_kobj;
++static struct bootcache_info *bootcache_backend;
++static bool bootcache_initilized;
++
++int bootcache_register_backend(struct bootcache_info *bci)
++{
++	int ret;
++
++	if (!bci)
++		return -EINVAL;
++	if (!bci->name)
++		return -EINVAL;
++
++	/* If we're not ready, tell backend to try again later */
++	if (!bootcache_initilized)
++		return -EPROBE_DEFER;
++
++	if (bootcache_backend) {
++		pr_warn("bootcache: Backend '%s' is already registered, cannot register '%s'\n",
++		bootcache_backend->name, bci->name);
++		return -EBUSY;
++	}
++	pr_info("bootcache: Registering backend '%s'\n",
++		bci->name);
++
++	/* Have the backend load and populate the cache store */
++	ret = bci->load_cache();
++
++	if (ret)
++		goto failed_initilize;
++
++	bootcache_backend = bci;
++	return 0;
++
++failed_initilize:
++	return ret;
++}
++EXPORT_SYMBOL(bootcache_register_backend);
++
++int bootcache_get(const char *name, void *buf, size_t *len)
++{
++	struct bootcache_entry *entry;
++	u32 hash;
++	int ret = -ENOENT;
++
++	if (!name || !buf || !len)
++		return -EINVAL;
++
++	hash = full_name_hash(NULL, name, strlen(name));
++
++	spin_lock(&bootcache_lock);
++	hash_for_each_possible(bootcache_table, entry, node, hash) {
++		if (strcmp(entry->key, name) == 0) {
++			if (*len < entry->len) {
++				*len = entry->len;
++				ret = -ENOSPC;
++				goto unlock;
++			}
++			memcpy(buf, entry->data, entry->len);
++			*len = entry->len;
++			ret = 0;
++			goto unlock;
++		}
++	}
++
++unlock:
++	spin_unlock(&bootcache_lock);
++	return ret;
++}
++EXPORT_SYMBOL(bootcache_get);
++
++int bootcache_add_entry(struct bootcache_entry *entry)
++{
++	u32 hash;
++	struct bootcache_entry *existing_entry;
++	int ret = 0;
++
++	hash = full_name_hash(NULL, entry->key, strlen(entry->key));
++
++	spin_lock(&bootcache_lock);
++
++	hash_for_each_possible(bootcache_table, existing_entry, node, hash) {
++		if (strcmp(existing_entry->key, entry->key) == 0) {
++			ret = -EEXIST;  // Key already exists
++			goto unlock;
++		}
++	}
++
++	hash_add(bootcache_table, &entry->node, hash);
++
++unlock:
++	spin_unlock(&bootcache_lock);
++	return ret;
++}
++EXPORT_SYMBOL(bootcache_add_entry);
++
++int bootcache_set(const char *name, const void *data, size_t len)
++{
++	struct bootcache_entry *new_entry;
++	u32 hash;
++	int ret = 0;
++
++	if (!name || !data || !len)
++		return -EINVAL;
++
++	new_entry = kzalloc(sizeof(*new_entry), GFP_KERNEL);
++	if (!new_entry)
++		return -ENOMEM;
++
++	new_entry->key = kstrdup(name, GFP_KERNEL);
++	if (!new_entry->key) {
++		ret = -ENOMEM;
++		goto free;
++	}
++
++	new_entry->data = kmemdup(data, len, GFP_KERNEL);
++	if (!new_entry->data) {
++		ret = -ENOMEM;
++		goto free;
++	}
++
++	new_entry->len = len;
++	ret = bootcache_add_entry(new_entry);
++	if (!ret)
++		return 0;
++
++free:
++	kfree(new_entry->data);
++	kfree(new_entry->key);
++	kfree(new_entry);
++	return ret;
++}
++EXPORT_SYMBOL(bootcache_set);
++
++static ssize_t writeout_store(struct kobject *kobj, struct kobj_attribute *attr,
++			    const char *buf, size_t count)
++{
++	/*Implement persistent storage backend */
++	return count;
++}
++
++static struct kobj_attribute writeout_attr = __ATTR_WO(writeout);
++
++static int __init bootcache_init(void)
++{
++	int ret;
++
++	pr_info("bootcache: backend loaded\n");
++
++	/* Create /sys/kernel/bootcache/writeout */
++	bootcache_kobj = kobject_create_and_add("bootcache", kernel_kobj);
++	if (!bootcache_kobj)
++		return -ENOMEM;
++
++	ret = sysfs_create_file(bootcache_kobj, &writeout_attr.attr);
++	if (ret) {
++		kobject_put(bootcache_kobj);
++		return ret;
++	}
++	bootcache_initilized = true;
++	return 0;
++}
++core_initcall(bootcache_init);
+diff --git a/include/linux/bootcache.h b/include/linux/bootcache.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..52c07cf09bb87fc6c305485e5409bd235ede4e6e
+--- /dev/null
++++ b/include/linux/bootcache.h
+@@ -0,0 +1,219 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef _LINUX_BOOTCACHE_H
++#define _LINUX_BOOTCACHE_H
++
++#include <linux/types.h>
++
++#ifdef CONFIG_BOOTCACHE
++
++#define BOOTCACHE_HASH_BITS 6  /* 64 buckets */
++
++struct bootcache_entry {
++	struct hlist_node node;
++	char *key;
++	void *data;
++	size_t len;
++};
++
++/**
++ * struct bootcache_info - Structure for registering a boot cache backend.
++ *
++ * @name:   The name of the backend.
++ *
++ * Callbacks:
++ * @load_cache: Callback function to read and populate the framework from the cache.
++ */
++
++struct bootcache_info {
++	const char *name;
++	/* Callback Function Pointers */
++	int (*load_cache)(void);
++};
++
++/**
++ * bootcache_add_entry - Add an entry directly into the hash table
++ * @entry: bootcache_entry structure
++ *
++ * Returns: 0 on success, entry was added, do not free it.
++ *          1 on success but an existing entry was updated,
++ *            free to deallocate entry.
++ */
++int bootcache_add_entry(struct bootcache_entry *entry);
++
++/**
++ * bootcache_register_backend - Register a backend provider with the framework
++ * @bci: bootcache_info structure
++ *
++ * Returns: 0 on success, -EPROBE_DEFER if the frontend is not ready,
++ *          -EBUSY if another backend is already registered,
++ *          -EINVAL on invalid registration information.
++ */
++int bootcache_register_backend(struct bootcache_info *bci);
++
++/**
++ * bootcache_get - Retrieve arbitrary data from the cache
++ * @name: Key to look up
++ * @buf: Buffer to store retrieved data
++ * @len: On input, size of buffer; on output, actual data size
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters,
++ *          -ENOENT if not found, -ENOSPC if buffer too small
++ */
++int bootcache_get(const char *name, void *buf, size_t *len);
++
++/**
++ * bootcache_set - Store arbitrary data in the cache
++ * @name: Key to store under
++ * @data: Data to store
++ * @len: Length of data
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters, -ENOMEM on allocation failure
++ */
++int bootcache_set(const char *name, const void *data, size_t len);
++
++#else /* !CONFIG_BOOTCACHE */
++
++static inline int bootcache_get(const char *name, void *buf, size_t *len)
++{
++	return -ENOENT;
++}
++
++static inline int bootcache_set(const char *name, const void *data, size_t len)
++{
++	return -EOPNOTSUPP;
++}
++
++/**
++ * bootcache_get_u16 - Retrieve a u16 value from the cache
++ * @name: Key to look up
++ * @out_val: Pointer to store the retrieved value
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters, -ENOENT if not found
++ */
++static inline int bootcache_get_u16(const char *name, u16 *out_val)
++{
++	size_t len = sizeof(u16);
++
++	if (IS_ENABLED(CONFIG_BOOTCACHE))
++		return bootcache_get(name, out_val, &len);
++	else
++		return -ENOENT;
++}
++
++/**
++ * bootcache_set_u16 - Store a u16 value in the cache
++ * @name: Key to store under
++ * @val: Value to store
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters, -ENOMEM on allocation failure
++ */
++static inline int bootcache_set_u16(const char *name, u16 val)
++{
++	if (IS_ENABLED(CONFIG_BOOTCACHE))
++		return bootcache_set(name, &val, sizeof(u16));
++	else
++		return -EOPNOTSUPP;
++}
++
++/**
++ * bootcache_get_u32 - Retrieve a u32 value from the cache
++ * @name: Key to look up
++ * @out_val: Pointer to store the retrieved value
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters, -ENOENT if not found
++ */
++static inline int bootcache_get_u32(const char *name, u32 *out_val)
++{
++	size_t len = sizeof(u32);
++
++	if (IS_ENABLED(CONFIG_BOOTCACHE))
++		return bootcache_get(name, out_val, &len);
++	else
++		return -ENOENT;
++}
++
++/**
++ * bootcache_set_u32 - Store a u32 value in the cache
++ * @name: Key to store under
++ * @val: Value to store
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters, -ENOMEM on allocation failure
++ */
++static inline int bootcache_set_u32(const char *name, u32 val)
++{
++	if (IS_ENABLED(CONFIG_BOOTCACHE))
++		return bootcache_set(name, &val, sizeof(u32));
++	else
++		return -EOPNOTSUPP;
++}
++
++/**
++ * bootcache_get_u64 - Retrieve a u64 value from the cache
++ * @name: Key to look up
++ * @out_val: Pointer to store the retrieved value
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters, -ENOENT if not found
++ */
++static inline int bootcache_get_u64(const char *name, u64 *out_val)
++{
++	size_t len = sizeof(u64);
++
++	if (IS_ENABLED(CONFIG_BOOTCACHE))
++		return bootcache_get(name, out_val, &len);
++	else
++		return -ENOENT;
++}
++
++/**
++ * bootcache_set_u64 - Store a u64 value in the cache
++ * @name: Key to store under
++ * @val: Value to store
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters, -ENOMEM on allocation failure
++ */
++static inline int bootcache_set_u64(const char *name, u64 val)
++{
++	if (IS_ENABLED(CONFIG_BOOTCACHE))
++		return bootcache_set(name, &val, sizeof(u64));
++	else
++		return -EOPNOTSUPP;
++}
++
++/**
++ * bootcache_get_string - Retrieve a string from the cache
++ * @name: Key to look up
++ * @buf: Buffer to store retrieved string
++ * @buflen: Size of buffer
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters,
++ *          -ENOENT if not found, -ENOSPC if buffer too small
++ */
++static inline int bootcache_get_string(const char *name, char *buf, size_t buflen)
++{
++	size_t len = buflen;
++
++	if (IS_ENABLED(CONFIG_BOOTCACHE))
++		return bootcache_get(name, buf, &len);
++	else
++		return -ENOENT;
++}
++
++/**
++ * bootcache_set_string - Store a string in the cache
++ * @name: Key to store under
++ * @str: Null-terminated string to store
++ *
++ * Returns: 0 on success, -EINVAL for invalid parameters, -ENOMEM on allocation failure
++ */
++static inline int bootcache_set_string(const char *name, const char *str)
++{
++	if (IS_ENABLED(CONFIG_BOOTCACHE)) {
++		if (!str)
++			return -EINVAL;
++		return bootcache_set(name, str, strlen(str) + 1);
++	} else {
++		return -EOPNOTSUPP;
++	}
++}
++
++#endif /* _LINUX_BOOTCACHE_H */
 
-acampanella-thegoodpenguin (2):
-      base: bootcache: initial commit
-      raid6: Add bootcache
-
- .../bootcache/linux,bootcache-backend-memory.yaml  |  67 +++++++
- MAINTAINERS                                        |   9 +
- crypto/xor.c                                       |  29 ++-
- drivers/base/Kconfig                               |  32 +++
- drivers/base/Makefile                              |   3 +
- drivers/base/bootcache.c                           | 179 +++++++++++++++++
- drivers/base/bootcache_backend_memory.c            | 220 +++++++++++++++++++++
- drivers/base/bootcache_backend_test.c              | 119 +++++++++++
- include/linux/bootcache.h                          | 219 ++++++++++++++++++++
- lib/raid6/algos.c                                  |  21 ++
- 10 files changed, 897 insertions(+), 1 deletion(-)
----
-base-commit: c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9
-change-id: 20250915-bootcache-1bcf0ee0d7b0
-
-Best regards,
 -- 
-acampanella-thegoodpenguin <acampanella@thegoodpenguin.co.uk>
+2.48.1
 
 
