@@ -1,83 +1,84 @@
-Return-Path: <linux-embedded+bounces-175-lists+linux-embedded=lfdr.de@vger.kernel.org>
+Return-Path: <linux-embedded+bounces-177-lists+linux-embedded=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20E5EB9647E
-	for <lists+linux-embedded@lfdr.de>; Tue, 23 Sep 2025 16:34:43 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 54035B96492
+	for <lists+linux-embedded@lfdr.de>; Tue, 23 Sep 2025 16:35:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 787FE3AB0D2
-	for <lists+linux-embedded@lfdr.de>; Tue, 23 Sep 2025 14:30:47 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0C439162A47
+	for <lists+linux-embedded@lfdr.de>; Tue, 23 Sep 2025 14:30:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9450C26FA6E;
-	Tue, 23 Sep 2025 14:23:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 784A528850E;
+	Tue, 23 Sep 2025 14:23:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20230601.gappssmtp.com header.i=@thegoodpenguin-co-uk.20230601.gappssmtp.com header.b="C/J972qK"
+	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20230601.gappssmtp.com header.i=@thegoodpenguin-co-uk.20230601.gappssmtp.com header.b="VbQ+jQzT"
 X-Original-To: linux-embedded@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EC0926A1C4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36DF725D1E6
 	for <linux-embedded@vger.kernel.org>; Tue, 23 Sep 2025 14:23:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758637428; cv=none; b=p1opTioDT5VrCAwakwUJLWMHqdvd6NVvvJZy2JmZQdtsqVoKK7bElUIgSJzH0OUS2B37fvucKllVR5xgPbwXlUe2FM0ExDeg0IPXSk+bLewowtrMjXlxh0FlF9PL9llfx1bchv2y5BfLt0FdkAJYaRw2Z5znGbN9ay9GNjGP9H8=
+	t=1758637429; cv=none; b=IAy+wm12AykBFpNMgoo2jVdz8T8Bqbw4UeXLXssajd7G+DdI5ziFlOxAv4E8RXe7FqzywM7kIoFFCoqLhFerf7ek38oJAET44nfF+xg05weJjMd6oAuMPJAKUYi9b6PMUbph98qPiIOCebG+IFahypqLWoBJc9Zvz0g1/+P6Pks=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758637428; c=relaxed/simple;
-	bh=qtpxFzF9TEagavgF+PepjCUoOkOD92N7fcs3YB4bbGw=;
+	s=arc-20240116; t=1758637429; c=relaxed/simple;
+	bh=lVm2m5B1DNrUQ73LE1eeHqcvBnqUICdND0Cl00LUVMY=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To; b=sIWbHDpHpdcnImSApKDcKBsgGZjsZzayUUQdo7LkAr1u4M2nuVELdfrVUJkXu16gRjJdUhAUPIlJ9BNhvZCPxUbjxQEPlRN9Ays7JX9AViBxmyAIKbJdWrEGjFrnCRWAF8uNU8RGe/TILhHU8GJjQoc+OEVYsucYqnOOJQZZoUQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20230601.gappssmtp.com header.i=@thegoodpenguin-co-uk.20230601.gappssmtp.com header.b=C/J972qK; arc=none smtp.client-ip=209.85.128.45
+	 In-Reply-To:To; b=pxAqCikBBEEYHvcD1ZOdvW8cVa/yGzf7BoWvFdfZuDSEf7/GdP2fKjVD3+I3sevbM44h3EQQeDZAZd4J/kr6QTjw+nUSFEfiPwi8UXbmjErXBuAg7eEQEO6MMJtZ7tq882euuft/s1ZKWjf5/RsDUo6Ms3TXoLjnvuSywdhTSHM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20230601.gappssmtp.com header.i=@thegoodpenguin-co-uk.20230601.gappssmtp.com header.b=VbQ+jQzT; arc=none smtp.client-ip=209.85.128.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-45b4d89217aso42859555e9.2
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-45f2c9799a3so42701095e9.0
         for <linux-embedded@vger.kernel.org>; Tue, 23 Sep 2025 07:23:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=thegoodpenguin-co-uk.20230601.gappssmtp.com; s=20230601; t=1758637425; x=1759242225; darn=vger.kernel.org;
         h=to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=F4hEl0zfIH1rtpn6jnrW3lO/OtUGin5mfgFn3YhGFcU=;
-        b=C/J972qK55/zBHopGHkUq1WK1LuTiTqWUFvnRUD525EutkbsFp2+Tg4FXwoVsZnUlw
-         pUVMxnJVUeovejJMraL5R2IzlZykM/Yq8EwwGVuY3gtdJzF6Z+0bagCpRcEN/nVYIwPz
-         cu4pEFcljM+LfZa53+fL4jryeknXovWuTEXzTu98QNTHI5BN4llXRBmzzZFzPr0GDYDs
-         3sfvRi1XX3zJyDy4wOAFZklBn04Id5vEG59kDdQ7VEvJmZ8+lQZOFZjiWkzKXMyGUeH5
-         /Bkh9F7u5rTz6tgympuMQEBkzY+q8/5hWpM+ayP6rLbBqRn2/S0hXc6WjFmNPDO4zUhU
-         2dRQ==
+        bh=IRH7Bip1GS5kZdBAqzu98VDCEjICHQoOmy9oTXTa7iQ=;
+        b=VbQ+jQzTJg0nkiYaKNfJ5QltDf+eyb+mCGzHyCuLMkCD/+yOnj6VmfS/RcbN2QR4My
+         l/R3Kyrw1jc8ZMKylOZQx+ZwpwBEnrSUKEu7xJLmcuTbiIvNDShUpgQeElU9XeSBS2i9
+         pKCWwTfT+og0OJjmaiNGJihw5bvCzmjjCyAyKvBwGR0/2iGB0jPxrcTrKGZ+Vc8SloAg
+         /YGE84cnDvH2hQpI4p2vOHneZ4ROzBNyfjaLtv7rKurMbwtA724pYath37QpL1ODLJqP
+         IaOokm4duR+JjFevzFU2r/YT/S1DjqI5M38TKxL11KHDCw6qQdntJ0ZrUYhoe7xUdnNY
+         oASg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1758637425; x=1759242225;
         h=to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=F4hEl0zfIH1rtpn6jnrW3lO/OtUGin5mfgFn3YhGFcU=;
-        b=uDyMbNHvrUVFMa1w6BDAMjNGJZ7xVFxN7v98yw6MDKL0r3VELFku2wJjipHKBARS+A
-         +jSJKW/iJQBrxio05+DPToBKCXnFNHaiIqLt8NHUrMBVg0VZft3tZvnBA/AL+56wwt5n
-         Z1V+5uvYFehEH4RpDw3YNuSk0Pn5mUcCZXPCHKf5oE58i7P8CoLvUXgs+wXLlHbCpqXA
-         I2wixU1ecaNJ7yI5J20J0LzaywJyh/yETacCnWjmMQl21Zwg+7KQG76nGovNIWhbTuBV
-         VASFHf190AvNu39wqJBdhfl9y3n9GLZJSH/xglYM3mOYoNGKFJuNuUspi3v1pB7D2f2Y
-         EwLw==
-X-Gm-Message-State: AOJu0YzgmsaKWh8hBFZEKvQm17lGZEUdnMYiIiEZJjcMzHryBnfp2vU0
-	kBHPqmfAmOA0tOFn3yuUWZLQ2+YFmdLbRnJY6eVee2Cos8Xn8UvBvIkcVhiEHbkctn9oN0NVcuV
-	P0cGfrkg=
-X-Gm-Gg: ASbGncudjQe2Yz75idaMof/W48W33DqeU7m1MDXQPEHQpDMfQmGD+HEWfMIuzQRCX7q
-	VUOAySdjn76F6xzg/0Ak1tqd8/qo/KzMN0O7SCEzrSxK7HXMxARXymBL7VgQ4l1ekl5sAAXbrC4
-	78zjH9y2ZhJI8YM0MA4Y0uAHDG5ASkFjDa9oUgtdedmmBRcXTVkJX8o5Gby91AKQx4soOKADwXo
-	b1ou3SCMLzzFu15oVKc3ktge98wwgMThBtiWLl+SVRHrosLUgnilHgYXcfUd7lmxS91Crrd1mlI
-	joLMm9Qyn/reMKUYsghs08/k0hsVf1g09VH4IFWngEXQ/s7etlWX4ARcnZC4vuE8Tmtp3JA6hLw
-	S69iV7vgPvCj3CL0G/oVaypfuNLt11RiCiaWGTeMDtDWScJx69PXBR+Qsv6SWKtDWOQ17IsDZbT
-	ZndwhhWCkG3gdK7yU2M5Y=
-X-Google-Smtp-Source: AGHT+IFFhMcVPHcIPzY0gJQXf/UILzf5O7KftuEWZNLCw8LsRcsDlTznptzbvSj/eAa7h0gH/bsj6Q==
-X-Received: by 2002:a05:600c:358f:b0:46d:7fa2:757c with SMTP id 5b1f17b1804b1-46e1dab7c93mr29822465e9.19.1758637424820;
-        Tue, 23 Sep 2025 07:23:44 -0700 (PDT)
+        bh=IRH7Bip1GS5kZdBAqzu98VDCEjICHQoOmy9oTXTa7iQ=;
+        b=pKjGCaiT0c5iXeIzzPIWmKqEGY84/sg/WHi+tvwuKneYy5mESxM1iJ0mkR+xmpkGZM
+         vgc3XfjW2kyWGyjIxh4Hf1ifK3s2tEMLXMhxqETnE2YBareqno9ZM1qvjwBl8TWtJmSR
+         lu7yndRJbe7XAZUz4f3djj/6WXa4ZsB6cIrmMRYUUMNpQ8T/gH84rk9+OsBMqUdzCYrP
+         2JAYTA/kTwJW93NDVEbWWd94rcPC34HZuWmDV/zaG73GPYQHY7aTGYnRni4YUaiO/zeJ
+         dXCbYYT5LVzgd3AfQnALEtA0Fmpp88+AecSEybHIBWmnqdGhE0TpAaKChdc3DMSvwvEu
+         Eg0g==
+X-Gm-Message-State: AOJu0YxsObJe2W0NvTb9BSyfNs4NOlkRqtsbNRJ83J9qM3FvGV95eOO9
+	NBYYKMSuK5O0PAnpauiv9JtM628Eje0kxnp9TRxXqz6rDVHXyW+PCzhkvXtLQSlaHK7errXGwBW
+	tcwEhobI=
+X-Gm-Gg: ASbGncsmRiDiG37E0YZUB+dPngZUQXytK/47iiYKIN9Gnfr1bP5lI3Q9g8fxCOU6KaG
+	iMuei5JWjZUNKxlV/9gANg/FQxjFegrhZjZqRI6zUHF2Z0GYtg3BYU0ijPL2Pu8H5PwQsgyXGr5
+	ljDlsecsKUovg6QY+7OVXLe3Q3npYqqCnmd+VImFjVRtTiqqH6HCkqQYqsBMjjqwOdMojSCdeu4
+	PcHZKaRjbdbiMZjKku80bVTEA2e46Uk3g4mtrgthMwjhIegUTliuxHd0ID2NhEytAeuv4LZgyH1
+	Z1naYiD8SOME4E2aH+IOfp1OY19y3PDLsJugcOLcbriSft98bitK2Wzd6ihWK8G+LlrU2Ce/oBs
+	9odnUO7gfkwHAKcrmAKNyFtAkJCuyfgNvoJcS5MEvDMX6eeaYso+4z8iXP9HEvGZMvUahlG/uTu
+	uvcq1kp+BlwIj2il0wW90=
+X-Google-Smtp-Source: AGHT+IESjAwFuAHCsDwSRPh51VZbLsOi6YzP8LDBuQYtNKO+LPXUUG+PsbxyuBfDOXRU/XkJhFhtiw==
+X-Received: by 2002:a05:600c:198f:b0:456:13b6:4b18 with SMTP id 5b1f17b1804b1-46e1dae28cbmr30383115e9.31.1758637425430;
+        Tue, 23 Sep 2025 07:23:45 -0700 (PDT)
 Received: from [127.0.1.1] (cpc145676-lewi19-2-0-cust696.2-4.cable.virginm.net. [82.0.238.185])
         by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-464f64ad1b0sm278986535e9.21.2025.09.23.07.23.44
         for <linux-embedded@vger.kernel.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 07:23:44 -0700 (PDT)
+        Tue, 23 Sep 2025 07:23:45 -0700 (PDT)
 From: acampanella-thegoodpenguin <acampanella@thegoodpenguin.co.uk>
-Date: Tue, 23 Sep 2025 15:23:39 +0100
-Subject: [PATCH PREVIEW RFC 2/6] raid6: Add bootcache
+Date: Tue, 23 Sep 2025 15:23:40 +0100
+Subject: [PATCH PREVIEW RFC 3/6] crypto: use bootcache to cache fastest
+ algorithm
 Precedence: bulk
 X-Mailing-List: linux-embedded@vger.kernel.org
 List-Id: <linux-embedded.vger.kernel.org>
@@ -86,72 +87,110 @@ List-Unsubscribe: <mailto:linux-embedded+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250923-bootcache-v1-2-4f86fdc38b4e@thegoodpenguin.co.uk>
+Message-Id: <20250923-bootcache-v1-3-4f86fdc38b4e@thegoodpenguin.co.uk>
 References: <20250923-bootcache-v1-0-4f86fdc38b4e@thegoodpenguin.co.uk>
 In-Reply-To: <20250923-bootcache-v1-0-4f86fdc38b4e@thegoodpenguin.co.uk>
 To: linux-embedded@vger.kernel.org
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1758637422; l=1758;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1758637422; l=2594;
  i=acampanella@thegoodpenguin.co.uk; s=20250829; h=from:subject:message-id;
- bh=qtpxFzF9TEagavgF+PepjCUoOkOD92N7fcs3YB4bbGw=;
- b=9f2mZPlUDn0TcSAfrpUYnKmGKWXKJySv5+DOChlKsAyb5Ssq8POFs+hfBn3ssil11aR0asKqS
- KWhPtnkU+PmD4Oa4N+4k+eABuzEZgyIP36QCbALmtKuQp5U4dDtlXoa
+ bh=R4ZGnddC+p3vfwDE/a+DVY7BX4ue2EUoTbRBVzqPfXo=;
+ b=dgNIH0uMvNNYlDEGigh1KX8KCcUBpvjFOB6eQZuTE8C0UTYHIyjUxR4H39T4yfkuM68PXhxUO
+ FFh3aUx40YzBkrfZmffM+ADGEhbiAvGyqKGQQkd931/tUIqOuKZQbvM
 X-Developer-Key: i=acampanella@thegoodpenguin.co.uk; a=ed25519;
  pk=qruBFipuvuZJTNm9XzFhMz42Q9F+xwyW1On3NgZHwzg=
 
-Check for previously cached results before benchmark
+From: Andrew Murray <amurray@thegoodpenguin.co.uk>
 
-Signed-off-by: Andrea Campanella <acampanella@thegoodpenguin.co.uk>
+During boot xor_blocks may determine the fastest xor algorithm
+by using do_xor_speed to perform a speed test on available
+algorithms. This process can increase the overall boot time.
+
+Let's make use of bootcache to cache the result of the speed
+test for subsequent boots.
+
+Signed-off-by: Andrew Murray <amurray@thegoodpenguin.co.uk>
 ---
- lib/raid6/algos.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+ crypto/xor.c | 29 ++++++++++++++++++++++++++++-
+ 1 file changed, 28 insertions(+), 1 deletion(-)
 
-diff --git a/lib/raid6/algos.c b/lib/raid6/algos.c
-index 799e0e5eac26db3d10c07e79f46537af4ec6f182..fc69d94afdb4fc153626a3e21c506eda57540618 100644
---- a/lib/raid6/algos.c
-+++ b/lib/raid6/algos.c
-@@ -19,6 +19,7 @@
- #include <linux/module.h>
- #include <linux/gfp.h>
- #endif
+diff --git a/crypto/xor.c b/crypto/xor.c
+index f39621a57bb33c4015c06dff00e03a07716618f6..3457df0414064758a1923752e91642d2237af7b3 100644
+--- a/crypto/xor.c
++++ b/crypto/xor.c
+@@ -14,6 +14,7 @@
+ #include <linux/raid/xor.h>
+ #include <linux/jiffies.h>
+ #include <linux/preempt.h>
 +#include <linux/bootcache.h>
+ #include <asm/xor.h>
  
- struct raid6_calls raid6_call;
- EXPORT_SYMBOL_GPL(raid6_call);
-@@ -159,6 +160,24 @@ static inline const struct raid6_calls *raid6_choose_gen(
- 	int start = (disks>>1)-1, stop = disks-3;	/* work on the second half of the disks */
- 	const struct raid6_calls *const *algo;
- 	const struct raid6_calls *best;
-+	char cached_algo_name[32];
+ #ifndef XOR_SELECT_TEMPLATE
+@@ -54,13 +55,13 @@ EXPORT_SYMBOL(xor_blocks);
+ /* Set of all registered templates.  */
+ static struct xor_block_template *__initdata template_list;
+ 
+-#ifndef MODULE
+ static void __init do_xor_register(struct xor_block_template *tmpl)
+ {
+ 	tmpl->next = template_list;
+ 	template_list = tmpl;
+ }
+ 
++#ifndef MODULE
+ static int __init register_xor_blocks(void)
+ {
+ 	active_template = XOR_SELECT_TEMPLATE(NULL);
+@@ -79,6 +80,21 @@ static int __init register_xor_blocks(void)
+ #define BENCH_SIZE	4096
+ #define REPS		800U
+ 
++static struct xor_block_template * __init
++xor_get_template_by_name(char *fastest_name)
++{
++	struct xor_block_template *f;
 +
-+	/* Try to get cached algorithm by name */
-+	if (bootcache_get_string("raid6_best_algo", cached_algo_name,
-+		sizeof(cached_algo_name)) == 0) {
-+		/* Find algorithm by name */
-+		for (algo = raid6_algos; *algo; algo++) {
-+			if (strcmp((*algo)->name, cached_algo_name) == 0) {
-+				if (!(*algo)->valid || (*algo)->valid()) {
-+					raid6_call = *algo;
-+					pr_info("raid6: using algorithm %s (from cache)\n",
-+						(*algo)->name);
-+					return best;
-+				}
-+				break;
-+			}
-+		}
++#define xor_speed	do_xor_register
++	// build a list of templates
++	XOR_TRY_TEMPLATES;
++#undef xor_speed
++	for (f = template_list; f; f = f->next)
++		if (!strcmp(f->name, fastest_name))
++			return f;
++	return NULL;
++}
++
+ static void __init
+ do_xor_speed(struct xor_block_template *tmpl, void *b1, void *b2)
+ {
+@@ -117,9 +133,18 @@ calibrate_xor_blocks(void)
+ {
+ 	void *b1, *b2;
+ 	struct xor_block_template *f, *fastest;
++	char cached_name[32];
++	int ret;
+ 
+ 	fastest = XOR_SELECT_TEMPLATE(NULL);
+ 
++	if (!fastest) {
++		ret = bootcache_get_string("xor_blocks_fastest",
++				cached_name, sizeof(cached_name));
++		if (!ret)
++			fastest = xor_get_template_by_name(cached_name);
 +	}
- 
- 	for (bestgenperf = 0, best = NULL, algo = raid6_algos; *algo; algo++) {
- 		if (!best || (*algo)->priority >= best->priority) {
-@@ -198,6 +217,8 @@ static inline const struct raid6_calls *raid6_choose_gen(
- 		goto out;
- 	}
- 
-+	bootcache_set_string("raid6_best_algo", best->name);
 +
- 	raid6_call = *best;
+ 	if (fastest) {
+ 		printk(KERN_INFO "xor: automatically using best "
+ 				 "checksumming function   %-10s\n",
+@@ -149,6 +174,8 @@ calibrate_xor_blocks(void)
+ 		if (f->speed > fastest->speed)
+ 			fastest = f;
  
- 	if (!IS_ENABLED(CONFIG_RAID6_PQ_BENCHMARK)) {
++	bootcache_set_string("xor_blocks_fastest", fastest->name);
++
+ 	pr_info("xor: using function: %s (%d MB/sec)\n",
+ 	       fastest->name, fastest->speed);
+ 
 
 -- 
 2.48.1
