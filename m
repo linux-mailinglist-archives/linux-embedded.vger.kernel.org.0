@@ -1,172 +1,193 @@
-Return-Path: <linux-embedded+bounces-196-lists+linux-embedded=lfdr.de@vger.kernel.org>
+Return-Path: <linux-embedded+bounces-198-lists+linux-embedded=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC5DBC0B698
-	for <lists+linux-embedded@lfdr.de>; Mon, 27 Oct 2025 00:04:10 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFC9DC0CE37
+	for <lists+linux-embedded@lfdr.de>; Mon, 27 Oct 2025 11:10:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 035D74ECD37
-	for <lists+linux-embedded@lfdr.de>; Sun, 26 Oct 2025 23:04:05 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 59ACA1882E45
+	for <lists+linux-embedded@lfdr.de>; Mon, 27 Oct 2025 10:10:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 749C82FFFAE;
-	Sun, 26 Oct 2025 23:03:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 30E022EF660;
+	Mon, 27 Oct 2025 10:10:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="l0UefmQU";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="bkyePVvY"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bQgqcUAZ"
 X-Original-To: linux-embedded@vger.kernel.org
-Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.11])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3642423EABC;
-	Sun, 26 Oct 2025 23:03:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.11
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761519831; cv=pass; b=j0XjVBnTi8sojlQL5xLAxi30Gqp1KYRVYM6xJh+ZI7HFQJBF6W1q2qDh+U1vLQWM5/NCPT5Seswfs/mMD1shFMC8q7ClbuZmoBv+VUGVsZzUECeyOK1/Vlmvhol0IkA8D4EFWhSNYUEYSj3FrcAM3mw9I+pXkTrGNaECIoIXo4g=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761519831; c=relaxed/simple;
-	bh=tSRixNkLhCUmU1E1Uy9yxAjJii9EPv9NuRcTEhUazSM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=lXPa+3NT3YMOhIn5lH7dsYFQ7dtBsqYmyMUXW3cZ/n0vdLz2V1YxTm4ucwaTxqTR0YacpNMbJDU7jjUEJ66Q8dXcg73uD6jP19MOEi+kPAIFTVUdy0KmIWAKc4HW5rXagMj1YkR1Zx0ApJEFKZXyfljXUJyJQPZHGAsY26C9rmo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=l0UefmQU; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=bkyePVvY; arc=pass smtp.client-ip=185.56.87.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-4x87.prod.antispam.mailspamprotection.com; s=arckey; t=1761519829;
-	 b=yr+JFNhGBdFwQfakR0gIhpgbDR2DvAVaM1HjX0UDFHdcIqKPMMX7/aX0SwXrqqgkwuaH3bnHwE
-	  YRhineQ/W8ApSEou4vh39OaoJse7YCIebssRgsmXgzTfAba7cBshAZdaAlCpFCGT4UJHjUAyV+
-	  GvzzCAvqbCzQuiARLRNH1PYwRIVDHSdEFQ8379fQZWFS3uUjseQsNT0eH+CKSA7ckL5GqLGDkl
-	  +qTJmHLblL8GSAUdtaKUoTbgdyQihDhLb1DndgMfA1KiLSOXL1LgBfa4+yW2ipR3AXt6oTrUZG
-	  xPbTXxA3OByVB7NMuUKqbPX8aZmJq/Z48nRI0HcLStdU7Q==;
-ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-4x87.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
-	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
-	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
-	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
-	arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-4x87.prod.antispam.mailspamprotection.com; s=arckey; t=1761519829;
-	bh=tSRixNkLhCUmU1E1Uy9yxAjJii9EPv9NuRcTEhUazSM=;
-	h=Cc:To:In-Reply-To:References:Message-ID:Content-Transfer-Encoding:
-	  Content-Type:MIME-Version:Subject:Date:From:DKIM-Signature:DKIM-Signature;
-	b=FaB4tLwD8bWZltLZj9xcOaWk0Ap9/d9NOw/byzCAMfUMzME7Sp6M30I8DOQxXVsbqEyK8B8EHs
-	  TJk7a9MUH0h13sqhGRuujMwCqNGB5TDyl69CH6Yn/g7dieC0CyyN5Ea31oXQNKPbFjq4N7iHJI
-	  sgGS4x15JJdSNGvgG4GolP0cQkIbdlIkyAd7LxMRiVJABN9ZK4k7MeES6w+aQdhbvVS0HzIU7u
-	  zR0skE1CcwZAsbnfpyAVlL8XZtZ8Nn7j06xW6N/9iOVT0NwuQHjrvNyyQ4hV5edjop6vCYeQJc
-	  gm6yazzuLSDMl6tOcAmYrmPpXVXTkEVt9O8Qhtt/BYAeaQ==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
-	:Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
-	:Date:From:Reply-To:List-Unsubscribe;
-	bh=JWB6QTvpgPfu9uLg/5WttzxYcN0yMoWXBCd3a+bQgKo=; b=l0UefmQU7CUZr4Bsf5ZLmYyJvC
-	93gDYsnkQ8sn8rzP2AoXYOxh3aC5PktcT0QG9GBnVZZaepnEO+FEiCIo85tUyqEXIHlqepOJLF2d+
-	eTam5PPBuRG6KwZmVjLq8nr9ShdvUAfkP5zRWjZg7zwT+xariTCN1RgyV1RsRt2LDAxA=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
-	by instance-europe-west4-4x87.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.98.1)
-	(envelope-from <francesco@valla.it>)
-	id 1vD9ly-00000002wBt-3K2Y;
-	Sun, 26 Oct 2025 23:03:40 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
-	s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
-	list-subscribe:list-post:list-owner:list-archive;
-	bh=JWB6QTvpgPfu9uLg/5WttzxYcN0yMoWXBCd3a+bQgKo=; b=bkyePVvYy8jjGA4QRC03eqSlwN
-	iUW+HaYTcxdxuWtbQEtjFhZLT0tNzzgtJQTH+i2D4EeVx+tFh2uNcoEGPR3d0doAS7AhEsDISrhr4
-	xh2SReiC3JkiQPg/KW4EW9KAX+XCXMWL0/7tNpU4eY936Ndx6MD8+VsQ221PwyfJ/A+M=;
-Received: from [87.17.42.198] (port=63736 helo=fedora.fritz.box)
-	by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.98.1)
-	(envelope-from <francesco@valla.it>)
-	id 1vD9ls-00000000KNm-1zj3;
-	Sun, 26 Oct 2025 23:03:32 +0000
-From: Francesco Valla <francesco@valla.it>
-Date: Mon, 27 Oct 2025 00:03:03 +0100
-Subject: [PATCH RFC 3/3] drm: docs: remove bootsplash from TODO
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDA9D224B0D;
+	Mon, 27 Oct 2025 10:09:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1761559799; cv=none; b=WtL2Nsv5wrs3ON/GYSmRYOd07JEXLCDxoZQSsmz0O3oQ9P//wDxbfP7RfrhL+JFaKsBGxnrsRAgPlW96HS8nTaLkQo54lGrUvEGMv0cdl4G1VjEsat7wbvliZU3cgvrby13MPnuV58Yz+wvhC5LagY89sj5oJoIwxDGVFnD+41o=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1761559799; c=relaxed/simple;
+	bh=iPy9PTr3E6+/Ob+n9HMKMgQGzj72xG8nvstl1/tHSgM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Blw5Bpoao/Vab2/oDVYxAnz4dxuW397/1GewwP+yvd7ywTcAYGImzjzDp2UBgRMOPp5ZdIYlrjYARQbx37ykqoYDoK0c5gndyufeCYwMokK3Y3bPZe6DOHRKESbdLFTeNpTFPOf6yBS1vJX6RtdxDt6FIOxweOi/z0qpBP4DQms=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bQgqcUAZ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E162AC4CEF1;
+	Mon, 27 Oct 2025 10:09:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1761559799;
+	bh=iPy9PTr3E6+/Ob+n9HMKMgQGzj72xG8nvstl1/tHSgM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=bQgqcUAZfk9WrQ9EwaUhEg793Ot9p9gugIruVAI5kXguUun+aVKaJ6SeFg+H/WiI2
+	 E2xFNizI4+u1MtkE1j5HRG/ckt718iPlvLArv4dlRUpsgXVoaGdvBjxbkIH5KDHad+
+	 1Cv6l87yVGeay2lXjwtu1ynJhYuFnmuV3ZqRWEQfRH64ZdgSOcHtTWE+mVzu9GYuif
+	 LL1GvDqqiTfy4Ocl73/6sL1sunIAYB8JFMzjEksL5rE6razCE93zioC9Ik1RmjZI0j
+	 hgM7AWxYwNJFGYp766gKSN80WvnPZeO6mG8nUWVUkVSLpjwb5QOgycpcgqauzX2gCE
+	 urPqvCx2ITz4w==
+Date: Mon, 27 Oct 2025 11:09:56 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: Francesco Valla <francesco@valla.it>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, 
+	Jocelyn Falempe <jfalempe@redhat.com>, Javier Martinez Canillas <javierm@redhat.com>, 
+	Sam Ravnborg <sam@ravnborg.org>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-doc@vger.kernel.org, linux-embedded@vger.kernel.org
+Subject: Re: [PATCH RFC 0/3] Add splash DRM client
+Message-ID: <yq4btdc5qqukuqps7y53dratmu64ghyifgprlndnk5rbgml4of@rvca75sncvsm>
+References: <20251027-drm_client_splash-v1-0-00698933b34a@valla.it>
 Precedence: bulk
 X-Mailing-List: linux-embedded@vger.kernel.org
 List-Id: <linux-embedded.vger.kernel.org>
 List-Subscribe: <mailto:linux-embedded+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-embedded+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251027-drm_client_splash-v1-3-00698933b34a@valla.it>
-References: <20251027-drm_client_splash-v1-0-00698933b34a@valla.it>
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="6xetpxgspicxrvf3"
+Content-Disposition: inline
 In-Reply-To: <20251027-drm_client_splash-v1-0-00698933b34a@valla.it>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Jonathan Corbet <corbet@lwn.net>, Jocelyn Falempe <jfalempe@redhat.com>, 
- Javier Martinez Canillas <javierm@redhat.com>
-Cc: Sam Ravnborg <sam@ravnborg.org>, linux-kernel@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
- linux-embedded@vger.kernel.org
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1227; i=francesco@valla.it;
- h=from:subject:message-id; bh=tSRixNkLhCUmU1E1Uy9yxAjJii9EPv9NuRcTEhUazSM=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDBn/VhxMPK7UHncreNrkNzMDXycvXXJ2zgyT+7sWcr07/
- H9Fuu2T+x2lLAxiXAyyYoosIetu3Nsz1/xb2gbGRzBzWJlAhjBwcQrARKI3MzIsyrd8U1UZxblQ
- 1+jdmktOM9v2GMrpibOHMaeuuhq00TWe4Z/J7V+pv7f//V9tLj0xuc9M5PPfW5uYjtdeDOhYL7X
- iwHV+AA==
-X-Developer-Key: i=francesco@valla.it; a=openpgp;
- fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - esm19.siteground.biz
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - valla.it
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SGantispam-id: 6185ed05db714419c33ff6120ab25f26
-AntiSpam-DLS: false
-AntiSpam-DLSP: 
-AntiSpam-DLSRS: 
-AntiSpam-TS: 1.0
-CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vD9ly-00000002wBt-3K2Y-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-4x87.prod.antispam.mailspamprotection.com;
-	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
-	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
-	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
-	arc=none
 
-Now that a splash client exists, remove the bootsplash task from the
-TODO list for the DRM subsystem.
 
-Signed-off-by: Francesco Valla <francesco@valla.it>
----
- Documentation/gpu/todo.rst | 17 -----------------
- 1 file changed, 17 deletions(-)
+--6xetpxgspicxrvf3
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH RFC 0/3] Add splash DRM client
+MIME-Version: 1.0
 
-diff --git a/Documentation/gpu/todo.rst b/Documentation/gpu/todo.rst
-index b5f58b4274b1d38e26b229b88a8b4f4ba3433179..b1a6d587c286f060d549a12cf8e771f753b712bc 100644
---- a/Documentation/gpu/todo.rst
-+++ b/Documentation/gpu/todo.rst
-@@ -717,23 +717,6 @@ See drivers/gpu/drm/amd/display/TODO for tasks.
- 
- Contact: Harry Wentland, Alex Deucher
- 
--Bootsplash
--==========
--
--There is support in place now for writing internal DRM clients making it
--possible to pick up the bootsplash work that was rejected because it was written
--for fbdev.
--
--- [v6,8/8] drm/client: Hack: Add bootsplash example
--  https://patchwork.freedesktop.org/patch/306579/
--
--- [RFC PATCH v2 00/13] Kernel based bootsplash
--  https://lore.kernel.org/r/20171213194755.3409-1-mstaudt@suse.de
--
--Contact: Sam Ravnborg
--
--Level: Advanced
--
- Brightness handling on devices with multiple internal panels
- ============================================================
- 
+Hi,
 
--- 
-2.51.0
+On Mon, Oct 27, 2025 at 12:03:00AM +0100, Francesco Valla wrote:
+> this patchset adds a new DRM client offering splash functionalities,
+> able to draw to screen:
+>=20
+>   - a colored background;
 
+So, I like that part, and we were recently discussing about this.
+
+>   - a single-line text message, which can be set through sysfs or
+>     directly from the kernel command line;
+>   - a very simple progress bar, which can be driven through sysfs;
+>   - a static image (optional).
+
+But there's no reason to have all that in the kernel, and we already
+have userspace components to do so (plymouth being the main "mainstream"
+one).
+
+> Once compiled inside the kernel, the client can be enabled through the
+> command line specifying the drm_client_lib.active=3Dsplash parameter.
+>=20
+> =3D=3D Motivation =3D=3D
+>=20
+> The motivation behind this work is to offer to embedded system
+> developers a new path for a simple activation of the display(s)
+> connected to their system, with the following usecases:
+>=20
+>   - bootsplash - possibly displaying even before init;
+>   - early activation of the display pipeline, in particular whenever one
+>     component of the pipeline (e.g.: a panel) takes a non-negligible
+>     time to initialize;
+>   - recovery systems, where the splash client can offer a simple feedback
+>     for unattended recovery tasks;
+>   - update systems, where the splash client can offer a simple feedback
+>     for unattended update tasks.
+
+If plymouth cannot be used by embedded systems for some reason, then you
+should work on a plymouth alternative.
+
+> While the first seems the most obvious one, it was the second that acted
+> as the driver, as in the past I had to implement a ugly workaround using
+> a systemd generator to kickstart the initialization of a display and
+> shave ~400ms of boot time.
+>=20
+> The last 2 usecase, instead, are the reason I dropped the "boot" part
+> from bootsplash.
+>=20
+> =3D=3D Implementation details =3D=3D
+>=20
+> The design is quite simple, with a kernel thread doing the heavylifting
+> for the rendering part and some locking to protect interactions with it.
+>=20
+> The splash image is loaded using the firmware framework, with the client
+> expecting to find a binary dump having the right dimensions (width and
+> height) and FOURCC format for each modeset. Given a 1920x1080 RGB888
+> modeset, the client will for example search for a firmware named:
+>=20
+>    drm_splash_1920x1080_RG24.raw
+>=20
+> If the firmware cannot be loaded directly, the NOUEVENT sysfs fallback
+> mechanism is used to let userspace load the appropriate image.
+>=20
+> =3D=3D Testing =3D=3D
+>=20
+> Testing was done on qemu (both with vkms and bochs drivers), on a HDMI
+> display connected to a Beagleplay and on a ILI9341 SPI display connected
+> to a i.MX93 FRDM board. All these platforms revealed different
+> weaknesses that were hopefully removed.
+>=20
+> =3D=3D Open points / issues =3D=3D
+>=20
+> The reason for this being an RFC is that there are several open points:
+>=20
+>   - Support for tiled connectors should be there, but has not been
+>     tested. Any idea on how to test it?
+
+Did you mean tiled formats?
+
+>   - I'm not entirely convinced that using the firmware framework to load
+>     the images is the right path. The idea behind it was to re-use the
+>     compressed firmware support, but then I discovered it is not there
+>     for built-in firmware.
+
+Yeah, firmware loading for this has a few issues (being tedious to setup
+for when built-in being one). I think just going the fbdev penguin road
+is a better choice: you provide the path, and it's embedded in the
+kernel directly.
+
+>   - Again on the firmware loading: CONFIG_LOADPIN would interfere with
+>     sysfs loading.
+>   - And again: FW_ACTION_NOUEVENT only has one user inside the kernel,
+>     leading me to think it is de-facto deprecated. And still, uevents
+>     for firmware loading seem frowned upon these days...=20
+>   - Generating binary dumps for... basically any format is not so
+>     straightforward. I crafted a Python tool with AI help which seems
+>     to work quite well, but I honestly did not yet understood which is
+>     the policy for AI-generated code inside the kernel, so it is not
+>     included in this patch set. All client code is genuine, though.
+
+BMP is simple enough to support so we should probably use that instead
+of a custom format.
+
+Maxime
+
+--6xetpxgspicxrvf3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaP9E9AAKCRAnX84Zoj2+
+dv9HAX4ih+okolm988IsppngNpozRPH+0bTL7tTiS+WP7ElIwx/nDF3e+NDgLokO
+HobomAABgO2avIRLa6ShC6ZiIhdpXMqBRPWoLDGc7sMbZFtl0lza9IpYnTIkD8Ao
+Xxid+w1qBA==
+=hxwS
+-----END PGP SIGNATURE-----
+
+--6xetpxgspicxrvf3--
 
