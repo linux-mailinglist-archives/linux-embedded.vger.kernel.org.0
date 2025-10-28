@@ -1,106 +1,107 @@
-Return-Path: <linux-embedded+bounces-206-lists+linux-embedded=lfdr.de@vger.kernel.org>
+Return-Path: <linux-embedded+bounces-204-lists+linux-embedded=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12BC2C13A28
-	for <lists+linux-embedded@lfdr.de>; Tue, 28 Oct 2025 09:56:19 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A34BC136F9
+	for <lists+linux-embedded@lfdr.de>; Tue, 28 Oct 2025 09:06:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D3A1D3B3B30
-	for <lists+linux-embedded@lfdr.de>; Tue, 28 Oct 2025 08:52:11 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 6D21B54292A
+	for <lists+linux-embedded@lfdr.de>; Tue, 28 Oct 2025 08:04:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EFBCC2E0926;
-	Tue, 28 Oct 2025 08:50:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC4BE257846;
+	Tue, 28 Oct 2025 08:04:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="LsPet6+K";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="ClfkBYFX"
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="v+XRmDh9";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="OZijjk78"
 X-Original-To: linux-embedded@vger.kernel.org
-Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.1])
+Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.0])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C32D72DBF75;
-	Tue, 28 Oct 2025 08:50:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29E9A18C031;
+	Tue, 28 Oct 2025 08:04:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.0
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761641454; cv=pass; b=X5d+oyr4IuuMrAXULX5o8I5AyhN3HIkR9qnUvMKnT5YmXenGcq9hYn4ST/jzOZjQH/lFwXHv3lk8SSn8q2sCK2sVxiDCMVqgfrdjyic+Us64WdmywUHbjY5WXh7LC0HPQVoXZp8pqFzBsGK3cacLNtfHoPTUnLwouIUKgOZnUAc=
+	t=1761638670; cv=pass; b=CTBxYq+anOa1HpbYNoin2bjY0xkhNhMQ6rG34MuGYf4rwUzjynEXqagfvwJcWCY4V2qsOC8evHYoBkL0/I31oc3V3okTfmA7OToebvL1sC6I5upxIUAp0AUMx8/2ma2ey6DtqVr5gXo0MdDRoaEhaWK3SP41wbWAeISc5/1poto=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761641454; c=relaxed/simple;
-	bh=iEY4Wt1Q2As11SfIf0/Sluu+mH2O6nSTVRG/jlw/s+s=;
+	s=arc-20240116; t=1761638670; c=relaxed/simple;
+	bh=s6a57ztWgKqzZop2eXVnrLGAARifLGZdVEuuyt6o4uw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=MpXojUXn8u+4eduF/1ZHENjjwJN37TkOZ6x/ZVes+dYjN6CveBlq4uxhvhUpG6JnJdohIZu4Jrd6erfOeW2u9svjbLqO+E6U+jhNPmXAWPzEGfp+OTnXxlHuuFOVlUJOqWRi8Lhm4FbrgpX21X4kINoinSgBTQznxf7SI/Wu55w=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=LsPet6+K; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=ClfkBYFX; arc=pass smtp.client-ip=185.56.87.1
+	 MIME-Version:Content-Type; b=UgTK3Yuk/vDREfSQ+Ek2wVfEwGe6HP6OCdnjkGl5F0YCE2TK1a27tUHQMT7hJqpb+RjVRZoiLpH5xZOCGoJ0njbE6HAHNvnDrrg2PyveUdktCHQIJ4nvvZ/maev2+SNWpNT6FpggazkVjxwovCLzzREVbgfWTiL8TkvmJSkdm+U=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=v+XRmDh9; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=OZijjk78; arc=pass smtp.client-ip=185.56.87.0
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-4wj9.prod.antispam.mailspamprotection.com; s=arckey; t=1761641451;
-	 b=ibClSf3l/Qv3u4iRhdYIkbbz0qfJEkYTL/h8CDqWw7Tsvx/MNjoXUnSoudPK543S22dFjt0c1K
-	  mc4ydtXIBSVY8/EQf4JApQNVG44s/tmOqGebhjn7Hd5BRrmWpvSCuM8EjV4QFE3l41JZt3TRS6
-	  FBPdVQ36JSMiWVc2qjHtgYLylvBzebqUIwI9Y7jBTS9Ya9IhnCQacjZv6OMzXnJMHtMwraMJVN
-	  IH6EHISkR8mprHt/kyamJDW+RrzIMm+JsqFp9io0t+FLWrERedCImkQ1Rm4KGG8qTdCkdkRo4s
-	  KDeYwEky4ocjNCmxTfdc95h3wCsFM9hpEoUNIGKDgardUA==;
-ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-4wj9.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-zd5h.prod.antispam.mailspamprotection.com; s=arckey; t=1761638668;
+	 b=DYmK8D8fCSvsIDFzEj1OIWynwBzz0cUvAAe0/WpYFviDLEER+EBGejIYllC58fP3oHjI7GY/xp
+	  VvPSwZqNSF5jrl927d8aO2vMegGQFJ730VXILcKepLkH7h9uJ0IeAlysdDH05qFSW7MbTXP8Qr
+	  Zd55TeERz7rwK1BQdwGFBw5uSmkfOAjdxYFKaYRW1V2rYyJgCo4pOwOxbcj8t8JWM2Sf7+mUBx
+	  QuuW7Apeoj2wTlxRtP5ekdHy+avDG4dsVtS3AM3rOZpo6ixoIkKA/xmVs461fLLBm0E2ODWy7/
+	  zNapQz6dVbPfXwSwiLUZAkUpM4sHNOzBBtmR+edWyir0CA==;
+ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-zd5h.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
 	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
 	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
 	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
 	arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-4wj9.prod.antispam.mailspamprotection.com; s=arckey; t=1761641451;
-	bh=iEY4Wt1Q2As11SfIf0/Sluu+mH2O6nSTVRG/jlw/s+s=;
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-zd5h.prod.antispam.mailspamprotection.com; s=arckey; t=1761638668;
+	bh=s6a57ztWgKqzZop2eXVnrLGAARifLGZdVEuuyt6o4uw=;
 	h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
 	  To:From:DKIM-Signature:DKIM-Signature;
-	b=Ar/SIQtL6gh2hcBl87bjWQnr/hyL/kAbbrO7NO1V9QYcS0rOUy3A3QaxXR33aDanUrZhTQiuiF
-	  b98ZkL49IG8u9icKv1chWsuvtZ4CA2QIB9YZpiBbam9t7HzyOVmypYrrOxvZsa9RbgDv7SWAwA
-	  9Rxu8EPZb5qjyhm+ve3t/uwBItWF5Ob+Fue2QIw3xC0eB4ev7EZnUO7NA/R9mlp9gMscbiYWmB
-	  ELb/JbK7w+fATfImU/UJABQA9FxQeYSOZ8WGLx/GFu4Vk/8MwX1IsbJ5kW6xQ+1pmks9wh2C77
-	  4RyE1/ZQPloOUYe6spgip4CGGkGvzPTZVOPbs9ZJ4pCjTA==;
+	b=km0lZcWvK/UlWCWRMN3KP0ohUIgo/XL+gSj4Lv7L87YWe51MaevqH99PI8ll14QnbivVD2bsH1
+	  2+rZj5n8uLN6ovHYxGB0Z/5rnynxGMgpdFRMnWU7As7alr8GrLzcSAMMP+cSagAel+96E9oa9M
+	  nkB4EAYW98PdkjnzLtMMOIOdSFzUAT9nFspdX7hZoabtzn35N/48g0ipjxMV+uwisNYgsEEGoC
+	  BGUv24y7SNSPT8GtBFUPJ3pz/l1z44jsf7TjuxqVLnXFR0WE02p2gAQmuHFJ6wSPMdjmEzhgrD
+	  7eP5XO4gtEWItfy+w2YMOIAowWP1oKiDEKJIiTn5vDz7lw==;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
 	:Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:
 	List-Unsubscribe:Content-Transfer-Encoding;
-	bh=zdfLZeLr5NvufMpcLIsBqTthOwjM4I46IsO/Ts8RIWE=; b=LsPet6+KdSQtippXk3uCBtNAhS
-	tpDGra5MuqsTXtB799xWBnCoxdIowJbN5b0T0h/u5RqLK+zt3ResmVlCYpt3aLx7GE5yw1Gxa1ivQ
-	WrIKHIqAzxHMxaWV0XYLyDLJ40BskubU3SVWgbE9QSue/UzBWJdbPahTz0JZ1ihQjEXs=;
+	bh=tv0PkcWT+R6COZq+/bFx5P+D3RWcMKpvqpZ6j2a+CzU=; b=v+XRmDh9AdgS8LEFJZFq2yeBKt
+	4a5Mmj980ZRHqPvi/g+btq2iQo6NFT5sVv5sh1aNbwblPPjyj4t7JVuOMYeNgpKFjG73Mr2vhGmU6
+	0ng7YuL6pknZ04cNchwWsI0qy0rQAHG6QksYU+QJ1PDTH58UfnqkNQNrOZolR+Ea5k8Q=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
-	by instance-europe-west4-4wj9.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	by instance-europe-west4-zd5h.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
 	(Exim 4.98.1)
 	(envelope-from <francesco@valla.it>)
-	id 1vDebE-00000000ZxG-28Pw;
-	Tue, 28 Oct 2025 07:58:38 +0000
+	id 1vDegj-00000000zwy-1f2q;
+	Tue, 28 Oct 2025 08:04:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
 	s=default; h=Date:Subject:Cc:To:From:list-help:list-unsubscribe:
 	list-subscribe:list-post:list-owner:list-archive;
-	bh=zdfLZeLr5NvufMpcLIsBqTthOwjM4I46IsO/Ts8RIWE=; b=ClfkBYFXsfPZoGUrAKm6wwrL8U
-	0zjVtmTjsdovD2/5iy3S07INI/dq3tPMKjgIVJh+4zSfrNHzW4bmUZJmIVqhtBpQxebkaD/TP505H
-	uPbAkefTqhyeHburXaz+Sl2c4WKBDsBXYz4mXe7sLTBogltkk27UVLS6bDnRCo27AkC4=;
-Received: from [87.17.42.198] (port=60166 helo=fedora.fritz.box)
+	bh=tv0PkcWT+R6COZq+/bFx5P+D3RWcMKpvqpZ6j2a+CzU=; b=OZijjk78i+B95GvMw1d1NggCNV
+	gS6m2njSh3c14y+eNYU715tLWZwRBp9g+3B6fbflCkwKy0OL0r3wiHrXShrdC8Lp2yi3rndZqqoeZ
+	oAYUvakhfEITOdyEyqBxG8zOrOaWYuqP1MvxL6fFbYUF1jOM7JjMO+V/hG3IfexkFZhc=;
+Received: from [87.17.42.198] (port=62990 helo=fedora.fritz.box)
 	by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
 	(Exim 4.98.1)
 	(envelope-from <francesco@valla.it>)
-	id 1vDear-00000000Lap-143e;
-	Tue, 28 Oct 2025 07:58:13 +0000
+	id 1vDegM-00000000NKV-2TYu;
+	Tue, 28 Oct 2025 08:03:54 +0000
 From: Francesco Valla <francesco@valla.it>
-To: Maxime Ripard <mripard@kernel.org>
+To: Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>
 Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>,
- Jocelyn Falempe <jfalempe@redhat.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Jonathan Corbet <corbet@lwn.net>, Jocelyn Falempe <jfalempe@redhat.com>,
  Javier Martinez Canillas <javierm@redhat.com>,
  Sam Ravnborg <sam@ravnborg.org>, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
  linux-embedded@vger.kernel.org
 Subject: Re: [PATCH RFC 0/3] Add splash DRM client
-Date: Tue, 28 Oct 2025 08:58:05 +0100
-Message-ID: <2756316.lGaqSPkdTl@fedora.fritz.box>
-In-Reply-To: <yq4btdc5qqukuqps7y53dratmu64ghyifgprlndnk5rbgml4of@rvca75sncvsm>
+Date: Tue, 28 Oct 2025 09:03:53 +0100
+Message-ID: <7194118.9J7NaK4W3v@fedora.fritz.box>
+In-Reply-To: <3edea192-6a3f-44f5-b570-7033776e2ce4@suse.de>
 References:
  <20251027-drm_client_splash-v1-0-00698933b34a@valla.it>
  <yq4btdc5qqukuqps7y53dratmu64ghyifgprlndnk5rbgml4of@rvca75sncvsm>
+ <3edea192-6a3f-44f5-b570-7033776e2ce4@suse.de>
 Precedence: bulk
 X-Mailing-List: linux-embedded@vger.kernel.org
 List-Id: <linux-embedded.vger.kernel.org>
 List-Subscribe: <mailto:linux-embedded+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-embedded+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPart2568004.XAFRqVoOGU";
+Content-Type: multipart/signed; boundary="nextPart9956517.eNJFYEL58v";
  micalg="pgp-sha512"; protocol="application/pgp-signature"
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
 X-AntiAbuse: Primary Hostname - esm19.siteground.biz
@@ -110,185 +111,211 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: 5a7c746a07f8a41a36c791bb827bc739
+X-SGantispam-id: de4ab1ac8654d35d866963dfba46f082
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vDebE-00000000ZxG-28Pw-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-4wj9.prod.antispam.mailspamprotection.com;
+CFBL-Feedback-ID: 1vDegj-00000000zwy-1f2q-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-zd5h.prod.antispam.mailspamprotection.com;
 	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
 	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
 	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
 	arc=none
 
---nextPart2568004.XAFRqVoOGU
+--nextPart9956517.eNJFYEL58v
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
 From: Francesco Valla <francesco@valla.it>
-To: Maxime Ripard <mripard@kernel.org>
 Subject: Re: [PATCH RFC 0/3] Add splash DRM client
-Date: Tue, 28 Oct 2025 08:58:05 +0100
-Message-ID: <2756316.lGaqSPkdTl@fedora.fritz.box>
+Date: Tue, 28 Oct 2025 09:03:53 +0100
+Message-ID: <7194118.9J7NaK4W3v@fedora.fritz.box>
+In-Reply-To: <3edea192-6a3f-44f5-b570-7033776e2ce4@suse.de>
 MIME-Version: 1.0
 
-Hi,
+Hi Thomas,
 
-On Monday, 27 October 2025 at 11:09:56 Maxime Ripard <mripard@kernel.org> wrote:
-> Hi,
+On Monday, 27 October 2025 at 13:35:31 Thomas Zimmermann <tzimmermann@suse.de> wrote:
+> Hi Francenso, Maxime,
 > 
-> On Mon, Oct 27, 2025 at 12:03:00AM +0100, Francesco Valla wrote:
-> > this patchset adds a new DRM client offering splash functionalities,
-> > able to draw to screen:
-> > 
-> >   - a colored background;
+> Am 27.10.25 um 11:09 schrieb Maxime Ripard:
+> > Hi,
+> >
+> > On Mon, Oct 27, 2025 at 12:03:00AM +0100, Francesco Valla wrote:
+> >> this patchset adds a new DRM client offering splash functionalities,
+> >> able to draw to screen:
+> >>
+> >>    - a colored background;
+> > So, I like that part, and we were recently discussing about this.
 > 
-> So, I like that part, and we were recently discussing about this.
-> 
-> >   - a single-line text message, which can be set through sysfs or
-> >     directly from the kernel command line;
-> >   - a very simple progress bar, which can be driven through sysfs;
-> >   - a static image (optional).
-> 
-> But there's no reason to have all that in the kernel, and we already
-> have userspace components to do so (plymouth being the main "mainstream"
-> one).
+> The panic screen has configurable foreground/background colors. Maybe we 
+> can harmonize these settings.
 > 
 
-I get that for the "text message" and "progress bar" parts. I still have
-some uses for them, that however may not be adherent to upstream philosophy.
+Maybe, but probably the panic colors would typically be much more vibrant
+than splash ones. 
 
-> > Once compiled inside the kernel, the client can be enabled through the
-> > command line specifying the drm_client_lib.active=splash parameter.
-> > 
-> > == Motivation ==
-> > 
-> > The motivation behind this work is to offer to embedded system
-> > developers a new path for a simple activation of the display(s)
-> > connected to their system, with the following usecases:
-> > 
-> >   - bootsplash - possibly displaying even before init;
-> >   - early activation of the display pipeline, in particular whenever one
-> >     component of the pipeline (e.g.: a panel) takes a non-negligible
-> >     time to initialize;
-> >   - recovery systems, where the splash client can offer a simple feedback
-> >     for unattended recovery tasks;
-> >   - update systems, where the splash client can offer a simple feedback
-> >     for unattended update tasks.
+> >
+> >>    - a single-line text message, which can be set through sysfs or
+> >>      directly from the kernel command line;
 > 
-> If plymouth cannot be used by embedded systems for some reason, then you
-> should work on a plymouth alternative.
+> Put it into the kernel config.
+> 
+> >>    - a very simple progress bar, which can be driven through sysfs;
+> 
+> Once you have options to control these settings from user space, you 
+> should do it in user space entirely. As Maxime suggested, please improve 
+> plymouth for anything with animation.
 > 
 
-Thing is: any possible alternative would still start after userspace has
-been loaded, checked (in case of secure boot, which is ubiquitous now)
-and initialized. This means, at least in my usecases, several hundreds of
-milliseconds after userspace start, to be summed to the panel initialization
-time.
+On this I can agree, see my reply to Maxime.
 
-> > While the first seems the most obvious one, it was the second that acted
-> > as the driver, as in the past I had to implement a ugly workaround using
-> > a systemd generator to kickstart the initialization of a display and
-> > shave ~400ms of boot time.
-> > 
-> > The last 2 usecase, instead, are the reason I dropped the "boot" part
-> > from bootsplash.
-> > 
-> > == Implementation details ==
-> > 
-> > The design is quite simple, with a kernel thread doing the heavylifting
-> > for the rendering part and some locking to protect interactions with it.
-> > 
-> > The splash image is loaded using the firmware framework, with the client
-> > expecting to find a binary dump having the right dimensions (width and
-> > height) and FOURCC format for each modeset. Given a 1920x1080 RGB888
-> > modeset, the client will for example search for a firmware named:
-> > 
-> >    drm_splash_1920x1080_RG24.raw
-> > 
-> > If the firmware cannot be loaded directly, the NOUEVENT sysfs fallback
-> > mechanism is used to let userspace load the appropriate image.
-> > 
-> > == Testing ==
-> > 
-> > Testing was done on qemu (both with vkms and bochs drivers), on a HDMI
-> > display connected to a Beagleplay and on a ILI9341 SPI display connected
-> > to a i.MX93 FRDM board. All these platforms revealed different
-> > weaknesses that were hopefully removed.
-> > 
-> > == Open points / issues ==
-> > 
-> > The reason for this being an RFC is that there are several open points:
-> > 
-> >   - Support for tiled connectors should be there, but has not been
-> >     tested. Any idea on how to test it?
+> >>    - a static image (optional).
 > 
-> Did you mean tiled formats?
+> Board vendors often provide an image, see /sys/firmware/acpi/bgrt/. This 
+> is a candidate for display, or the penguin or a custom image. Please 
+> make it configurable by Kconfig. Again, if you need policy and 
+> heuristics for deciding what to display, you better do this in user space.
+>
+
+I'm not under ACPI/UEFI typically, and the concept for this patch was not
+developed on such system. But I'll take a look!
+
+> > But there's no reason to have all that in the kernel, and we already
+> > have userspace components to do so (plymouth being the main "mainstream"
+> > one).
+> >
+> >> Once compiled inside the kernel, the client can be enabled through the
+> >> command line specifying the drm_client_lib.active=splash parameter.
+> >>
+> >> == Motivation ==
+> >>
+> >> The motivation behind this work is to offer to embedded system
+> >> developers a new path for a simple activation of the display(s)
+> >> connected to their system, with the following usecases:
+> >>
+> >>    - bootsplash - possibly displaying even before init;
+> >>    - early activation of the display pipeline, in particular whenever one
+> >>      component of the pipeline (e.g.: a panel) takes a non-negligible
+> >>      time to initialize;
+> >>    - recovery systems, where the splash client can offer a simple feedback
+> >>      for unattended recovery tasks;
+> >>    - update systems, where the splash client can offer a simple feedback
+> >>      for unattended update tasks.
+> > If plymouth cannot be used by embedded systems for some reason, then you
+> > should work on a plymouth alternative.
+> 
+> Agreed. With an updater running in user space, that process should also 
+> manage the display update. No need for this in the kernel.
+> 
+> >
+> >> While the first seems the most obvious one, it was the second that acted
+> >> as the driver, as in the past I had to implement a ugly workaround using
+> >> a systemd generator to kickstart the initialization of a display and
+> >> shave ~400ms of boot time.
+> >>
+> >> The last 2 usecase, instead, are the reason I dropped the "boot" part
+> >> from bootsplash.
+> >>
+> >> == Implementation details ==
+> >>
+> >> The design is quite simple, with a kernel thread doing the heavylifting
+> >> for the rendering part and some locking to protect interactions with it.
+> >>
+> >> The splash image is loaded using the firmware framework, with the client
+> >> expecting to find a binary dump having the right dimensions (width and
+> >> height) and FOURCC format for each modeset. Given a 1920x1080 RGB888
+> >> modeset, the client will for example search for a firmware named:
+> >>
+> >>     drm_splash_1920x1080_RG24.raw
+> >>
+> >> If the firmware cannot be loaded directly, the NOUEVENT sysfs fallback
+> >> mechanism is used to let userspace load the appropriate image.
+> >>
+> >> == Testing ==
+> >>
+> >> Testing was done on qemu (both with vkms and bochs drivers), on a HDMI
+> >> display connected to a Beagleplay and on a ILI9341 SPI display connected
+> >> to a i.MX93 FRDM board. All these platforms revealed different
+> >> weaknesses that were hopefully removed.
+> >>
+> >> == Open points / issues ==
+> >>
+> >> The reason for this being an RFC is that there are several open points:
+> >>
+> >>    - Support for tiled connectors should be there, but has not been
+> >>      tested. Any idea on how to test it?
+> > Did you mean tiled formats?
+> >
+> >>    - I'm not entirely convinced that using the firmware framework to load
+> >>      the images is the right path. The idea behind it was to re-use the
+> >>      compressed firmware support, but then I discovered it is not there
+> >>      for built-in firmware.
+> > Yeah, firmware loading for this has a few issues (being tedious to setup
+> > for when built-in being one). I think just going the fbdev penguin road
+> > is a better choice: you provide the path, and it's embedded in the
+> > kernel directly.
+> >
+> >>    - Again on the firmware loading: CONFIG_LOADPIN would interfere with
+> >>      sysfs loading.
+> >>    - And again: FW_ACTION_NOUEVENT only has one user inside the kernel,
+> >>      leading me to think it is de-facto deprecated. And still, uevents
+> >>      for firmware loading seem frowned upon these days...
+> >>    - Generating binary dumps for... basically any format is not so
+> >>      straightforward. I crafted a Python tool with AI help which seems
+> >>      to work quite well, but I honestly did not yet understood which is
+> >>      the policy for AI-generated code inside the kernel, so it is not
+> >>      included in this patch set. All client code is genuine, though.
+> > BMP is simple enough to support so we should probably use that instead
+> > of a custom format.
+> 
+> file /sys/firmware/acpi/bgrt/image
+> /sys/firmware/acpi/bgrt/image: PC bitmap, Windows 3.x format, 768 x 256 
+> x 24, image size 589824, cbSize 589878, bits offset 54
+> 
+> That should probably be the format for now unless your firmware uses 
+> something else natively. Code for reading a BMP file can be found in the 
+> efifb driver. [1]
+> 
+> [1] 
+> https://elixir.bootlin.com/linux/v6.17.5/source/drivers/video/fbdev/efifb.c#L24
 > 
 
-No, AFAIU the tiled connectors are different connectors that feed different
-panels, which however are part of a single logical screen. Support for this
-setup is present at drm level [1], but I'm not familiar with it.
+When I started working on the patch I was not able to find this BMP decoder,
+I only found the PPM one from the bootup logo. I'll take a look here too.  
 
-I've only found this used inside the i915 Intel driver [2].
 
-> >   - I'm not entirely convinced that using the firmware framework to load
-> >     the images is the right path. The idea behind it was to re-use the
-> >     compressed firmware support, but then I discovered it is not there
-> >     for built-in firmware.
+> Apart from the criticism for complexity, I do like the idea of having a 
+> splash screen.
 > 
-> Yeah, firmware loading for this has a few issues (being tedious to setup
-> for when built-in being one). I think just going the fbdev penguin road
-> is a better choice: you provide the path, and it's embedded in the
-> kernel directly.
+> Best regards
+> Thomas
 > 
-
-Yes, this is already working, but if large-ish images are used, the loading
-time for them defeats the entire purpose of an in-kernel splash.
-
-> >   - Again on the firmware loading: CONFIG_LOADPIN would interfere with
-> >     sysfs loading.
-> >   - And again: FW_ACTION_NOUEVENT only has one user inside the kernel,
-> >     leading me to think it is de-facto deprecated. And still, uevents
-> >     for firmware loading seem frowned upon these days... 
-> >   - Generating binary dumps for... basically any format is not so
-> >     straightforward. I crafted a Python tool with AI help which seems
-> >     to work quite well, but I honestly did not yet understood which is
-> >     the policy for AI-generated code inside the kernel, so it is not
-> >     included in this patch set. All client code is genuine, though.
+> >
+> > Maxime
 > 
-> BMP is simple enough to support so we should probably use that instead
-> of a custom format.
 > 
-> Maxime
-> 
-
 
 Thank you!
 
-Regards,
+Best regards,
 Francesco
 
-
-[1] https://elixir.bootlin.com/linux/v6.17.5/source/include/drm/drm_connector.h#L2253
-[2] https://elixir.bootlin.com/linux/v6.17.5/source/drivers/gpu/drm/drm_connector.c#L2739
-
-
---nextPart2568004.XAFRqVoOGU
+--nextPart9956517.eNJFYEL58v
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part.
 Content-Transfer-Encoding: 7Bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRUrtjevJ039mawAeLir2xSXEi5AAUCaQB3jQAKCRDir2xSXEi5
-AFnSAQC9C4qNTZxuzclFDDCR37ko3jNFdZTX3yJfD8TIeTHZzQD/aVd9TRgWztp0
-2tBumHqBgLdhZcyZQNGyt5HWFk7XcQU=
-=5pI2
+iHUEABYKAB0WIQRUrtjevJ039mawAeLir2xSXEi5AAUCaQB46QAKCRDir2xSXEi5
+AGFFAP44WmJhkVq8Dd3yPrN4/6UbZ2jWawAOmn01DC155zZoIgEAhZhC84pdRLkN
+8fFc7/Acio+KH0UOmzebgGlT202k6g0=
+=JHNe
 -----END PGP SIGNATURE-----
 
---nextPart2568004.XAFRqVoOGU--
+--nextPart9956517.eNJFYEL58v--
 
 
 
