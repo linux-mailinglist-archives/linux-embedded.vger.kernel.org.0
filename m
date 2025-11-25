@@ -1,57 +1,57 @@
-Return-Path: <linux-embedded+bounces-218-lists+linux-embedded=lfdr.de@vger.kernel.org>
+Return-Path: <linux-embedded+bounces-215-lists+linux-embedded=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5DB3C8A182
-	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 14:49:44 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 197D1C88B0B
+	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 09:40:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id A74694E179B
-	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 13:49:41 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C80503A3E66
+	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 08:40:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D268F328263;
-	Wed, 26 Nov 2025 13:49:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 932F9318143;
+	Wed, 26 Nov 2025 08:40:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
 	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="IaJv+LRY";
 	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="XXEDXNsw"
 X-Original-To: linux-embedded@vger.kernel.org
-Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.9])
+Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80F4B3242B6;
-	Wed, 26 Nov 2025 13:49:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1009B219A86;
+	Wed, 26 Nov 2025 08:40:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.1
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764164978; cv=pass; b=dG454lO4hHkK5S1i3O2mGAM4xNzjgKuYG1o+56ZkF+ffiSoZpvR+A5ePAK8mX2cOmdBqAC0qjVYBMirAIN1iWdMoRwNbXrT/pqGFY4oA+7/2vm6tB0dQaeNR3ZlokmCKlh0fDAXC+X8Tj+TJuAgg8F99uje5Tef4yLSMj6cFqzc=
+	t=1764146443; cv=pass; b=HcceOS9XzFyM1FV5Q1fm/1z+3FTvCjXhvZ9644k6mgAX49S+MHgOuYUaeR7wjSn1Vx4aQJyMPtdXHuQOpxJwSgsR3cBxi7UVIb95HRje2WjeWCzpgK9G0pwjYAIhd4ovn7oP7xtodOpUFwHfbAkJZGwIAb7OtSUutQiXmDY6KVo=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764164978; c=relaxed/simple;
+	s=arc-20240116; t=1764146443; c=relaxed/simple;
 	bh=x+KhN09hImtwWDjzDfa1bG6kYamw8/6E2KGdH6hULxA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=J75RYIwyX2cNJ4RT9NpWaJHiNwi7YvlZnIp6LJLBT+1URnJAEwQoi01nYZV+/GiQFp5G0tWBxdVE9MBEAqk53vTtl/5TEDVTbjy+Pch20DUlYeeLy6aQhPQblZzOcynhPcmbGdRboTVMFneiJhDNE9uxbiITl8rjjFiso1oprNU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=IaJv+LRY; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=XXEDXNsw; arc=pass smtp.client-ip=185.56.87.9
+	 Content-Type:Content-Disposition:In-Reply-To; b=qX2uj3b9RMWU5/ZWfsbMec6s7y7s+MC+hQWj7dWSwjknGkxF5HRRn6poVyH0fpZH8z/+SuTnoCoMVLS7DiIvEQ33HEUhBzzsYnD9z/6lSQ9YjAYRJJa1T6a7KB6KawrK1dbfB2qYTfadJdJjUsmPLiHb1zCHK7Iop5n4TdwwXkU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=IaJv+LRY; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=XXEDXNsw; arc=pass smtp.client-ip=185.56.87.1
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-9d2x.prod.antispam.mailspamprotection.com; s=arckey; t=1764164975;
-	 b=QVPqsPLtI0HVtiXIux7LKUtVwkPjp3KnqNZZByZHzraSltnRG4pv21Rng3hivhYParfSn1wJKd
-	  ClJgzfO0Ujz4GZ/mdcKEKzD9580OPkmw5c5sK6WDWY7Rmi8HtFMbMUMYInHcUqqD3FQRr+Wlky
-	  grlQTo5a8jpoftdBmaVkxCzPYcy5WHhrIPdZcQo08Pf+t/syiQc5OA7GNvBm4SMQteLdvyyhNG
-	  lm6tXYevapiywgiRy8L2iqiP8iIe2mL0VuRq4x6rkEdgQBK3F2vHk2zFM3uwoR8cbH28AbkoMC
-	  jEuMVT/VGM4c/bSbmqVHICoKNWooxePkSnnzmX8ieh8HyA==;
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-9d2x.prod.antispam.mailspamprotection.com; s=arckey; t=1764146441;
+	 b=QPaC8CXBIrvRyYhVVqi5aj1TWE38y2aQ/aOxAhazBMDKKgsy0XIk+5nCTOtb2lwBzgNuRwqDhT
+	  0ksBQW6hh7KZEONg8aplLVNAQA4O7De1p+HEJZvtAx4X4NDz4D+I6gGUJezAx2oFYDiTG8BaSZ
+	  pvm+DdTOemvdVKT08x3eoE5OS5wOxIKua563kSQ5VfZWSn7a0X5Z6gXSeAT0R+SF1AN+J/z3jI
+	  zyUuFrlcWUT5e/NtRtnWYby39WbIXm7ZOGyw5Mnre6hodU64Xgl48grQpMW8H0gAbbC0X01GIl
+	  FQWVVrnrgHkwKLCPA6NBTVJH7aEt9OOuY1SL4PJFdk3hqg==;
 ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-9d2x.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
 	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
 	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
 	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
 	arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-9d2x.prod.antispam.mailspamprotection.com; s=arckey; t=1764164975;
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-9d2x.prod.antispam.mailspamprotection.com; s=arckey; t=1764146441;
 	bh=x+KhN09hImtwWDjzDfa1bG6kYamw8/6E2KGdH6hULxA=;
 	h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:
 	  From:Date:DKIM-Signature:DKIM-Signature;
-	b=ABBMxJk0+Q0sIPwnOiXYsKo8wQT3UXCDg946bcmMwvgR8ZHh94OzB5RYyotdNNMugoW0SV6vYP
-	  fNmDXnZGrLiJvfxTNbuQF2n9f4QEosvHyNNQFGMXSk9sx4ZUq80/rjkT8gz7lJxcw0SZ/MaXAC
-	  PQzHkTN/9FvRT5/UgGpE3zJrDEM2n7w5vzX4/vlRzpiAGokTH2KvjWxPVBvWpO+8lPKC3XSScF
-	  3B2njjzHW8zhsUybm1qYFvLEqG7I0ewlMvXbWEDz//q5+fLmEGSbLDBowcKWUqC78gJUkaam0+
-	  fJq4uQRYLJh4nQOnJt+wfXr0WvXZQQphft1o1o4xfReSKw==;
+	b=EuCYuL/U2sBJImnt1YUeouJvYbsfYokg1xniyLAmCZ/zZOOiAe5asJy3Mm9K2+eXNUMJ23kLx7
+	  5Es3OaRxPCu6jrqKF/rs5jjpW6poreVonQIcHbJxlUCYDuXpS+t5gBdAgr1N8A09JQPh912i3W
+	  juVik4y6byfbxXvZaTi3Y5dS0mBIEMgoZLhmB+MTms5+v9GMXvw+7ETCzgUaV7rYn3FGYyD3ai
+	  X2jd3iI6TerjXf4nwRT528pXymtImdQ65DgBFyc8PM/pwg14BfiYpOQqn7BkEMGN3EDrbTCNJ+
+	  TRAKBhNctRNQFIm9bIg1Dx5quWrEYVB9x0HyVCPZZ21Glw==;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
 	:Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Reply-To:
