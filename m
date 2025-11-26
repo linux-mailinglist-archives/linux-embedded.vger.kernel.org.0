@@ -1,87 +1,87 @@
-Return-Path: <linux-embedded+bounces-219-lists+linux-embedded=lfdr.de@vger.kernel.org>
+Return-Path: <linux-embedded+bounces-228-lists+linux-embedded=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4F9DC8C423
-	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 23:55:37 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id AB13DC8C957
+	for <lists+linux-embedded@lfdr.de>; Thu, 27 Nov 2025 02:39:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 7FE4C4E13EC
-	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 22:55:36 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 51BBA3AC73B
+	for <lists+linux-embedded@lfdr.de>; Thu, 27 Nov 2025 01:39:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4890F2FD67C;
-	Wed, 26 Nov 2025 22:55:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 133DA22333D;
+	Thu, 27 Nov 2025 01:39:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="suRKDgAG";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="nkpcsISh"
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="EMuQ2bmH";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="B7V4hB8u"
 X-Original-To: linux-embedded@vger.kernel.org
-Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.13])
+Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF3E52D9481
-	for <linux-embedded@vger.kernel.org>; Wed, 26 Nov 2025 22:55:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAD37217F24
+	for <linux-embedded@vger.kernel.org>; Thu, 27 Nov 2025 01:39:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.10
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764197730; cv=pass; b=ekZ9pek2qCfXtPRfcJMP/VeDj/PwntboibdyawVR6t0ME2SO7XvtjtE2DF52AKNUF8XbPWdjHSVRCfDRxTV3JBOIC9ImwG3e18ZYRv5hK9Ma5g0bFELJoXQj7IMFGRMsILHol/eomN45Mcrb4n3/Nkz+6jP1jPqxjGnCL6eGOg4=
+	t=1764207544; cv=pass; b=q2wqjA6fZBjz+I1cQ4ii1GuB11onI/rzM11tq//44e43Wtzavy9guwLj8TNF+laCA13KbI2tj1qmJeNfhnfbu6/VuEXHJSeuHLO8VS8GyU8SpuEYLy8EhDFGumTQ1c/N0MevZsTJ+H2aG+DJHjW+QcToQDZXYIyxCTfs2S+YHjA=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764197730; c=relaxed/simple;
-	bh=yHYZ/X1d3QhoPsxLwGtGC3eXaCqqCILLQa11Kyk06M4=;
+	s=arc-20240116; t=1764207544; c=relaxed/simple;
+	bh=ED6emQgHl3SaTCF3IR5l3ZdfpJRNkRaOSEgPiN98wss=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=jMx3z/Q3pbiPOTdfWJeo1drqnBU3PjzMB3xL2VtG0SIGxh8feG/z0mrUEirjkbOMs24xu4KiDSnQgaQmmlFJz5XIrBv558SigN0n7yrGp+VNpcp1GboEtzgLX97P6A0ujtsEs6jUF5EsbwvR4GAfwKo6rJQmCeRi8KPRGhrboFE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=suRKDgAG; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=nkpcsISh; arc=pass smtp.client-ip=185.56.87.13
+	 In-Reply-To:To:Cc; b=R6uZ/LjL4YxiZBdqkGD+o40KIlho6amtoZSkLpslNjuzI4/NHYn/rXctBsqriIpH7anoMmm49ktP6pKd2AyY++QP3Vcm+UPCcGoJgGLmnyqOwF1W360fD8JB8gYUl9TdpJ/tDxMnboqQ8JA/StaNOHH2gauuSFmnI43pqI2mtZ4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=EMuQ2bmH; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=B7V4hB8u; arc=pass smtp.client-ip=185.56.87.10
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-mkbs.prod.antispam.mailspamprotection.com; s=arckey; t=1764197728;
-	 b=A5pMkKWFY/LYrKWAc7XlCc1cbqi57rY8UqV+CqcfsBpmZFOC1krN90sMmIK9C2fBLlYdia6FBP
-	  bh8Xhc3NvmMAxWEbyRlwvQvrg8jHmN0C/TAbK7Fx/zypV6ssI+RX9hglhmN32IgikODtXC6250
-	  qw9diz/8364/bZ0e3UD0d3oPooC91xeCyCMMOts3gtjJIEm2274YsrfjJRMxN86uZblX6qaH+U
-	  mClcDkQpjeQD2HwWDGTCZA/U+Ddepfg6KGYo9msgWT2fvlukrvtn+NeUiCgvhx8bi3I+PSM1LB
-	  T6vzqHkoB3SLC+iX2srSZzd7Io1c0Dy2T0VE+UHpz8HLnQ==;
-ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-mkbs.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; s=arckey; t=1764207541;
+	 b=K4jldgWMxg42r/rjfVB6lOkF6NusE0EmwIzTYe27vf0j+PNTJ47wFxCTxTtPGYTHoumSOm1zZu
+	  LNOmETU5E+Vgj/yx8re6/Z2FcB0Ilysdnd/RqKsu76oeL5TYMw5vEZeYEjR6BaUJi42WH20sL4
+	  iI0PGPVZqIzpg3KvdkcXPwTuIGvIgTPQU2NQ/A5CS7cZDhG5ob8tuPSKWMIwTtGPwxX3nDRbWT
+	  mqbVZoY+ru3fUIkxfCMaO/jKwXEQjhapV8T6LZ9YIcLC0syo/1OdpR+r+MzycLWBaCJ57cWEJ4
+	  cJ12QGi+8tv1vQZXmsUKsVYJC5ZNg0wRNr67oVpAqYVWkQ==;
+ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
 	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
 	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
 	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
 	arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-mkbs.prod.antispam.mailspamprotection.com; s=arckey; t=1764197728;
-	bh=yHYZ/X1d3QhoPsxLwGtGC3eXaCqqCILLQa11Kyk06M4=;
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; s=arckey; t=1764207541;
+	bh=ED6emQgHl3SaTCF3IR5l3ZdfpJRNkRaOSEgPiN98wss=;
 	h=Cc:To:In-Reply-To:References:Message-ID:Content-Transfer-Encoding:
 	  Content-Type:MIME-Version:Subject:Date:From:DKIM-Signature:DKIM-Signature;
-	b=WU1BVl1mmzXg8ULki4OiURnEBNiq06bjCzxwY2XvMlhj0SykMDp38cOEQuZHK5TL8HsG4jdWNg
-	  2fs+3VOUTTF681QyPAhCvGTGMzyRFe7TOqhINzXOWssfkkQ/5aurcFEuYCR7lSJsPF1Tr0Mf7Y
-	  DCwdsRqfPRUMv+Z8WybYP5UGt2W3CkbvKBbr771DH0Zc/02AbSQDnieDOseT0g5grptZ1cK+s+
-	  EnlOnz3/C81SHmz/A/XIp7KuCs+K3JY77c4IZE6W5IhR2hHcyaT7EElfkpW+etoJOHGU46ULEF
-	  jTDJW9hUkd21Ao6HLH6Cw5LaJGanhuclwWFlMPB/cPrfJw==;
+	b=ibrrYGPdXOUolX6fgfKLIHZZRb4nCNggI+FPYgArmgh+BB/WSXsaqpeVInfBoWjJ3Yse+zhODu
+	  FVfCbD73M4NRK0TB9x6ISUJctRttIGhugF2SDNn+I5j9PeW66fWHO8J7RRvGU3kyMSr4bLUj9c
+	  HFy/7Fx4QJZAVJyYekEgavvtHn26KkPSmIMFOHzLVypeWwhUE2goqU9+V586hqo5FFlhI5mOrf
+	  hlcNr2JG2L92T1mVbi53J7Z5kAD1jS1Yq9TAMt9L3Kc2fIgXpfuzbFDXHxxEWp7WwRGvGRf2On
+	  ZxGc9az1vXSUGxlzSIn5w95LAkkdFDh67mVR942Rhk/LaA==;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
 	:Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
 	:Date:From:Reply-To:List-Unsubscribe;
-	bh=VUN1iGwv2qwaxTKk0/woAZkyUrTYL9/rXxZ4A8Awb5M=; b=suRKDgAGMYdvRy4+Uft5hnNeXf
-	ze9O727ksPw1mmFeBm1OK+710x0PvI6Myw4bclpvFMoV/ogIAwT6cXkgCEo75uVgGNAMsXJKHZ1fX
-	hqxS7X5uE/okQwciXoHDHIuDami/fJvZDKTeyyIO3Y3FtabYAo5xlq5eP6S9kMgjcOxQ=;
+	bh=BzGrfLg15spZfp6rIVjSqtnSD1rRRITHVgO9lY0/8tE=; b=EMuQ2bmHQ4hwxbN/cgr+iDxhXR
+	7QsJ/mf+hAUqt2isNboANvlirFj7duQqLNtqkOnmjLTGYXPyO23RVo0iZMObZFeJi40sRJU5JCn+u
+	n8XDuwyepoXtRC2hZD/1GXaUPRwR8aWglHb6JJpnI9XeHuKFwcl5BYd4t+LvufQLuSBE=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
-	by instance-europe-west4-mkbs.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	by instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
 	(Exim 4.98.1)
 	(envelope-from <francesco@valla.it>)
-	id 1vOOQ1-00000003yQQ-1MLV
+	id 1vOOQ1-0000000DTmz-42OI
 	for linux-embedded@vger.kernel.org;
-	Wed, 26 Nov 2025 22:55:26 +0000
+	Wed, 26 Nov 2025 22:55:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
 	s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
 	list-subscribe:list-post:list-owner:list-archive;
-	bh=VUN1iGwv2qwaxTKk0/woAZkyUrTYL9/rXxZ4A8Awb5M=; b=nkpcsIShxDU/I2U/uhsSQqwHJv
-	NF+hHTsnjPUZtu6DjNLsoIeI8+x998ekAkfqOl6NmJfUnWK4WDVAS7c9dyn0G6WlUQI/ahXjsCbpj
-	qB+wx4gP5ZsrCMLuyliGOEy5TglwJBKqVK8OUrXm3z+ex139qrrUDbOOmDsf98vBthc4=;
+	bh=BzGrfLg15spZfp6rIVjSqtnSD1rRRITHVgO9lY0/8tE=; b=B7V4hB8uc2qlb/B4dl+E25Y32r
+	Vg3MrgZ/OQjBaafEQvHM0bdtsz5HVh0jRHjcBz86KG6qSbQ+z1ATCrzGb2PxOAA3oJ24ooy8ZsqvT
+	F+ONWZGznPniTHs6yHvo50UtQv+lJbcq+G3dB7X2ci39GmufleV7gYS+phw98zgG9sGk=;
 Received: from [82.59.186.57] (port=59963 helo=[192.168.178.175])
 	by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
 	(Exim 4.98.1)
 	(envelope-from <francesco@valla.it>)
-	id 1vOOPq-000000006mk-2yXw;
-	Wed, 26 Nov 2025 22:55:14 +0000
+	id 1vOOPr-000000006mk-0skQ;
+	Wed, 26 Nov 2025 22:55:15 +0000
 From: Francesco Valla <francesco@valla.it>
-Date: Wed, 26 Nov 2025 23:54:30 +0100
-Subject: [PATCH DISCUSSION 2/8] arm64: dts: ti: k3-am625-beagleplay: set
- post-init-providers
+Date: Wed, 26 Nov 2025 23:54:31 +0100
+Subject: [PATCH DISCUSSION 3/8] arm64: dts: ti: k3-am625-beagleplay: remove
+ inter-regulator dependency
 Precedence: bulk
 X-Mailing-List: linux-embedded@vger.kernel.org
 List-Id: <linux-embedded.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-embedded+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251126-beagleplay-probes-v1-2-c833defd4c9b@valla.it>
+Message-Id: <20251126-beagleplay-probes-v1-3-c833defd4c9b@valla.it>
 References: <20251126-beagleplay-probes-v1-0-c833defd4c9b@valla.it>
 In-Reply-To: <20251126-beagleplay-probes-v1-0-c833defd4c9b@valla.it>
 To: linux-embedded@vger.kernel.org, Tim Bird <tim.bird@sony.com>
@@ -100,12 +100,12 @@ Cc: Federico Giovanardi <federico@giovanardi.dev>,
  Vignesh Raghavendra <vigneshr@ti.com>, Tero Kristo <kristo@kernel.org>, 
  Francesco Valla <francesco@valla.it>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3291; i=francesco@valla.it;
- h=from:subject:message-id; bh=yHYZ/X1d3QhoPsxLwGtGC3eXaCqqCILLQa11Kyk06M4=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJnqrQGMC5u1S7We7thx+syaF9PffHfi/r079ka1xwbl9
- QFvu9NkOkpZGMS4GGTFFFlC1t24t2eu+be0DYyPYOawMoEMYeDiFICJ+O1g+Cume/D5p6CttnNC
- M1OmzKkNv3zq0uepLAfdnmd1M+71cI1k+J+QtVDjxqo0hxeNK/qWXq0pupN713DF8zlbncO35d5
- 5uYgDAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1112; i=francesco@valla.it;
+ h=from:subject:message-id; bh=ED6emQgHl3SaTCF3IR5l3ZdfpJRNkRaOSEgPiN98wss=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJnqrQFXSycue8DDefrUSo7m/lm85/tPByx1rzKofLf8z
+ 4HA+MykjlIWBjEuBlkxRZaQdTfu7Zlr/i1tA+MjmDmsTCBDGLg4BWAiEh4Mf/i/XuSSfe7zJXtl
+ mrfQ1P/LDC6x/0xzn/fwZ9lhxfUTJeoYGbYf/+VTEKR8LVupaOHFvbefJcWqVVdf5T2jk7GMrcz
+ lBysA
 X-Developer-Key: i=francesco@valla.it; a=openpgp;
  fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -116,93 +116,44 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: c88971eb1b7038afc29588f9481b544e
+X-SGantispam-id: 5f8171ac6a125e522b4c288cb7190d83
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vOOQ1-00000003yQQ-1MLV-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-mkbs.prod.antispam.mailspamprotection.com;
+CFBL-Feedback-ID: 1vOOQ1-0000000DTmz-42OI-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com;
 	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
 	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
 	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
 	arc=none
 
-Add the post-init-providers property where reasonable:
+The dependency between vsys_5v0 (supplier) and vdd_3v3 (consumer)
+describes the hardware well, but causes delays during boot, since
+the kernel is trying to probe vdd_3v3 before vsys_5v0, causing a
+boot deferral chain for it and all the dependent devices.
 
-  - the gic500 is depending on itself, but that is taken care during
-    probe;
-  - the TPS65219 PMIC is depending on one of its regulators, but also
-    that is considered during probe;
-  - the DRM endpoints causes mutual dependencies between componets, but
-    only one way is an actual init dependency for each couple.
-
-This solves the following cycles found by the fw_devlink infrastructure
-during initialization:
-
-[    0.056895] /bus@f0000/interrupt-controller@1800000: Fixed dependency cycle(s) with /bus@f0000/interrupt-controller@1800000
-[    0.057072] /bus@f0000/i2c@20020000/bridge-hdmi@4c: Fixed dependency cycle(s) with /bus@f0000/dss@30200000
-[    0.057218] /bus@f0000/dss@30200000: Fixed dependency cycle(s) with /bus@f0000/i2c@20020000/bridge-hdmi@4c
-[    0.073755] /bus@f0000/i2c@20020000/bridge-hdmi@4c: Fixed dependency cycle(s) with /bus@f0000/dss@30200000
-[    0.079458] /bus@f0000/i2c@20020000/bridge-hdmi@4c: Fixed dependency cycle(s) with /bus@f0000/dss@30200000
-[    0.079567] /bus@f0000/dss@30200000: Fixed dependency cycle(s) with /bus@f0000/i2c@20020000/bridge-hdmi@4c
-[    0.086984] /bus@f0000/i2c@20020000/bridge-hdmi@4c: Fixed dependency cycle(s) with /connector-hdmi
-[    0.087088] /connector-hdmi: Fixed dependency cycle(s) with /bus@f0000/i2c@20020000/bridge-hdmi@4c
-[    0.573947] /bus@f0000/i2c@20000000/pmic@30: Fixed dependency cycle(s) with /bus@f0000/i2c@20000000/pmic@30/regulators/buck2
-[    0.598398] /connector-hdmi: Fixed dependency cycle(s) with /bus@f0000/i2c@20020000/bridge-hdmi@4c
-[    0.598494] /bus@f0000/dss@30200000: Fixed dependency cycle(s) with /bus@f0000/i2c@20020000/bridge-hdmi@4c
-[    0.598675] /bus@f0000/i2c@20020000/bridge-hdmi@4c: Fixed dependency cycle(s) with /connector-hdmi
-[    0.598734] /bus@f0000/i2c@20020000/bridge-hdmi@4c: Fixed dependency cycle(s) with /bus@f0000/dss@30200000
+The dependency is not functionally required, as both regulators are
+fixed, not controllable and always ON, and is thus removed.
 
 Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts b/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts
-index 7028d9835c4a89cc3f5ca17543b18d3419751f0a..60e2c86ab197e348bf941e30c2641a26cd940d82 100644
+index 60e2c86ab197e348bf941e30c2641a26cd940d82..3a96d76db0fbf7be68884c130ecb9e5c1c06d834 100644
 --- a/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts
 +++ b/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts
-@@ -211,6 +211,9 @@ hdmi0: connector-hdmi {
- 		compatible = "hdmi-connector";
- 		label = "hdmi";
- 		type = "a";
-+
-+		post-init-providers = <&it66121>;
-+
- 		port {
- 			hdmi_connector_in: endpoint {
- 				remote-endpoint = <&it66121_out>;
-@@ -622,6 +625,10 @@ cpsw3g_phy1: ethernet-phy@1 {
+@@ -118,7 +118,6 @@ vdd_3v3: regulator-2 {
+ 		regulator-name = "vdd_3v3";
+ 		regulator-min-microvolt = <3300000>;
+ 		regulator-max-microvolt = <3300000>;
+-		vin-supply = <&vsys_5v0>;
+ 		regulator-always-on;
+ 		regulator-boot-on;
  	};
- };
- 
-+&gic500 {
-+	post-init-providers = <&gic500>;
-+};
-+
- &main_gpio0 {
- 	bootph-all;
- 	pinctrl-names = "default";
-@@ -701,6 +708,8 @@ tps65219: pmic@30 {
- 		system-power-controller;
- 		ti,power-button;
- 
-+		post-init-providers = <&buck2_reg>;
-+
- 		regulators {
- 			buck1_reg: buck1 {
- 				regulator-name = "VDD_CORE";
-@@ -793,6 +802,8 @@ it66121: bridge-hdmi@4c {
- 		interrupts = <36 IRQ_TYPE_EDGE_FALLING>;
- 		#sound-dai-cells = <0>;
- 
-+		post-init-providers = <&dss>;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
 
 -- 
 2.52.0
