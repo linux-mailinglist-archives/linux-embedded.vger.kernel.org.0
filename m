@@ -1,86 +1,86 @@
-Return-Path: <linux-embedded+bounces-229-lists+linux-embedded=lfdr.de@vger.kernel.org>
+Return-Path: <linux-embedded+bounces-223-lists+linux-embedded=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C016C8CAC0
-	for <lists+linux-embedded@lfdr.de>; Thu, 27 Nov 2025 03:31:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FA35C8C42C
+	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 23:55:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 389AF4E24F0
-	for <lists+linux-embedded@lfdr.de>; Thu, 27 Nov 2025 02:31:03 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id F221B4E1F60
+	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 22:55:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E58A236454;
-	Thu, 27 Nov 2025 02:30:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D12B2FD67C;
+	Wed, 26 Nov 2025 22:55:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="IZVuMqWz";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="YemJzZAJ"
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="pyUwrxMX";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="kesUYiDb"
 X-Original-To: linux-embedded@vger.kernel.org
-Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.1])
+Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10F311F12F8
-	for <linux-embedded@vger.kernel.org>; Thu, 27 Nov 2025 02:30:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 449E02DE71A
+	for <linux-embedded@vger.kernel.org>; Wed, 26 Nov 2025 22:55:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.11
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764210658; cv=pass; b=hrKl20As7NpyKGLicMRmrqgNUas1wGOTChwUcz3KheEy+hyGlsEOiFUHu6irq8W6G16kjmDlPz6qxV5mE2mMP3m9yp4tbmGFVRaZhw51VzxLC9roYid3D0kYgLkM0sk+vJ5jDrxjSXYinkKLz+d7GDDby4JlcalT1NqzIJW9Pjs=
+	t=1764197738; cv=pass; b=ow/b9FjTfSds6r9+MplcGBG43naWIUZOK9FycP+LkiCit66CnU9BjGI/3e7xwBjOdm5niDrK2P8mz1FypjdJ5xK3jhJFNdkFeFgz7gSbhEqKhfBzagrNRjW6ab6N30/jEqkLSh3BD+TPVEGya5Cmq5IBLm/WXefTvO4/LLHLFh0=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764210658; c=relaxed/simple;
-	bh=QI7D1fWJhBMEKjkjHt6Wn1hE0of5uUUXY5P6nd9quxc=;
+	s=arc-20240116; t=1764197738; c=relaxed/simple;
+	bh=usTL0n7qQhee1SENvcPhRxPrMYfaZrscfEmjtjMc8RA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=p8NxY5X3RheTVIHXNFPrMo6Z61OGAQA1m2vtTEememL+dFVlE0Yp1uYV7Gmzy2AwKRN0EfsvdlRMk5pB7PGrJj9nX3eGElEdUx5TK357fBqYZ/zI6+w+jFZra9UHAT/N1ZPX/GKnEgDu9/07En2p7x+HK3Y4jqoO4j+M7LyJWBQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=IZVuMqWz; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=YemJzZAJ; arc=pass smtp.client-ip=185.56.87.1
+	 In-Reply-To:To:Cc; b=Mb/ep0JI2+D8ZMgn4/44WNDDQ4fY+m6IUgx6KqUuYdC4WSV/xGyrtyaEHwXL1j+Z6fmdlLC8SiQWAIlcUhrpKrREKBgSNIJIzGIvcurHhZLD5wsB61rmExFynaQblNyWjjCRY7DkdGPCCNmuqIVlehe+/4V7yyHwl8V6bqcpWLM=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=pyUwrxMX; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=kesUYiDb; arc=pass smtp.client-ip=185.56.87.11
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; s=arckey; t=1764210656;
-	 b=lGvwcv2qV0CbWmj9OQaLxmpbsEn2xnYrKwMTTPxMxfJ8aFaqP9EVq1Ru9YSMQFdgMFV/xSk/AA
-	  oi4V/9WMPopjZIG8L9Ht0XopTCCm7X6RNFF03nVh7Prwyd8NEMj+H+y6BFkoXw0ygpO9jSLRoq
-	  JenpHAmR3RDhEwjkn7PivS76XwGHKImMZol/IEBvPMgPhdP+Y3e4zXqW9zOgYeWqKtT6WXdyGL
-	  BSX1AC2SpgnbpjdTlYFQVfyheQvoc8CaDEcOUB9U2EX2bYeKjgu9Hyst6HWcqCip9W5vzqQZmH
-	  ZADNvSP0gZOqyOA0Y0LGA0+ALjj7nEucGvs2jM5fym4J/Q==;
-ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-4l43.prod.antispam.mailspamprotection.com; s=arckey; t=1764197736;
+	 b=em1q72Z76eFi8slGBLGHWZQcSNaXlby1wVERx0aYHyvMCS257PG3jWVvKaJw1JI2Z2fE6aVbso
+	  vqndlmGOVFTk4QHFj/acxHEDFJ/0YCdTespqy2CPViK6oBu+BwuqTW4tVRB09K0qtw86WSN9VE
+	  r0S4FEJWalLLu270mtcW9/DEIrHcYq2IyJRbf6DaMGQ1taeK637/C+WExO00pQiWKm666Lefxk
+	  /EOAAdA5E8+aRxzcO2W3Tq+VRs5OWF5/T6u4A6lbSUacFFplHeof+BkISYvHalNKpAGuJmQYT8
+	  FNFVQo1n0PwgFNgtdyOoDr5+GuJACpOpfaw/vm/ATv9B9Q==;
+ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-4l43.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
 	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
 	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
 	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
 	arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; s=arckey; t=1764210656;
-	bh=QI7D1fWJhBMEKjkjHt6Wn1hE0of5uUUXY5P6nd9quxc=;
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-4l43.prod.antispam.mailspamprotection.com; s=arckey; t=1764197736;
+	bh=usTL0n7qQhee1SENvcPhRxPrMYfaZrscfEmjtjMc8RA=;
 	h=Cc:To:In-Reply-To:References:Message-ID:Content-Transfer-Encoding:
 	  Content-Type:MIME-Version:Subject:Date:From:DKIM-Signature:DKIM-Signature;
-	b=HmYAdloUHEYzzC5PLhfBCph4H07f6iMR1rTdeRKXd687AT1puoBMUS3sKJ1cgPBBtpfPeGXCU2
-	  KgT7hyGd+AN9O6P5uaLyiKf3zJk8rYZrHEc89J12Suw4Sb5I1eJ/mMWdl+IbIineUYIBf7Y8Vd
-	  Pv67vmJV9BI/qcprPw5gzqBJr2PXDxJKkpoi0VgeAcPRMF3zDGk8meBXTXsfOLRprEKltqbg/a
-	  aBh3xBEx98mvxz6Q+k5TDkLDAVf6FT6yULUiaqd3IGObcf4ZxTlALG6L3NAEymXwEXnvihbK47
-	  FysfEVG8FAqlft9fBUGf0ngrnwTmFwTG9T+di52pIdZb9g==;
+	b=KTs0bh5nOHzd4RIZ33nni7wggt3k5T1ncqzq/u8WofkCUcGHaT/kuKJYMsH7D9RBkoYXMUSCvd
+	  EzTI3bX/eDlCK/YLc5n8KVT/wLbiiwFXrM2TUXsgRvgwTG/YCJkvJRG2cJ3/tIsC/klSc08T/Z
+	  mgm3gSnlcwO20d5gKfqZo67J6rj4vwJrfmrZp3lY+9/Cid/OUw+Oddyv+a6HhFbUGvOFGBggqD
+	  iwpP2MSw/hFc5bgQnYSS2VwdLcw5VMDeiWUN1Lk/b9lL49D8fzjcWCsozOA1IBSff6FWTXES1y
+	  JfRnqXL7EUtVz7Ru4IfsbF9hYO5OQA7IugmxF3yVBaHPnw==;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
 	:Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
 	:Date:From:Reply-To:List-Unsubscribe;
-	bh=pB+Lvjgl3NpA60/eTcQQx10RfUFLHGz1Z2MHuivJRQM=; b=IZVuMqWzjzoVBoapQr2T/fVYna
-	spfhI1U1pq8fS9tWpC/ap1UB8GD/LGFt3DjhhSeXJWGC3t1vwIw3NfCGascg5AIBVtz7uzRueHxYd
-	OsR/Q7eaBOM/hzNI5Zi9F+dWYbbRKu7x/5rQOThD0Z4jt9iyeIlqpCgl5p0vPEBbvPLE=;
+	bh=DHWtVldokMUgQw1oT2G53dkgV2GwFzOgqic7YUfZ1fE=; b=pyUwrxMXVgBaBoZNUfwkJukOn/
+	JZH6AYSk1qiS7jrwVa0UhlpjkrhOGiYn2Log9nj2HSZujWjfd5NRPLDIuLAXTUvIx7zM7RxP5Edwv
+	zPC9EFy5+KJHWsCrWUxbFFYuLY7oM6Gqx2mUCxg3K3MFp3O1j7KwNYbbaX+wox+r8mX4=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
-	by instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	by instance-europe-west4-4l43.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
 	(Exim 4.98.1)
 	(envelope-from <francesco@valla.it>)
-	id 1vOOQ2-0000000DTpY-3hY4
+	id 1vOOQ3-00000009wvx-28OZ
 	for linux-embedded@vger.kernel.org;
-	Wed, 26 Nov 2025 22:55:28 +0000
+	Wed, 26 Nov 2025 22:55:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
 	s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
 	list-subscribe:list-post:list-owner:list-archive;
-	bh=pB+Lvjgl3NpA60/eTcQQx10RfUFLHGz1Z2MHuivJRQM=; b=YemJzZAJEtGb3mQLzx1suA1Jiu
-	J8A3uGNcNjBH9/QI7hfdqw4PrD8ERKIh/1HWXbPVU/6nKzvhtB0nBe/H+FS6RvBN3m6bMbgUOzidr
-	ihv4OYMCCOHOQzFYoc7lnvkut/aoEL7gdQUbAJkLP9PgUqkj+3aXcCGdP646xinupxQ0=;
+	bh=DHWtVldokMUgQw1oT2G53dkgV2GwFzOgqic7YUfZ1fE=; b=kesUYiDb4hDk1WCsrOAELirjik
+	kQYq6Lg9gcyn9rDDUMUMvfEsoj0qOt6SzZiBzIzYc4zpfq53Q5mCQ09iy1Zm3gkghn4QE7/MhJ2hW
+	x6Kmcyt967R5JPUMjK1Fe9EXzMjLNtc2JMO4nlPdlH2IR/NRGtR/vmrzqnWgqM9TYADo=;
 Received: from [82.59.186.57] (port=59963 helo=[192.168.178.175])
 	by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
 	(Exim 4.98.1)
 	(envelope-from <francesco@valla.it>)
-	id 1vOOPs-000000006mk-0qCc;
+	id 1vOOPs-000000006mk-2v6O;
 	Wed, 26 Nov 2025 22:55:16 +0000
 From: Francesco Valla <francesco@valla.it>
-Date: Wed, 26 Nov 2025 23:54:33 +0100
-Subject: [PATCH DISCUSSION 5/8] gpio: davinci: reset initcall level
+Date: Wed, 26 Nov 2025 23:54:34 +0100
+Subject: [PATCH DISCUSSION 6/8] i2c: omap: reset initcall level
 Precedence: bulk
 X-Mailing-List: linux-embedded@vger.kernel.org
 List-Id: <linux-embedded.vger.kernel.org>
@@ -89,7 +89,7 @@ List-Unsubscribe: <mailto:linux-embedded+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251126-beagleplay-probes-v1-5-c833defd4c9b@valla.it>
+Message-Id: <20251126-beagleplay-probes-v1-6-c833defd4c9b@valla.it>
 References: <20251126-beagleplay-probes-v1-0-c833defd4c9b@valla.it>
 In-Reply-To: <20251126-beagleplay-probes-v1-0-c833defd4c9b@valla.it>
 To: linux-embedded@vger.kernel.org, Tim Bird <tim.bird@sony.com>
@@ -99,12 +99,12 @@ Cc: Federico Giovanardi <federico@giovanardi.dev>,
  Vignesh Raghavendra <vigneshr@ti.com>, Tero Kristo <kristo@kernel.org>, 
  Francesco Valla <francesco@valla.it>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1431; i=francesco@valla.it;
- h=from:subject:message-id; bh=QI7D1fWJhBMEKjkjHt6Wn1hE0of5uUUXY5P6nd9quxc=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJnqrQEPQxnSG3vWRPNMf7Xur7iF7RMbnfOcsn4xdy+qv
- bqxvZe1o5SFQYyLQVZMkSVk3Y17e+aaf0vbwPgIZg4rE8gQBi5OAZjIzTuMDDcfHQ2V6X9zK+X1
- 3ddzXM+U7JVo1Y9YmNbGtyCiymrZdgGG//Vm91Ri1k+ZcFXzzekvC3b+lGmMqGTOyJ/L6fX4wkS
- +WDYA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1349; i=francesco@valla.it;
+ h=from:subject:message-id; bh=usTL0n7qQhee1SENvcPhRxPrMYfaZrscfEmjtjMc8RA=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJnqrQHsNu816zMqnz64VWLfVt3wvidkQn+ry0fmwLkV7
+ NNjrrF0lLIwiHExyIopsoSsu3Fvz1zzb2kbGB/BzGFlAhnCwMUpABNZ+5Phn5KFE+uV3RtSnr74
+ EC2tKu0gG7qvZJ5G6b7/5SIsPY17eBgZ9q9JWfvzyvZT1jnf2v9dT1dokDZwLFoYtfuqpP6BUPs
+ VvAA=
 X-Developer-Key: i=francesco@valla.it; a=openpgp;
  fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -115,14 +115,14 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: d4a6e3751a1d710c0450ccd88cb0eaaf
+X-SGantispam-id: e50f86c7b31b7b90e875fb533f2bebef
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vOOQ2-0000000DTpY-3hY4-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com;
+CFBL-Feedback-ID: 1vOOQ3-00000009wvx-28OZ-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-4l43.prod.antispam.mailspamprotection.com;
 	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
 	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
 	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
@@ -130,42 +130,40 @@ Authentication-Results: outgoing.instance-europe-west4-4xtm.prod.antispam.mailsp
 
 With the fw_devlink infrastracture in place, a custom initcall level is
 doing more harm than good, especially in arm64 platforms that use the
-(quite old) davinci gpio driver but relies on firmware for power
-management and clock setup. Reset the initcall level to the default.
+(quite old) omap i2c driver but relies on firmware for power management
+and clock setup. Reset the initcall level to the default.
 
 Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- drivers/gpio/gpio-davinci.c | 17 +----------------
- 1 file changed, 1 insertion(+), 16 deletions(-)
+ drivers/i2c/busses/i2c-omap.c | 15 +--------------
+ 1 file changed, 1 insertion(+), 14 deletions(-)
 
-diff --git a/drivers/gpio/gpio-davinci.c b/drivers/gpio/gpio-davinci.c
-index 538f27209ce718ae49820c6429e3ab9342006825..fd937b07bc52f7dac437ba0503e6013af3196a1b 100644
---- a/drivers/gpio/gpio-davinci.c
-+++ b/drivers/gpio/gpio-davinci.c
-@@ -663,22 +663,7 @@ static struct platform_driver davinci_gpio_driver = {
- 		.of_match_table	= davinci_gpio_ids,
+diff --git a/drivers/i2c/busses/i2c-omap.c b/drivers/i2c/busses/i2c-omap.c
+index d9f590f0c384340dd31308bdf9ed0cb1a1a2ba8b..081b472ec99a271521cbbbc21b8462c3a69d13cf 100644
+--- a/drivers/i2c/busses/i2c-omap.c
++++ b/drivers/i2c/busses/i2c-omap.c
+@@ -1625,20 +1625,7 @@ static struct platform_driver omap_i2c_driver = {
+ 		.of_match_table = of_match_ptr(omap_i2c_of_match),
  	},
  };
 -
--/*
-- * GPIO driver registration needs to be done before machine_init functions
-- * access GPIO. Hence davinci_gpio_drv_reg() is a postcore_initcall.
-- */
--static int __init davinci_gpio_drv_reg(void)
+-/* I2C may be needed to bring up other drivers */
+-static int __init
+-omap_i2c_init_driver(void)
 -{
--	return platform_driver_register(&davinci_gpio_driver);
+-	return platform_driver_register(&omap_i2c_driver);
 -}
--postcore_initcall(davinci_gpio_drv_reg);
+-subsys_initcall(omap_i2c_init_driver);
 -
--static void __exit davinci_gpio_exit(void)
+-static void __exit omap_i2c_exit_driver(void)
 -{
--	platform_driver_unregister(&davinci_gpio_driver);
+-	platform_driver_unregister(&omap_i2c_driver);
 -}
--module_exit(davinci_gpio_exit);
-+module_platform_driver(davinci_gpio_driver);
+-module_exit(omap_i2c_exit_driver);
++module_platform_driver(omap_i2c_driver);
  
- MODULE_AUTHOR("Jan Kotas <jank@cadence.com>");
- MODULE_DESCRIPTION("DAVINCI GPIO driver");
+ MODULE_AUTHOR("MontaVista Software, Inc. (and others)");
+ MODULE_DESCRIPTION("TI OMAP I2C bus adapter");
 
 -- 
 2.52.0
