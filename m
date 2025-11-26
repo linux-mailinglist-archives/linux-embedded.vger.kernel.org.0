@@ -1,87 +1,87 @@
-Return-Path: <linux-embedded+bounces-228-lists+linux-embedded=lfdr.de@vger.kernel.org>
+Return-Path: <linux-embedded+bounces-221-lists+linux-embedded=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-embedded@lfdr.de
 Delivered-To: lists+linux-embedded@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB13DC8C957
-	for <lists+linux-embedded@lfdr.de>; Thu, 27 Nov 2025 02:39:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 554E5C8C426
+	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 23:55:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 51BBA3AC73B
-	for <lists+linux-embedded@lfdr.de>; Thu, 27 Nov 2025 01:39:41 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 06EDE3AED10
+	for <lists+linux-embedded@lfdr.de>; Wed, 26 Nov 2025 22:55:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 133DA22333D;
-	Thu, 27 Nov 2025 01:39:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E327301718;
+	Wed, 26 Nov 2025 22:55:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="EMuQ2bmH";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="B7V4hB8u"
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="kK83RWWt";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="ND23l5wu"
 X-Original-To: linux-embedded@vger.kernel.org
-Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.10])
+Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.9])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAD37217F24
-	for <linux-embedded@vger.kernel.org>; Thu, 27 Nov 2025 01:39:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57A222DC772
+	for <linux-embedded@vger.kernel.org>; Wed, 26 Nov 2025 22:55:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.9
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764207544; cv=pass; b=q2wqjA6fZBjz+I1cQ4ii1GuB11onI/rzM11tq//44e43Wtzavy9guwLj8TNF+laCA13KbI2tj1qmJeNfhnfbu6/VuEXHJSeuHLO8VS8GyU8SpuEYLy8EhDFGumTQ1c/N0MevZsTJ+H2aG+DJHjW+QcToQDZXYIyxCTfs2S+YHjA=
+	t=1764197732; cv=pass; b=F1cKSbksk+rNjUjQ1xBfVkhnEfY08KlAmG6/SQW4682NmQ7WRXz1v91WbHEUyxpZOBa6Rb2qz8flN8pMRiiPV8wo++Sm/I3S0JvKZRgJT1NacY3pmchyEGnX42Y6Agar+XipR9g/CL/fQLUIiUruAhH0kuLBWlEAmxbHYBq8kn0=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764207544; c=relaxed/simple;
-	bh=ED6emQgHl3SaTCF3IR5l3ZdfpJRNkRaOSEgPiN98wss=;
+	s=arc-20240116; t=1764197732; c=relaxed/simple;
+	bh=unlIOh/vh4xYksKATnCVo9g+NkZJU+CC8BpFaNdf4pM=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=R6uZ/LjL4YxiZBdqkGD+o40KIlho6amtoZSkLpslNjuzI4/NHYn/rXctBsqriIpH7anoMmm49ktP6pKd2AyY++QP3Vcm+UPCcGoJgGLmnyqOwF1W360fD8JB8gYUl9TdpJ/tDxMnboqQ8JA/StaNOHH2gauuSFmnI43pqI2mtZ4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=EMuQ2bmH; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=B7V4hB8u; arc=pass smtp.client-ip=185.56.87.10
+	 In-Reply-To:To:Cc; b=q19vz2+eZsapvZpy2OMg3T6m0mSzf3vNFBKvrGgQqE+3HtinBAJieAnsvY5jooa3iX4ON8Su9x5gvD7ro7ydd11JColascCi+VivCw/Zt8DhA1p9Y1aX64rOJ9mfwwl7MsED7U7770JBo+k25XjBNeAwSdXzs/6OrvYTrwM/0so=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=kK83RWWt; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=ND23l5wu; arc=pass smtp.client-ip=185.56.87.9
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; s=arckey; t=1764207541;
-	 b=K4jldgWMxg42r/rjfVB6lOkF6NusE0EmwIzTYe27vf0j+PNTJ47wFxCTxTtPGYTHoumSOm1zZu
-	  LNOmETU5E+Vgj/yx8re6/Z2FcB0Ilysdnd/RqKsu76oeL5TYMw5vEZeYEjR6BaUJi42WH20sL4
-	  iI0PGPVZqIzpg3KvdkcXPwTuIGvIgTPQU2NQ/A5CS7cZDhG5ob8tuPSKWMIwTtGPwxX3nDRbWT
-	  mqbVZoY+ru3fUIkxfCMaO/jKwXEQjhapV8T6LZ9YIcLC0syo/1OdpR+r+MzycLWBaCJ57cWEJ4
-	  cJ12QGi+8tv1vQZXmsUKsVYJC5ZNg0wRNr67oVpAqYVWkQ==;
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; s=arckey; t=1764197730;
+	 b=gPHe8PCgP3bElbKbkCW6kWQO9aujTETN1PtnsiyJqJQOCo7DGsZ4gBFFRPHCXbfhrw4BS19wuC
+	  WqewZIsWrkGZNeLFSzxfkw20A3ZDNcAz6q9DRyS1qpflrRLZbNm4NqpwFLnbM7VXWKRE8TLCqH
+	  EUR7eM4nyzf0WmhI4F1rfjdBbtsddoquiLO+fFSNv2+oAaKMG2wkPINbUScCz44MuA+81bFQjQ
+	  kY75YSSVD9xB309vtQFctNrHW1tSgT464IgqwI3ntmM5pNyCiCdcCbdK2Hv3oAWiPQL/dWwuIb
+	  GmNuNSnuRCCZHsLuxFjaYubUzla4PcEHF/9ppvVnsRlW7w==;
 ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
 	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
 	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
 	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
 	arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; s=arckey; t=1764207541;
-	bh=ED6emQgHl3SaTCF3IR5l3ZdfpJRNkRaOSEgPiN98wss=;
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com; s=arckey; t=1764197730;
+	bh=unlIOh/vh4xYksKATnCVo9g+NkZJU+CC8BpFaNdf4pM=;
 	h=Cc:To:In-Reply-To:References:Message-ID:Content-Transfer-Encoding:
 	  Content-Type:MIME-Version:Subject:Date:From:DKIM-Signature:DKIM-Signature;
-	b=ibrrYGPdXOUolX6fgfKLIHZZRb4nCNggI+FPYgArmgh+BB/WSXsaqpeVInfBoWjJ3Yse+zhODu
-	  FVfCbD73M4NRK0TB9x6ISUJctRttIGhugF2SDNn+I5j9PeW66fWHO8J7RRvGU3kyMSr4bLUj9c
-	  HFy/7Fx4QJZAVJyYekEgavvtHn26KkPSmIMFOHzLVypeWwhUE2goqU9+V586hqo5FFlhI5mOrf
-	  hlcNr2JG2L92T1mVbi53J7Z5kAD1jS1Yq9TAMt9L3Kc2fIgXpfuzbFDXHxxEWp7WwRGvGRf2On
-	  ZxGc9az1vXSUGxlzSIn5w95LAkkdFDh67mVR942Rhk/LaA==;
+	b=QRak7Ot9+vzjrgt9q5whNOXiTLtc5+TwIoilPGTowNEDHGsndVe2YSPBIpTKBhpm2FrXUcCYko
+	  Umzj01W4Rsm+pDukFy91SlUaOtLTBEIRkV/g8c/8p1wJ9hQYBh+244uVUvL5IfjBID3xfRglVD
+	  SF94DjlD8R4u48hmsAPUArhGFxFJY4tLE1pfWlhtJXDORwT7K3IV4Zw+B3hVbuYuR8WmkH3Ppz
+	  jhPElAqPxg662LqCHetYGGqIRT7EHlqLzl7opKg3gUpPuoNh5jh5u4QSy+dODkEi0bTjZlKB+w
+	  yPW3WLmKGBhY0DzteXcuXl2fHjBj4lpLLW5yj/bLlhsJiQ==;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
 	:Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
 	:Date:From:Reply-To:List-Unsubscribe;
-	bh=BzGrfLg15spZfp6rIVjSqtnSD1rRRITHVgO9lY0/8tE=; b=EMuQ2bmHQ4hwxbN/cgr+iDxhXR
-	7QsJ/mf+hAUqt2isNboANvlirFj7duQqLNtqkOnmjLTGYXPyO23RVo0iZMObZFeJi40sRJU5JCn+u
-	n8XDuwyepoXtRC2hZD/1GXaUPRwR8aWglHb6JJpnI9XeHuKFwcl5BYd4t+LvufQLuSBE=;
+	bh=fgvOn0VrwMv01w8f464p1fOd3kfjaqbNbl5mNbwtRJ0=; b=kK83RWWtN0cYcBFzz8mTGSXU2D
+	OTH8tM6avuB/Yx98RdPqkgd23J5hXgUK9B+nloaTKKrPosHimAbPJpb7BzvAj6AP2pFhvVSKdjTZI
+	ToqpdRKOLTHKQzKac1pzqbT2/uh8jo6FlXH0GEl1jiu8D2JT9u5uwirgWYuUI+2E/6cw=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
 	by instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
 	(Exim 4.98.1)
 	(envelope-from <francesco@valla.it>)
-	id 1vOOQ1-0000000DTmz-42OI
+	id 1vOOQ2-0000000DToS-2p7a
 	for linux-embedded@vger.kernel.org;
-	Wed, 26 Nov 2025 22:55:27 +0000
+	Wed, 26 Nov 2025 22:55:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
 	s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
 	list-subscribe:list-post:list-owner:list-archive;
-	bh=BzGrfLg15spZfp6rIVjSqtnSD1rRRITHVgO9lY0/8tE=; b=B7V4hB8uc2qlb/B4dl+E25Y32r
-	Vg3MrgZ/OQjBaafEQvHM0bdtsz5HVh0jRHjcBz86KG6qSbQ+z1ATCrzGb2PxOAA3oJ24ooy8ZsqvT
-	F+ONWZGznPniTHs6yHvo50UtQv+lJbcq+G3dB7X2ci39GmufleV7gYS+phw98zgG9sGk=;
+	bh=fgvOn0VrwMv01w8f464p1fOd3kfjaqbNbl5mNbwtRJ0=; b=ND23l5wuEKvylQM5oY3Z0WUFUt
+	K8Nis0TA5Ihm6isITVAk9v0NV80XPW7cm+X9H0p8aO9rbEisZzIy5bxrby077du/ml0KjcGxUNDfR
+	2Z3lkvtV+WWF+ofJ2yDPOMIjl3sWOZZNuR6d6+Ey9jpIgnElEFOCEsgiEW5tNNaeDFVY=;
 Received: from [82.59.186.57] (port=59963 helo=[192.168.178.175])
 	by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
 	(Exim 4.98.1)
 	(envelope-from <francesco@valla.it>)
-	id 1vOOPr-000000006mk-0skQ;
+	id 1vOOPr-000000006mk-2xQy;
 	Wed, 26 Nov 2025 22:55:15 +0000
 From: Francesco Valla <francesco@valla.it>
-Date: Wed, 26 Nov 2025 23:54:31 +0100
-Subject: [PATCH DISCUSSION 3/8] arm64: dts: ti: k3-am625-beagleplay: remove
- inter-regulator dependency
+Date: Wed, 26 Nov 2025 23:54:32 +0100
+Subject: [PATCH DISCUSSION 4/8] arm64: defconfig: compile reset-gpio as
+ built-in
 Precedence: bulk
 X-Mailing-List: linux-embedded@vger.kernel.org
 List-Id: <linux-embedded.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-embedded+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251126-beagleplay-probes-v1-3-c833defd4c9b@valla.it>
+Message-Id: <20251126-beagleplay-probes-v1-4-c833defd4c9b@valla.it>
 References: <20251126-beagleplay-probes-v1-0-c833defd4c9b@valla.it>
 In-Reply-To: <20251126-beagleplay-probes-v1-0-c833defd4c9b@valla.it>
 To: linux-embedded@vger.kernel.org, Tim Bird <tim.bird@sony.com>
@@ -100,12 +100,12 @@ Cc: Federico Giovanardi <federico@giovanardi.dev>,
  Vignesh Raghavendra <vigneshr@ti.com>, Tero Kristo <kristo@kernel.org>, 
  Francesco Valla <francesco@valla.it>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1112; i=francesco@valla.it;
- h=from:subject:message-id; bh=ED6emQgHl3SaTCF3IR5l3ZdfpJRNkRaOSEgPiN98wss=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJnqrQFXSycue8DDefrUSo7m/lm85/tPByx1rzKofLf8z
- 4HA+MykjlIWBjEuBlkxRZaQdTfu7Zlr/i1tA+MjmDmsTCBDGLg4BWAiEh4Mf/i/XuSSfe7zJXtl
- mrfQ1P/LDC6x/0xzn/fwZ9lhxfUTJeoYGbYf/+VTEKR8LVupaOHFvbefJcWqVVdf5T2jk7GMrcz
- lBysA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1470; i=francesco@valla.it;
+ h=from:subject:message-id; bh=unlIOh/vh4xYksKATnCVo9g+NkZJU+CC8BpFaNdf4pM=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJnqrQEPLpeactsIT1XRNHinsmpn7sz339dxxNYe9c/Xt
+ 7Tb4TC7o5SFQYyLQVZMkSVk3Y17e+aaf0vbwPgIZg4rE8gQBi5OAZjInViG/0XLZi6IWKvRLru5
+ xd3Aj+MaR3okt1V2b+q9/wpplZ9X6TAyXHM6yROb0qGw+X3A3VtuE2/OrEjd55/73Szn29WZB8S
+ OsQEA
 X-Developer-Key: i=francesco@valla.it; a=openpgp;
  fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -116,44 +116,54 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: 5f8171ac6a125e522b4c288cb7190d83
+X-SGantispam-id: 834405a7beaa4c588e8eb49afdbe085e
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vOOQ1-0000000DTmz-42OI-feedback@antispam.mailspamprotection.com
+CFBL-Feedback-ID: 1vOOQ2-0000000DToS-2p7a-feedback@antispam.mailspamprotection.com
 Authentication-Results: outgoing.instance-europe-west4-4xtm.prod.antispam.mailspamprotection.com;
 	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
 	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
 	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
 	arc=none
 
-The dependency between vsys_5v0 (supplier) and vdd_3v3 (consumer)
-describes the hardware well, but causes delays during boot, since
-the kernel is trying to probe vdd_3v3 before vsys_5v0, causing a
-boot deferral chain for it and all the dependent devices.
+Having the reset-gpio driver as module interferes with the fw_devlink
+mechanism, since all reset-gpios appears to probe correctly but cannot
+then be used right away because the underlying reset controller is not
+yet registered. This leads to wasted probe time, as fw_devlink cannot
+really prevent the probe due to a missing supplier.
 
-The dependency is not functionally required, as both regulators are
-fixed, not controllable and always ON, and is thus removed.
+On a Beagleplay, this leads to multiple non-negligible probe deferrals
+before userspace:
+
+[    0.878651] probe of sdio-pwrseq returned 517 after 1726 usecds
+[    0.891927] probe of sdio-pwrseq returned 517 after 238 usecs
+[    0.897796] probe of sdio-pwrseq returned 517 after 234 usecs
+[    0.933930] probe of sdio-pwrseq returned 517 after 277 usecs
+[    0.979049] probe of sdio-pwrseq returned 517 after 252 usecs
+
+Set CONFIG_RESET_GPIO=y to have the driver built-in.
 
 Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts | 1 -
- 1 file changed, 1 deletion(-)
+ arch/arm64/configs/defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts b/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts
-index 60e2c86ab197e348bf941e30c2641a26cd940d82..3a96d76db0fbf7be68884c130ecb9e5c1c06d834 100644
---- a/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts
-+++ b/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts
-@@ -118,7 +118,6 @@ vdd_3v3: regulator-2 {
- 		regulator-name = "vdd_3v3";
- 		regulator-min-microvolt = <3300000>;
- 		regulator-max-microvolt = <3300000>;
--		vin-supply = <&vsys_5v0>;
- 		regulator-always-on;
- 		regulator-boot-on;
- 	};
+diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
+index 1a48faad2473a9b8f1c87567f38fedc7b703b44d..4879aec0b2d70e3b8fe6636c14e68ecdf023e625 100644
+--- a/arch/arm64/configs/defconfig
++++ b/arch/arm64/configs/defconfig
+@@ -1607,7 +1607,7 @@ CONFIG_QCOM_PDC=y
+ CONFIG_QCOM_MPM=y
+ CONFIG_TI_SCI_INTR_IRQCHIP=y
+ CONFIG_TI_SCI_INTA_IRQCHIP=y
+-CONFIG_RESET_GPIO=m
++CONFIG_RESET_GPIO=y
+ CONFIG_RESET_IMX7=y
+ CONFIG_RESET_QCOM_AOSS=y
+ CONFIG_RESET_QCOM_PDC=m
 
 -- 
 2.52.0
